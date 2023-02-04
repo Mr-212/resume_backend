@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+ resume_backend:
+    container_name: resume_backend
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: php80_apache
+    # command: 'chmod -R 0777 ${WORKING_DIR}'  
+    ports:
+      # - "8080:80"
+      # - "8000:8000"
+      # - "2525:2525"
+      # - "3000:3000"
+      - "8001:80"
+      # - "8000:8001"
+
+    # volumes:
+    #   - .:/var/www/crm_backend
+
+    working_dir: /var/www/resume_backend
+    volumes:
+      - ./:/var/www/resume_backend
+      - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/entry_point.sh:/usr/local/bin/entry_point.sh
+    tty: true
+    restart: unless-stopped
+
+    entrypoint:
+      - /usr/local/bin/entry_point.sh
+
+    # command: ["apachectl", "-D", "FOREGROUND"]
+    # env_file:
+    #   - ./.env
+    networks:
+      - app     
+
+networks:
+  app:
+    name: php80
+    external: true
