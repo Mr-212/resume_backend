@@ -16,8 +16,8 @@ a2enmod rewrite
 apachectl -D FOREGROUND
 
 cd $APP_PATH
-# composer dump-autoload
+composer dump-autoload
 
 
 # cd $APP_PATH
-# exec "$@"
+exec "$@"
