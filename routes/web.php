@@ -14,7 +14,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return Inertia::render('Auth/Login');
     // return view('layouts.app');
+});
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+
+});
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard/Index');
+
 });
