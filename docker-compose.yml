@@ -11,9 +11,11 @@ services:
     ports:
       # - "8080:80"
       # - "8000:8000"
-      # - "2525:2525"
+      - "2525:2525"
       # - "3000:3000"
       - "8001:80"
+      # - "5173:5173"
+      # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
       # - "8000:8001"
 
     # volumes:
@@ -24,13 +26,50 @@ services:
       - ./:/var/www/resume_backend
       - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./docker/entry_point.sh:/usr/local/bin/entry_point.sh
-    tty: true
+      - ./docker/entry_node.sh:/usr/local/bin/entry_node.sh
+    # tty: true
     restart: unless-stopped
 
     entrypoint:
       - /usr/local/bin/entry_point.sh
+      # - /usr/local/bin/entry_node.sh
 
-    # command: ["apachectl", "-D", "FOREGROUND"]
+    command: bash -c "apachectl -D FOREGROUND"
+    # env_file:
+    #   - ./.env
+    networks:
+      - app    
+
+ resume_backend_node:
+    container_name: resume_backend_node
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: php80_apache
+    # command: 'chmod -R 0777 ${WORKING_DIR}'  
+    ports:
+      # - "8080:80"
+      # - "8000:8000"
+      # - "2525:2525"
+      - "3000:3000"
+      # - "8001:80"
+      # - "5173:5173"
+      - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
+
+    working_dir: /var/www/resume_backend
+    volumes:
+      - ./:/var/www/resume_backend
+      # - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      # - ./docker/entry_point.sh:/usr/local/bin/entry_point.sh
+      - ./docker/entry_node.sh:/usr/local/bin/entry_node.sh
+    # tty: true
+    restart: unless-stopped
+
+    entrypoint:
+      # - /usr/local/bin/entry_point.sh
+      - /usr/local/bin/entry_node.sh
+
+    # command: bash -c "apachectl -D FOREGROUND"
     # env_file:
     #   - ./.env
     networks:
