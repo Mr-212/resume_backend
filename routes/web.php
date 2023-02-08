@@ -27,3 +27,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
 
 });
+
+Route::get('/input', function () {
+    return Inertia::render('Build/input');
+
+});
