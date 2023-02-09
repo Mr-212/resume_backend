@@ -3,10 +3,10 @@
     <!-- head -->
     <head>
         @include('layouts.partials.head')
-        <!-- @viteReactRefresh -->
+        @viteReactRefresh
 
         @vite('resources/css/app.css')
-        @vite('resources/js/app.js') 
+        @vite('resources/js/app.js')
         @vite('resources/js/app.tsx')
         @inertiaHead
     </head>
