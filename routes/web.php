@@ -18,6 +18,25 @@ Route::get('/', function () {
     // return Inertia::render('Auth/Login');
     return view('layouts.app');
 });
+
+Route::prefix('dashboard')->group(function(){
+
+    Route::get('/', function () {
+        return Inertia::render('Dashboard/Index');
+    
+    });
+
+    Route::get('/profile', function () {
+        return Inertia::render('Build/Profile');
+    
+    });
+    Route::get('/education', function () {
+        return Inertia::render('Build/Education');
+    
+    });
+    
+});
+
 Route::get('/login', function () {
     // dd('here');
     return Inertia::render('Auth/Login');
@@ -28,12 +47,5 @@ Route::get('/register', function () {
 
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard/Index');
 
-});
 
-Route::get('/input', function () {
-    return Inertia::render('Build/input');
-
-});

@@ -1,21 +1,26 @@
 import { Link } from "@inertiajs/react";
 import React from "react"
+import { usePage }  from "@inertiajs/react";
 
-const li_class = "text-black font-bold hover:text-lg transition ease-in-out duration-300 hover:scale-125 hover:scale-x-100 hover:text-slate-900 border-b-2 border-slate-500";
-
+const li_class = "shadow:sm font-sans text-white font-bold hover:text-lg transition ease-in-out duration-300 hover:scale-125 hover:scale-x-110";
+const active = "active shadow-lg opacity-100 text-gray-500 font-bold text-xl border-b-2 border-blue-500 scalle-110 transition ease-in-out duration-300";
 
 export const Sidebar = () => {
 
+    const  { url, component} = usePage();
+    { console.log('active '+li_class)}
+
+
     return(
-        <div className="flex flex-row shadow-lg bg-slate-100 p-10 text-left h-screen max-h-screen ">
-            {/* <div className="bg-black ml-5 w-1"></div> */}
+        <div className="flex flex-row shadow-lg border-gray-700 bg-black p-10 text-left pl-14 h-screen max-h-screen ">
                 
                 <ul className="space-y-6 pl-3 ">
-                    <li className={li_class}><Link href="/dashboard">Dashboard</Link></li>
-                    <li className={li_class}><Link href="/input">Input</Link></li>
-                    <li className={li_class}><Link href="/login">Login</Link></li>
-                    <li className={li_class}><a> Cat</a></li>
-                    <li className={li_class}><a> Menu</a></li>
+                    <li className={url === '/dashboard'? active: li_class}><Link href="/dashboard">Dashboard</Link></li>
+                    <li className={url === '/dashboard/profile'? active: li_class}><Link href="/dashboard/profile">Basic Profile</Link></li>
+                    <li className={url === '/dashboard/education'? active: li_class}><Link href="/dashboard/education">Education</Link></li>
+                    <li className={url === '/dashboard/work_history'? active: li_class}><Link href="/dashboard/work_history">Work History</Link></li>
+                    {/* <li className={li_class}><a> Cat</a></li> */}
+                    {/* <li className={li_class}><a> Menu</a></li> */}
                 </ul>
             
         </div>

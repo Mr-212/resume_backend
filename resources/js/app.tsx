@@ -19,7 +19,7 @@ import { createInertiaApp } from '@inertiajs/react'
 
 import { createRoot } from 'react-dom/client'
 import React from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import { InertiaProgress } from '@inertiajs/progress';
 
 InertiaProgress.init();
