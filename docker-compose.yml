@@ -3,10 +3,10 @@ version: '3.7'
 services:
  resume_backend:
     container_name: resume_backend
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    image: php80_apache
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile
+    image: docker_env_php80
     # command: 'chmod -R 0777 ${WORKING_DIR}'  
     ports:
       # - "8080:80"
@@ -41,10 +41,10 @@ services:
 
  resume_backend_node:
     container_name: resume_backend_node
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    image: php80_apache
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile
+    image: docker_env_php80
     ports:
       - "3000:3000"
       - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
@@ -63,7 +63,22 @@ services:
     # env_file:
     #   - ./.env
     networks:
-      - app     
+      - app
+
+ lt:
+    # image: efrecon/localtunnel
+    image: docker_env_php80
+    # restart: on-failure
+    # network_mode: host
+    command: lt  --local-host resume_backend --port 80 --subdomain resumedev
+    # environment: 
+    #   - SUBDOMAIN=resume
+    # links:
+    #   - resume_backend
+    # depends_on:
+    #   - resume_backend
+    networks:
+      - app
 
 networks:
   app:
