@@ -135,6 +135,7 @@ const Profile = () => {
     )
 }
 
-Profile.layout = page =>  <Dashboard><BuildLayout children={ page }></BuildLayout></Dashboard>;
+// Profile.layout = page =>  <Dashboard><BuildLayout children={ page }></BuildLayout></Dashboard>;
+Profile.layout = page =>  <BuildLayout children={ page }></BuildLayout>;
 
 export default Profile;

@@ -19,7 +19,6 @@
         <!-- <div id="app" class="text-center w-full"> -->
         @inertia
         <h3>Welcome</h3>
-
         <!-- </div> -->
     </body>
 
