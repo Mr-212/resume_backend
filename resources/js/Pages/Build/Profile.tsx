@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, FormEventHandler, useState } from "react
 import Dashboard from "../Dashboard/Index";
 import BuildLayout from "./BuildLayout";
 import { WithHOC } from "./WithHOC";
+import { useForm } from "react-hook-form";
 
 interface ProfileProps {
     job_title : string,
@@ -21,6 +22,8 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = () => {
 
+    const{register ,handleSubmit} = useForm();
+
 
     const[formValues, setFormValues] = useState<ProfileProps>();
 
@@ -33,10 +36,10 @@ const Profile: React.FC<ProfileProps> = () => {
         setFormValues({...formValues, [name]: value});
         
     }
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault;
-        console.log(formValues)
-    }
+    // const handleSubmitt = (e: FormEvent) => {
+    //     e.preventDefault;
+    //     console.log(formValues)
+    // }
     
     return(
         <BuildLayout saveFunction={handleSubmit}>
@@ -60,7 +63,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="font-bold text-md text-black">Job Title</label>
                         <div className="inline-flex items-start justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <input  className="w-full h-8 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" name="job_title"></input>
+                            <input  className="w-full h-8 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title')} name="job_title"></input>
                         </div> 
                     </div>
 
@@ -68,7 +71,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="font-bold text-md text-black">Who are you?</label>
                         <div className="inline-flex items-start justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <textarea  className="w-full h-32 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" name="job_description"></textarea>
+                            <textarea  className="w-full h-32 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description')}  name="job_description"></textarea>
                         </div> 
                     </div>
                 </div>
@@ -94,7 +97,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2"  onChange={handleFormChange} placeholder="Name" name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2"  onChange={handleFormChange} placeholder="First Name" {...register('first_name')} name="first_name"></input>
                         </div>
 
                     </div>
@@ -105,7 +108,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} placeholder="Name" name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange}  {...register('last_name')} placeholder="Last Name" name="last_name"></input>
                         </div>
 
                     </div>
@@ -114,7 +117,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="block font-bold text-sm text-black">Email</label>
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.email} onChange={handleFormChange} placeholder="Email" name="email"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.email} onChange={handleFormChange}  {...register('email')} placeholder="Email" name="email"></input>
                         </div>
                     </div>
 
@@ -122,7 +125,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="block font-bold text-sm text-black">Phone</label>
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} placeholder="Phone" name="phone"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone')} placeholder="Phone" name="phone"></input>
                         </div>
                        
                     </div>
@@ -131,7 +134,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="block font-bold text-sm text-black">Date of Birth</label>
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 pl-2 bg-white rounded h-8 pt-3"><i className="fa fa-calendar" aria-hidden="true"></i> </span> */}
-                            <input type="date" className="w-full h-8 pl-8 rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.dob} onChange={handleFormChange}  placeholder="Date of birth" name="dob"></input>
+                            <input type="date" className="w-full h-8 pl-8 rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.dob} onChange={handleFormChange} {...register('dob')}  placeholder="Date of birth" name="dob"></input>
                         </div>
                     </div>
                 </div> 
