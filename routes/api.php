@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\MenuController;
+use App\Http\Controllers\Resume\ProfileContoller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('dashboard')->group(function(){
-   
-    Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
-
+Route::prefix('resume')->group(function(){
+    //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
+    Route::resource('profile',ProfileContoller::class);
 });
 
 

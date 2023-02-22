@@ -15,22 +15,20 @@ interface Props {
 
 
 
-const BuildLayout = ( { children, saveFunction }: any ) => {
+const BuildLayout = ( { children, saveFunction }: any )  => {
 
     return(
         // <Dashboard>
             <div className="flex flex-col items-center gap-y-5">
                 <div className="pt-3 w-full">
-                    {CreatePageUrl()}
+                    <CreatePageUrl />
                 </div>
                 <div className="w-4/5">
-                    {children}
+                    { children }
                 </div>
                 <div className="w-4/5  static  b-0">
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div>
-            
-            
             </div>
         // </Dashboard>
     )

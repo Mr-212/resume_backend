@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resume;
 
-use App\Http\Requests\StoreResumeRequest;
-use App\Http\Requests\UpdateResumeRequest;
-use App\Models\Resume;
-use Illuminate\Http\Client\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class ResumeController extends Controller
+class ProfileContoller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,18 +22,18 @@ class ResumeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        dd($request->all());
+        
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreResumeRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResumeRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -43,10 +41,10 @@ class ResumeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Resume  $resume
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Resume $resume)
+    public function show($id)
     {
         //
     }
@@ -54,10 +52,10 @@ class ResumeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Resume  $resume
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Resume $resume)
+    public function edit($id)
     {
         //
     }
@@ -65,11 +63,11 @@ class ResumeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateResumeRequest  $request
-     * @param  \App\Models\Resume  $resume
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResumeRequest $request, Resume $resume)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +75,10 @@ class ResumeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Resume  $resume
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resume $resume)
+    public function destroy($id)
     {
         //
     }

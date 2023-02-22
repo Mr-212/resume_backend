@@ -40,7 +40,7 @@ const Dashboard:  React.FC<Props> = ({children}) => {
 
                 <div className="w-4/5 bg-gray h-screen">
                     <Outlet />
-                    { children }
+                    {/* { children } */}
                 </div>
 
             </div>

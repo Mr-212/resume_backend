@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
+import { URL_PROFILE_CREATE } from "../../constants/ResumeUrls";
 import Dashboard from "../Dashboard/Index";
 import BuildLayout from "./BuildLayout";
 import { WithHOC } from "./WithHOC";
@@ -21,24 +23,29 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = () => {
 
-    const[formValues, setFormValues] = useState<ProfileProps>();
+    const[formValues, setFormValues] = useState<ProfileProps >();
 
 
-    const handleFormChange = (e: ChangeEvent< HTMLInputElement | HTMLTextAreaElement>): void => {
+    const handleFormChange = (e: ChangeEvent< HTMLInputElement | HTMLTextAreaElement | undefined>): void => {
         const{name, value} = e.currentTarget;
         // const key  = e.target.key;
         // const value  = e.target.value;
-        // console.log(name, value);
-        // setFormValues({...formValues, [name]: value});
+        setFormValues( {...formValues, [name]: value} );
         
     }
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault;
-        console.log(formValues)
+        axios.get(URL_PROFILE_CREATE,{formValues})
+        .then(res => {
+            console.log(res);
+        });
+        //console.log(formValues)
     }
     
     return(
-        // <BuildLayout saveFunction={handleSubmit}>
+        
+        <BuildLayout saveFunction={handleSubmit}>
         
         <div className="gap-y-2 w-4/5">
             <form >
@@ -173,7 +180,7 @@ const Profile: React.FC<ProfileProps> = () => {
                         <label className="block font-bold text-sm text-black">Address</label>
                         <div className="inline-flex items-start justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <textarea  className="w-full h-16 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.address} onChange={handleFormChange} placeholder="Address" name="address"></textarea>
+                            <textarea  className="w-full h-16 pl-8 pt-2 block rounded text-black focus:outline-blue-500 focus:outline border-b-2" value={formValues?.address} onChange={handleFormChange} placeholder="Address" name="address"></textarea>
                         </div> 
 
                     </div>
@@ -184,7 +191,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
          </form>
     </div>
-    // </BuildLayout>
+    </BuildLayout>
     )
 }
  
@@ -192,5 +199,5 @@ const Profile: React.FC<ProfileProps> = () => {
 // Profile.layout = (page) =>  <Dashboard><BuildLayout children={ page } saveFunction={page.handleSubmit}></BuildLayout></Dashboard>;
 // Profile.layout = page =>  <BuildLayout children={ page }></BuildLayout>;
 
-export default WithHOC(Profile);
+export default (Profile);
 // export default Profile;

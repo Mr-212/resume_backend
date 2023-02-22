@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from "../Dashboard/Index";
 import BuildLayout from "./BuildLayout";
+import { WithHOC } from "./WithHOC";
 
 const Education = () => {
     
@@ -128,6 +129,6 @@ const Education = () => {
     )
 }
 
-Education.layout = page =>  <Dashboard><BuildLayout children={ page }></BuildLayout></Dashboard>;
+// Education.layout = page =>  <Dashboard><BuildLayout children={ page }></BuildLayout></Dashboard>;
 
-export default Education;
+export default WithHOC(Education);
