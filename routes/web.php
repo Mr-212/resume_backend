@@ -22,18 +22,20 @@ Route::get('/', function () {
 Route::prefix('dashboard')->group(function(){
 
     Route::get('/', function () {
-        return Inertia::render('Dashboard/Index');
+        return view('app');
+
+       // return Inertia::render('Dashboard/Index');
     
     });
 
-    Route::get('/profile', function () {
-        return Inertia::render('Build/Profile');
+    // Route::get('/profile', function () {
+    //     return Inertia::render('Build/Profile');
     
-    });
-    Route::get('/education', function () {
-        return Inertia::render('Build/Education');
+    // });
+    // Route::get('/education', function () {
+    //     return Inertia::render('Build/Education');
     
-    });
+    // });
     
 });
 

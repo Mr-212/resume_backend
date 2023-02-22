@@ -12,11 +12,11 @@ interface Props {
     console.log(props)
 
     return (
-        <Dashboard>
+        // <Dashboard>
             <BuildLayout saveFunction={props.handleSubmit}>
                 <Component {...props}></Component>
             </BuildLayout>
-        </Dashboard>
+        // </Dashboard>
     )
 
 }

@@ -2,12 +2,12 @@
     
     <!-- head -->
     <head>
-        @include('layouts.partials.head')
+        <!-- @include('layouts.partials.head')
         @vite('resources/css/app.css')
         @vite('resources/js/app.js') 
         @viteReactRefresh
         @vite('resources/js/app.jsx')
-        @inertiaHead
+        @inertiaHead -->
     </head>
    
    
@@ -17,7 +17,7 @@
         @include('layouts.partials.headerbar')
 
         <!-- <div id="app" class="text-center w-full"> -->
-        @inertia
+        <!-- @inertia -->
         <h3>Welcome</h3>
         <!-- </div> -->
     </body>

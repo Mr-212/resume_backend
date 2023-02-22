@@ -1,36 +1,13 @@
-// import './bootstrap';
-// import { createInertiaApp } from '@inertiajs/inertia-react';
-// import React from 'react';
-// import { render } from 'react-dom/cjs/react-dom.development';
+import React from "react";
+import { render } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "./react/components/App";
 
 
-// const app = document.getElementById('app');
+render(
+    // <BrowserRouter>
+        <App />,
+    // </BrowserRouter>,
 
-// render(
-//     <InertiaApp initialPage={ JSON.parse(app.dataset.page)} 
-//                 resolveComponent={name => import(`/pages/${name}`).then(module => module.default)}
-//     ></InertiaApp>,
-//     app
-// )
-
-
-import { createInertiaApp } from '@inertiajs/react'
-// import { createInertiaApp } from '@inertiajs/inertia-react';
-
-import { createRoot } from 'react-dom/client';
-import React from 'react';
-// import { render } from 'react-dom';
-import { InertiaProgress } from '@inertiajs/progress';
-
-InertiaProgress.init();
-
-createInertiaApp({
-  resolve: name => import(`./Pages/${name}`),
-  // resolve: name => {
-  //   const pages = import(`./Pages/**/*.tsx`)
-  //   return pages[`./Pages/${name}.jsx`]
-  // },
-  setup({ el, App, props }) {
-    createRoot(el).render(<App {...props} />)
-  },
-})
+    document.getElementById("app")
+ );
