@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resumes', function (Blueprint $table) {
-            $table->uuid('id');
+        Schema::create('resume_profile', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
             $table->string('job_title')->nullable();
             $table->text('job_description')->nullable();
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('resume_profile');
     }
 };

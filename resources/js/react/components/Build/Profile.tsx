@@ -20,6 +20,10 @@ interface ProfileProps {
     address: string,
 }
 
+type props= {
+    submitForm?: () => void,
+}
+
 
 
 const Profile: React.FC<ProfileProps> = () => {
@@ -42,18 +46,23 @@ const Profile: React.FC<ProfileProps> = () => {
         
     }
 
-    const submitForm = (e: FormEvent) => {
-        e.preventDefault;
-        axios.post(URL_PROFILE_CREATE,{formValues})
-        .then(res => {
-            console.log(res);
-        });
+    // const submitForm = (e: FormEvent) => {
+    const submitForm  = handleSubmit(data => {
+        console.log(data)
+    }) 
+    
+        
+        // console.log(formValues)
+        // axios.post(URL_PROFILE_CREATE,{formValues})
+        // .then(res => {
+        //     console.log(res);
+        // });
         //console.log(formValues)
-    }
+    
     
     return(
         
-        <BuildLayout saveFunction={handleSubmit(submitForm)}>
+        <BuildLayout saveFunction={submitForm}>
         
         <div className="gap-y-2 w-4/5">
             <form >
@@ -126,7 +135,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Name" name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Name" name="last_name"></input>
                         </div>
 
                     </div>

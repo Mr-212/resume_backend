@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Resume;
 
 use App\Http\Controllers\Controller;
+use App\Models\Resume\Profile;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProfileContoller extends Controller
@@ -35,8 +37,21 @@ class ProfileContoller extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        exit;
+        try{
+            dd($request->all());
+            $request->request->add(['user_id' => Profile::generateUUID()]);
+            dd($request->all());
+            // exit;
+            
+            if(Profile::create($request->all())){
+                return response()->json(['STATUS_CODE'=>200, 'message' => 'Profile saved. ']);
+
+            }
+        }catch(Exception $e){
+
+            return response()->json(['STATUS_CODE' => 404, 'message' => $e->getMessage()]);
+        }
+        
     }
 
     /**
