@@ -19,16 +19,17 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
 
     return(
         // <Dashboard>
-            <div className="flex flex-col items-center gap-y-5">
+            <div className="flex flex-col justify-center gap-y-2">
                 <div className="pt-3 w-full">
                     <CreatePageUrl />
                 </div>
-                <div className="w-4/5">
-                    { children }
-                </div>
-                <div className="w-4/5  static  b-0">
+                <div className="w-full items-end text-right static  b-0">
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div>
+                <div className="w-full">
+                    { children }
+                </div>
+              
             </div>
         // </Dashboard>
     )

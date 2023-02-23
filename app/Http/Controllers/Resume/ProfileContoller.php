@@ -38,9 +38,9 @@ class ProfileContoller extends Controller
     public function store(Request $request)
     {
         try{
-            dd($request->all());
+            // dd($request->all());
             $request->request->add(['user_id' => Profile::generateUUID()]);
-            dd($request->all());
+            // dd($request->all());
             // exit;
             
             if(Profile::create($request->all())){

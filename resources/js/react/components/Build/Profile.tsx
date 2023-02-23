@@ -20,15 +20,34 @@ interface ProfileProps {
     address: string,
 }
 
+
+interface WarningProps {
+    show: boolean,
+    title: string,
+    message: string
+}
+
 type props= {
     submitForm?: () => void,
 }
 
 
+export const AlertPop = ( title: string, message: string ) => {
+     return(
+        <div className="bg-sky-100 border-l-4 border-blue-400 text-indigo-400 p-4" role="alert">
+            <p className="font-bold text-left">{title}</p>
+            <p className="text-left">{message}</p>
+        </div>
+     )
+}
 
-const Profile: React.FC<ProfileProps> = () => {
+
+
+const Profile: React.FC<ProfileProps | WarningProps> = () => {
 
     const[formValues, setFormValues] = useState<ProfileProps >();
+    const[alert, setAlert] = useState<WarningProps>();
+
 
     const { register, handleSubmit, formState: {errors}} = useForm<ProfileProps>();
 
@@ -48,7 +67,21 @@ const Profile: React.FC<ProfileProps> = () => {
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-        console.log(data)
+        // console.log(data);
+
+        
+        AlertPop('Success','Data saved');
+        axios.post(URL_PROFILE_CREATE, data )
+        .then(res => {
+            // console.log(res.STATUS_CODE);
+            setAlert({...alert, show:true,title:'Alert',message: res.message})
+
+        });
+
+        setTimeout(() => {
+            setAlert({...alert, show:false})
+
+        }, 5000)
     }) 
     
         
@@ -64,10 +97,15 @@ const Profile: React.FC<ProfileProps> = () => {
         
         <BuildLayout saveFunction={submitForm}>
         
-        <div className="gap-y-2 w-4/5">
+        <div className="items-center gap-y-1">
             <form >
+                { alert?.show &&
+                <div className="pb-2">
+                    {AlertPop(alert.title, alert.message)}
+                </div>
+                }
             <div className="grid grid-cols-2 pb-3 shadow-lg bg-white  border border-spacing-0">
-                <div className="col-span-2 border-b-2 border-blue-400 bg-white h-12 pr-28 py-2 mb-3 shadow-lg opacity-100">
+                <div className="col-span-2 border-b-2 border-blue-400 bg-white h-10 pr-28 py-2 mb-3 shadow-lg opacity-100">
                         <h4 className="text-blue-800 font-bold text-xl text-right ">Profile</h4>
                 </div>
                 <div className="px-10">
@@ -107,7 +145,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
             <div className="grid grid-cols-2 justify-items-stretch border shadow-sm opacity-100 bg-white space-y-5">
            
-                <div className="col-span-2 border-t-2 border-blue-400 shadow-lg bg-white h-12 pt-2 pr-28">
+                <div className="col-span-2 border-t-2 border-blue-400 shadow-lg bg-white h-10 pt-2 pr-28">
                         <h4 className="text-blue-800 font-bold text-xl text-right">Basic Information</h4>
                 </div>
 
@@ -122,7 +160,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2"  onChange={handleFormChange} placeholder="Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2"  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
                         </div>
 
                     </div>
@@ -135,7 +173,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Name" name="last_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
                         </div>
 
                     </div>
@@ -146,7 +184,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50})} placeholder="Email" name="email"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
                         </div>
                     </div>
 
@@ -156,7 +194,8 @@ const Profile: React.FC<ProfileProps> = () => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20})}  placeholder="Phone" name="phone"></input>
+                            {/* <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input> */}
+                            <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input>
                         </div>
                        
                     </div>
@@ -222,7 +261,7 @@ const Profile: React.FC<ProfileProps> = () => {
             </div>
 
          </form>
-    </div>
+        </div>
     </BuildLayout>
     )
 }
