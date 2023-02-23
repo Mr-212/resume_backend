@@ -29,12 +29,10 @@ const Education = () => {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-rows-1 shadow-sm opacity-100 bg-white">
+            <div className="grid grid-rows-1 shadow-sm opacity-100 bg-white px-10">
            
 
-                <div className="px-10 space-y-2">
                     <AddEducation></AddEducation>
-                </div> 
 
             </div>
 
@@ -51,7 +49,7 @@ const AddEducation = () => {
     const { register, handleSubmit, formState: {errors}} = useForm();
 
     return(
-        <div className="grid grid-flow-col">
+        <div className="grid grid-flow-col items-center justify-center">
             <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-black pl-1">Qualification Type</label>
                         {/* {validationErrors('email', 'Email')} */}

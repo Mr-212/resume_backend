@@ -42,9 +42,9 @@ const BtnNavigator = ({saveFunction}: any) => {
 
     return(
         <div className="flex flex-row items-end justify-end gap-3">
-                <button type="button"  onClick={() => setLinkIndex(currentIndex-1)} className="transition ease-in-out duration-150  hover:bg-blue-500 hover:scale-110 px-4 p-1  text-indigo-600 shadow-sm font-bold  focus:outline-blue-400 focus:outline" placeholder="Address" name=""><Link  to={ getLink(currentIndex-1) }>Previous</Link></button>
-                <button type="button"  onClick={() => setLinkIndex(currentIndex+1)} className="transition ease-in-out duration-150  hover:bg-blue-500 hover:scale-110 px-4 p-1  text-indigo-600 shadow-sm font-bold  focus:outline-blue-400 focus:outline" placeholder="Address" name=""><Link to={ getLink(currentIndex+1) }>Next</Link></button>
-                <button type="button"  onClick={saveFunction} className="transition ease-in-out duration-150  hover:bg-blue-500 hover:scale-110 px-4 p-1 text-black shadow-lg font-bold block focus:outline-blue-400 focus:outline" name="btn_save">Save</button>
+                <button type="button"  onClick={() => setLinkIndex(currentIndex-1)} className="transition ease-in-out duration-150  hover:bg-slate-400 hover:text-white hover:scale-110 px-4 p-1  text-indigo-600 shadow-md font-bold  focus:outline-blue-400 focus:outline" placeholder="Address" name=""><Link  to={ getLink(currentIndex-1) }>Previous</Link></button>
+                <button type="button"  onClick={() => setLinkIndex(currentIndex+1)} className="transition ease-in-out duration-150  hover:bg-slate-400 hover:text-white hover:scale-110 px-4 p-1  text-indigo-600 shadow-md font-bold  focus:outline-blue-400 focus:outline" placeholder="Address" name=""><Link to={ getLink(currentIndex+1) }>Next</Link></button>
+                <button type="button"  onClick={saveFunction} className="transition ease-in-out duration-150  hover:bg-green-500 hover:text-white hover:scale-110 px-4 p-1 text-black shadow-lg font-bold block focus:outline-blue-400 focus:outline" name="btn_save">Save</button>
         </div>
     )
 }
