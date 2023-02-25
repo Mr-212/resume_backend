@@ -120,9 +120,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                     <div className="flex flex-col justify-start items-start">
                         <label className="font-bold text-md text-black">Job Title</label>
                         {validationErrors('job_title', 'Title')}
-                        <div className="inline-flex items-start justify-start w-full">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <input  className="w-full h-8 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title', { required: true, maxLength: 20 })} name="job_title"></input>
+                            <input  className="w-full h-8 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title', { required: true, maxLength: 20 })} name="job_title"></input>
                         </div> 
                     </div>
 
@@ -130,9 +130,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                         <label className="font-bold text-md text-black">Who are you?</label>
                         {validationErrors('job_description', 'Description')}
 
-                        <div className="inline-flex items-start justify-start w-full">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <textarea  className="w-full h-32 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description', {required: true, maxLength:100})}  name="job_description"></textarea>
+                            <textarea  className="w-full h-32 pl-8 pt-2 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description', {required: true, maxLength:100})}  name="job_description"></textarea>
                         </div> 
                     </div>
                 </div>
@@ -158,9 +158,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                             {/* <label className="block text-red-600 font-bold text-md">{errors.first_name && "First name is required"}</label> */}
                         
 
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2"  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline"  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
                         </div>
 
                     </div>
@@ -171,9 +171,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
 
                       
 
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
                         </div>
 
                     </div>
@@ -182,9 +182,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                         <label className="block font-bold text-sm text-black">Email</label>
                         {validationErrors('email', 'Email')}
 
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
                         </div>
                     </div>
 
@@ -192,10 +192,10 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                         <label className="block font-bold text-sm text-black">Phone</label>
                         {validationErrors('phone', 'Phone')}
 
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span>
-                            {/* <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input> */}
-                            <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input>
+                            {/* <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input> */}
+                            <input type="tel" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input>
                         </div>
                        
                     </div>
@@ -204,9 +204,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                         <label className="block font-bold text-sm text-black">Date of Birth</label>
                         {validationErrors('dob', 'Date of Birth')}
 
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 pl-2 bg-white rounded h-8 pt-3"><i className="fa fa-calendar" aria-hidden="true"></i> </span> */}
-                            <input type="date" className="w-full h-8 pl-8 rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.dob} onChange={handleFormChange} {...register('dob', {required: true})}  placeholder="Date of birth" name="dob"></input>
+                            <input type="date" className="w-full h-8 pl-8 rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.dob} onChange={handleFormChange} {...register('dob', {required: true})}  placeholder="Date of birth" name="dob"></input>
                         </div>
                     </div>
                 </div> 
@@ -215,9 +215,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                 <div className="px-10 space-y-2">
                     <div className="flex flex-col justify-start items-start p-1">
                         <label className="basis block font-bold text-sm text-black">LinkedIn</label>
-                        <div className="inline-flex justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span>
-                            <input type="text" className=" w-full h-8 pl-8 block rounded-sm text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.linkedin_url} onChange={handleFormChange} placeholder="LinkedIn URL" name="linkedin_url"></input>
+                            <input type="text" className=" w-full h-8 pl-8 block rounded-sm text-black focus:outline-blue-400 focus:outline" value={formValues?.linkedin_url} onChange={handleFormChange} placeholder="LinkedIn URL" name="linkedin_url"></input>
                         </div> 
                         
                     </div>
@@ -226,9 +226,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                    
                         <label className="block font-bold text-sm text-black">Github</label>
                         
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.github_url} onChange={handleFormChange} placeholder="Github URL" name="github_url"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.github_url} onChange={handleFormChange} placeholder="Github URL" name="github_url"></input>
                         </div> 
                     </div>
 
@@ -236,9 +236,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                    
                         <label className="block font-bold text-sm text-black">Twitter</label>
                         
-                        <div className="inline-flex items-center justify-start w-full">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline border-b-2" value={formValues?.twitter_url} onChange={handleFormChange} placeholder="Twitter" name="twitter_url"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.twitter_url} onChange={handleFormChange} placeholder="Twitter" name="twitter_url"></input>
                         </div> 
                     </div>
 
@@ -249,9 +249,9 @@ const Profile: React.FC<ProfileProps | WarningProps> = () => {
                         <label className="block font-bold text-sm text-black">Address</label>
                         {validationErrors('address', 'Address')}
 
-                        <div className="inline-flex items-start justify-start w-full">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span>
-                            <textarea  className="w-full h-16 pl-8 pt-2 block rounded text-black focus:outline-blue-500 focus:outline border-b-2" value={formValues?.address} onChange={handleFormChange} {...register('address', {required: true, maxLength:100})}  placeholder="Address" name="address"></textarea>
+                            <textarea  className="w-full h-16 pl-8 pt-2 block rounded text-black focus:outline-blue-500 focus:outline" value={formValues?.address} onChange={handleFormChange} {...register('address', {required: true, maxLength:100})}  placeholder="Address" name="address"></textarea>
                         </div> 
 
                     </div>

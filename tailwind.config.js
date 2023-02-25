@@ -5,6 +5,7 @@ module.exports = {
     "./resources/**/*.js",
     "./resources/**/*.vue",
     "./resources/**/*.tsx",
+    "./resources/**/*.ts",
 
   ],
   theme: {
