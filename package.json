@@ -6,7 +6,8 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.18.6",
-        "@inertiajs/progress": "^0.2.7",
+        "@reduxjs/toolkit": "^1.9.3",
+        "@types/react-redux": "^7.1.25",
         "@vitejs/plugin-react": "^3.1.0",
         "autoprefixer": "^10.4.13",
         "axios": "^1.1.2",
@@ -22,9 +23,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.3.0",
-        "@inertiajs/inertia": "^0.11.1",
-        "@inertiajs/inertia-react": "^0.8.1",
-        "@inertiajs/react": "^1.0.0",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.11",
         "react": "^18.2.0",

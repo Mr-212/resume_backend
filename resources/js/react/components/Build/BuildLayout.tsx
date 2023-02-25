@@ -36,8 +36,4 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
 
 }
 
-
-// BuildLayout.layout = page => <Dashboard children={page}></Dashboard>;
-
-
 export default BuildLayout;
