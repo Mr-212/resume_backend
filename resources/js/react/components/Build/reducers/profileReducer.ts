@@ -2,16 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/root";
 import { AnyAction } from 'redux'
 
-export const educationSlice = createSlice({
-    name: 'education',
-    initialState: [],
+
+export const profileSlice = createSlice({
+    name: 'profile',
+    initialState: {
+        //  id?: string,
+         profile: {},
+    },
     reducers : {
         add:(state, action: PayloadAction<object>) => {
-             state.unshift(action.payload);
+             state .profile = action.payload;
         },
 
         remove: (state, action: PayloadAction<number>) => {
-            state.splice(action.payload, 1);
+            //state.profile.splice(action.payload, 1);
         },
 
         getRecord: (state, action: PayloadAction<number>) => {
@@ -26,8 +30,10 @@ export const educationSlice = createSlice({
     },
 
  });
- export const { add, remove , getRecord} = educationSlice.actions;
- export default educationSlice.reducer; 
+
+
+ export const { add, remove , getRecord} = profileSlice.actions;
+ export default profileSlice.reducer; 
 
 
 

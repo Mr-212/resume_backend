@@ -5,7 +5,7 @@ import { WithHOC } from "./WithHOC";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { add, remove} from "./reducers/educationReducer";
+import { add, remove, getRecord} from "./reducers/educationReducer";
 
 
 interface EducationProps {
@@ -40,10 +40,8 @@ const Education: React.FC<EducationProps> = () => {
 
     const handEducationRecord = () => {
 
-    }
-    { console.log(data)}
+    }; 
 
-    
     return(
 
         <BuildLayout>
@@ -72,21 +70,32 @@ export default Education;
 
 
 interface EducationProps {
-    qulificatin_type: string,
+    qualification_type: string,
     institute: string,
-    gpa_masks: string,
+    gpa_marks: string,
     start_date: string,
     end_date: string,
     setEducation : () => void,
-}
+};
 
 
-const AddEducation: React.FC<EducationProps | any> = ({setData}) => {
- // const[education, setEducation] = useState([]);
+
+
+const AddEducation: React.FC<EducationProps | any> = ({setData},id=null) => {
+
+    const defaultValues = {
+        qualification_type: "BSCS",
+        institute: "UMT",
+        gpa_marks: "3.0",
+        // start_date: "01/01/2014",
+        end_date: "12/12/2018",
+    }
+
+    const[from, setForm] = useState<EducationProps>();
     // const[education, dispatch] = useReducer(educationReducer, []);
-    const { register, handleSubmit, formState: {errors}} = useForm<EducationProps>();
+    const { register, handleSubmit, formState: {errors}, setValue}  = useForm<EducationProps>({defaultValues: defaultValues});
     const dispatch = useAppDispatch();
-    let education = useAppSelector(state => state.educationSlice);
+    const education = useAppSelector(state => state.educationSlice);
 
     const addRecord = handleSubmit(data => {
         dispatch(add(data));
@@ -94,6 +103,15 @@ const AddEducation: React.FC<EducationProps | any> = ({setData}) => {
 
     const removeRecord = (id: number): void =>{
         dispatch(remove(id));
+    }
+
+    const editRecord = (id: number): void => {
+        const record  = education[id];
+        // console.log(record);
+        Object.entries(record).map(([k,v]) => {
+            setValue(k,v);
+        })
+       // setValue(record);
     }
 
     return(
@@ -138,7 +156,7 @@ const AddEducation: React.FC<EducationProps | any> = ({setData}) => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="date" className="w-full h-8 pl-1 block  text-black focus:outline-blue-400 focus:outline border-b-2"    {...register('start_date', {required: true, maxLength:50})} placeholder="Start Date" name="start_date"></input>
+                            <input type="date" className="w-full h-8 pl-1 block  text-black focus:outline-blue-400 focus:outline border-b-2"  {...register('start_date', {required: true, maxLength:50})} placeholder="" name="start_date"></input>
                         </div>
             </div>
             <div className="flex flex-col justify-center items-start p-1 w-full">
@@ -176,6 +194,7 @@ const AddEducation: React.FC<EducationProps | any> = ({setData}) => {
                         { education.length>0 &&
                          <div className="flex flex-col justify-center items-center border-l-2 p-1 w-full" >
                             <button className="pl-10" onClick={() => removeRecord(key)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
+                            <button className=" pl-10" onClick={() => editRecord(key)}><span className="text-lg text-blue-600 text-left"><i className="fa fa-plus"></i></span></button>
 
                         </div>
                         }

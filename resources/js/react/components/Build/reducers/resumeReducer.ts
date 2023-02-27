@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/root";
 import { AnyAction } from 'redux'
 
-export const educationSlice = createSlice({
+export const resumeSlice = createSlice({
     name: 'education',
     initialState: [],
     reducers : {
@@ -26,8 +26,10 @@ export const educationSlice = createSlice({
     },
 
  });
- export const { add, remove , getRecord} = educationSlice.actions;
- export default educationSlice.reducer; 
+
+
+ export const { add, remove , getRecord} = resumeSlice.actions;
+ export default resumeSlice.reducer; 
 
 
 

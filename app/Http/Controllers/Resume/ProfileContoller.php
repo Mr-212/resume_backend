@@ -14,9 +14,20 @@ class ProfileContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id =null)
     {
-        //
+        try{
+            $profile = Profile::find($id);
+            return dd($profile,$id);
+            exit;
+            return response()->json(['STATUS_CODE'=>200,'profile'=>$$profile, 'message' => 'Profile Retrived.']);
+
+
+        }catch(Exception $e){
+            return response()->json(['STATUS_CODE' => 404, 'message' => $e->getMessage()]);
+
+        }
+        
     }
 
     /**
@@ -40,11 +51,9 @@ class ProfileContoller extends Controller
         try{
             // dd($request->all());
             $request->request->add(['user_id' => Profile::generateUUID()]);
-            // dd($request->all());
-            // exit;
             
-            if(Profile::create($request->all())){
-                return response()->json(['STATUS_CODE'=>200, 'message' => 'Profile saved. ']);
+            if($id = Profile::create($request->all())){
+                return response()->json(['STATUS_CODE'=>200,'id'=>$id, 'message' => 'Profile saved.']);
 
             }
         }catch(Exception $e){
@@ -62,7 +71,17 @@ class ProfileContoller extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $profile = Profile::find($id);
+            // return dd($profile,$id);
+            // exit;
+            return response()->json(['STATUS_CODE'=>200,'profile'=>$profile, 'message' => 'Profile Retrived.']);
+
+
+        }catch(Exception $e){
+            return response()->json(['STATUS_CODE' => 404, 'message' => $e->getMessage()]);
+
+        }
     }
 
     /**
