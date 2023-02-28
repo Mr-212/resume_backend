@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/root";
 import { AnyAction } from 'redux'
+import { profile_id } from "./profileReducer";
 
 export const educationSlice = createSlice({
     name: 'education',
@@ -15,13 +16,7 @@ export const educationSlice = createSlice({
         },
 
         getRecord: (state, action: PayloadAction<number>) => {
-            //   const r = state.slice(action.payload, action.payload+1);
-            //   const r = state.map((val,key )=> {
-            //     console.log(key, val)
-            //      if(key == action.payload)
-            //         return val
-            //   });
-            //   console.log(r);
+    
         }
     },
 

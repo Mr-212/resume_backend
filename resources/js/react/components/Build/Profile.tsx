@@ -9,20 +9,55 @@ import BuildLayout from "./BuildLayout";
 import { add } from "./reducers/profileReducer";
 import { WithHOC } from "./WithHOC";
 
-export interface ProfileProps {
+// export interface ProfileProps {
 
-        id?:string,
-        job_title : string,
-        job_description: string,
-        first_name: string, 
-        last_name: string,
-        email: string,
-        phone: string,
-        dob: string,
-        linkedin_url?: string,
-        github_url?: string,
-        twitter_url?: string,
-        address: string,
+//         id?:string,
+//         job_title : string,
+//         job_description: string,
+//         first_name: string, 
+//         last_name: string,
+//         email: string,
+//         phone: string,
+//         dob: string,
+//         linkedin_url?: string,
+//         github_url?: string,
+//         twitter_url?: string,
+//         address: string,
+
+// }
+export interface ProfileProps<T> {
+
+        profile: T[],
+        id?: T,
+
+        // id?:string,
+        // job_title : string,
+        // job_description: string,
+        // first_name: string, 
+        // last_name: string,
+        // email: string,
+        // phone: string,
+        // dob: string,
+        // linkedin_url?: string,
+        // github_url?: string,
+        // twitter_url?: string,
+        // address: string,
+
+}
+let formValue =  {
+
+    id:"",
+    job_title : "",
+    job_description: "",
+    first_name: "", 
+    last_name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    linkedin_url: "",
+    github_url: "",
+    twitter_url: "",
+    address: "",
 
 }
 
@@ -58,7 +93,7 @@ type props= {
 }
 
 
-export const AlertPop = ( title: string, message: string ) => {
+export const Alert = ( title: string, message: string ) => {
      return(
         <div className="bg-sky-100 border-l-4 border-blue-400 text-indigo-400 p-4" role="alert">
             <p className="font-bold text-left">{title}</p>
@@ -69,33 +104,42 @@ export const AlertPop = ( title: string, message: string ) => {
 
 
 
-const Profile: React.FC<ProfileProps | WarningProps> = (id?:string) => {
+function Profile<T>({id}: (ProfileProps<T> & WarningProps)){
     const[alert, setAlert] = useState<WarningProps>();
     const dispatch = useAppDispatch();
     const state = useAppSelector(state => state.profile);
-    // console.log(state.profile);
+    // let formValue = state.profile ? state.profile : {};
+    const[formValues, setFormValues] = useState<ProfileProps<T>>();
+
+    const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps<T>>({defaultValues: formValue});
+    // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
 
 
-    const { register, handleSubmit, formState: {errors}} = useForm<ProfileProps>();
     const validationErrors = (key: string, value: string) => {
-
         return(
             <label className="block text-indigo-600 font-bold text-md">{ errors[key] && value +` is required`}</label>
         )
     }
+
     useEffect(() => {
         id = "0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
-        const data = axios.get(URL_PROFILE_GET + id)
-        .then((res: {}) => {
-            dispatch(add(res.data.profile));
-            setFormValues(res.data.profile)
-        });
+        // id = "";
+        if(id){
+            const data = axios.get(URL_PROFILE_GET + id)
+            .then((res: {}) => {
+                dispatch(add(res.data.profile));
+                // setFormValues(res.data.profile);
+                Object.entries(res.data.profile).map(([k,v]) => {
+                    setValue(k,v);
+                })
+            });
         console.log(state.profile);
-        //setFormValues(res.data.profile)
+        // setFormValues(state.profile)
+        }
+        
 
-    }, []);
+    },[]);
 
-    const[formValues, setFormValues] = useState<ProfileProps >(state.profile);
 
 
 
@@ -104,47 +148,36 @@ const Profile: React.FC<ProfileProps | WarningProps> = (id?:string) => {
         // const key  = e.target.key;
         // const value  = e.target.value;
         setFormValues( {...formValues, [name]: value} );
+        // console.log(state.profile)
         
     }
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-        // console.log(data);
-
-        
-        AlertPop('Success','Data saved');
-        axios.post(URL_PROFILE_CREATE, data)
+        Alert('Success','Data saved');
+        const request = axios.post(URL_PROFILE_CREATE, data)
         .then(res => {
-            // console.log(res.STATUS_CODE);
-            setAlert({...alert, show:true, title:'Alert', message: res.message})
+            setAlert({...alert, show:true, title:'Alert', message: res.data.message})
 
         });
         dispatch(add(data));
-
         setTimeout(() => {
-            setAlert({...alert, show:false})
+            setAlert({...alert, show: false})
 
         }, 5000)
     }) 
-    
-        
-        // console.log(formValues)
-        // axios.post(URL_PROFILE_CREATE,{formValues})
-        // .then(res => {
-        //     console.log(res);
-        // });
-        //console.log(formValues)
     
     
     return(
         
         <BuildLayout saveFunction={submitForm}>
-        
+               { console.log(state.profile)}
+
         <div className="items-center gap-y-1">
             <form >
                 { alert?.show &&
                 <div className="pb-2">
-                    {AlertPop(alert.title, alert.message)}
+                    {Alert(alert.title, alert.message)}
                 </div>
                 }
             <div className="grid grid-cols-2 pb-3 shadow-lg bg-white  border border-spacing-0">
@@ -203,7 +236,7 @@ const Profile: React.FC<ProfileProps | WarningProps> = (id?:string) => {
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             <span className="absolute w-8 bg-white roundeD h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span>
-                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues.first_name}  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
+                            <input type="text" className="w-full h-8 pl-8 block rounded text-black focus:outline-blue-400 focus:outline" value={formValues?.first_name}  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
                         </div>
 
                     </div>

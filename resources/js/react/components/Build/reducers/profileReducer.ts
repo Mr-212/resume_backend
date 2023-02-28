@@ -6,7 +6,7 @@ import { AnyAction } from 'redux'
 export const profileSlice = createSlice({
     name: 'profile',
     initialState: {
-        //  id?: string,
+         id: null,
          profile: {},
     },
     reducers : {
@@ -32,9 +32,9 @@ export const profileSlice = createSlice({
  });
 
 
+ export const profile_id = (state) => state.profile.id;
  export const { add, remove , getRecord} = profileSlice.actions;
- export default profileSlice.reducer; 
-
+ export default profileSlice.reducer;
 
 
 

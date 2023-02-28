@@ -69,19 +69,32 @@ const Education: React.FC<EducationProps> = () => {
 export default Education;
 
 
-interface EducationProps {
-    qualification_type: string,
-    institute: string,
-    gpa_marks: string,
-    start_date: string,
-    end_date: string,
-    setEducation : () => void,
+// interface EducationProps {
+//     profile_id?: string,
+//     qualification_type: string,
+//     institute: string,
+//     gpa_marks: string,
+//     start_date: string,
+//     end_date: string,
+// };
+interface EducationProps<T> {
+
+    education: T[],
+    id?: T,
+    profile_id?: T,
+    // qualification_type: T,
+    // institute: T,
+    // gpa_marks: T,
+    // start_date: T,
+    // end_date: T,
+    setData: T,
 };
 
 
 
 
-const AddEducation: React.FC<EducationProps | any> = ({setData},id=null) => {
+// function AddEducation<T> ({ setData, id }: EducationProps<T>) {
+const AddEducation = <T extends EducationProps<T>>( { setData, id }: T) =>{
 
     const defaultValues = {
         qualification_type: "BSCS",
@@ -89,13 +102,15 @@ const AddEducation: React.FC<EducationProps | any> = ({setData},id=null) => {
         gpa_marks: "3.0",
         // start_date: "01/01/2014",
         end_date: "12/12/2018",
+        // profile_id: profile_id,
     }
 
-    const[from, setForm] = useState<EducationProps>();
+    const[from, setForm] = useState<T>();
     // const[education, dispatch] = useReducer(educationReducer, []);
-    const { register, handleSubmit, formState: {errors}, setValue}  = useForm<EducationProps>({defaultValues: defaultValues});
+    const { register, handleSubmit, formState: {errors}, setValue}  = useForm<EducationProps<T>>({defaultValues: defaultValues});
     const dispatch = useAppDispatch();
     const education = useAppSelector(state => state.educationSlice);
+    const profile_id = useAppSelector(state => state.profile.profile.id);
 
     const addRecord = handleSubmit(data => {
         dispatch(add(data));
@@ -107,7 +122,7 @@ const AddEducation: React.FC<EducationProps | any> = ({setData},id=null) => {
 
     const editRecord = (id: number): void => {
         const record  = education[id];
-        // console.log(record);
+        console.log( profile_id);
         Object.entries(record).map(([k,v]) => {
             setValue(k,v);
         })
@@ -120,7 +135,8 @@ const AddEducation: React.FC<EducationProps | any> = ({setData},id=null) => {
             
         <div className="flex flex-row items-center justify-center shadow-lg opacity-100 bg-gray border-y-0 border-blue-400">   
             <div className="flex flex-col justify-center items-start p-1 w-24">
-                       
+           
+
             </div>
 
             <div className="flex flex-col justify-center items-start p-1 w-full">
