@@ -17,7 +17,7 @@ export const Sidebar = () => {
                 
                 <ul className="space-y-6 pl-3 ">
                     <li className={url === '/dashboard'? active: li_class}><Link key="0" to="/dashboard">Dashboard</Link></li>
-                    <li className={url === '/dashboard/profile'? active: li_class}><Link key="1" to="/dashboard/profile">Basic Profile</Link></li>
+                    <li className={url === '/profile'? active: li_class}><Link key="1" to="/profile">Basic Profile</Link></li>
                     {/* <li className={url === '/dashboard/education'? active: li_class}><Link to="/dashboard/education">Education</Link></li> */}
                     {/* <li className={url === '/dashboard/work_history'? active: li_class}><Link to="/dashboard/work_history">Work History</Link></li> */}
                     {/* <li className={li_class}><a> Cat</a></li> */}

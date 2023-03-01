@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::prefix('dashboard')->group(function(){
+Route::prefix('/')->group(function(){
 
     Route::get('/', function () {
         return view('app');

@@ -4,8 +4,8 @@ import { getUrlPath } from "../hooks/GetLocation";
 
 const ResumeUrls = [
     
-    {"Profile" :"/dashboard/profile"},
-    {"Education" :"/dashboard/education"},
+    {"Profile" :"/"},
+    {"Education" :"/education"},
     {"Soft Skill" :""},
     {"Technical Skill" :""},
     {"Work History" :"" },
@@ -16,9 +16,7 @@ const ResumeUrls = [
  const CreatePageUrl = () => {
     const url = getUrlPath();
     const last_index = ResumeUrls.length;
-    // let i = 0;
     let line = "bg-black h-1 w-full";
-
     const li_class = "shadow:sm font-sans text-black font-bold hover:text-sm transition ease-in-out duration-300 hover:scale-125 hover:scale-x-110";
     const active = "active shadow-lg opacity-500 text-blue-500 font-bold text-lg  border-blue-500 scalle-100 transition ease-in-out duration-300";
 
