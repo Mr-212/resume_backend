@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { ChangeEvent, FormEvent, FormEventHandler, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { URL_PROFILE_CREATE, URL_PROFILE_GET } from "../../constants/ResumeUrls";
-import { useAppSelector } from "../../store/hooks";
-import { useAppDispatch } from "../../store/store";
-import Dashboard from "../Dashboard/Index";
-import BuildLayout from "./BuildLayout";
-import { add } from "./reducers/profileReducer";
-import { WithHOC } from "./WithHOC";
+import { URL_PROFILE_CREATE, URL_PROFILE_GET } from "../../../constants/ResumeUrls";
+import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch } from "../../../store/store";
+import Dashboard from "../../Dashboard/Index";
+import BuildLayout from "../BuildLayout";
+import { add } from "../reducers/profileReducer";
+import { WithHOC } from "../WithHOC";
 
 // export interface ProfileProps {
 
@@ -27,14 +27,16 @@ import { WithHOC } from "./WithHOC";
 // }
 export interface ProfileProps<T> {
 
-        profile: T[],
-        id?: T,
+        profile?: T,
+        id?: string,
+        errors?: T[]
 
         // id?:string,
         // job_title : string,
         // job_description: string,
-        // first_name: string, 
-        // last_name: string,
+        // first_name?: string, 
+        // last_name?: string,
+        // name: string,
         // email: string,
         // phone: string,
         // dob: string,
@@ -44,13 +46,15 @@ export interface ProfileProps<T> {
         // address: string,
 
 }
-let formValue =  {
+const formValue =  {
 
-    id:"",
+    // id:"",
+   
+    
     job_title : "",
     job_description: "",
-    first_name: "", 
-    last_name: "",
+    name: "", 
+    // last_name: "",
     email: "",
     phone: "",
     dob: "",
@@ -60,6 +64,11 @@ let formValue =  {
     address: "",
 
 }
+type profile = ProfileProps<typeof formValue>;
+
+
+
+// type Profile = ProfileProps<formValue>;
 
 // export interface ProfileProps {
 //        id?: string,
@@ -82,11 +91,13 @@ let formValue =  {
 // }
 
 
-interface WarningProps<T> {
-    show: T,
-    title: T,
-    message: T
+interface WarningProps {
+    show: boolean,
+    title: string,
+    message: string
 }
+
+type CombineProps<T> = ProfileProps<T> & WarningProps & typeof formValue;
 
 type props= {
     submitForm?: () => void,
@@ -105,14 +116,15 @@ export const Alert = ( title: string, message: string ) => {
 
 
 // function Profile<T , U extends WarningProps<U>> ( { id }: (ProfileProps<T>)){
-function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
-    const[alert, setAlert] = useState<WarningProps<U>>();
+
+function Profile<T> ( { id }: CombineProps<T>){
+    const[alert, setAlert] = useState();
     const dispatch = useAppDispatch();
     const state = useAppSelector(state => state.profile);
     // let formValue = state.profile ? state.profile : {};
-    const[formValues, setFormValues] = useState<ProfileProps<T>>();
+    const[formValues, setFormValues] = useState<CombineProps<T>>();
 
-    const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps<T | string>>({defaultValues: formValue});
+    const { register, handleSubmit, formState: {errors}, setValue} = useForm<CombineProps<string | T>>({defaultValues: formValue});
     // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
 
 
@@ -129,13 +141,10 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
             const data = axios.get(URL_PROFILE_GET + id)
             .then((res) => {
                 dispatch(add(res.data.profile));
-                // setFormValues(res.data.profile);
                 Object.entries(res.data.profile).map(([k,v]) => {
                     setValue(k,v);
                 })
             });
-        // console.log(state.profile);
-        // setFormValues(state.profile)
         }
 
     },[]);
@@ -157,7 +166,7 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
         Alert('Success','Data saved');
         const request = axios.post(URL_PROFILE_CREATE, data)
         .then(res => {
-            setAlert({...alert, show:true, title:'Alert', message: res.data.message})
+            setAlert({...alert, show: true, title:'Alert', message: res.data.message})
 
         });
         dispatch(add(data));
@@ -181,8 +190,8 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                 </div>
                 }
             <div className="grid grid-cols-2 justify-items-stretch shadow-sm opacity-100 bg-white space-y-5 pb-2 border-b-2">
-                <div className="col-span-2 border-b-2 border-blue-200 bg-white h-10 pr-28 py-2 mb-3 shadow-md">
-                        <h4 className="text-blue-800 font-bold text-md text-left px-10">Profile</h4>
+                <div className="col-span-2 border-b-2 border-blue-900 bg-blue-900 h-10 pr-28 py-2 mb-3 shadow-md">
+                        <h4 className="text-sky-100 font-bold text-md text-left px-10">Profile</h4>
                 </div>
                 {/* <div className="px-10">
                     <div className="border border-gray-400 border-dashed h-5/6 w-4/6">
@@ -191,14 +200,13 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                     </div>
 
                 </div>  */}
-
                 <div className="px-10 items-start justify-items-start space-y-3">
                     <div className="flex flex-col justify-start items-start">
                         <label className="font-bold text-sm text-gray-400">Job Title</label>
                         {validationErrors('job_title', 'Title')}
-                        <div className="inline-flex items-start justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <input  className="w-full h-8 pt-2 block  text-slate-500 focus:outline-none focus:bg-gray" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title', { required: true, maxLength: 20 })} name="job_title"></input>
+                            <input  className="w-full h-8 pt-2 block  text-black font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title', { required: true, maxLength: 20 })} name="job_title"></input>
                         </div> 
                     </div>
 
@@ -206,9 +214,9 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                         <label className="font-bold text-sm text-gray-400">Potfolio Description</label>
                         {validationErrors('job_description', 'Description')}
 
-                        <div className="inline-flex items-start justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <textarea  className="w-full h-24  pt-2 block rounded text-slate-500 focus:outline-none" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description', {required: true, maxLength:100})}  name="job_description"></textarea>
+                            <textarea  className="w-full h-24  pt-2 block rounded text-black font-bold focus:outline-none" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description', {required: true, maxLength:100})}  name="job_description"></textarea>
                         </div> 
                     </div>
                 </div>
@@ -217,60 +225,61 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
             
 
 
+            <div className="col-span-2  border-sky-900 bg-blue-900 h-0 pr-28 shadow-md"> </div>
 
 
-            <div className="grid grid-cols-2 justify-items-stretch shadow-sm opacity-100 bg-white">
+            <div className="grid grid-cols-2 justify-items-stretch shadow-sm opacity-100 bg-white pt-4">
 
-                {/* <div className="col-span-2 border-t-2 border-blue-200 shadow-md bg-white h-10 pt-2 pr-28">
+                {/* <div className="col-span-2 border-t-2 border-blue-900 shadow-md bg-white h-10 pt-2 pr-28">
                         <h4 className="text-blue-800 font-bold text-md text-left">Basic Information</h4>
                 </div> */}
 
                 <div className="px-10 space-y-2">       
                     <div className="flex flex-col items-start justify-center p-1">
                         
-                            <label className="block font-bold text-sm text-gray-400">First Name</label>
+                            <label className="block font-bold text-sm text-gray-400">Name</label>
                             {validationErrors('first_name', 'First Name')}
                             {/* <label className="block text-red-600 font-bold text-md">{errors.first_name && "First name is required"}</label> */}
                         
 
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.first_name}  onChange={handleFormChange} placeholder="First Name" {...register('first_name', {required: true, maxLength:20})} name="first_name"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.name}  onChange={handleFormChange} placeholder="Name" {...register('first_name', {required: true, maxLength:20})} name="name"></input>
                         </div>
 
                     </div>
-                    <div className="flex flex-col justify-center items-start p-1 w-full">
+                    {/* <div className="flex flex-col justify-center items-start p-1 w-full">
                        
                             <label className="block font-bold text-sm text-gray-400">Last Name</label>
                             {validationErrors('last_name', 'Last Name')}
 
                       
 
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
+                            {/* <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">Email</label>
                         {validationErrors('email', 'Email')}
 
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
                         </div>
                     </div>
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
-                        <label className="block font-bold text-sm text-gray-400">Phone</label>
+                        <label className="block font-bold text-sm text-gray-400">City</label>
                         {validationErrors('phone', 'Phone')}
 
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
-                            <input type="tel" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input>
-                            {/* <input type="tel" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
+                            <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input>
+                            {/* <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
                         </div>
                        
                     </div>
@@ -279,18 +288,31 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                         <label className="block font-bold text-sm text-gray-400">Date of Birth</label>
                         {validationErrors('dob', 'Date of Birth')}
 
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 pl-2 bg-white rounded h-8 pt-3"><i className="fa fa-calendar" aria-hidden="true"></i> </span> */}
-                            <input type="date" className="w-full h-8  rounded text-slate-500 focus:outline-none" value={formValues?.dob} onChange={handleFormChange} {...register('dob', {required: true})}  placeholder="Date of birth" name="dob"></input>
+                            <input type="date" className="w-full h-8  rounded text-black font-bold focus:outline-none" value={formValues?.dob} onChange={handleFormChange} {...register('dob', {required: true})}  placeholder="Date of birth" name="dob"></input>
                         </div>
                     </div>
                 </div> 
 
                 
                 <div className="px-10 space-y-2">
+
+                   <div className="flex flex-col justify-center items-start p-1 w-full">
+                        <label className="block font-bold text-sm text-gray-400">Phone</label>
+                        {validationErrors('phone', 'Phone')}
+
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
+                            {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
+                            <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input>
+                            {/* <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
+                        </div>
+                       
+                    </div>
+
                     <div className="flex flex-col justify-start items-start p-1">
                         <label className="basis block font-bold text-sm text-gray-400">LinkedIn</label>
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span> */}
                             <input type="text" className=" w-full h-8  block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url} onChange={handleFormChange} placeholder="LinkedIn URL" name="linkedin_url"></input>
                         </div> 
@@ -301,9 +323,9 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                    
                         <label className="block font-bold text-sm text-gray-400">Github</label>
                         
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.github_url} onChange={handleFormChange} placeholder="Github URL" name="github_url"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.github_url} onChange={handleFormChange} placeholder="Github URL" name="github_url"></input>
                         </div> 
                     </div>
 
@@ -311,9 +333,9 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                    
                         <label className="block font-bold text-sm text-gray-400">Twitter</label>
                         
-                        <div className="inline-flex items-center justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-slate-500 focus:outline-none" value={formValues?.twitter_url} onChange={handleFormChange} placeholder="Twitter" name="twitter_url"></input>
+                            <input type="text" className="w-full h-8  block  text-black font-bold focus:outline-none" value={formValues?.twitter_url} onChange={handleFormChange} placeholder="Twitter" name="twitter_url"></input>
                         </div> 
                     </div>
 
@@ -324,9 +346,9 @@ function Profile<T , U extends WarningProps<U>> ( { id }: ProfileProps<string>){
                         <label className="block font-bold text-sm text-gray-400">Address</label>
                         {validationErrors('address', 'Address')}
 
-                        <div className="inline-flex items-start justify-start w-full border-b-2 border-blue-200">
+                        <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <textarea  className="w-full h-16  pt-2 block rounded text-slate-500 focus:outline-blue-500 focus:outline" value={formValues?.address} onChange={handleFormChange} {...register('address', {required: true, maxLength:100})}  placeholder="Address" name="address"></textarea>
+                            <textarea  className="w-full h-16  pt-2 block  text-black font-bold focus:outline-none" value={formValues?.address} onChange={handleFormChange} {...register('address', {required: true, maxLength:100})}  placeholder="Address" name="address"></textarea>
                         </div> 
 
                     </div>

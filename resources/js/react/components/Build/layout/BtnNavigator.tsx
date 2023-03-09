@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getUrlPath } from "../hooks/GetLocation";
+import { getUrlPath } from "../../hooks/GetLocation";
 
 
 const modules = [

@@ -1,11 +1,11 @@
 import React from "react"
 import { Outlet } from "react-router-dom";
 import Dashboard from "../Dashboard/Index";
-import BtnNavigator from "./BtnNavigator";
-import Education from "./Education";
+import BtnNavigator from "./layout/BtnNavigator";
+import Education from "./pages/Education";
 // import Profile from "./Profile";
-import CreatePageUrl from "./Navigation";
-import Profile from "./Profile";
+import CreatePageUrl from "./layout/Navigation";
+import Profile from "./pages/Profile";
 
 
 interface Props {
@@ -22,14 +22,14 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
 
     return(
         // <Dashboard>
-            <div className="grid grid-cols-2 justify-center gap-y-2 px-10">
-                <div className="">
+            <div className="grid grid-cols-2 justify-center gap-y-2 px-10 overflow-auto">
+                <div className="gap-y-4 space-y-2">
                     <CreatePageUrl />
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>  
-                    <div className="">
-                        {/* <Profile></Profile> */}
-                        {/* <Education></Education> */}
-                         <Outlet />
+                    <div className="border border-slate-400 shadow-sm">
+                        <Profile></Profile>
+                        <Education></Education>
+                         {/* <Outlet /> */}
                         { children } 
                 </div>
                 </div>

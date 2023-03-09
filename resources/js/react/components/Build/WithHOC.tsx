@@ -1,8 +1,8 @@
 import React, { ComponentProps } from "react";
 import Dashboard from "../Dashboard/Index";
-import BtnNavigator from "./BtnNavigator";
+import BtnNavigator from "./layout/BtnNavigator";
 import BuildLayout from "./BuildLayout";
-import CreatePageUrl from "./Navigation";
+import CreatePageUrl from "./layout/Navigation";
 
 interface Props {
     handleSubmit?: () => void

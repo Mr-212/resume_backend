@@ -8,8 +8,8 @@ import {
     RouterProvider,
   } from "react-router-dom";
 import BuildLayout from "../../components/Build/BuildLayout";
-import Education from "../../components/Build/Education";
-import Profile from "../../components/Build/Profile";
+import Education from "../../components/Build/pages/Education";
+import Profile from "../../components/Build/pages/Profile";
 import Dashboard from "../../components/Dashboard/Index";
   
   
