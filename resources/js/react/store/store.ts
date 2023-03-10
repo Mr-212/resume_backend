@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {rootReducer} from './root';
+import {rootReducer} from './rootReducer';
 import { useDispatch } from 'react-redux'
 // import additionalMiddleware from 'additional-middleware';
 // import logger from 'redux-logger';

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/root";
+import { RootState } from "../../../store/rootReducer";
 import { AnyAction } from 'redux'
 
 
@@ -8,7 +8,7 @@ export const resumeState = {
         id: null,
         profile: {},
         education: [],
-        skills: [],
+        skills: {},
    
 }
 
