@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { ChangeEvent, useReducer, useState } from "react";
 import Dashboard from "../../Dashboard/Index";
 import BuildLayout from "../BuildLayout";
 import { WithHOC } from "../WithHOC";
@@ -50,9 +50,12 @@ const Skills = <T extends SkillProps> () => {
     const selectSkill = (skill: string) => {
         
         // console.log(skills.find(skill))
+            const skillObject = { [skill] : 0}
+            console.log(skillObject)
+            // Object.assign(skillObject,{ skill: 0 })
 
         
-            setSkills([...skills, skill]);
+            setSkills([...skills, skillObject]);
             // console.log(skills)
         
     }
@@ -97,20 +100,32 @@ export default Skills;
 
 function  AddSkills(props){
 
-    console.log(props.skills);
+    const scoreArray = {25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
+    const[rating, setRating] = useState(25);
+
+    const handleRangeInput = (e: ChangeEvent<HTMLInputElement>| unknown| undefined) =>{
+        setRating(e.target.value)
+
+    }
+
+    // console.log(props.skills);
 
     return(
-        <div className="flex flex-col w-full p-5">
+        <div className="flex flex-col w-full pt-2">
             <div>
 
                 {/* <label>Name</label> */}
                 {props.skills.map((v,k) => {
+                    return Object.entries(v).map(([skill,score]) => {
                     return  (
-                        <div className="flex items-center">
-                            <span className="text-green-500 absolute pr-2"><i className="fa fa-check" aria-hidden="true"></i></span>
-                            <input className="block  pl-8 p-2 h-8 text-gray-600 font-bold  bg-white border-b-2 w-3/6 focus:outline-none" value={v} placeholder=""></input>
+                        <div className="flex items-center border-b-2 bg-white pt-2 ">
+                            <span className="text-green-500 absolute pl-4"><i className="fa fa-check" aria-hidden="true"></i></span>
+                            <input className="block h-8 pl-12 p-2 text-gray-600 font-bold   focus:outline-none w-1/3" value={skill} placeholder=""></input>
+                            <input className="block h-8 w-1/3"  type="range" min="0" max="100" step="25" value={rating} onChange={handleRangeInput} />
+                            <span className="block h-8 w-1/3 font-bold text-sky-400">{scoreArray[rating]}</span>
                         </div>
                     )
+                    })
 
                 })}
                 
