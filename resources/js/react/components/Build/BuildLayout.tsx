@@ -6,6 +6,7 @@ import Education from "./pages/Education";
 // import Profile from "./Profile";
 import CreatePageUrl from "./layout/Navigation";
 import Profile from "./pages/Profile";
+import TemplateBasic from "./templates/basic";
 
 
 interface Props {
@@ -22,23 +23,23 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
 
     return(
         // <Dashboard>
-            <div className="grid grid-cols-2 justify-center gap-y-2 px-10 overflow-auto">
+            <div className="grid grid-cols-2 justify-center  space-x-2 overflow-y-auto p-5">
                 <div className="gap-y-4 space-y-2">
                     <CreatePageUrl />
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>  
-                    <div className="border border-slate-400 shadow-sm">
-                        <Profile></Profile>
-                        <Education></Education>
-                         {/* <Outlet /> */}
+                    <div className="">
+                        {/* <Profile></Profile> */}
+                        {/* <Education></Education> */}
+                         <Outlet />
                         { children } 
-                </div>
+                    </div>
                 </div>
                 {/* <div className="w-full items-end text-right static  b-0">
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div> */}
                
-                <div className="w-full">
-
+                <div className="w-full h-screen  px-5 py-10">
+                    <TemplateBasic></TemplateBasic>
                 </div>
               
             </div>

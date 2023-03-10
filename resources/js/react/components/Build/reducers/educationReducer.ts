@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/root";
 import { AnyAction } from 'redux'
-import { profile_id } from "./profileReducer";
+// import { profile_id } from "./profileReducer";
+import { resumeState } from "./profileReducer";
 
 export const educationSlice = createSlice({
     name: 'education',
-    initialState: [],
+    initialState: resumeState.education,
     reducers : {
         add:(state, action: PayloadAction<object>) => {
              state.unshift(action.payload);

@@ -58,6 +58,7 @@ const formValue =  {
     email: "",
     phone: "",
     dob: "",
+    city:"",
     linkedin_url: "",
     github_url: "",
     twitter_url: "",
@@ -163,17 +164,19 @@ function Profile<T> ( { id }: CombineProps<T>){
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-        Alert('Success','Data saved');
-        const request = axios.post(URL_PROFILE_CREATE, data)
-        .then(res => {
-            setAlert({...alert, show: true, title:'Alert', message: res.data.message})
+        console.log(data);
 
-        });
+        // Alert('Success','Data saved');
+        // const request = axios.post(URL_PROFILE_CREATE, data)
+        // .then(res => {
+        //     setAlert({...alert, show: true, title:'Alert', message: res.data.message})
+
+        // });
         dispatch(add(data));
-        setTimeout(() => {
-            setAlert({...alert, show: false})
+        // setTimeout(() => {
+        //     setAlert({...alert, show: false})
 
-        }, 5000)
+        // }, 5000)
     }) 
     
     
@@ -182,16 +185,17 @@ function Profile<T> ( { id }: CombineProps<T>){
         // <BuildLayout saveFunction={submitForm}>
             //    { console.log(state.profile)}
 
-        <div className="items-center gap-y-2">
+        <div className="items-center gap-y-2" >
             <form >
                 { alert?.show &&
                 <div className="pb-2">
                     {Alert(alert.title, alert.message)}
                 </div>
                 }
-            <div className="grid grid-cols-2 justify-items-stretch shadow-sm opacity-100 bg-white space-y-5 pb-2 border-b-2">
-                <div className="col-span-2 border-b-2 border-blue-900 bg-blue-900 h-10 pr-28 py-2 mb-3 shadow-md">
-                        <h4 className="text-sky-100 font-bold text-md text-left px-10">Profile</h4>
+            <div className="grid grid-cols-2 justify-items-stretch bg-white space-y-5 pb-2">
+                <div className="col-span-2 items-center align-middle justify-items-end border-b-2 opacity-40 bg-blue-300 h-10 pr-28 py-2 mb-3 shadow-md">
+                        <h4 className="text-black font-bold text-md text-left px-10">Profile</h4>
+                        {/* <button type="button" className="px-4 bg-green-400 text-right align-middle" onClick={submitForm}>Save</button> */}
                 </div>
                 {/* <div className="px-10">
                     <div className="border border-gray-400 border-dashed h-5/6 w-4/6">
@@ -206,17 +210,17 @@ function Profile<T> ( { id }: CombineProps<T>){
                         {validationErrors('job_title', 'Title')}
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <input  className="w-full h-8 pt-2 block  text-black font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title} onChange={handleFormChange} placeholder="Add you job Title e.g. Full Stack Developer" {...register('job_title', { required: true, maxLength: 20 })} name="job_title"></input>
+                            <input  className="w-full h-8 pt-2 block  text-black text-sm font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="E.g. Full Stack Developer" {...register('job_title', { required: false, maxLength: 20 })} name="job_title"></input>
                         </div> 
                     </div>
 
                     <div className="flex flex-col justify-start items-start">
-                        <label className="font-bold text-sm text-gray-400">Potfolio Description</label>
+                        <label className="font-bold text-sm text-gray-400">Description</label>
                         {validationErrors('job_description', 'Description')}
 
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <textarea  className="w-full h-24  pt-2 block rounded text-black font-bold focus:outline-none" value={formValues?.job_description} onChange={handleFormChange} placeholder="Tell about yourself!" {...register('job_description', {required: true, maxLength:100})}  name="job_description"></textarea>
+                            <textarea  className="w-full h-24  pt-2 block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.job_description}  placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:100})}  name="job_description"></textarea>
                         </div> 
                     </div>
                 </div>
@@ -244,7 +248,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.name}  onChange={handleFormChange} placeholder="Name" {...register('first_name', {required: true, maxLength:20})} name="name"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.name}  onMouseOver={submitForm} placeholder="" {...register('name', {required: false, maxLength:20})} name="name"></input>
                         </div>
 
                     </div>
@@ -257,7 +261,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounde h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span> */}
-                            {/* <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.last_name} onChange={handleFormChange} {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
+                            {/* <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.last_name}  {...register('last_name', {required: true, maxLength:20})} placeholder="Last Name" name="last_name"></input>
                         </div>
 
                     </div> */}
@@ -268,18 +272,18 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.email} onChange={handleFormChange}  {...register('email', {required: true, maxLength:50, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="Email" name="email"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.email}  {...register('email', {required: false, maxLength:100, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="" name="email"></input>
                         </div>
                     </div>
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">City</label>
-                        {validationErrors('phone', 'Phone')}
+                        {validationErrors('city', 'city')}
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
-                            <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input>
-                            {/* <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
+                            <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.city}  {...register('city', {required: false, maxLength:20})}  placeholder="" name="city"></input>
+                            {/* <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
                         </div>
                        
                     </div>
@@ -290,7 +294,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 pl-2 bg-white rounded h-8 pt-3"><i className="fa fa-calendar" aria-hidden="true"></i> </span> */}
-                            <input type="date" className="w-full h-8  rounded text-black font-bold focus:outline-none" value={formValues?.dob} onChange={handleFormChange} {...register('dob', {required: true})}  placeholder="Date of birth" name="dob"></input>
+                            <input type="date" className="w-full h-8  rounded text-black text-sm font-bold focus:outline-none" value={formValues?.dob} {...register('dob', {required: false})}  placeholder="" name="dob"></input>
                         </div>
                     </div>
                 </div> 
@@ -304,28 +308,28 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
-                            <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="Phone" name="phone"></input>
-                            {/* <input type="tel" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.phone} onChange={handleFormChange} {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
+                            <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="" name="phone"></input>
+                            {/* <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
                         </div>
                        
                     </div>
 
                     <div className="flex flex-col justify-start items-start p-1">
-                        <label className="basis block font-bold text-sm text-gray-400">LinkedIn</label>
+                        <label className="basis block font-bold text-sm text-gray-400">LinkedIn URL</label>
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span> */}
-                            <input type="text" className=" w-full h-8  block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url} onChange={handleFormChange} placeholder="LinkedIn URL" name="linkedin_url"></input>
+                            <input type="text" className=" w-full h-8  block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url}  placeholder="" name="linkedin_url"></input>
                         </div> 
                         
                     </div>
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                    
-                        <label className="block font-bold text-sm text-gray-400">Github</label>
+                        <label className="block font-bold text-sm text-gray-400">Github URL</label>
                         
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-black font-bold focus:outline-none" value={formValues?.github_url} onChange={handleFormChange} placeholder="Github URL" name="github_url"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
                         </div> 
                     </div>
 
@@ -335,7 +339,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                         
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block  text-black font-bold focus:outline-none" value={formValues?.twitter_url} onChange={handleFormChange} placeholder="Twitter" name="twitter_url"></input>
+                            <input type="text" className="w-full h-8  block  text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
                         </div> 
                     </div>
 
@@ -348,7 +352,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <textarea  className="w-full h-16  pt-2 block  text-black font-bold focus:outline-none" value={formValues?.address} onChange={handleFormChange} {...register('address', {required: true, maxLength:100})}  placeholder="Address" name="address"></textarea>
+                            <textarea  className="w-full h-16  pt-2 block  text-black text-sm font-bold focus:outline-none" value={formValues?.address}  {...register('address', {required: false, maxLength:100})}  placeholder="" name="address"></textarea>
                         </div> 
 
                     </div>

@@ -6,8 +6,8 @@ const ResumeUrls = [
     
     {"Profile" :"/"},
     {"Education" :"/education"},
-    {"Soft Skill" :""},
-    {"Technical Skill" :""},
+    // {"Soft Skill" :""},
+    {"Skill" :"/skills"},
     {"Work History" :"" },
     {"Cirtifications" :"" },
 ]
@@ -17,12 +17,12 @@ const ResumeUrls = [
     const url = getUrlPath();
     const last_index = ResumeUrls.length;
     let line = "bg-black h-1 w-full";
-    const li_class = "shadow:sm font-sans text-black font-bold hover:text-sm transition ease-in-out duration-300 hover:scale-125 hover:scale-x-110";
-    const active = "active shadow-lg opacity-500 text-blue-500 font-bold text-lg  border-blue-500 scalle-100 transition ease-in-out duration-300";
+    const li_class = "text-black font-bold hover:text-indigo-800 hover:text-xl transition-all ease-in-out delay-150 duration-300 ";
+    const active = "active opacity-100 text-green-800 font-bold text-lg transition ease-in-out duration-300";
 
     return(
         <>
-              <nav className="bg-white-200  shadow-lg opacity-100 border-b-2 p-2 w-full">
+              <nav className="bg-blue-300 shadow-sm opacity-50 border-b-2 p-2 w-full">
                 <ul className="inline-flex items-center justify-evenly gap-x-8">
                     
                     { ResumeUrls.map( (val, key) => {
@@ -41,11 +41,10 @@ const ResumeUrls = [
                                             {/* <span className="text-orange-500 font-bold text-lg pr-1">{val+1}</span> */}
                                             <Link className={ url === v ?  active : li_class } key={k} to={v}>{k}</Link>
                                         </li>
-                                        { key !==  last_index -1 ?
-
+                                        {/* { key !==  last_index -1 ?
                                             // <span className={ key < last_index-1 ?  i < key && i > 0  ? "bg-black h-1 w-full" : "h-1 w-full bg-blue-400" : "bg-black h-1 w-full"}></span> : null
                                             <span  key={k} className={ line }></span> : null
-                                        }
+                                        } */}
                                     </>
                                 )
                             })
