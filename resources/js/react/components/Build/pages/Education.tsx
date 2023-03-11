@@ -41,7 +41,7 @@ const Education = <T extends EducationProps<T>> () => {
     // const { register, handleSubmit, formState: {errors}} = useForm();
 
     // const [education_list, setList] = useState([]);
-    const educationList = useAppSelector(state=>state.educationSlice);
+    const educationList = useAppSelector(state=>state.education);
     const dispatch = useAppDispatch();
     const validationErrors = (key: string, value: string) => {
 
@@ -75,7 +75,7 @@ const Education = <T extends EducationProps<T>> () => {
         <div className="items-center gap-y-1">
          
             <div className="grid grid-cols-2 border-slate-400">
-                <div className="col-span-2  bg-slate-400 h-10 py-2 border-slate-400 mb-3 shadow-lg  items-center align-middle">
+                <div className="col-span-2  h-10 py-2 bg-blue-300 opacity-50 mb-3 shadow-lg  items-center align-middle">
                     <div className="grid grid-cols-2 border-slate-400 px-10">
                         <h4 className="text-blue-800 text-md font-bold text-left">Educational Details</h4>
                         <button className="text-right" onClick={addEducation}><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
@@ -143,7 +143,7 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
     // const[education, dispatch] = useReducer(educationReducer, []);
     const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: items});
     const dispatch = useAppDispatch();
-    const education = useAppSelector(state => state.educationSlice[index]);
+    const education = useAppSelector(state => state.education[index]);
     const profile_id = useAppSelector(state => state.profile.profile.id);
 
     useEffect(() => {

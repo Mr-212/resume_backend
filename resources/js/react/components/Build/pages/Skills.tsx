@@ -24,7 +24,7 @@ const defaultValues = {
 }
 
 const Skills = <T extends SkillProps> () => {
-    const skillList = useAppSelector(state => state.skills.skills);
+    const skillList = useAppSelector(state => state.skills);
     const dispatch = useAppDispatch();
     // const [skills, setSkills] = useState([]); 
 
@@ -86,7 +86,7 @@ const Skills = <T extends SkillProps> () => {
             </div>
             <div className="flex flex-row items-center flex-wrap space-y-4">
                 
-                <AddSkills ></AddSkills>
+                <AddSkills skills={skillList} ></AddSkills>
             </div>
 
         
@@ -102,21 +102,12 @@ function  AddSkills(props){
     let scoreArray = {0: "Fresh ",25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
     // const[rating, setRating] = useState(25);
     const dispatch = useAppDispatch();
-    const skillList = useAppSelector(state => state.skills.skills);
-
+    // const skillList = useAppSelector(state => state.skills);
+    const skillList = props.skills;
 
     const handleRangeInput = (value: number, skill: string) =>{
-        // setRating(e.target.value);
-        // console.log(value,skill);
-        // console.log(props.skills[skill]['skill']);
-        // setRating(value);
-        // let skillObject = props.skills[skill];
-        // skillObject['score'] = value
-        // console.log(skillObject);
         dispatch(update({skill, score: value}));
-
     }
-    // console.log(props.skills);
 
     return(
 
@@ -129,7 +120,7 @@ function  AddSkills(props){
                         console.log( key, val)
                     return(
                         <div className="flex items-center border-b-2 bg-white pt-2" key={val}>
-                            <span className="text-green-500 absolute pl-4"><i className="fa fa-check" aria-hidden="true"></i></span>
+                            <span className="text-green-500 pl-4"><i className="fa fa-check" aria-hidden="true"></i></span>
                             <input className="block h-8 pl-12 p-2 text-gray-600 font-bold   focus:outline-none w-1/3" value={key['skill']}  placeholder=""></input>
                             <input className="block h-8 w-1/3"  type="range" min="0" max="100" step="25" value={key['score']} onChange={(e)=>handleRangeInput(e.target.value, key['skill'])} />
                             <span className="block h-8 w-1/3 font-bold text-sky-400">{scoreArray[key['score']]}</span>

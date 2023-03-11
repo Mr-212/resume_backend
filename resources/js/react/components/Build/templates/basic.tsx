@@ -12,7 +12,7 @@ import { useAppSelector } from "../../../store/hooks";
 
     return(
     
-        <div className="border border-gray-300 rounded-sm shadow-lg py-10 px-10 mb-10">
+        <div className="border border-gray-300 rounded-sm shadow-lg py-10 px-10">
         <header>
             <ul className="flex flex-wrap justify-end gap-2">
                 <li>

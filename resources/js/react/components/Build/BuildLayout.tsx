@@ -22,11 +22,23 @@ interface Props {
 const BuildLayout = ( { children, saveFunction }: any )  => {
 
     return(
-        // <Dashboard>
-            <div className="grid grid-cols-2 justify-center  space-x-2 overflow-y-auto p-5">
-                <div className="gap-y-4 space-y-2">
-                    <CreatePageUrl />
-                    <BtnNavigator saveFunction={saveFunction}></BtnNavigator>  
+        <>
+
+        <div className="fixed justify-center space-x-2 px-5 w-full pr-5">
+            <div className="grid grid-cols-2">
+                <CreatePageUrl />
+            </div>
+            <div className="grid grid-cols-2">
+
+            </div>
+           
+
+        </div>
+            <div className="grid grid-cols-2 justify-center space-x-2 overflow-y-auto px-5 py-16">
+                
+                <div className="">
+                   
+                    {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
                     <div className="">
                         {/* <Profile></Profile> */}
                         {/* <Education></Education> */}
@@ -38,12 +50,12 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div> */}
                
-                <div className="w-full h-screen  px-5 py-10">
+                <div className="w-full h-screen">
                     <TemplateBasic></TemplateBasic>
                 </div>
               
             </div>
-        // </Dashboard>
+        </>
     )
 
 }

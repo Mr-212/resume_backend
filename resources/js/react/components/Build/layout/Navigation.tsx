@@ -22,8 +22,8 @@ const ResumeUrls = [
 
     return(
         <>
-              <nav className="bg-blue-300 shadow-sm opacity-50 border-b-2 p-2 w-full">
-                <ul className="inline-flex items-center justify-evenly gap-x-8">
+              <nav className="flex flex-row items-center justify-start border-b-2 p-2 pl-10 w-full">
+                <ul className="inline-flex gap-x-8">
                     
                     { ResumeUrls.map( (val, key) => {
                         //const last_index = Object.keys(val).length;
@@ -51,8 +51,13 @@ const ResumeUrls = [
                         })
                     }
                 </ul>
+               
 
             </nav>
+            <div className="flex flex-row items-center justify-end border-b-2 p-2 w-full">
+                    <button type="button"  onClick={null} className="transition ease-in-out duration-150 hover:bg-green-700 hover:text-white hover:scale-110 px-4 p-1 text-blue-900 font-bold block focus:outline-blue-400 focus:outline" name="btn_save">Save</button>
+
+            </div>
 
         </>
     )

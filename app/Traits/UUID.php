@@ -14,7 +14,8 @@ trait UUID {
 
         static::creating( function($model){
             if($model->getKey() === null){
-                $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
+                // $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
+                $model->{$model->getKeyName()} =  Str::uuid()->toString();
             }
         });
 

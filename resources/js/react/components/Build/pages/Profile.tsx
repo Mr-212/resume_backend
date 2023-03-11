@@ -6,7 +6,7 @@ import { useAppSelector } from "../../../store/hooks";
 import { useAppDispatch } from "../../../store/store";
 import Dashboard from "../../Dashboard/Index";
 import BuildLayout from "../BuildLayout";
-import { add } from "../reducers/profileReducer";
+import { add, getProfile, postProfile } from "../reducers/profileReducer";
 import { WithHOC } from "../WithHOC";
 
 // export interface ProfileProps {
@@ -54,6 +54,7 @@ const formValue =  {
     job_title : "",
     job_description: "",
     name: "", 
+    first_name: "", 
     // last_name: "",
     email: "",
     phone: "",
@@ -121,32 +122,39 @@ export const Alert = ( title: string, message: string ) => {
 function Profile<T> ( { id }: CombineProps<T>){
     const[alert, setAlert] = useState();
     const dispatch = useAppDispatch();
-    const state = useAppSelector(state => state.profile);
+    const profile = useAppSelector(state => state.profile.profile);
     // let formValue = state.profile ? state.profile : {};
-    const[formValues, setFormValues] = useState<CombineProps<T>>();
+    const[formValues, setFormValues] = useState<CombineProps<T>>(profile);
 
-    const { register, handleSubmit, formState: {errors}, setValue} = useForm<CombineProps<string | T>>({defaultValues: formValue});
+    const { register, handleSubmit, formState: {errors}, setValue} = useForm({defaultValues: formValue});
     // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
 
 
     const validationErrors = (key: string, value: string) => {
         return(
-            <label className="block text-indigo-600 font-bold text-md">{ errors[key] && value +` is required`}</label>
+            null
+            // <label className="block text-indigo-600 font-bold text-md">{ errors[key] && value +` is required`}</label>
         )
     }
 
     useEffect(() => {
-        id = "0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
-        // id = "";
-        if(id){
-            const data = axios.get(URL_PROFILE_GET + id)
-            .then((res) => {
-                dispatch(add(res.data.profile));
-                Object.entries(res.data.profile).map(([k,v]) => {
-                    setValue(k,v);
-                })
-            });
-        }
+        // id = "0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
+        // // id = "";
+        // if(id){
+        //     const data = axios.get(URL_PROFILE_GET + id)
+        //     .then((res) => {
+        //         dispatch(add(res.data.profile));
+        //         Object.entries(res.data.profile).map(([k,v]) => {
+        //             setValue(k,v);
+        //         })
+        //     });
+        // }
+        dispatch(getProfile());
+        console.log(profile)
+        Object.entries(profile).map(([k,v]) => {
+            setValue(k,v);
+        })
+        // setFormValues(profile);
 
     },[]);
 
@@ -164,15 +172,19 @@ function Profile<T> ( { id }: CombineProps<T>){
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-        console.log(data);
-
+        // e.preventDefault();
+        console.log(profile);
+        Object.entries(profile).map(([k,v]) => {
+            setValue(k,v);
+        })
+        // dispatch(postProfile(data));
         // Alert('Success','Data saved');
         // const request = axios.post(URL_PROFILE_CREATE, data)
         // .then(res => {
         //     setAlert({...alert, show: true, title:'Alert', message: res.data.message})
 
         // });
-        dispatch(add(data));
+        // dispatch(add(data));
         // setTimeout(() => {
         //     setAlert({...alert, show: false})
 
@@ -193,9 +205,9 @@ function Profile<T> ( { id }: CombineProps<T>){
                 </div>
                 }
             <div className="grid grid-cols-2 justify-items-stretch bg-white space-y-5 pb-2">
-                <div className="col-span-2 items-center align-middle justify-items-end border-b-2 opacity-40 bg-blue-300 h-10 pr-28 py-2 mb-3 shadow-md">
+                <div className="col-span-2 flex flex-row items-center justify-between border-b-2 opacity-40 bg-blue-300 h-10 pr-28 py-2 mb-3 shadow-md">
                         <h4 className="text-black font-bold text-md text-left px-10">Profile</h4>
-                        {/* <button type="button" className="px-4 bg-green-400 text-right align-middle" onClick={submitForm}>Save</button> */}
+                        <button type="button" className="px-4 py-1 shadow-md text-black font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>
                 {/* <div className="px-10">
                     <div className="border border-gray-400 border-dashed h-5/6 w-4/6">
@@ -207,7 +219,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                 <div className="px-10 items-start justify-items-start space-y-3">
                     <div className="flex flex-col justify-start items-start">
                         <label className="font-bold text-sm text-gray-400">Job Title</label>
-                        {validationErrors('job_title', 'Title')}
+                        {/* {validationErrors('job_title', 'Title')} */}
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
                             <input  className="w-full h-8 pt-2 block  text-black text-sm font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="E.g. Full Stack Developer" {...register('job_title', { required: false, maxLength: 20 })} name="job_title"></input>
@@ -216,7 +228,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                     <div className="flex flex-col justify-start items-start">
                         <label className="font-bold text-sm text-gray-400">Description</label>
-                        {validationErrors('job_description', 'Description')}
+                        {/* {validationErrors('job_description', 'Description')} */}
 
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
@@ -242,20 +254,20 @@ function Profile<T> ( { id }: CombineProps<T>){
                     <div className="flex flex-col items-start justify-center p-1">
                         
                             <label className="block font-bold text-sm text-gray-400">Name</label>
-                            {validationErrors('first_name', 'First Name')}
+                            {/* {validationErrors('first_name', 'First Name')} */}
                             {/* <label className="block text-red-600 font-bold text-md">{errors.first_name && "First name is required"}</label> */}
                         
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-user-circle" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.name}  onMouseOver={submitForm} placeholder="" {...register('name', {required: false, maxLength:20})} name="name"></input>
+                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.first_name}  onMouseOver={submitForm} placeholder="" {...register('first_name', {required: false, maxLength:20})} name="first_name"></input>
                         </div>
 
                     </div>
                     {/* <div className="flex flex-col justify-center items-start p-1 w-full">
                        
                             <label className="block font-bold text-sm text-gray-400">Last Name</label>
-                            {validationErrors('last_name', 'Last Name')}
+                            // {validationErrors('last_name', 'Last Name')}
 
                       
 
@@ -268,17 +280,18 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">Email</label>
-                        {validationErrors('email', 'Email')}
+                        {/* {validationErrors('email', 'Email')} */}
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.email}  {...register('email', {required: false, maxLength:100, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="" name="email"></input>
+                            {/* <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.email}  {...register('email', {required: false, maxLength:100, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})} placeholder="" name="email"></input> */}
+                            <input type="text" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.email}  {...register('email', {required: false, maxLength:100})} placeholder="" name="email"></input>
                         </div>
                     </div>
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">City</label>
-                        {validationErrors('city', 'city')}
+                        {/* {validationErrors('city', 'city')} */}
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
@@ -290,7 +303,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                     <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">Date of Birth</label>
-                        {validationErrors('dob', 'Date of Birth')}
+                        {/* {validationErrors('dob', 'Date of Birth')} */}
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 pl-2 bg-white rounded h-8 pt-3"><i className="fa fa-calendar" aria-hidden="true"></i> </span> */}
@@ -304,11 +317,11 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                    <div className="flex flex-col justify-center items-start p-1 w-full">
                         <label className="block font-bold text-sm text-gray-400">Phone</label>
-                        {validationErrors('phone', 'Phone')}
+                        {/* {validationErrors('phone', 'Phone')} */}
 
                         <div className="inline-flex items-center justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-phone" aria-hidden="true"></i> </span> */}
-                            <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20, pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/ })}  placeholder="" name="phone"></input>
+                            <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20})}  placeholder="" name="phone"></input>
                             {/* <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: true, minLength:9,maxLength:11})}  placeholder="Phone" name="phone"></input> */}
                         </div>
                        
@@ -348,7 +361,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                 <div className="col-span-2 px-10 pb-6">
                     <div className="flex flex-col items-start justify-start w-full gap-2">
                         <label className="block font-bold text-sm text-gray-400">Address</label>
-                        {validationErrors('address', 'Address')}
+                        {/* {validationErrors('address', 'Address')} */}
 
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}

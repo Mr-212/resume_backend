@@ -50,10 +50,11 @@ class ProfileContoller extends Controller
     {
         try{
             // dd($request->all());
-            $request->request->add(['user_id' => Profile::generateUUID()]);
             
-            if($id = Profile::create($request->all())){
-                return response()->json(['STATUS_CODE'=>200,'id'=>$id, 'message' => 'Profile saved.']);
+            $request->request->add(['user_id' => Profile::generateUUID()]);
+            if($profile = Profile::updateOrCreate(['id' => $request->id],$request->all())){
+                return response()->json($profile);
+                return response()->json(['STATUS_CODE'=>200,$profile, 'message' => 'Profile saved.']);
 
             }
         }catch(Exception $e){
@@ -73,7 +74,7 @@ class ProfileContoller extends Controller
     {
         try{
             $profile = Profile::find($id);
-            // return dd($profile,$id);
+            //  dd($profile,$id);
             // exit;
             return response()->json(['STATUS_CODE'=>200,'profile'=>$profile, 'message' => 'Profile Retrived.']);
 
