@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Resume\ProfileContoller;
+use App\Http\Controllers\Resume\EducationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('resume')->group(function(){
     //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
     Route::resource('profile',ProfileContoller::class);
+    Route::resource('profile.education',EducationController::class)->shallow();
 });
 
 

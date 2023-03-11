@@ -124,7 +124,7 @@ function Profile<T> ( { id }: CombineProps<T>){
     const dispatch = useAppDispatch();
     const profile = useAppSelector(state => state.profile.profile);
     // let formValue = state.profile ? state.profile : {};
-    const[formValues, setFormValues] = useState<CombineProps<T>>(profile);
+    const[formValues, setFormValues] = useState<CombineProps<T>>({});
 
     const { register, handleSubmit, formState: {errors}, setValue} = useForm({defaultValues: formValue});
     // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
@@ -139,21 +139,11 @@ function Profile<T> ( { id }: CombineProps<T>){
 
     useEffect(() => {
         // id = "0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
-        // // id = "";
-        // if(id){
-        //     const data = axios.get(URL_PROFILE_GET + id)
-        //     .then((res) => {
-        //         dispatch(add(res.data.profile));
-        //         Object.entries(res.data.profile).map(([k,v]) => {
-        //             setValue(k,v);
-        //         })
-        //     });
-        // }
         dispatch(getProfile());
         console.log(profile)
-        Object.entries(profile).map(([k,v]) => {
-            setValue(k,v);
-        })
+        // Object.entries(profile).map(([k,v]) => {
+        //     setValue(k,v);
+        // })
         // setFormValues(profile);
 
     },[]);
@@ -173,6 +163,7 @@ function Profile<T> ( { id }: CombineProps<T>){
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
         // e.preventDefault();
+        // setFormValues(profile);
         console.log(profile);
         Object.entries(profile).map(([k,v]) => {
             setValue(k,v);

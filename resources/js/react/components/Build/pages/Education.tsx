@@ -5,10 +5,11 @@ import { WithHOC } from "../WithHOC";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add, remove, getRecord} from "../reducers/educationReducer";
+import { add, remove, getRecord, postEducation, getEducation} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { profile_id } from "../reducers/profileReducer";
 
 
 
@@ -18,7 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface EducationProps<T> {
     qulificatin_type: string,
-    institute: string,
+    institution: string,
     gpa_masks: string,
     start_date: string,
     end_date: string,
@@ -27,11 +28,12 @@ interface EducationProps<T> {
 }
 
 const defaultValues = {
-    qualification_type: "BSCS",
-    institute: "UMT",
+    qualification: "BSCS",
+    institution: "UMT",
     gpa_marks: "3.0",
     start_date: "01/01/2014",
     end_date: "12/12/2018",
+    address: "",
     // profile_id: profile_id,
 }
 
@@ -41,7 +43,7 @@ const Education = <T extends EducationProps<T>> () => {
     // const { register, handleSubmit, formState: {errors}} = useForm();
 
     // const [education_list, setList] = useState([]);
-    const educationList = useAppSelector(state=>state.education);
+    const educationList = useAppSelector(state => state.education);
     const dispatch = useAppDispatch();
     const validationErrors = (key: string, value: string) => {
 
@@ -49,7 +51,19 @@ const Education = <T extends EducationProps<T>> () => {
             <label className="block text-indigo-600 text-md">{ errors[key] && value +` is required`}</label>
         )
     }
+
     const[data, setData] = useState([{}]);
+
+    useEffect(() => {
+        dispatch(getEducation());
+        console.log(educationList);
+
+    },[]);
+
+    useEffect(() => {
+        console.log(educationList);
+
+    },[educationList])
     
     // const { register, handleSubmit, formState: {errors}} = useForm<EducationProps>();
 
@@ -104,8 +118,8 @@ export default Education;
 
 // interface EducationProps {
 //     profile_id?: string,
-//     qualification_type: string,
-//     institute: string,
+//     qualification: string,
+//     institution: string,
 //     gpa_marks: string,
 //     start_date: string,
 //     end_date: string,
@@ -116,8 +130,8 @@ interface EducationProps<T={}> {
     education: T[],
     id?: T | null,
     profile_id?: T,
-    // qualification_type: T,
-    // institute: T,
+    // qualification: T,
+    // institution: T,
     // gpa_marks: T,
     // start_date: T,
     // end_date: T,
@@ -144,13 +158,16 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
     const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: items});
     const dispatch = useAppDispatch();
     const education = useAppSelector(state => state.education[index]);
-    const profile_id = useAppSelector(state => state.profile.profile.id);
+    // const profile_id = useAppSelector(state => state.profile.profile.id);
 
     useEffect(() => {
         setHideShow(hide);
     },[ hide ])
+
     const addRecord = handleSubmit(data => {
-        dispatch(add(data));
+        // data['profile_id'] = profile_id;
+        dispatch(postEducation(data));
+        // dispatch(add(data));
     });
 
     const removeRecord = (id: number): void =>{
@@ -182,13 +199,14 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
     <div className="grid grid-row pt-0">
        <div className="grid grid-cols-2 border-slate-400 bg-white opacity-40 shadow-md py-5"> 
                <div className="text-left pl-12 space-x-4">
-                     <span className="">{education.qualification_type}</span>
+                     <span className="">{education.qualification}</span>
                      <span className="">{education.gpa_marks}</span>
-                     <span className="">({education.institute} {education.city ? "-"+education.city:""})</span>
+                     <span className="">({education.institution} {education.city ? "-"+education.city:""})</span>
                </div>
                <div className="text-right pr-10">
-                   <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
+                   {/* <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button> */}
                    <button className="pl-4" onClick={() => setHide(!hide) }><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
+                   <button className="pl-4" onClick={addRecord}><span className="text-lg text-blue-800"><i className="fa fa-save"></i></span></button>
                </div>
         </div>
 
@@ -200,7 +218,7 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('qualification_type', {required: false, maxLength:50})} placeholder="" name="qualification_type"></input>
+                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('qualification', {required: false, maxLength:50})} placeholder="" name="qualification"></input>
                         </div>
             </div>
             <div className="flex flex-col justify-center items-start p-1">
@@ -209,16 +227,16 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('institute', {required: false, maxLength:50})} placeholder="" name="institute"></input>
+                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('institution', {required: false, maxLength:50})} placeholder="" name="institution"></input>
                         </div>
             </div>
             <div className="flex flex-col justify-center items-start p-1">
-                        <label className="block text-sm text-gray-400 pl-1 font-bold">City</label>
+                        <label className="block text-sm text-gray-400 pl-1 font-bold">Address</label>
                         {/* {validationErrors('email', 'Email')} */}
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('city', {required: false, maxLength:50})} placeholder="" name="city"></input>
+                            <input type="text" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('address', {required: false, maxLength:50})} placeholder="" name="address"></input>
                         </div>
             </div>
             <div className="flex flex-col justify-center items-start p-1">

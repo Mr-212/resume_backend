@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('user_id');
             $table->string('job_title')->nullable();
             $table->text('job_description')->nullable();
+            $table->string('name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
@@ -32,6 +33,8 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('address1')->nullable();
             $table->text('objectives')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -52,11 +52,11 @@ class ProfileContoller extends Controller
             // dd($request->all());
             
             $request->request->add(['user_id' => Profile::generateUUID()]);
-            if($profile = Profile::updateOrCreate(['id' => $request->id],$request->all())){
-                return response()->json($profile);
-                return response()->json(['STATUS_CODE'=>200,$profile, 'message' => 'Profile saved.']);
+        if($profile = Profile::updateOrCreate(['id' => $request->id],$request->all())){
+            return response()->json($profile);
+            return response()->json(['STATUS_CODE'=>200,$profile, 'message' => 'Profile saved.']);
 
-            }
+        }
         }catch(Exception $e){
 
             return response()->json(['STATUS_CODE' => 404, 'message' => $e->getMessage()]);
