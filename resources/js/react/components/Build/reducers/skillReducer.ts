@@ -13,6 +13,7 @@ export const SkillReducer = createSlice({
             // const payload  = action.payload;
             state[skill] = action.payload;
         },
+        
         update:(state, action: PayloadAction<object>) => {
              state[action.payload.skill]['score'] = (action.payload.score);
         },

@@ -5,11 +5,12 @@ import { WithHOC } from "../WithHOC";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add, remove, getRecord, postEducation, getEducation} from "../reducers/educationReducer";
+import { add,updateRecord, remove, getRecord, postEducation, getEducation} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { profile_id } from "../reducers/profileReducer";
+// import { update } from "../reducers/skillReducer";
 
 
 
@@ -55,13 +56,13 @@ const Education = <T extends EducationProps<T>> () => {
     const[data, setData] = useState([{}]);
 
     useEffect(() => {
-        dispatch(getEducation());
-        console.log(educationList);
+        // dispatch(getEducation());
+        // console.log(educationList);
 
     },[]);
 
     useEffect(() => {
-        console.log(educationList);
+        // console.log(educationList);
 
     },[educationList])
     
@@ -145,9 +146,9 @@ interface EducationProps<T={}> {
 
 
 // function AddEducation<T> ({ setData, id }: EducationProps<T>) {
-const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
+const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
 
-    const {hidden, setHideShow} = useHideShowComponent(false);
+    const {hidden, setHideShow} = useHideShowComponent(true);
 
     const[dateValue, setDateValue] = useState(new Date());
 
@@ -162,13 +163,22 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
 
     useEffect(() => {
         setHideShow(hide);
-    },[ hide ])
+    },[ hide, education ])
 
     const addRecord = handleSubmit(data => {
+        // console.log(data);
         // data['profile_id'] = profile_id;
+        data['index'] = index;
+        console.log(data);
         dispatch(postEducation(data));
+        // .then(resp => {
+        //     // console.log(resp.payload);;
+        //     const newD = { index: index, data: resp.payload}
+        //     dispatch(updateRecord(newD));
+        // });
         // dispatch(add(data));
     });
+    
 
     const removeRecord = (id: number): void =>{
         // console.log(form.hide);
@@ -197,17 +207,26 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) =>{
 
     return(
     <div className="grid grid-row pt-0">
-       <div className="grid grid-cols-2 border-slate-400 bg-white opacity-40 shadow-md py-5"> 
-               <div className="text-left pl-12 space-x-4">
+       <div className="grid grid-cols-2 border-b-2 border-slate-200 bg-white opacity-100 shadow-lg py-2"> 
+               <div className="text-left text-black font-bold pl-12 space-x-4">
                      <span className="">{education.qualification}</span>
                      <span className="">{education.gpa_marks}</span>
                      <span className="">({education.institution} {education.city ? "-"+education.city:""})</span>
                </div>
                <div className="text-right pr-10">
                    {/* <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button> */}
-                   <button className="pl-4" onClick={() => setHide(!hide) }><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
-                   <button className="pl-4" onClick={addRecord}><span className="text-lg text-blue-800"><i className="fa fa-save"></i></span></button>
+                   <button className="pl-4" onClick={(addRecord)}><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
+
+                   <button className="pl-4" onClick={() => setHide(!hide) } data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className="fa fa-plus"></i></span></button>
+                   {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                         Tooltip content
+                     <div className="tooltip-arrow" data-popper-arrow></div>
+                    </div> */}
+                  
                </div>
+        </div>
+        <div>
+          
         </div>
 
         <div className={"grid grid-cols-2 border-slate-400 items-center justify-center shadow-md bg-white p-10 " + hidden}>   

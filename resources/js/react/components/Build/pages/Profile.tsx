@@ -6,7 +6,8 @@ import { useAppSelector } from "../../../store/hooks";
 import { useAppDispatch } from "../../../store/store";
 import Dashboard from "../../Dashboard/Index";
 import BuildLayout from "../BuildLayout";
-import { add, getProfile, postProfile } from "../reducers/profileReducer";
+import { getEducation } from "../reducers/educationReducer";
+import { add, getProfile, postProfile, profile } from "../reducers/profileReducer";
 import { WithHOC } from "../WithHOC";
 
 // export interface ProfileProps {
@@ -122,6 +123,7 @@ export const Alert = ( title: string, message: string ) => {
 function Profile<T> ( { id }: CombineProps<T>){
     const[alert, setAlert] = useState();
     const dispatch = useAppDispatch();
+    // const profile = profile;
     const profile = useAppSelector(state => state.profile.profile);
     // let formValue = state.profile ? state.profile : {};
     const[formValues, setFormValues] = useState<CombineProps<T>>({});
@@ -138,15 +140,17 @@ function Profile<T> ( { id }: CombineProps<T>){
     }
 
     useEffect(() => {
-        // id = "0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
-        dispatch(getProfile());
-        console.log(profile)
-        // Object.entries(profile).map(([k,v]) => {
-        //     setValue(k,v);
-        // })
-        // setFormValues(profile);
-
+        // const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
+        // dispatch(getProfile(profile_id));
+        // dispatch(getEducation());
     },[]);
+
+    useEffect(() => {
+        Object.entries(profile).map(([k,v]) => {
+            setValue(k,v);
+        })
+
+    },[profile]);
 
 
 

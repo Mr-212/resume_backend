@@ -8,12 +8,17 @@
  export const URL_PROFILE_DELETE = API_URL + '/resume/'; 
 
 
- export const URL_EDUCATION_CREATE = API_URL + '/resume/education'; 
+ export const URL_EDUCATION_CREATE = API_URL + '/resume/profile/education'; 
  export const URL_EDUCATION_GET = API_URL + '/resume/profile/'; 
  export const URL_EDUCATION_UPDATE = API_URL + '/resume/'; 
  export const URL_EDUCATION_DELETE = API_URL + '/resume/';
 
 
- export const getEducationIndex = (profile_id: string): string => {
+ export const getEducationIndexURL = (profile_id: string): string => {
+    return URL_EDUCATION_GET+profile_id+'/education';
+ }
+
+
+ export const postEducationURL = (profile_id: string): string => {
     return URL_EDUCATION_GET+profile_id+'/education';
  }

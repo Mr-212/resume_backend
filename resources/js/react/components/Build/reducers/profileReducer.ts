@@ -52,11 +52,12 @@ export const profileSlice = createSlice({
 
  });
 
-
+//  export const profile = state => state.profile;
 //  export const profile_id = state  => state.profile.profile.id ? state.profile.profile.id :"0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
  export const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
  export const { add, remove , getRecord} = profileSlice.actions;
  export default profileSlice.reducer;
+
 
 
  export const postProfile = createAsyncThunk(
@@ -67,10 +68,12 @@ export const profileSlice = createSlice({
     }
  );
 
+//  export const getProfile = (profile: string) => createAsyncThunk(
  export const getProfile = createAsyncThunk(
     'prifile/get',
-    async() => {
-        const response = await axios.get(URL_PROFILE_GET + profile_id );
+    async (id: string) => {
+        id = id ? id: profile_id;
+        const response = await axios.get(URL_PROFILE_GET + id );
         // console.log(response.data.prifile)
         return response.data.profile;
     }
