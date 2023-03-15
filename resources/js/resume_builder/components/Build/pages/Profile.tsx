@@ -166,13 +166,11 @@ function Profile<T> ( { id }: CombineProps<T>){
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-        // e.preventDefault();
-        // setFormValues(profile);
-        console.log(profile);
-        Object.entries(profile).map(([k,v]) => {
-            setValue(k,v);
-        })
-        // dispatch(postProfile(data));
+
+        // Object.entries(profile).map(([k,v]) => {
+        //     setValue(k,v);
+        // })
+        dispatch(postProfile(data));
         // Alert('Success','Data saved');
         // const request = axios.post(URL_PROFILE_CREATE, data)
         // .then(res => {

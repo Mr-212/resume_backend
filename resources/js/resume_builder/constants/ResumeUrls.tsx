@@ -11,7 +11,7 @@
  export const URL_EDUCATION_CREATE = API_URL + '/resume/profile/education'; 
  export const URL_EDUCATION_GET = API_URL + '/resume/profile/'; 
  export const URL_EDUCATION_UPDATE = API_URL + '/resume/'; 
- export const URL_EDUCATION_DELETE = API_URL + '/resume/';
+ export const URL_EDUCATION_DELETE = API_URL + '/resume/education/';
 
 
  export const getEducationIndexURL = (profile_id: string): string => {

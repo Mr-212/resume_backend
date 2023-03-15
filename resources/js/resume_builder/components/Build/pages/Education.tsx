@@ -5,7 +5,7 @@ import { WithHOC } from "../WithHOC";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add,updateRecord, remove, getRecord, postEducation, getEducation} from "../reducers/educationReducer";
+import { add,updateRecord, remove, getRecord, postEducation, getEducation, deleteEducation} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -180,10 +180,12 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
     });
     
 
-    const removeRecord = (id: number): void =>{
+    const removeRecord = (index: number): void =>{
         // console.log(form.hide);
+        const id = education.id;
         
-        // dispatch(remove(id));
+        dispatch(deleteEducation(id));
+        dispatch(remove(index));
     }
 
     // const editRecord = (id: number): void => {
@@ -214,7 +216,7 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
                      <span className="">({education.institution} {education.city ? "-"+education.city:""})</span>
                </div>
                <div className="text-right pr-10">
-                   {/* <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button> */}
+                   <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
                    <button className="pl-4" onClick={(addRecord)}><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
 
                    <button className="pl-4" onClick={() => setHide(!hide) } data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className="fa fa-plus"></i></span></button>

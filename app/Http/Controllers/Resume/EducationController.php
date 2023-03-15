@@ -16,6 +16,12 @@ class EducationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $model;
+
+    public function __construct(Education $education)
+    {
+        $this->model = $education;
+    } 
     public function index($profile_id)
     {
         try{
@@ -98,8 +104,14 @@ class EducationController extends Controller
      * @param  \App\Models\Resume\Education  $education
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Education $education)
+    public function destroy($education)
     {
-        //
+        try{
+            if($education && $this->model::find($education)->delete());
+                return response()->json(['status' => 200]);
+
+        }catch(Exception $e){
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 }

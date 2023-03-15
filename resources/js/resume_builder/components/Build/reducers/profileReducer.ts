@@ -61,7 +61,7 @@ export const profileSlice = createSlice({
 
 
  export const postProfile = createAsyncThunk(
-    'prifile/add',
+    'profile/add',
     async initialProfile => {
         const response = await axios.post(URL_PROFILE_CREATE, initialProfile);
         return response.data;
@@ -70,7 +70,7 @@ export const profileSlice = createSlice({
 
 //  export const getProfile = (profile: string) => createAsyncThunk(
  export const getProfile = createAsyncThunk(
-    'prifile/get',
+    'profile/get',
     async (id: string) => {
         id = id ? id: profile_id;
         const response = await axios.get(URL_PROFILE_GET + id );

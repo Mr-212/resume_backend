@@ -3,7 +3,7 @@ import { RootState } from "../../../store/rootReducer";
 import { AnyAction } from 'redux'
 import { profile_id } from "./profileReducer";
 import { resumeState } from "./profileReducer";
-import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATION_CREATE, URL_EDUCATION_GET, URL_PROFILE_CREATE } from "../../../constants/ResumeUrls";
+import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATION_CREATE, URL_EDUCATION_DELETE, URL_EDUCATION_GET, URL_PROFILE_CREATE } from "../../../constants/ResumeUrls";
 import axios from "axios";
 import { update } from "./skillReducer";
 
@@ -43,6 +43,13 @@ export const educationSlice = createSlice({
             state.unshift(...action.payload);
         });
 
+        builder.addCase(deleteEducation.fulfilled, (state, action)=>{
+            console.log(action.payload.status == 200)
+                // getEducation();
+
+
+        });
+
     }
 
 
@@ -69,6 +76,16 @@ export const educationSlice = createSlice({
         const response = await axios.get(getEducationIndexURL(profile_id));
         // console.log(response.data.prifile)
         return response.data;
+    }
+ )
+ export const deleteEducation = createAsyncThunk(
+    'education/delete',
+    async(id: string) => {
+        if(id){
+            const response = await axios.delete(URL_EDUCATION_DELETE + id);
+            // console.log(response.data.prifile)
+            return response.data;
+        }
     }
  )
 
