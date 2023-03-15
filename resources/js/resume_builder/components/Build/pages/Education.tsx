@@ -207,7 +207,7 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
 
     return(
     <div className="grid grid-row pt-0">
-       <div className="grid grid-cols-2 border-b-2 border-slate-200 bg-white opacity-100 shadow-lg py-2"> 
+       <div className="grid grid-cols-2 border-b-2 border-slate-200 bg-white opacity-60 shadow-lg py-2"> 
                <div className="text-left text-black font-bold pl-12 space-x-4">
                      <span className="">{education.qualification}</span>
                      <span className="">{education.gpa_marks}</span>

@@ -2,8 +2,8 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import App from "./react/components/App";
-import store from "./react/store/store";
+import App from "./resume_builder/components/App";
+import store from "./resume_builder/store/store";
 
 
 render(

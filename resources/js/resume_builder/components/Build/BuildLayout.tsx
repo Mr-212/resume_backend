@@ -10,6 +10,7 @@ import TemplateBasic from "./templates/basic";
 import { getProfile } from "./reducers/profileReducer";
 import { getEducation } from "./reducers/educationReducer";
 import { useAppDispatch } from "../../store/store";
+import { getProfileSkills } from "./reducers/skillReducer";
 
 
 interface Props {
@@ -33,6 +34,7 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
         const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
         dispatch(getProfile(profile_id));
         dispatch(getEducation());
+        dispatch(getProfileSkills(profile_id));
     },[]);
 
     return(

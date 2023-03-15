@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Resume\Education;
+use App\Models\Profile\Skill;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class EducationPolicy
+class SkillPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class EducationPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Resume\Education  $education
+     * @param  \App\Models\Profile\Skill  $skill
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Education $education)
+    public function view(User $user, Skill $skill)
     {
         //
     }
@@ -48,10 +48,10 @@ class EducationPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Resume\Education  $education
+     * @param  \App\Models\Profile\Skill  $skill
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Education $education)
+    public function update(User $user, Skill $skill)
     {
         //
     }
@@ -60,10 +60,10 @@ class EducationPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Resume\Education  $education
+     * @param  \App\Models\Profile\Skill  $skill
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Education $education)
+    public function delete(User $user, Skill $skill)
     {
         //
     }
@@ -72,10 +72,10 @@ class EducationPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Resume\Education  $education
+     * @param  \App\Models\Profile\Skill  $skill
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Education $education)
+    public function restore(User $user, Skill $skill)
     {
         //
     }
@@ -84,10 +84,10 @@ class EducationPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Resume\Education  $education
+     * @param  \App\Models\Profile\Skill  $skill
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Education $education)
+    public function forceDelete(User $user, Skill $skill)
     {
         //
     }

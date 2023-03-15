@@ -22,3 +22,18 @@
  export const postEducationURL = (profile_id: string): string => {
     return URL_EDUCATION_GET+profile_id+'/education';
  }
+
+
+ export const URL_SKILL_CREATE = API_URL + '/resume/profile/skill'; 
+ export const URL_SKILL_GET = API_URL + '/resume/profile/'; 
+ export const URL_SKILL_UPDATE = API_URL + '/resume/'; 
+ export const URL_SKILL_DELETE = API_URL + '/resume/skill/';
+
+ export const getSKillIndexURL = (profile_id: string): string => {
+   return URL_SKILL_GET + profile_id + '/skill';
+}
+
+
+export const postSkillURL = (profile_id: string): string => {
+   return URL_SKILL_GET + profile_id + '/skill';
+}
