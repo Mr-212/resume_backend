@@ -88,6 +88,3 @@ export const SkillReducer = createSlice({
         return {skill: val, status: response.data.status};
     }
  )
-
-
-

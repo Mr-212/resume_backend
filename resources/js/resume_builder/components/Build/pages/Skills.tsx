@@ -107,7 +107,7 @@ export default Skills;
 
 function  AddSkills(props){
 
-    let scoreArray = {0: "Fresh ",25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
+    const scoreArray = {0: "Fresh ",25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
     // const[rating, setRating] = useState(25);
     const dispatch = useAppDispatch();
     // const skillList = useAppSelector(state => state.skills);
