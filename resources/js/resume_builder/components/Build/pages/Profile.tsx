@@ -198,7 +198,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                 </div>
                 }
             <div className="grid grid-cols-2 justify-items-stretch bg-white space-y-5 pb-2">
-                <div className="col-span-2 flex flex-row items-center justify-between border-b-2 opacity-40 bg-blue-300 h-10 pr-28 py-2 mb-3 shadow-md">
+                <div className="col-span-2 flex flex-row items-center justify-between border-b-2  bg-blue-200 opacity-100 h-10 pr-28 py-2 mb-3 shadow-md">
                         <h4 className="text-black font-bold text-md text-left px-10">Profile</h4>
                         <button type="button" className="px-4 py-1 shadow-md text-black font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>

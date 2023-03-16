@@ -75,7 +75,7 @@ const Skills = <T extends SkillProps> () => {
         <div className="columns-1 items-center gap-y-1">
          
             <div className="grid grid-cols-2 border-blue-300">
-                <div className="col-span-2  bg-blue-200 h-10 py-2 border-blue-100  opacity-70 mb-3 shadow-lg items-center align-middle">
+                <div className="col-span-2 h-10 py-2 border-blue-100  bg-blue-200 opacity-100 mb-3 shadow-lg items-center align-middle">
                     <div className="grid grid-cols-2 border-blue-300 px-10">
                         <h4 className="text-blue-800 text-md font-bold text-left">Skills</h4>
                         <button className="text-right" onClick={submitSkills}><span className="text-xl hover:text-2xl transition-all ease-linear duration-150 font-bold text-black"><i className="fa fa-plus"></i></span></button>

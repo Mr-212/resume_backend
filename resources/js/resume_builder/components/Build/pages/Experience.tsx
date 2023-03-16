@@ -73,7 +73,7 @@ const Experience = () => {
     return(
         <div className="items-center gap-y-1">
             <div className="grid grid-cols-2 border-slate-400">
-                <div className="col-span-2  h-10 py-2 bg-blue-300 opacity-50 mb-3 shadow-lg  items-center align-middle">
+                <div className="col-span-2  h-10 py-2 bg-blue-200 opacity-100 mb-3 shadow-lg  items-center align-middle">
                     <div className="grid grid-cols-2 border-slate-400 px-10">
                         <h4 className="text-blue-800 text-md font-bold text-left">Experience</h4>
                         <button className="text-right" onClick={addExperience}><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
@@ -175,7 +175,7 @@ interface EProps {
     return(
 
         <div className="grid grid-row">
-            <div className="grid grid-flow-row border-b-2 bg-gray-100 opacity-100 shadow-lg py-2"> 
+            <div className="grid grid-flow-row border-b-2 bg-gray-400 opacity-100 shadow-lg py-2"> 
                 <div className="flex flex-row w-full justify-between">
 
                         <div className="text-left pl-10 font-bold text-gray-700">
@@ -184,7 +184,7 @@ interface EProps {
                             <p><strong className="italic pr-2">{experience.company}</strong><small className="text-blue-600">{experience.start_date + ' - ' + experience.end_date}</small></p>
 
                         </div>
-                        <div className="text-right pr-10">
+                        <div className="text-right pr-10 pt-4">
                             {/* <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button> */}
                             <button className="pl-4" onClick={addRecord} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
                             <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
