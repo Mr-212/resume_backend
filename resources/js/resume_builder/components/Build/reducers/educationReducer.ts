@@ -7,12 +7,14 @@ import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATIO
 import axios from "axios";
 import { update } from "./skillReducer";
 
+
 export const educationSlice = createSlice({
     name: 'education',
     initialState: resumeState.education,
     reducers : {
         add:(state, action: PayloadAction<object>) => {
-             state.unshift(action.payload);
+            //  state.push(action.payload);
+            return [(action.payload), ...state];
         },
 
         updateRecord: (state, action: PayloadAction<object>) => {
@@ -39,8 +41,9 @@ export const educationSlice = createSlice({
         });
 
         builder.addCase(getEducation.fulfilled, (state, action)=>{
-            // state = [...state, ...action.payload];
-            state.unshift(...action.payload);
+            //[...state, ...action.payload];
+            // console.log(action.payload)
+            return action.payload;
         });
 
         builder.addCase(deleteEducation.fulfilled, (state, action)=>{
@@ -63,9 +66,9 @@ export const educationSlice = createSlice({
     async (educationObject) => {
         const {index} = educationObject;
         educationObject['profile_id'] = profile_id;
-        // console.log(index, educationObject)
+        console.log(index, educationObject)
         const response = await axios.post(postEducationURL(profile_id), educationObject);
-        // return {data: response.data};
+        // // return {data: response.data};
         return {index: index, data: response.data};
     }
  );
@@ -74,7 +77,6 @@ export const educationSlice = createSlice({
     'education/get',
     async() => {
         const response = await axios.get(getEducationIndexURL(profile_id));
-        // console.log(response.data.prifile)
         return response.data;
     }
  )

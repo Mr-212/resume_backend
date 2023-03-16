@@ -46,7 +46,7 @@ const Skills = <T extends SkillProps> () => {
 
     useEffect(() => {
         // console.log(skillList)
-        console.log(skillArray)
+        // console.log(skillArray)
 
     },[skillList])
 
@@ -120,7 +120,7 @@ function  AddSkills(props){
     }
 
     const removeSkill = (key: string) => {
-        console.log(key);
+        // console.log(key);
         dispatch(deleteProfileSkills(key));
 
     }

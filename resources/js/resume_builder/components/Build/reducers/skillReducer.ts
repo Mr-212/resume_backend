@@ -43,7 +43,7 @@ export const SkillReducer = createSlice({
         });
 
         builder.addCase(deleteProfileSkills.fulfilled,(state, action)=>{
-            console.log(action.payload);
+            // console.log(action.payload);
             if(action.payload.status == 200)
                 delete state.skills[action.payload.skill];
                 // remove(action.payload.skill);
@@ -76,7 +76,7 @@ export const SkillReducer = createSlice({
     async (id: string) => {
         id = id ? id: profile_id;
         const response = await axios.get(getSKillIndexURL(profile_id));
-        console.log(response.data)
+        // console.log(response.data)
         return response.data;
     }
  )

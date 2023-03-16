@@ -52,7 +52,7 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        // dd($request->id);
         try{
             if($education = Education::updateOrCreate(['id' => $request->id], $request->all())){
                 return response()->json($education);

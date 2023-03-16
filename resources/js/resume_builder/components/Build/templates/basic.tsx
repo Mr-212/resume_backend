@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../store/hooks";
     const skills = useAppSelector(state => state.skills.skills);
     const education = useAppSelector(state => state.education);
     useEffect(() => {
-        console.log(skills);
+        // console.log(skills);
     },[profile, skills]);
     const scoreArray = {0: "Fresh ",25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
 
@@ -123,7 +123,7 @@ import { useAppSelector } from "../../../store/hooks";
                     </div>
                     <ul className="flex flex-col justify-start items-start w-full">
                         {Object.entries(skills).map(([key, val]) => {
-                            console.log(key, val)
+                            // console.log(key, val)
                             return (
                                 <div className="flex flex-col items-start gap-y-1 w-full mt-1">
                                     <div className="w-full text-left">

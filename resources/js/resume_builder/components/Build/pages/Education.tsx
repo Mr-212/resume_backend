@@ -10,6 +10,8 @@ import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { profile_id } from "../reducers/profileReducer";
+import Draggable from 'react-draggable'
+
 // import { update } from "../reducers/skillReducer";
 
 
@@ -28,15 +30,16 @@ interface EducationProps<T> {
     education_list : T[],
 }
 
-const defaultValues = {
-    qualification: "BSCS",
-    institution: "UMT",
-    gpa_marks: "3.0",
-    start_date: "01/01/2014",
-    end_date: "12/12/2018",
+let defaultValues = {
+    qualification: "",
+    institution: "",
+    gpa_marks: "",
+    start_date: "",
+    end_date: "",
     address: "",
     // profile_id: profile_id,
 }
+let counter = 0;
 
 const Education = <T extends EducationProps<T>> () => {
 
@@ -83,7 +86,6 @@ const Education = <T extends EducationProps<T>> () => {
         dispatch(add(defaultValues));
 
     }; 
-
     return(
 
         //<BuildLayout>
@@ -100,10 +102,21 @@ const Education = <T extends EducationProps<T>> () => {
             </div>
 
             <div className="grid grid-rows-1">
+                
                 { educationList.length  > 0 && educationList.map( (val,key) => {
-                    // console.log(key);
+
+                    counter++;
+                    console.log(counter);
                     // return (<AddEducation setData={setData} id={null}></AddEducation>)
-                    return (<AddEducation items={val}  index={key}></AddEducation>)
+                    return (
+                        <Draggable axis="Y">
+                            <div key={counter}>
+                            
+                                    <AddEducation items={val}  index={key}></AddEducation>
+                                
+                            </div>
+                        </Draggable>
+                        )
                 })
                 }             
             </div>
@@ -117,18 +130,23 @@ const Education = <T extends EducationProps<T>> () => {
 export default Education;
 
 
-// interface EducationProps {
-//     profile_id?: string,
-//     qualification: string,
-//     institution: string,
-//     gpa_marks: string,
-//     start_date: string,
-//     end_date: string,
-// };
+interface EProps {
+    id?:string,
+    index: number,
+    items: {},
+    profile_id?: string,
+    qualification: string,
+    institution: string,
+    gpa_marks: string,
+    start_date: string,
+    end_date: string,
+    hide?: boolean,
+    hidden? : string
+};
 
-interface EducationProps<T={}> {
-    index?:string,
-    education: T[],
+interface EducationProps<T> {
+    index?:number,
+    education?: T[],
     id?: T | null,
     profile_id?: T,
     // qualification: T,
@@ -146,37 +164,44 @@ interface EducationProps<T={}> {
 
 
 // function AddEducation<T> ({ setData, id }: EducationProps<T>) {
-const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
+ function AddEducation( {index, items}: props ) {
 
     const {hidden, setHideShow} = useHideShowComponent(true);
 
-    const[dateValue, setDateValue] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date());
 
    
 
     const[hide, setHide] = useState(false);
     // const[education, dispatch] = useReducer(educationReducer, []);
-    const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: items});
+    const education = items
+
+    const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: education});
     const dispatch = useAppDispatch();
-    const education = useAppSelector(state => state.education[index]);
+    // const education = useAppSelector(state => state.education[index]);
+    const[arrowClass, setArrorClass]  = useState("fa fa-arrow-up");
     // const profile_id = useAppSelector(state => state.profile.profile.id);
 
     useEffect(() => {
+        Object.entries(education).map(([k,v]) => {
+                        setValue(k,v);
+            });
+    },[])
+    useEffect(() => {
+        // console.log(education);
         setHideShow(hide);
-    },[ hide, education ])
+        hide? setArrorClass("fa fa-arrow-up") : setArrorClass("fa fa-arrow-down")
+        // console.log(education)
+        // Object.entries(education).map(([k,v]) => {
+        //             setValue(k,v);
+        // });
+    },[ hide ])
 
     const addRecord = handleSubmit(data => {
-        // console.log(data);
-        // data['profile_id'] = profile_id;
         data['index'] = index;
-        console.log(data);
+        console.log(data, education);
         dispatch(postEducation(data));
-        // .then(resp => {
-        //     // console.log(resp.payload);;
-        //     const newD = { index: index, data: resp.payload}
-        //     dispatch(updateRecord(newD));
-        // });
-        // dispatch(add(data));
+    
     });
     
 
@@ -201,8 +226,6 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
     //    // setValue(record);
     // }
     const setHiddenProperty = (show: boolean): void => {
-    
-        // setHide(!hide);
         setHideShow(hide);
 
     }
@@ -217,9 +240,9 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
                </div>
                <div className="text-right pr-10">
                    <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
-                   <button className="pl-4" onClick={(addRecord)}><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
+                   <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
 
-                   <button className="pl-4" onClick={() => setHide(!hide) } data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className="fa fa-plus"></i></span></button>
+                   <button className="pl-4" onClick={() => setHide(!hide) } data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
                    {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                          Tooltip content
                      <div className="tooltip-arrow" data-popper-arrow></div>
@@ -275,8 +298,8 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            {/* <input type="number" min={"1980"} max={"2030"} className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('start_date', {required: true, maxLength:50})} placeholder="" name="start_date"></input> */}
-                            <DatePicker onChange={() => setDateValue} yearItemNumber={9} selected={dateValue} dateFormat="yyyy"  showYearPicker  className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('start_date', {required: false, maxLength:50})}/>
+                            <input type="number" min={"1950"} max={"2300"} className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('start_date', {required: true, maxLength:50})} placeholder="" name="start_date"></input>
+                            {/* <DatePicker onChange={(date) => setStartDate(date)} selected={startDate} dateFormat="yyyy"  showYearPicker  className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('start_date', {required: false})} name="start_date"/> */}
                         </div>
             </div>
             <div className="flex flex-col justify-center items-start p-1">
@@ -285,8 +308,8 @@ const AddEducation = <T extends EducationProps<T>>( {index, items}: T) => {
 
                         <div className="inline-flex items-center justify-start w-full">
                             {/* <span className="absolute w-8 bg-white  h-8 pt-3"><i className="fa fa-envelope" aria-hidden="true"></i> </span> */}
-                            {/* <input type="month" className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('end_date', {required: true, maxLength:50})} placeholder="End Date" name="end_date"></input> */}
-                            <DatePicker onChange={() => setDateValue} yearItemNumber={9} selected={dateValue} dateFormat="yyyy"  showYearPicker  className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('end_date', {required: false, maxLength:50})} />
+                            <input type="number" min={"1950"} max={"2300"} className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('end_date', {required: true, maxLength:50})} placeholder="End Date" name="end_date"></input>
+                            {/* <DatePicker selected={startDate} dateFormat="yyyy"  showYearPicker onChange={(startDate) => setStartDate(startDate)}   className="w-full h-8 pl-1 block  text-black focus:outline-none border-b-2 "  {...register('end_date', {required: false})} name="end_date" /> */}
 
                         </div>
             </div>
