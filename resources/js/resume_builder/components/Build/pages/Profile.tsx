@@ -170,6 +170,7 @@ function Profile<T> ( { id }: CombineProps<T>){
         // Object.entries(profile).map(([k,v]) => {
         //     setValue(k,v);
         // })
+        console.log(data);
         dispatch(postProfile(data));
         // Alert('Success','Data saved');
         // const request = axios.post(URL_PROFILE_CREATE, data)
@@ -188,15 +189,13 @@ function Profile<T> ( { id }: CombineProps<T>){
     return(
         
         // <BuildLayout saveFunction={submitForm}>
-            //    { console.log(state.profile)}
 
         <div className="items-center gap-y-2" >
-            <form >
-                { alert?.show &&
-                <div className="pb-2">
-                    {Alert(alert.title, alert.message)}
-                </div>
-                }
+                {/* { alert?.show &&
+                    <div className="pb-2">
+                        {Alert(alert.title, alert.message)}
+                    </div>
+                } */}
             <div className="grid grid-cols-2 justify-items-stretch bg-white space-y-5 pb-2">
                 <div className="col-span-2 flex flex-row items-center justify-between border-b-2  bg-blue-200 opacity-100 h-10 pr-28 py-2 mb-3 shadow-md">
                         <h4 className="text-black font-bold text-md text-left px-10">Profile</h4>
@@ -215,7 +214,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                         {/* {validationErrors('job_title', 'Title')} */}
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <input  className="w-full h-8 pt-2 block  text-black text-sm font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="E.g. Full Stack Developer" {...register('job_title', { required: false, maxLength: 20 })} name="job_title"></input>
+                            <input  className="w-full h-8 pt-2 block  text-black text-sm font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="E.g. Full Stack Developer" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
                         </div> 
                     </div>
 
@@ -225,7 +224,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         <div className="inline-flex items-start justify-start w-full border-b-2">
                             {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                            <textarea  className="w-full h-24  pt-2 block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.job_description}  placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:100})}  name="job_description"></textarea>
+                            <textarea  className="w-full h-24  pt-2 block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.job_description}  placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
                         </div> 
                     </div>
                 </div>
@@ -366,10 +365,7 @@ function Profile<T> ( { id }: CombineProps<T>){
   
 
             </div>
-
-         </form>
         </div>
-    // </BuildLayout>
     )
 }
  

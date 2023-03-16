@@ -241,7 +241,7 @@ interface EProps {
                 <div className="flex flex-row w-full p-1">
                     <div className="flex flex-col justify-center items-start w-full">
                         <label className="block text-md text-gray-600 pl-1 font-bold">Describe your experience</label>
-                        <textarea className="w-full h-40 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('description', {required: false, maxLength:50})} placeholder="" name="description"></textarea>
+                        <textarea className="w-full h-40 pl-1 block  text-black focus:outline-none border-b-2 "   {...register('description', {required: false, maxLength:1000})} placeholder="" name="description"></textarea>
                     </div>
 
                 </div>

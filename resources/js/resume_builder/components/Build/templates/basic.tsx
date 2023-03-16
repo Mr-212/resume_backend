@@ -9,6 +9,7 @@ import { education } from "../reducers/educationReducer";
     const profile = useAppSelector(state => state.profile.profile);
     const skills = useAppSelector(state => state.skills.skills);
     const education = useAppSelector(state => state.education.education);
+    const experience = useAppSelector(state => state.experience.experience);
     // const education = education;
     useEffect(() => {
         // console.log(skills);
@@ -100,10 +101,11 @@ import { education } from "../reducers/educationReducer";
                 </div>
             </div>
 
-            <div className="w-2/6 border-l-2 pl-2 mt-2">
+            <div className="flex w-2/6 border-l-2 justify-center items-center">
                 <div className="bg-cover bg-no-repeat rounded-full h-52 w-52 border"
                                 // style="background-image: url(../bootstrap/dog.jpg)"
-                            >IMAGE
+                          >
+                            <p className="text-center align-middle">Image</p>
                 </div>
             </div>
         </header>
@@ -177,14 +179,19 @@ import { education } from "../reducers/educationReducer";
                     <h2 className="text-left text-md mt-6 border-b font-semibold">Education Details</h2>
                     <ul className="mt-2">
                         {education.map((education,k) => {
-
                             return (
                                 <li className="pt-1">
-                                     <p className="flex justify-between text-sm"><strong className="font-bold italic text-gray-500">{education.qualification}</strong>{education.start_date + '-'+ education.end_date}</p>
-                                     <p className="flex justify-between text-sm">{education.institution}<small className="font-bold">{education.gpa_marks}</small></p>
+                                     <p className="flex justify-between text-md items-center">
+                                        <strong className="font-bold text-blue-900 opacity-100">{education.qualification}</strong>
+                                            {/* <small {education.start_date + '-'+ education.end_date}></small> */}
+                                            <small className="font-bold text-blue-400">{education.gpa_marks}</small>
+                                    </p>
+                                     <p className="flex justify-between text-md items-center">
+                                        <span className=" font-bold italic text-gray-600">{education.institution}</span>
+                                         <small className="font-bold"> {education.start_date + '-'+ education.end_date}</small>
+                                     </p>
                                 </li>
                             )
-
                         }) 
                         }
                         
@@ -194,7 +201,35 @@ import { education } from "../reducers/educationReducer";
                 <section>
                     <h2 className="text-lg text-left mt-6 pb-1 border-b-2 font-semibold">Work Experience</h2>
                     <ul className="mt-1">
-                        <li className="py-2">
+                        {experience.map((experience, k ) => {
+                            return(
+                                <li className="py-2">
+                                <div className="flex flex-col justify-between items-start">
+                                    <p className="flex flex-row justify-between w-full">
+                                        <strong className="pr-4 text-blue-900 opacity-100">{experience?.job_title}</strong>
+                                        <small className="text-blue-400 font-bold">{experience.start_date + ' - ' + experience.end_date}</small>
+                                    </p>
+                                    <p className="flex flex-row justify-between w-full">
+                                        <span className="pr-2 text-md font-bold italic text-gray-600">{experience?.company}</span>
+                                        <small className="font-bold">{experience.city + ' ( '+ experience.country +' ) '}</small>
+                                    </p>
+                                    {/* <p className="flex">
+                                        <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">HTML</span>
+                                        <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">CSS</span>
+                                        <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">JS</span>
+                                    </p> */}
+                                </div>
+                                {/* <ul className="flex mb-2">
+                                    <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Live</a>
+                                    </li>
+                                    <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Code</a>
+                                    </li>
+                                </ul> */}
+                                <p className="text-md text-left">{experience.description}</p>
+                            </li> 
+                            )
+                        })}
+                        {/* <li className="py-2">
                             <div className="flex justify-between my-1">
                                 <strong>Rules of 10000 hours</strong>
                                 <p className="flex">
@@ -215,107 +250,7 @@ import { education } from "../reducers/educationReducer";
                                 Earum dolore cupiditate sed et maxime distinctio iure fugiat aspernatur at veniam
                                 laudantium eveniet corporis dicta reiciendis quod consequatur, labore perferendis
                                 dolorum velit quibusdam minus iste dolorem! Officiis, obcaecati maxime</p>
-                        </li>
-                        <li className="py-2">
-                            <div className="flex justify-between my-1">
-                                <strong>Vending Machine</strong>
-                                <p className="flex">
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">HTML</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">CSS</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">JS</span>
-                                </p>
-                            </div>
-                            <ul className="flex mb-2">
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Live</a>
-                                </li>
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Code</a>
-                                </li>
-                            </ul>
-                            <p className="text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                                expedita illum optio porro suscipit rerum labore veritatis autem eum totam veniam
-                                repudiandae repellendus perspiciatis eligendi sequi maiores, cum ipsa ut!
-                                Dolorum aliquid quaerat, dolore nemo, vero alias non porro quam totam impedit
-                                repellat voluptas, nobis harum quae dolorem accusantium consequatur. Recusandae
-                                cupiditate possimus natus consequuntur aliquid, molestias provident saepe nobis.
-                            </p>
-                        </li>
-                        <li className="py-2">
-                            <div className="flex justify-between my-1">
-                                <strong>Landing Page</strong>
-                                <p className="flex">
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">HTML</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">CSS</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">React</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">Node.js</span>
-                                </p>
-                            </div>
-                            <ul className="flex mb-2">
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Live</a>
-                                </li>
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Code</a>
-                                </li>
-                            </ul>
-                            <p className="text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
-                                odio autem non possimus adipisci, sed sequi culpa ipsa necessitatibus repellat
-                                rerum. Obcaecati nobis modi voluptate nam minus praesentium soluta voluptatibus!
-                                Minima temporibus deserunt laborum, expedita ad molestiae perferendis? Ipsa aut,
-                                necessitatibus expedita rem iure minus sit voluptates magni, sequi eum architecto
-                                excepturi tempora dolorum soluta quam odit amet nobis incidunt.</p>
-                        </li>
-                        <li className="py-2">
-                            <div className="flex justify-between my-1">
-                                <strong>Gamgyul Market</strong>
-                                <p className="flex">
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">HTML</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">CSS</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">React</span>
-                                    <span className="bg-gray-600 text-white px-2 py-1 ml-1 text-xs rounded">Node.js</span>
-                                </p>
-                            </div>
-                            <ul className="flex mb-2">
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Live</a>
-                                </li>
-                                <li><a href="#" className="bg-blue-600 text-white px-2 py-1 mr-1 text-sm rounded">Code</a>
-                                </li>
-                            </ul>
-                            <p className="text-xs">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus
-                                suscipit soluta at doloremque ipsa unde, doloribus beatae delectus odio dolorum
-                                consequatur libero esse ratione nostrum nihil quaerat alias cupiditate assumenda?
-                                Nesciunt unde aliquid quam quisquam excepturi deserunt ipsa doloremque culpa itaque.
-                                Esse consectetur odit est laboriosam facilis! Accusamus inventore vel magni sed
-                                aliquid! Aspernatur dolores, nam id fugit ad aliquam.
-                            </p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h2 className="text-2xl mt-6 pb-1 border-b font-semibold">Work Experiences</h2>
-                    <ul className="mt-2">
-                        <li className="pt-2">
-                            <p className="flex justify-between text-sm"><strong className="text-base">Company
-                                    Name</strong>2019-2021</p>
-                            <p className="flex justify-between text-base">Job title<small>location</small></p>
-                            <p className="text-justify text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Dolorum, expedita exercitationem, cum quisquam laboriosam voluptas aut libero
-                                officiis quae natus laborum explicabo, labore nobis porro ad et soluta deleniti.
-                                Rerum?
-                                Voluptatibus id officiis adipisci eligendi provident minima sed. Ullam aliquid, fuga
-                                nisi modi amet quasi, quod veniam eos sit culpa distinctio rem a tempora ad autem
-                                soluta rerum, doloremque quas?
-                            </p>
-                        </li>
-                        <li className="pt-2">
-                            <p className="flex justify-between text-sm"><strong className="text-base">Company
-                                    Name</strong>2014-2019</p>
-                            <p className="flex justify-between text-base">Job title<small>location</small></p>
-                            <p className="text-justify text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Delectus nemo fugiat neque tempore consectetur nihil alias ullam esse corporis fugit
-                                deserunt maxime, numquam eos repellendus, deleniti quae at fuga repudiandae!
-                                Perspiciatis odit nobis sunt! Natus ea reiciendis enim! Itaque possimus eaque
-                                perspiciatis architecto reiciendis laboriosam voluptas corporis unde ducimus quis
-                                aliquid, distinctio dolorum quo ullam a at, fugit veniam optio.
-                            </p>
-                        </li>
+                        </li> */}
                     </ul>
                 </section>
                 
