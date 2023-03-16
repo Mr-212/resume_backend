@@ -1,5 +1,5 @@
 import React from "react";
-import { DashboardRoutes } from "../routes/build/Dashboard";
+import { ResumeRoutes } from "../routes/build/ResumeRoutes";
 // import { DashboardRoutes } from "../routes/build/Dashboard";
 import Dashboard from "./Dashboard/Index";
 
@@ -10,7 +10,7 @@ const App = () => {
     return(
     //  <DashboardRoutes></DashboardRoutes>
     <>
-        <DashboardRoutes></DashboardRoutes>
+        <ResumeRoutes></ResumeRoutes>
     </>
 
     );

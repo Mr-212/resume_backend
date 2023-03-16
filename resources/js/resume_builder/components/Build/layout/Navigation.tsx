@@ -8,7 +8,7 @@ const ResumeUrls = [
     {"Education" :"/education"},
     // {"Soft Skill" :""},
     {"Skill" :"/skills"},
-    {"Work History" :"" },
+    {"Work History" :"/experience" },
     {"Cirtifications" :"" },
 ]
 

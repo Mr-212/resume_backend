@@ -5,7 +5,7 @@ import { WithHOC } from "../WithHOC";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add,updateRecord, remove, getRecord, postEducation, getEducation, deleteEducation} from "../reducers/educationReducer";
+import { add,updateRecord, remove, getRecord, postEducation, getEducation, deleteEducation, setHide} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -170,9 +170,10 @@ interface EducationProps<T> {
 
     const [startDate, setStartDate] = useState(new Date());
 
-   
+    // const hide = useAppSelector(state => state.education.hide);
 
     const[hide, setHide] = useState(false);
+    
     // const[education, dispatch] = useReducer(educationReducer, []);
     const education = items
 
@@ -232,8 +233,8 @@ interface EducationProps<T> {
 
     return(
     <div className="grid grid-row pt-0">
-       <div className="grid grid-cols-2 border-b-2 border-b-white bg-gray-100 opacity-60 shadow-lg py-2"> 
-               <div className="text-left text-black font-bold pl-12 space-x-4 space-y-2">
+       <div className="grid grid-cols-2 border-b-2 border-b-white bg-black opacity-80 shadow-lg py-2"> 
+               <div className="text-left text-white font-bold pl-12 space-x-4 space-y-2">
                      <span className="">{education.qualification}</span>
                      <span className="">{education.institution? " - "+education.institution:""} {education.city ? "-"+education.city:""}</span>
                      <span className="">{education.gpa_marks}</span>
@@ -244,7 +245,7 @@ interface EducationProps<T> {
                    <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
                    <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
 
-                   <button className="pl-4" onClick={() => setHide(!hide) } data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
+                   <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
                    {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                          Tooltip content
                      <div className="tooltip-arrow" data-popper-arrow></div>

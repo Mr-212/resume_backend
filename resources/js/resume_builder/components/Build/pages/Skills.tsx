@@ -127,19 +127,19 @@ function  AddSkills(props){
 
     return(
 
-        <div className="flex flex-col w-full pt-2">
+        <div className="flex flex-col w-full pt-2 space-y-2">
             <div>
 
                 {/* <label>Name</label> */}
                 { Object.values(skillList).map((key, val) => {
                         // console.log( key, val)
                     return(
-                        <div className="flex items-center border-b-2 bg-white pt-2" key={val}>
+                        <div className="flex items-start border-b-2 bg-white pt-3" key={val}>
                             <span className="text-green-500 pl-4"><i className="fa fa-check" aria-hidden="true"></i></span>
                             <input className="block h-8 pl-12 p-2 text-gray-600 font-bold   focus:outline-none w-1/3" value={key['skill']}  placeholder=""></input>
-                            <input className="block h-8 w-1/3"  type="range" min="0" max="100" step="25" value={key['score']} onChange={(e)=>handleRangeInput(e.target.value, key['skill'])} />
-                            <span className="block h-8 w-1/3 font-bold text-sky-400">{scoreArray[key['score']]}</span>
-                            <button className="pl-4" onClick={() => removeSkill(key['skill'])}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
+                            <input className="block h-8 w-2/3"  type="range" min="0" max="100" step="25" value={key['score']} onChange={(e)=>handleRangeInput(e.target.value, key['skill'])} />
+                            <span className="block h-6 w-1/3 font-bold text-gray-700 text-center">{scoreArray[key['score']]}</span>
+                            <button className="w-1/5" onClick={() => removeSkill(key['skill'])}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
 
                         </div>
                     )

@@ -9,6 +9,7 @@ import {
   } from "react-router-dom";
 import BuildLayout from "../../components/Build/BuildLayout";
 import Education from "../../components/Build/pages/Education";
+import Experience from "../../components/Build/pages/Experience";
 import Profile from "../../components/Build/pages/Profile";
 import Skills from "../../components/Build/pages/Skills";
 import Dashboard from "../../components/Dashboard/Index";
@@ -16,7 +17,7 @@ import Dashboard from "../../components/Dashboard/Index";
   
 
 
-export const DashboardRoutes = () => {
+export const ResumeRoutes = () => {
 
      const routes = createBrowserRouter(
          createRoutesFromElements(
@@ -24,6 +25,7 @@ export const DashboardRoutes = () => {
             <Route path="/"   element={<Profile />} />
             <Route path="education" element={<Education />} />
             <Route path="skills" element={<Skills />} />
+            <Route path="experience" element={<Experience />} />
          </Route>
          )
        );
