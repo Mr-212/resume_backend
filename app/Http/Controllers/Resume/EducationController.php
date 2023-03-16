@@ -25,7 +25,7 @@ class EducationController extends Controller
     public function index($profile_id)
     {
         try{
-            $educationList = Education::whereProfileId($profile_id)->get();
+            $educationList = $this->model::whereProfileId($profile_id)->get();
             return response()->json($educationList);
 
         }catch(Exception $e){
@@ -54,7 +54,7 @@ class EducationController extends Controller
     {
         // dd($request->id);
         try{
-            if($education = Education::updateOrCreate(['id' => $request->id], $request->all())){
+            if($education = $this->model::updateOrCreate(['id' => $request->id], $request->all())){
                 return response()->json($education);
             }
 

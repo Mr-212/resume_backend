@@ -11,6 +11,7 @@ import { getProfile } from "./reducers/profileReducer";
 import { getEducation } from "./reducers/educationReducer";
 import { useAppDispatch } from "../../store/store";
 import { getProfileSkills } from "./reducers/skillReducer";
+import { getExperience } from "./reducers/experienceReducer";
 
 
 interface Props {
@@ -35,6 +36,7 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
         dispatch(getProfile(profile_id));
         dispatch(getEducation());
         dispatch(getProfileSkills(profile_id));
+        dispatch(getExperience(profile_id));
     },[]);
 
     return(

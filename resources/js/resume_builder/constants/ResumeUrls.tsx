@@ -40,16 +40,16 @@ export const postSkillURL = (profile_id: string): string => {
 
 
 
-export const URL_EXPERIENCE_CREATE = API_URL + '/resume/experience/skill'; 
-export const URL_EXPERIENCE_GET = API_URL + '/resume/experience/'; 
+export const URL_EXPERIENCE_CREATE = API_URL + '/resume/profile/skill'; 
+export const URL_EXPERIENCE_GET = API_URL + '/resume/profile/'; 
 export const URL_EXPERIENCE_UPDATE = API_URL + '/resume/'; 
 export const URL_EXPERIENCE_DELETE = API_URL + '/resume/experience/';
 
 export const getExperienceIndexURL = (profile_id: string): string => {
-  return URL_SKILL_GET + profile_id + '/experience';
+  return URL_EXPERIENCE_GET + profile_id + '/experience';
 }
 
 
 export const postExperienceURL = (profile_id: string): string => {
-  return URL_SKILL_GET + profile_id + '/experience';
+  return URL_EXPERIENCE_GET + profile_id + '/experience';
 }

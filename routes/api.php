@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Resume\ProfileContoller;
 use App\Http\Controllers\Resume\EducationController;
+use App\Http\Controllers\Resume\ExperienceController;
 use App\Http\Controllers\Resume\SkillController;
 
 /*
@@ -27,6 +28,7 @@ Route::prefix('resume')->group(function(){
     Route::resource('profile',ProfileContoller::class);
     Route::resource('profile.education',EducationController::class)->shallow();
     Route::resource('profile.skill',SkillController::class)->shallow();
+    Route::resource('profile.experience',ExperienceController::class)->shallow();
 });
 
 

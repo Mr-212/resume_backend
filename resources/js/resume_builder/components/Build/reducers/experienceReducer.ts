@@ -18,9 +18,9 @@ export const experienceSlice = createSlice({
         },
 
         updateRecord: (state, action: PayloadAction<object>) => {
-            const { index, data } = action.payload;
+            const { index, experience } = action.payload;
             // const item = state.filter((item,k) => { index == k ? item = data});
-            state.experience[index] = data;
+            state.experience[index] = experience;
              
         },
 
@@ -39,12 +39,13 @@ export const experienceSlice = createSlice({
     },
     extraReducers (builder){
         builder.addCase(postExperience.fulfilled, (state, action)=>{
-            const {index, data} = action.payload;
-            state.experience[index] = data;
+            const {index, experience} = action.payload;
+            state.experience[index] = experience;
         });
 
         builder.addCase(getExperience.fulfilled, (state, action)=>{
-            state.experience.push(...action.payload);
+            console.log(action.payload);
+            state.experience.push(...action.payload?.experiences);
         });
 
         builder.addCase(deleteExperience.fulfilled, (state, action)=>{
@@ -71,13 +72,13 @@ export const experienceSlice = createSlice({
         console.log(index, experience)
         const response = await axios.post(postExperienceURL(profile_id), experience);
         // // return {data: response.data};
-        return {index: index, data: response.data};
+        return {index: index, experience: response.data?.experience};
     }
  );
 
  export const getExperience = createAsyncThunk(
     'experience/get',
-    async() => {
+    async(profile_id) => {
         const response = await axios.get(getExperienceIndexURL(profile_id));
         return response.data;
     }
@@ -86,8 +87,7 @@ export const experienceSlice = createSlice({
     'experience/delete',
     async(id: string) => {
         if(id){
-            const response = await axios.delete(URL_Experience_DELETE + id);
-            // console.log(response.data.prifile)
+            const response = await axios.delete(URL_EXPERIENCE_DELETE + id);
             return response.data;
         }
     }

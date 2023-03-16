@@ -173,13 +173,9 @@ interface EducationProps<T> {
     // const hide = useAppSelector(state => state.education.hide);
 
     const[hide, setHide] = useState(false);
-    
-    // const[education, dispatch] = useReducer(educationReducer, []);
-    const education = items
-
+    const education = items;
     const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: education});
     const dispatch = useAppDispatch();
-    // const education = useAppSelector(state => state.education[index]);
     const[arrowClass, setArrorClass]  = useState("fa fa-arrow-up");
     // const profile_id = useAppSelector(state => state.profile.profile.id);
 
@@ -233,25 +229,25 @@ interface EducationProps<T> {
 
     return(
     <div className="grid grid-row pt-0">
-       <div className="grid grid-cols-2 border-b-2 border-b-white bg-black opacity-80 shadow-lg py-2"> 
-               <div className="text-left text-white font-bold pl-12 space-x-4 space-y-2">
-                     <span className="">{education.qualification}</span>
-                     <span className="">{education.institution? " - "+education.institution:""} {education.city ? "-"+education.city:""}</span>
-                     <span className="">{education.gpa_marks}</span>
-                     <span className="">{education.start_date +'-'+education.end_date}</span>
+       <div className="grid grid-flow-row border-b-2 border-b-white bg-black opacity-80 shadow-lg py-2"> 
+            <div className="flex flex-row w-full justify-between">
+ 
+                <div className="text-left pl-10 font-bold text-white pt-2">
+                        <p><span className="pr-2">{education.qualification}</span><strong className="text-blue-400 font-bold">( {education.gpa_marks} )</strong></p>
+                        <p><strong className="italic pr-2">{education.institution}</strong><span className="pr-2">{" - "+ education.address}</span><small className="text-blue-400">( {education.start_date +'-'+education.end_date} )</small></p>
+                </div>
+                <div className="text-right pr-10 pt-4">
+                    <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
+                    <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
 
-               </div>
-               <div className="text-right pr-10">
-                   <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
-                   <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
-
-                   <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
-                   {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                         Tooltip content
-                     <div className="tooltip-arrow" data-popper-arrow></div>
-                    </div> */}
-                  
-               </div>
+                    <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-white"><i className={arrowClass}></i></span></button>
+                    {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Tooltip content
+                        <div className="tooltip-arrow" data-popper-arrow></div>
+                        </div> */}
+                    
+                </div>
+            </div>
         </div>
         <div>
           

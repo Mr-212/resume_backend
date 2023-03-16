@@ -16,7 +16,8 @@ export default function useHideShowComponent(show: boolean){
 
     const setHideShow = (show: boolean) => {
             setHide(show);
-            const h =  hide? "hidden transition transition-opacity ease-in-out delay-700 duration-700":"transition transition-opacity ease-in-out delay-700 duration-700";
+            const h =  hide? "hidden transition transition-opacity ease-in-out delay-700 duration-700" :
+                                                "transition transition-opacity ease-in-out delay-700 duration-700";
             setHidden(h);   
     }
 
