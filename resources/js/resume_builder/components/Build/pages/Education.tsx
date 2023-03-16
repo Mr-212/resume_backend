@@ -237,10 +237,13 @@ interface EducationProps<T> {
                         <p><strong className="italic pr-2">{education.institution}</strong><span className="pr-2">{" - "+ education.address}</span><small className="text-blue-400">( {education.start_date +'-'+education.end_date} )</small></p>
                 </div>
                 <div className="text-right pr-10 pt-4">
+                    <button className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={(addRecord)} >Save</button>
+
                     <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
-                    <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
+                    {/* <button className="pl-4" onClick={(addRecord)} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button> */}
 
                     <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-white"><i className={arrowClass}></i></span></button>
+                    
                     {/* <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                             Tooltip content
                         <div className="tooltip-arrow" data-popper-arrow></div>

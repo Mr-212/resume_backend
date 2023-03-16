@@ -184,9 +184,10 @@ interface EProps {
                             <p><strong className="italic pr-2">{experience.company}</strong><small className="text-blue-600">{experience.start_date + ' - ' + experience.end_date}</small></p>
 
                         </div>
-                        <div className="text-right pr-10 pt-4">
+                        <div className="text-right pr-10 pt-2">
                             {/* <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button> */}
-                            <button className="pl-4" onClick={addRecord} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button>
+                            {/* <button className="pl-4" onClick={addRecord} ><span className="text-lg text-blue-800"><i className="fas fa-save"></i></span></button> */}
+                            <button className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={addRecord}>Save</button>
                             <button className="pl-4" onClick={() => setHide(!hide)} data-tooltip-target="tooltip-dark"><span className="text-lg text-black"><i className={arrowClass}></i></span></button>
                             
                         </div>

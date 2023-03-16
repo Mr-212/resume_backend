@@ -257,12 +257,7 @@ import { education } from "../reducers/educationReducer";
             </div>
         </main>
          <footer className="mt-6">
-             <p className="bg-gray-600 text-white text-left text-xs pt-2">The best way to predict the future is to
-                 create it. <small>- AbrahamLincoln</small>
-             </p>
-             <p className="bg-gray-600 text-white text-left text-sm pb-2">I am creating my future by learning new things
-                 and
-                 making small progresses everyday.</p>
+            <p></p>
          </footer>
          </div>
     
