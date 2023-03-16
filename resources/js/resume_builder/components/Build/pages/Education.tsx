@@ -47,7 +47,7 @@ const Education = <T extends EducationProps<T>> () => {
     // const { register, handleSubmit, formState: {errors}} = useForm();
 
     // const [education_list, setList] = useState([]);
-    const educationList = useAppSelector(state => state.education);
+    const educationList = useAppSelector(state => state.education.education);
     const dispatch = useAppDispatch();
     const validationErrors = (key: string, value: string) => {
 
@@ -232,11 +232,13 @@ interface EducationProps<T> {
 
     return(
     <div className="grid grid-row pt-0">
-       <div className="grid grid-cols-2 border-b-2 border-slate-200 bg-white opacity-60 shadow-lg py-2"> 
-               <div className="text-left text-black font-bold pl-12 space-x-4">
+       <div className="grid grid-cols-2 border-b-2 border-b-white bg-gray-100 opacity-60 shadow-lg py-2"> 
+               <div className="text-left text-black font-bold pl-12 space-x-4 space-y-2">
                      <span className="">{education.qualification}</span>
+                     <span className="">{education.institution? " - "+education.institution:""} {education.city ? "-"+education.city:""}</span>
                      <span className="">{education.gpa_marks}</span>
-                     <span className="">({education.institution} {education.city ? "-"+education.city:""})</span>
+                     <span className="">{education.start_date +'-'+education.end_date}</span>
+
                </div>
                <div className="text-right pr-10">
                    <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>

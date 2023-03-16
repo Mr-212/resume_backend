@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppSelector } from "../../../store/hooks";
+import { education } from "../reducers/educationReducer";
 
 
 
@@ -7,10 +8,11 @@ import { useAppSelector } from "../../../store/hooks";
 
     const profile = useAppSelector(state => state.profile.profile);
     const skills = useAppSelector(state => state.skills.skills);
-    const education = useAppSelector(state => state.education);
+    const education = useAppSelector(state => state.education.education);
+    // const education = education;
     useEffect(() => {
         // console.log(skills);
-    },[profile, skills]);
+    },[profile, skills, education]);
     const scoreArray = {0: "Fresh ",25: "Starter", 50: "Intermediate", 75: "Professional", 100: "Expert"};
 
 

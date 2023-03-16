@@ -10,22 +10,22 @@ import { update } from "./skillReducer";
 
 export const educationSlice = createSlice({
     name: 'education',
-    initialState: resumeState.education,
+    initialState: {education : resumeState.education, hide: true},
     reducers : {
         add:(state, action: PayloadAction<object>) => {
-            //  state.push(action.payload);
-            return [(action.payload), ...state];
+            state.education.unshift(action.payload);
+            // return [(action.payload), ...state];
         },
 
         updateRecord: (state, action: PayloadAction<object>) => {
             const { index, data } = action.payload;
             // const item = state.filter((item,k) => { index == k ? item = data});
-            state[index] = data;
+            state.education[index] = data;
              
         },
 
         remove: (state, action: PayloadAction<number>) => {
-            state.splice(action.payload, 1);
+            state.education.splice(action.payload, 1);
         },
         
 
@@ -37,13 +37,14 @@ export const educationSlice = createSlice({
         builder.addCase(postEducation.fulfilled, (state, action)=>{
             const {index, data} = action.payload;
             // [...state.slice(0, index-1), action.payload.data, ...state.slice(index)]
-            state[index] = data;
+            state.education[index] = data;
         });
 
         builder.addCase(getEducation.fulfilled, (state, action)=>{
             //[...state, ...action.payload];
             // console.log(action.payload)
-            return action.payload;
+            state.education.push(...action.payload);
+            // return action.payload;
         });
 
         builder.addCase(deleteEducation.fulfilled, (state, action)=>{
@@ -57,6 +58,8 @@ export const educationSlice = createSlice({
 
 
  });
+
+ export const education = state => state.education;
  export const { add, updateRecord , remove, getRecord} = educationSlice.actions;
  export default educationSlice.reducer; 
 
