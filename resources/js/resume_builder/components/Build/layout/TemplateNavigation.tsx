@@ -30,14 +30,14 @@ const Templates = {
                     { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
                             return(
-                              <div className={"flex flex-row justify-center w-full active "} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
+                              <div className={"flex flex-row justify-center w-full active border-r-2"} key={key} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
                             )
                             
                         })
                     }
                 {/* </div> */}
             </div>
-            <div className="w-full h-screen overflow-y-auto overflow-y-auto">
+            <div className="w-full h-screen overflow-y-auto">
                     {template}
 
             </div>

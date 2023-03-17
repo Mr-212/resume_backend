@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::prefix('/')->group(function(){
 
     Route::get('/', function () {
-        return view('app');
+        return view('resume.app');
 
        // return Inertia::render('Dashboard/Index');
     

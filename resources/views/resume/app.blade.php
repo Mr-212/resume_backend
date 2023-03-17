@@ -15,7 +15,7 @@
     <!-- body -->
     <body class="container-fluid bg-slate-100">
         <!-- @include('layouts.partials.headerbar') -->
-        <div id="app" class="text-center w-full">
+        <div id="app" class="text-center w-full h-screen">
         </div>
     </body>
 
