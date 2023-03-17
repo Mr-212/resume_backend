@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/rootReducer";
 import { AnyAction } from 'redux'
 import { profile_id, resumeState } from "./profileReducer";
@@ -11,18 +11,22 @@ export const SkillReducer = createSlice({
     initialState: {skills: resumeState.skills, skillList:[]},
     reducers : {
         add:(state, action: PayloadAction<object>) => {
-            const skill = action.payload?.skill;
+            // const skill = action.payload?.skill;
             // const payload  = action.payload;
-            state.skills[skill] = action.payload;
+            state.skills.unshift(action.payload);
         },
         
         update:(state, action: PayloadAction<object>) => {
-             state.skills[action.payload.skill]['score'] = action.payload?.score;
+             //state.skills[action.payload.index]['score'] = action.payload?.score;
+        },
+        updateScore:(state, action: PayloadAction<object>) => {
+             state.skills[action.payload.index]['score'] = action.payload?.score;
         },
 
         remove: (state, action: PayloadAction<number>) => {
             // state.skills.splice(action.payload, 1);
-            delete state.skills[action.payload];
+            // delete state.skills[action.payload];
+            state.skills.splice(action.payload,1);
         },
 
         getRecord: (state, action: PayloadAction<number>) => {
@@ -44,8 +48,11 @@ export const SkillReducer = createSlice({
 
         builder.addCase(deleteProfileSkills.fulfilled,(state, action)=>{
             // console.log(action.payload);
-            if(action.payload.status == 200)
-                delete state.skills[action.payload.skill];
+            // let obj= state.skills.filter((k) => console.log(current(k)) );
+            // console.log(current(obj.id));
+            if(action.payload.status == 200){}
+                // remove(action.payload.id);
+                // delete state.skills[action.payload.skill];
                 // remove(action.payload.skill);
                 
               
@@ -56,7 +63,7 @@ export const SkillReducer = createSlice({
 
  });
 
- export const { add, update, remove , getRecord} = SkillReducer.actions;
+ export const { add, update, remove , getRecord, updateScore} = SkillReducer.actions;
  export default SkillReducer.reducer;
 
 
@@ -82,9 +89,10 @@ export const SkillReducer = createSlice({
  )
  export const deleteProfileSkills = createAsyncThunk(
     'skill/delete',
-    async (val: string) => {
-        const response = await axios.delete(URL_SKILL_DELETE + (val));
+    async (id: string) => {
+        const response = await axios.delete(URL_SKILL_DELETE + (id));
         // console.log(response.data)
-        return {skill: val, status: response.data.status};
+        return response.data;
+        // return {id: id, status: 200};
     }
  )

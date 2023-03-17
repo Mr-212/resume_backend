@@ -11,7 +11,7 @@ export const resumeState = {
         id: null,
         profile: {},
         education: [],
-        skills: {},
+        skills: [],
    
 }
 

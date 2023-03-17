@@ -29,11 +29,11 @@ class SkillController extends Controller
         try{
             $skills = SkillConstants::List;
             $list = Skill::whereProfileId($profile_id)->get()->toArray();
-            foreach($list as $k=>$v){
-                // dd($v);
-                $list[$v['skill']] = $v;
-                unset($list[$k]);
-            }
+            // foreach($list as $k=>$v){
+            //     // dd($v);
+            //     $list[$v['skill']] = $v;
+            //     unset($list[$k]);
+            // }
             // dd($list);
             return response()->json(['skillsList' => $skills, 'skills' => $list]);
 
@@ -67,7 +67,8 @@ class SkillController extends Controller
                 $id = array_key_exists('id',$value)?$value['id'] : "";
 
                 if($skill = Skill::updateOrCreate(['id' => $id], $value)){
-                    $updatedSkills[$k] = $skill;
+                    // $updatedSkills[$k] = $skill;
+                    $updatedSkills[] = $skill;
                 }
              }
         return response()->json($updatedSkills);
@@ -123,7 +124,7 @@ class SkillController extends Controller
     {
         // dd($id);
         try{
-            if($this->model->whereSkill($id)->delete()){
+            if($this->model::find($id)->delete()){
                 return response()->json(['status' => 200]);
             }
          } catch( Exception $e){

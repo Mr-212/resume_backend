@@ -132,10 +132,10 @@ import { education } from "../reducers/educationReducer";
                                 <div className="flex flex-col items-start gap-y-1 w-full mt-1">
                                     <div className="w-full text-left">
                                         <span className="text-green-500"><i className="fa fa-check" aria-hidden="true"></i></span>
-                                        <span className="px-2 font-bold text-md text-gray-500">{key}</span>
+                                        <span className="px-2 font-bold text-md text-gray-500">{val['skill']}</span>
                                     </div>
 
-                                    <div className="w-full text-left ml-6"><input className="w-4/5 h-1 bg-green-400 rounded-sm cursor-pointer dark:bg-gray-700"  type="range" min="0" max="100" step="25" value={val['score']} /></div>
+                                    <div className="w-full text-left ml-6"><input className="w-4/5 h-1 bg-green-400 rounded-sm cursor-pointer dark:bg-gray-700"  type="range" min="0" max="100" step="10" value={val['score']} /></div>
                                     {/* <span className="block h-8 w-1/3 font-bold text-sky-400">{scoreArray[val['score']]}</span> */}
                                 </div>
 
