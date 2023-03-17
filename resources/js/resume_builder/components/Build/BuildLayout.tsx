@@ -12,6 +12,8 @@ import { getEducation } from "./reducers/educationReducer";
 import { useAppDispatch } from "../../store/store";
 import { getProfileSkills } from "./reducers/skillReducer";
 import { getExperience } from "./reducers/experienceReducer";
+import TemplateBasic_1 from "./templates/basic-1";
+import TemplateNavigation from "./layout/TemplateNavigation";
 
 
 interface Props {
@@ -68,8 +70,21 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div> */}
                
-                <div className="w-full h-screen">
-                    <TemplateBasic></TemplateBasic>
+                <div className="flex flex-col w-full ">
+                    <div className="w-full flex-row">
+                        <TemplateNavigation></TemplateNavigation>
+
+                        {/* <div className="w-40 h-56">
+                        <TemplateBasic_1></TemplateBasic_1>
+                        </div> */}
+
+                    </div>
+                    <div className="h-screen overflow-y-auto">
+                          {/* <TemplateBasic_1></TemplateBasic_1> */}
+
+                    </div>
+                    {/* <TemplateBasic></TemplateBasic> */}
+                   
                 </div>
               
             </div>
