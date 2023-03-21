@@ -14,6 +14,7 @@ import { getProfileSkills } from "./reducers/skillReducer";
 import { getExperience } from "./reducers/experienceReducer";
 import TemplateBasic_1 from "./templates/basic-1";
 import TemplateNavigation from "./layout/TemplateNavigation";
+import BuilderNavigation from "./layout/BuilderNavigation";
 
 
 interface Props {
@@ -44,7 +45,7 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
     return(
         <>
 
-            <div className="flex flex-row fixed items-center shadow-md bg-slate-200 justify-center w-full ">
+            {/* <div className="flex flex-row  items-center shadow-md bg-slate-200 justify-center w-full">
                 <div className="flex flex-row w-full border-r-2">
                     <ResumeMenuBar />
                 </div>
@@ -52,25 +53,23 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
 
                 </div>
             
-            </div>
+            </div> */}
 
-            <div className="grid grid-cols-2 justify-center py-16 space-x-3 px-14">
+            <div className="ralative grid grid-cols-2 justify-center space-x-2 px-10 ">
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
-                <div className="w-full">
+                <div className="w-full sticky top-0">
                     {/* <Profile></Profile> */}
                     {/* <Education></Education> */}
-                        <Outlet />
-                        { children } 
+                        {/* <Outlet /> */}
+                        <BuilderNavigation></BuilderNavigation>
+                        {/* { children }  */}
                 </div>
                 {/* <div className="w-full items-end text-right static  b-0">
                     <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
                 </div> */}
                
-                <div className="w-full ">
-                    <div className="w-full flex-row">
+                <div className="w-full flex-row">
                         <TemplateNavigation></TemplateNavigation>
-                    </div>
-                
                    
                 </div>
               

@@ -4,14 +4,14 @@ import { education } from "../reducers/educationReducer";
 
 
 
- const TemplateBasic = () => {
+ const TemplateBasic = ({resumeProps} : any) => {
 
-    const profile = useAppSelector(state => state.profile.profile);
-    const skills = useAppSelector(state => state.skills.skills);
-    const education = useAppSelector(state => state.education.education);
-    const experience = useAppSelector(state => state.experience.experience);
+    // const profile = useAppSelector(state => state.profile.profile);
+    // const skills = useAppSelector(state => state.skills.skills);
+    // const education = useAppSelector(state => state.education.education);
+    // const experience = useAppSelector(state => state.experience.experience);
 
-    // const {profile, skills, education, experience} = resumeProps;
+    const {profile, skills, education, experience} = resumeProps;
 
     
     // useEffect(() => {

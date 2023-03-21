@@ -1,26 +1,39 @@
+<!DOCTYPE html>
 <html>
     
     <!-- head -->
     <head>
-        <!-- @include('layouts.partials.head')
+        @include('layouts.partials.head')
         @vite('resources/css/app.css')
-        @vite('resources/js/app.js') 
+        @vite('resources/js/app.js')
         @viteReactRefresh
         @vite('resources/js/app.jsx')
-        @inertiaHead -->
     </head>
    
    
 
     <!-- body -->
-    <body class="container-fluid bg-slate-100">
-        @include('layouts.partials.headerbar')
+    <body class="bg-gray-300">
+        <section>
+             @include('layouts.partials.headerbar')
+        </section>
+      
+        <section class="container mt-14">
+            <div class="">
+                <div class="text-primary">
+                    <h3>Welcome</h3>  
+                </div>
+            </div>
+        </section>
+        
+        </main>
+      
 
-        <!-- <div id="app" class="text-center w-full"> -->
-        <!-- @inertia -->
-        <h3>Welcome</h3>
-        <!-- </div> -->
     </body>
+
+    <div class="col-4 float-right">
+        @include('auth.login')
+    </div>
 
 
     <!-- footer -->

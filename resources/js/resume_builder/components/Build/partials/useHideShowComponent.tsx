@@ -21,7 +21,7 @@ export default function useHideShowComponent(show: boolean){
             setHidden(h);   
     }
 
-    return {hidden, setHideShow};
+    return { hidden, setHideShow };
 
 
 }

@@ -19,13 +19,12 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::prefix('/')->group(function(){
+Route::prefix('resume')->group(function(){
 
     Route::get('/', function () {
         return view('resume.app');
 
        // return Inertia::render('Dashboard/Index');
-    
     });
 
     // Route::get('/profile', function () {

@@ -1,4 +1,6 @@
 <html>
+
+<script ></script>
     
     <!-- head -->
     <head>
@@ -13,9 +15,10 @@
    
 
     <!-- body -->
-    <body class="container-fluid bg-slate-100">
+    <!-- <body class="container-fluid bg-slate-100 w-full h-screen [&::-webkit-scrollbar]:hidden overflow-y-auto"> -->
+    <body class="container-fluid bg-slate-100 w-full ">
         <!-- @include('layouts.partials.headerbar') -->
-        <div id="app" class="text-center w-full h-screen">
+        <div id="app" class="flex text-center h-screen max-h-screen">
         </div>
     </body>
 

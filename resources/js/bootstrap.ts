@@ -1,4 +1,10 @@
-// import _ from 'lodash';
+
+
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+// // Variables
+// @import 'variables';
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';// import _ from 'lodash';
 (window as any)._ = require('lodash');
 
 /**
