@@ -33,8 +33,8 @@
                 <h3> OR / Login With </h3>
             </header>
         <div class="flex justify-content-center  gap-x-2">
-                <button type="button" class="flex-grow-1 btn btn-danger bg-danger btn-md border-0 rounded-0">Google</button>
-                <button type="button" class="flex-grow-1 btn btn-secondary bg-secondary btn-md rounded-0">Github</button>
+                <button type="button" class="flex-grow-1 btn btn-danger bg-danger btn-md border-0 rounded-0"> <a href="/auth/social/google">Google</a></button>
+                <button type="button" class="flex-grow-1 btn btn-secondary bg-secondary btn-md rounded-0"><a href="/auth/social/github">Github</a></button>
                 <!-- <button type="button" class="col-6 btn btn-primary btn-sm border-none">LinkedIn</button> -->
         </div>
     </div>
