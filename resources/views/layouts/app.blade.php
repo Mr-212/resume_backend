@@ -23,6 +23,7 @@
                 <div class="text-primary">
                     <h3>Welcome</h3>  
                 </div>
+                <!-- @yield('content') -->
             </div>
         </section>
         

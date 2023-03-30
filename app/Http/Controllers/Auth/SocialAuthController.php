@@ -23,25 +23,22 @@ class SocialAuthController extends Controller
     }
 
     public function getClientDriver($driver){
-
+        
         $client = Socialite::driver($driver)->redirect();
-        session('driver', $driver);
+        // session('driver', $driver);
         return $client;
 
     }
 
 
-    public function callback(Request $request ){
+    public function callback($provider){
         try{
-            $driver  = session('driver');
-            // $driver  = "google";
-            $driver  = "github";
-            if($driver){
-                $user = Socialite::driver($driver)->user();
-                dd($request->all(), $user);
 
-                $this->userModel->update_google_user($user->user);
-                dd($request->all(), $user);
+            if($provider){
+                $user = Socialite::driver($provider)->user();
+                $method = 'update_'.$provider.'_user';
+                $this->userModel->$method($user->user);
+                // dd($request->all(), $user);
             }
 
     }catch(Exception $e){

@@ -29,7 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'first_name','last_name','phone','is_social','social_plateform','social_profile_img_link','social_email_verified'
+        'first_name','last_name','phone','is_social','privider','provider_id','img_url','social_email_verified','nickname','url','nickname'
     ];
 
     /**
@@ -58,16 +58,34 @@ class User extends Authenticatable
            return self::updateOrcreate(['email' => $user['email']],
             [
                 'is_social' => 1,
-                'social_plateform' => self::GOOGLE ,
+                'provider' => self::GOOGLE ,
+                'provider_id' => $user['id'],
                 'name' => $user['name'],
                 'first_name' => $user['given_name'],
                 'last_name' => $user['family_name'],
                 // 'phone' => $user->phone,
                 'social_email_verified'=> $user['email_verified'],
-                'social_profile_img_link' => $user['picture']
+                'img_url' => $user['picture']
             ]);
         }catch(Exception $e){
-            // dd($e->getMessage());
+            dd($e->getMessage());
+            return ['error' => true, 'errorMsg' => $e->getMessage()];
+        }
+    }
+    public function update_github_user($user){
+        // dd($user);
+        try{
+           return self::updateOrcreate(['provider_id' => $user['id']],
+            [
+                'is_social' => 1,
+                'provider' => self::GITHUB,
+                'name' => $user['name'],
+                'img_url' => $user['avatar_url'],
+                'url' => $user['url'],
+                'nickname' => $user['login'],
+            ]);
+        }catch(Exception $e){
+            dd($e->getMessage());
             return ['error' => true, 'errorMsg' => $e->getMessage()];
         }
     }

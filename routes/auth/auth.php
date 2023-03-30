@@ -18,4 +18,4 @@ Route::prefix('social')->group(function(){
     // Route::get('callback', [SocialAuthController::class, 'callback']);
     // Route::post('register', []);
 });
-Route::get('callback', [SocialAuthController::class, 'callback']);
+Route::get('{provider}/callback', [SocialAuthController::class, 'callback']);

@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resume;
 
 use App\Http\Requests\StoreResumeRequest;
 use App\Http\Requests\UpdateResumeRequest;
 use App\Models\Resume;
-use Illuminate\Http\Client\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Resume\Profile;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ResumeController extends Controller
 {
@@ -14,9 +18,23 @@ class ResumeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $resumeModel;
+
+    public function __construct(Profile $profile)
+    {   
+        $this->resumeModel = $profile;
+    }
+
     public function index()
     {
-        //
+        try{
+            $resumes  = $this->resumeModel->get();
+            return view('resume.index',compact($resumes));
+        }catch(Exception $e){
+
+            return $e->getMessage();
+        }
+        
     }
 
     /**
@@ -26,7 +44,12 @@ class ResumeController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
+        $title = $request->title;
+        $user = Str::uuid();
+        $resume = $this->resumeModel->create(['title'=>$title,'user_id' => $user]);
+        return redirect('/resume/'.$resume->id);
+        // dd($resume);
+        // return 
     }
 
     /**
@@ -46,9 +69,12 @@ class ResumeController extends Controller
      * @param  \App\Models\Resume  $resume
      * @return \Illuminate\Http\Response
      */
-    public function show(Resume $resume)
+    public function show($id)
     {
-        //
+        $resume_id = $id;
+        // dd($id);
+        // $resume_id = $this->resumeModel::find($id);
+        return view('resume.app',['resume_id' => $resume_id]);
     }
 
     /**

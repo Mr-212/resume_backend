@@ -4,8 +4,10 @@ import * as ReactDOM from "react-dom";
 import {
     createBrowserRouter,
     createRoutesFromElements,
+    Navigate,
     Route,
     RouterProvider,
+
   } from "react-router-dom";
 import BuildLayout from "../../components/Build/BuildLayout";
 import Education from "../../components/Build/pages/Education";
@@ -17,15 +19,22 @@ import Dashboard from "../../components/Dashboard/Index";
   
 
 
-export const ResumeRoutes = () => {
+export const ResumeRoutes = (props) => {
+  // console.log(props)
+  const profile_id = props.profileId;
+      
 
      const routes = createBrowserRouter(
          createRoutesFromElements(
-          <Route path="/" element={<BuildLayout />}>
-            <Route path="/"   element={<Profile />} />
-            <Route path="education" element={<Education />} />
-            <Route path="skills" element={<Skills />} />
-            <Route path="experience" element={<Experience />} />
+          // <Route path="/resume/:profile_id" element={<BuildLayout />}>
+          <Route path="resume" element={<BuildLayout />}>
+            {/* <Route index path=":profile_id" element={<Navigate to=":profile_id/profile" replace={true} />} /> */}
+            <Route index path=":profile_id" element={<Profile />} />
+            <Route path=":profile_id/profile" element={<Profile />} />
+            {/* <IndexRoute path=":profile_id/profile"   index element={<Profile />} /> */}
+            <Route path=":profile_id/education" element={<Education />} />
+            <Route path=":profile_id/skills" element={<Skills />} />
+            <Route path=":profile_id/experience" element={<Experience />} />
          </Route>
          )
        );

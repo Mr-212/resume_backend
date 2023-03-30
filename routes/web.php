@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Resume\ResumeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,24 +20,26 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::prefix('resume')->group(function(){
+// Route::prefix('resume')->group(function(){
 
-    Route::get('/', function () {
-        return view('resume.app');
+//     // Route::get('/', function () {
+//     //     return view('resume.app');
 
-       // return Inertia::render('Dashboard/Index');
-    });
+//     // });
+//     // Route::get('/', [ResumeController::class,'index']);
+//     Route::resource('/', ResumeController::class);
 
-    // Route::get('/profile', function () {
-    //     return Inertia::render('Build/Profile');
+//     // Route::get('/profile', function () {
+//     //     return Inertia::render('Build/Profile');
     
-    // });
-    // Route::get('/education', function () {
-    //     return Inertia::render('Build/Education');
+//     // });
+//     // Route::get('/education', function () {
+//     //     return Inertia::render('Build/Education');
     
-    // });
+//     // });
     
-});
+// });
+Route::resource('resume', ResumeController::class);
 
 Route::get('/login', function () {
     // dd('here');

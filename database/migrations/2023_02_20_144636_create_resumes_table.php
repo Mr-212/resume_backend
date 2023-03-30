@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('resume_profile', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
+            $table->string('title')->nullable();
             $table->string('job_title')->nullable();
             $table->text('job_description')->nullable();
             $table->string('name')->nullable();

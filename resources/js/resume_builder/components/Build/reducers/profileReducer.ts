@@ -8,7 +8,7 @@ import { URL_PROFILE_CREATE, URL_PROFILE_GET } from "../../../constants/ResumeUr
 
 export const resumeState = {
     
-        id: null,
+        profile_id: "",
         profile: {},
         education: [],
         skills: [],
@@ -22,6 +22,9 @@ export const profileSlice = createSlice({
     reducers : {
         add:(state, action: PayloadAction<object>) => {
              state.profile = action.payload;
+        },
+        setProfileId:(state, action: PayloadAction<string>) => {
+             state.profile_id = action.payload;
         },
 
         remove: (state, action: PayloadAction<number>) => {
@@ -53,10 +56,13 @@ export const profileSlice = createSlice({
  });
 
 //  export const profile = state => state.profile;
-//  export const profile_id = state  => state.profile.profile.id ? state.profile.profile.id :"0d8b8b7b-1171-4af1-ada7-b6f4105064cd";
- export const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
- export const { add, remove , getRecord} = profileSlice.actions;
+//  export const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
+ export const profile_id = state  => state.profile_id;
+
+ export const { add, remove , getRecord, setProfileId} = profileSlice.actions;
  export default profileSlice.reducer;
+
+
 
 
 

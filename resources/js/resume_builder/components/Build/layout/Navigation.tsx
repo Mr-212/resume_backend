@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../store/hooks";
 import { getUrlPath } from "../../hooks/GetLocation";
+// import { profile_id } from "../reducers/profileReducer";
 
 // const ResumeUrls = [
     
@@ -13,7 +15,7 @@ import { getUrlPath } from "../../hooks/GetLocation";
 // ]
 const ResumeUrls = {
     
-    "Profile" :"/",
+    "Profile" : "/profile",
     "Education" :"/education",
     // {"Soft Skill" :""},
     "Skill" :"/skills",
@@ -23,6 +25,8 @@ const ResumeUrls = {
 
 
  const ResumeMenuBar = () => {
+    const profile_id = useAppSelector(state=>state.profile.profile_id)
+
     const url = getUrlPath();
     const last_index = ResumeUrls.length;
     let line = "bg-black h-1 w-full";
@@ -43,12 +47,13 @@ const ResumeUrls = {
                                 // if(i == 0) line ="bg-black h-1 w-full";
                                 // if( i !== 0 && key < i+1  )  line = "bg-blue-400 h-1 w-full ";
 
-                                console.log(k, v);
+                                // console.log(k, v);
                                 return(
                                     <>
                                         <li className="" key={k}>
                                             {/* <span className="text-orange-500 font-bold text-lg pr-1">{val+1}</span> */}
-                                            <Link className={ url === v ?  active : li_class }  to={v}>{k}</Link>
+                                            <Link className={ url === v ?  active : li_class }  to={profile_id+v}>{k}</Link>
+                                            {/* <Link className={ url === v ?  active : li_class }  to={v}>{k}</Link> */}
                                         </li>
                                         {/* { key !==  last_index -1 ?
                                             // <span className={ key < last_index-1 ?  i < key && i > 0  ? "bg-black h-1 w-full" : "h-1 w-full bg-blue-400" : "bg-black h-1 w-full"}></span> : null
