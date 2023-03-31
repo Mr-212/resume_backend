@@ -184,6 +184,8 @@ function Profile<T> ( { id }: CombineProps<T>){
 
         // }, 5000)
     }) 
+    console.log(profile)
+
     
     
     return(

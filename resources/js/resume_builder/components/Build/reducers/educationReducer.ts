@@ -83,8 +83,10 @@ export const educationSlice = createSlice({
 
  export const getEducation = createAsyncThunk(
     'education/get',
-    async() => {
-        const response = await axios.get(getEducationIndexURL(profile_id));
+    async(profile_id: string) => {
+        const url = getEducationIndexURL(profile_id);
+        console.log(url.toString());
+        const response = await axios.get(`${url.toString()}`);
         return response.data;
     }
  )

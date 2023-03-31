@@ -78,7 +78,6 @@ export const profileSlice = createSlice({
  export const getProfile = createAsyncThunk(
     'profile/get',
     async (id: string) => {
-        id = id ? id: profile_id;
         const response = await axios.get(URL_PROFILE_GET + id );
         // console.log(response.data.prifile)
         return response.data.profile;

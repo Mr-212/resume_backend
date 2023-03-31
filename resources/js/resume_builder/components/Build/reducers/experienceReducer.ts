@@ -78,7 +78,7 @@ export const experienceSlice = createSlice({
 
  export const getExperience = createAsyncThunk(
     'experience/get',
-    async(profile_id) => {
+    async(profile_id: string) => {
         const response = await axios.get(getExperienceIndexURL(profile_id));
         return response.data;
     }

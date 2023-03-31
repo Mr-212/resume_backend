@@ -80,9 +80,12 @@ export const SkillReducer = createSlice({
 
  export const getProfileSkills = createAsyncThunk(
     'skill/get',
-    async (id: string) => {
-        id = id ? id: profile_id;
-        const response = await axios.get(getSKillIndexURL(profile_id));
+    async (profile_id: string) => {
+
+        // console.log(profile_id)
+        const url =getSKillIndexURL(profile_id);
+        console.log(url);
+        const response = await axios.get(url);
         // console.log(response.data)
         return response.data;
     }

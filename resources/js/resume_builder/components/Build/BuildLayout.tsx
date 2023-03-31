@@ -15,6 +15,7 @@ import { getExperience } from "./reducers/experienceReducer";
 import TemplateBasic_1 from "./templates/basic-1";
 import TemplateNavigation from "./layout/TemplateNavigation";
 import BuilderNavigation from "./layout/BuilderNavigation";
+import { useAppSelector } from "../../store/hooks";
 
 
 interface Props {
@@ -32,15 +33,20 @@ interface Props {
 
 const BuildLayout = ( { children, saveFunction }: any )  => {
     const dispatch = useAppDispatch();
+    const profile_id =  useAppSelector(state => state.profile.profile_id);
 
-    useEffect(()=>{
+    useEffect(() => {
+        // console.log(profile_id)
+        // const profile_id = "100466e4-0388-4f35-bfad-42b31c616416";
 
-        const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
-        dispatch(getProfile(profile_id));
-        dispatch(getEducation());
-        dispatch(getProfileSkills(profile_id));
-        dispatch(getExperience(profile_id));
-    },[]);
+        if(profile_id){
+
+            dispatch(getProfile(profile_id));
+            dispatch(getEducation(profile_id));
+            dispatch(getProfileSkills(profile_id));
+            dispatch(getExperience(profile_id));
+        }
+    });
 
     return(
         <>
