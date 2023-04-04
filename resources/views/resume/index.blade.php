@@ -1,5 +1,8 @@
+@extends('resume.app')
 
+@section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 @include('layouts.partials.headersJs')
 
 <div class="row h-screen" >
@@ -29,7 +32,7 @@
     </div> -->
 
 </div>
-
+@endsection
 
 <script type="text/javascript">
      $('#cv_create_div').hide();

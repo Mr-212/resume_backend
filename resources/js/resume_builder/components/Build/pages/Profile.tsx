@@ -192,13 +192,13 @@ function Profile<T> ( { id }: CombineProps<T>){
         
         // <BuildLayout saveFunction={submitForm}>
 
-        <div className="items-center gap-y-2" >
+        <div className="items-center" >
                 {/* { alert?.show &&
                     <div className="pb-2">
                         {Alert(alert.title, alert.message)}
                     </div>
                 } */}
-            <div className="grid grid-flow-row bg-white space-y-5 p-4">
+            <div className="bg-white">
                 <div className="flex flex-row items-center justify-between border-b-2 bg-blue-300 opacity-100 h-10 py-2 mb-3 shadow-md px-10">
                         <h4 className="text-black font-bold text-md text-left ">Profile</h4>
                         <button type="button" className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitForm} name="save_btn">Save</button>
@@ -206,22 +206,22 @@ function Profile<T> ( { id }: CombineProps<T>){
              
                 <div className="flex flex-row px-10 items-star w-full">
                     <div className="text-center w-1/4 pt-6">
-                        <div className="bg-cover bg-no-repeat rounded-md h-40 w-40 border">
+                        <div className="bg-cover bg-no-repeat rounded-md h-32 w-32 border">
 
                         </div>
                         
 
                     </div>
 
-                    <div className="w-3/4 space-y-0">
-                        <div className="flex flex-row">
+                    <div className="w-3/4 gap-2">
+                        <div className="flex flex-row gap-3">
 
                         
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="font-bold text-sm text-gray-400">Job Title</label>
                                
                                 <div className="inline-flex items-start justify-start border-b-2 w-full">
-                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="E.g. Full Stack Developer" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
+                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
                                 </div> 
                             </div>
                             <div className="flex flex-col justify-center items-start p-1 w-full">
@@ -235,7 +235,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                             </div>
 
                         </div>
-                        <div className="flex flex-row">
+                        <div className="flex flex-row gap-3">
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="block font-bold text-sm text-gray-400">Email</label>
                                 {/* {validationErrors('email', 'Email')} */}
@@ -281,7 +281,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                    
                 </div>
-                <div className="flex flex-row px-10 w-full">
+                <div className="flex flex-row p-10 gap-3">
 
 
                 <div className="flex flex-col justify-start items-start p-1">

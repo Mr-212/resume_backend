@@ -80,8 +80,8 @@ import { WithResumeProps } from "../partials/WithResumeProps";
 
     return(
         
-        <div className="flex flex-col w-full">
-              <div className="flex flex-row border-b-2 w-full bg-white opacity-100 text-blue-800 font-bold p-2">
+        <div className="flex flex-col">
+              <div className="flex flex-row align-middle justify-items-center border-b-2 w-full bg-white opacity-100 text-blue-800 font-bold p-2">
                     { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
                             return(
@@ -95,7 +95,7 @@ import { WithResumeProps } from "../partials/WithResumeProps";
                     <button className="text-blue-400 px-4 py-1" onClick={handleDonwlodPDF}>Download</button>
                 </div>
             </div>
-            <div className="w-full bg-slate-500 p-10 [&::-webkit-scrollbar]:hidden overflow-y-auto">
+            <div className="w-full bg-gray-300 p-10 [&::-webkit-scrollbar]:hidden overflow-y-auto">
             <div >
                 {/* <div > */}
 

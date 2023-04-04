@@ -40,7 +40,6 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
         // const profile_id = "100466e4-0388-4f35-bfad-42b31c616416";
 
         if(profile_id){
-
             dispatch(getProfile(profile_id));
             dispatch(getEducation(profile_id));
             dispatch(getProfileSkills(profile_id));
@@ -61,20 +60,13 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
             
             </div> */}
 
-            <div className="ralative grid grid-cols-2 justify-center space-x-2 px-10 w-full">
+            <div className="ralative grid grid-cols-2 justify-center space-x-2 px-20 gap-10 w-full pt-10">
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
                 <div className="w-full sticky top-0">
-                    {/* <Profile></Profile> */}
-                    {/* <Education></Education> */}
-                        {/* <Outlet /> */}
                         <BuilderNavigation></BuilderNavigation>
-                        {/* { children }  */}
                 </div>
-                {/* <div className="w-full items-end text-right static  b-0">
-                    <BtnNavigator saveFunction={saveFunction}></BtnNavigator>
-                </div> */}
                
-                <div className="w-full flex-row">
+                <div className="w-full">
                         <TemplateNavigation></TemplateNavigation>
                    
                 </div>

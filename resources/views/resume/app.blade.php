@@ -16,9 +16,13 @@
  
     <!-- body -->
     <!-- <body class="container-fluid bg-slate-100 w-full h-screen [&::-webkit-scrollbar]:hidden overflow-y-auto"> -->
-    <body class="container-fluid bg-slate-100 w-full ">
-        <!-- <div id="app" class="flex text-center h-screen max-h-screen" data-profile-id="{{ $resume_id }}"></div> -->
-        <div id="app" class="flex text-center h-screen max-h-screen w-full" data-profile-id="{{ $resume_id }}"></div>
+    <body class="container-fluid bg-slate-100 w-full">
+        @include('resume.header')
+        @yield('content')
+
+        @if(isset($resume_id))
+            <div id="app" class="flex text-center h-screen max-h-screen w-full mt-20" data-profile-id="{{ $resume_id }}"></div>
+        @endif
     </body>
 
 

@@ -82,7 +82,7 @@ const Experience = () => {
                 </div>
             </div>
 
-            <div className="grid grid-rows-1 space-y-2">
+            <div className="space-y-2">
                 
                 { experiences.length  > 0 && experiences.map((experience,key) => {
                     console.log(experience);
@@ -174,7 +174,7 @@ interface EProps {
 
     return(
 
-        <div className="grid grid-row">
+        <div className="">
             <div className="grid grid-flow-row border-b-2 bg-gray-400 opacity-100 shadow-lg py-2"> 
                 <div className="flex flex-row w-full justify-between">
 
