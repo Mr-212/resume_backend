@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
 
@@ -37,7 +38,11 @@ class SocialAuthController extends Controller
             if($provider){
                 $user = Socialite::driver($provider)->user();
                 $method = 'update_'.$provider.'_user';
-                $this->userModel->$method($user->user);
+                $user = $this->userModel->$method($user->user);
+                if($user?->id){
+                    Auth::login($user, true);
+                    return redirect('resume');
+                }
                 // dd($request->all(), $user);
             }
 

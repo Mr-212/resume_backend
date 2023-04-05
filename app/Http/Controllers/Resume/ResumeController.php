@@ -74,7 +74,9 @@ class ResumeController extends Controller
         $resume_id = $id;
         // dd($id);
         // $resume_id = $this->resumeModel::find($id);
-        return view('resume.app',['resume_id' => $resume_id]);
+        // return view('resume.app',['resume_id' => $resume_id]);
+        return view('resume.new',['resume_id' => $resume_id]);
+
     }
 
     /**

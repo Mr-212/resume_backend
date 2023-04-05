@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import path from 'path'
 // import { viteExternalsPlugin } from 'vite-plugin-externals'
 // import html2canvas from 'html2canvas';
 
@@ -33,4 +34,11 @@ export default defineConfig({
 
             
     ],
+
+    resolve:{
+        alias:{
+            '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+        }
+
+    }
 });

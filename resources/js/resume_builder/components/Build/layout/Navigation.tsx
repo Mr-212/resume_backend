@@ -28,15 +28,15 @@ const ResumeUrls = {
     const profile_id = useAppSelector(state=>state.profile.profile_id)
 
     const url = getUrlPath();
-    const last_index = ResumeUrls.length;
+    // const last_index = ResumeUrls.length;
     let line = "bg-black h-1 w-full";
-    const li_class = "text-blue-900 font-bold hover:text-indigo-800 hover:text-sm transition-all ease-in-out delay-150 duration-150 ";
+    const li_class = "text-blue-600 font-bold hover:text-green-800 hover:text-sm transition-all ease-in-out delay-150 duration-150 ";
     const active = "active opacity-100 text-green-800 font-bold text-md transition-all ease-in-out duration-150";
 
     return(
         <div className="flex flex-row justify-between p-2 w-full items-center">
               <nav className="flex flex-row items-center justify-start pl-10 w-2/3">
-                <ul className="inline-flex gap-x-8">
+                <ul className="inline-flex gap-8 text-sm">
                     
                     { 
                         //const last_index = Object.keys(val).length;
@@ -52,7 +52,7 @@ const ResumeUrls = {
                                     <>
                                         <li className="" key={k}>
                                             {/* <span className="text-orange-500 font-bold text-lg pr-1">{val+1}</span> */}
-                                            <Link className={ url === v ?  active : li_class }  to={profile_id+v}>{k}</Link>
+                                            <Link className={ url === profile_id + v ?  active : li_class }  to={profile_id+v}>{k}</Link>
                                             {/* <Link className={ url === v ?  active : li_class }  to={v}>{k}</Link> */}
                                         </li>
                                         {/* { key !==  last_index -1 ?

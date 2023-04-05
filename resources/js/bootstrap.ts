@@ -6,12 +6,18 @@
 // // Bootstrap
 // @import '~bootstrap/scss/bootstrap';// import _ from 'lodash';
 (window as any)._ = require('lodash');
+window._ = loadash;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+import 'bootstrap';
+import * as Popper from '@popperjs/core'
+window.Popper = Popper;
+import "@fortawesome/fontawesome-free/css/all.css";
+
 
 import axios from 'axios';
 (window as any).axios = axios;

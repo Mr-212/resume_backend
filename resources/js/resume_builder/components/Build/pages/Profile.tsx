@@ -192,7 +192,7 @@ function Profile<T> ( { id }: CombineProps<T>){
         
         // <BuildLayout saveFunction={submitForm}>
 
-        <div className="items-center" >
+        <div className="w-full" >
                 {/* { alert?.show &&
                     <div className="pb-2">
                         {Alert(alert.title, alert.message)}
@@ -281,35 +281,34 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                    
                 </div>
-                <div className="flex flex-row p-10 gap-3">
+                <div className="flex flex-row p-10">
 
-
-                <div className="flex flex-col justify-start items-start p-1">
-                    <label className="basis block font-bold text-sm text-gray-400">LinkedIn URL</label>
-                    <div className="inline-flex items-center justify-start w-full border-b-2">
+                <div className="flex flex-col justify-start items-start">
+                    <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
+                    {/* <div className="inline-flex items-center justify-start  border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span> */}
-                        <input type="text" className=" h-8  block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url}  placeholder="" name="linkedin_url"></input>
-                    </div>        
+                        <input type="text" className="h-8 border-b-2 block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url}  placeholder="" name="linkedin_url"></input>
+                    {/* </div>         */}
                 </div>
 
-                <div className="flex flex-col justify-center items-start p-1 w-full">
+                <div className="flex flex-col justify-center items-start">
 
                     <label className="block font-bold text-sm text-gray-400">Github URL</label>
                     
-                    <div className="inline-flex items-center justify-start w-full border-b-2">
+                    {/* <div className="inline-flex items-center justify-start w-full border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
-                        <input type="text" className=" h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
-                    </div> 
+                        <input type="text" className=" h-8 border-b-2  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
+                    {/* </div>  */}
                 </div>
 
-                <div className="flex flex-col justify-center items-start p-1 w-full">
+                <div className="flex flex-col justify-center items-start">
 
                     <label className="block font-bold text-sm text-gray-400">Twitter</label>
                     
-                    <div className="inline-flex items-center justify-start w-full border-b-2">
+                    {/* <div className="inline-flex items-center justify-start border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
-                        <input type="text" className=" h-8  block  text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
-                    </div> 
+                        <input type="text" className=" h-8  block  border-b-2 text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
+                    {/* </div>  */}
                 </div>
 
                 </div> 

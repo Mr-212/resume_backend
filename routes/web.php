@@ -40,6 +40,7 @@ Route::get('/', function () {
     
 // });
 Route::resource('resume', ResumeController::class);
+//->middleware(['auth']);
 
 Route::get('/login', function () {
     // dd('here');

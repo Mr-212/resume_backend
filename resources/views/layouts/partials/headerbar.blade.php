@@ -18,11 +18,18 @@
         </div>
         <div class="col-6 text-right">
             <ul class="navbar-nav float-right">
+                @if(auth()->user())
+                <li class="nav-link nav-item">
+                    <h3>{{ auth()->user()->name }}</h3>
+                </li>
+                @else
+                
                 <li class="nav-item">       
                     <button class="nav-link font-bold">Login</button></li>
                 <li class="nav-link nav-item">
                     <button class="text-primary font-bold">Register</button>
                 </li>
+                @endif
             </ul>
 
         </div>

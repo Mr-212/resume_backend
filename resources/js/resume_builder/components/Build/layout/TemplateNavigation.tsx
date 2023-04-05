@@ -95,7 +95,7 @@ import { WithResumeProps } from "../partials/WithResumeProps";
                     <button className="text-blue-400 px-4 py-1" onClick={handleDonwlodPDF}>Download</button>
                 </div>
             </div>
-            <div className="w-full bg-gray-300 p-10 [&::-webkit-scrollbar]:hidden overflow-y-auto">
+            <div className="w-full [&::-webkit-scrollbar]:hidden overflow-y-auto">
             <div >
                 {/* <div > */}
 

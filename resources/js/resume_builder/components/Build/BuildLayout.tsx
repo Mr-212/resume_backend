@@ -60,13 +60,13 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
             
             </div> */}
 
-            <div className="ralative grid grid-cols-2 justify-center space-x-2 px-20 gap-10 w-full pt-10">
+            <div className="grid grid-cols-2 justify-center space-x-4 w-full pt-10">
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
-                <div className="w-full sticky top-0">
+                <div className="col-span-1">
                         <BuilderNavigation></BuilderNavigation>
                 </div>
                
-                <div className="w-full">
+                <div className="col-span-1">
                         <TemplateNavigation></TemplateNavigation>
                    
                 </div>
