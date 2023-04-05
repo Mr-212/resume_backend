@@ -17,13 +17,13 @@ import ResumeMenuBar from "./Navigation";
 
 
     return(
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-2">
             <div className="flex flex-col">
-                <div className="flex flex-row border-b-2 w-full bg-slate-200 shadow-md opacity-100 text-blue-800 font-bold p-1">
+                <div className="flex flex-row w-full bg-slate-600 shadow-lg rounded-full opacity-100 text-gray-900 font-bold">
                         <ResumeMenuBar />
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full rounded-full">
                     <Outlet />
             </div>
         </div>

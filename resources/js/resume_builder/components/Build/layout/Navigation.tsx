@@ -30,7 +30,7 @@ const ResumeUrls = {
     const url = getUrlPath();
     // const last_index = ResumeUrls.length;
     let line = "bg-black h-1 w-full";
-    const li_class = "text-blue-600 font-bold hover:text-green-800 hover:text-sm transition-all ease-in-out delay-150 duration-150 ";
+    const li_class = "text-white font-bold hover:text-green-800 hover:text-sm transition-all ease-in-out delay-150 duration-150 ";
     const active = "active opacity-100 text-green-800 font-bold text-md transition-all ease-in-out duration-150";
 
     return(

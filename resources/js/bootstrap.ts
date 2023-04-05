@@ -5,8 +5,8 @@
 // @import 'variables';
 // // Bootstrap
 // @import '~bootstrap/scss/bootstrap';// import _ from 'lodash';
-(window as any)._ = require('lodash');
-window._ = loadash;
+// (window as any)._ = require('lodash');
+// window._ = loadash;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -15,7 +15,7 @@ window._ = loadash;
  */
 import 'bootstrap';
 import * as Popper from '@popperjs/core'
-window.Popper = Popper;
+// window.Popper = Popper;
 import "@fortawesome/fontawesome-free/css/all.css";
 
 

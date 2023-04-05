@@ -45,8 +45,9 @@ class ResumeController extends Controller
     public function create(Request $request)
     {
         $title = $request->title;
-        $user = Str::uuid();
-        $resume = $this->resumeModel->create(['title'=>$title,'user_id' => $user]);
+        // $user = Str::uuid();
+        $user_id = auth()->user()->id;
+        $resume = $this->resumeModel->create(['title'=>$title,'user_id' => $user_id]);
         return redirect('/resume/'.$resume->id);
         // dd($resume);
         // return 

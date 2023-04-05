@@ -170,7 +170,7 @@ function Profile<T> ( { id }: CombineProps<T>){
         // Object.entries(profile).map(([k,v]) => {
         //     setValue(k,v);
         // })
-        console.log(data);
+        // console.log(data);
         dispatch(postProfile(data));
         // Alert('Success','Data saved');
         // const request = axios.post(URL_PROFILE_CREATE, data)
@@ -184,7 +184,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
         // }, 5000)
     }) 
-    console.log(profile)
+    // console.log(profile)
 
     
     
@@ -199,21 +199,21 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                 } */}
             <div className="bg-white">
-                <div className="flex flex-row items-center justify-between border-b-2 bg-blue-300 opacity-100 h-10 py-2 mb-3 shadow-md px-10">
+                <div className="flex flex-row items-center justify-between border-b-2 bg-gray-400 opacity-100 h-10 py-2 mb-3 shadow-md pl-10">
                         <h4 className="text-black font-bold text-md text-left ">Profile</h4>
                         <button type="button" className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>
              
                 <div className="flex flex-row px-10 items-star w-full">
-                    <div className="text-center w-1/4 pt-6">
+                    {/* <div className="text-center w-1/4 pt-6">
                         <div className="bg-cover bg-no-repeat rounded-md h-32 w-32 border">
 
                         </div>
                         
 
-                    </div>
+                    </div> */}
 
-                    <div className="w-3/4 gap-2">
+                    <div className="w-full gap-2">
                         <div className="flex flex-row gap-3">
 
                         
@@ -221,7 +221,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <label className="font-bold text-sm text-gray-400">Job Title</label>
                                
                                 <div className="inline-flex items-start justify-start border-b-2 w-full">
-                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
+                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title} onMouseOver={submitForm}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
                                 </div> 
                             </div>
                             <div className="flex flex-col justify-center items-start p-1 w-full">
@@ -229,7 +229,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <label className="block font-bold text-sm text-gray-400">Name</label>
 
                                 <div className="inline-flex items-center justify-start border-b-2 w-full ">
-                                    <input type="text" className=" h-8 block rounded  text-black text-sm font-bold focus:outline-none" value={formValues?.first_name}  onMouseOver={submitForm} placeholder="" {...register('first_name', {required: false, maxLength:20})} name="first_name"></input>
+                                    <input type="text" className=" h-8 block rounded  text-black text-sm font-bold focus:outline-none" value={formValues?.first_name}  onMouseOver={submitForm} placeholder="" {...register('name', {required: false, maxLength:20})} name="name"></input>
                                 </div>
 
                             </div>
@@ -321,7 +321,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                                 <div className="inline-flex items-start justify-start w-full border-b-2">
                                     {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                                    <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description}  placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
+                                    <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} onMouseOver={submitForm} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
                                 </div> 
                     </div>
                 </div>

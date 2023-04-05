@@ -80,19 +80,19 @@ import { WithResumeProps } from "../partials/WithResumeProps";
 
     return(
         
-        <div className="flex flex-col">
-              <div className="flex flex-row align-middle justify-items-center border-b-2 w-full bg-white opacity-100 text-blue-800 font-bold p-2">
+        <div className="flex flex-col space-y-2">
+              <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg rounded-full opacity-100 text-gray-900 font-bold p-1">
                     { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
                             return(
                               
-                              <div className={"flex flex-row justify-center w-full active"} key={key} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
+                              <div className={"flex flex-row text-gray-100 justify-evenly w-full active"} key={key} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
                             )                      
                         })
                       
                     }
                 <div className="">
-                    <button className="text-blue-400 px-4 py-1" onClick={handleDonwlodPDF}>Download</button>
+                    <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button>
                 </div>
             </div>
             <div className="w-full [&::-webkit-scrollbar]:hidden overflow-y-auto">
