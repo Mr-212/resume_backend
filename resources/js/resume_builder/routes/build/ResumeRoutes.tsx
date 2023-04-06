@@ -15,6 +15,7 @@ import Experience from "../../components/Build/pages/Experience";
 import Profile from "../../components/Build/pages/Profile";
 import Skills from "../../components/Build/pages/Skills";
 import Dashboard from "../../components/Dashboard/Index";
+import ResumeIndex from "../../components/resumeIndex/pages";
   
   
 
@@ -27,20 +28,28 @@ export const ResumeRoutes = (props) => {
      const routes = createBrowserRouter(
          createRoutesFromElements(
           // <Route path="/resume/:profile_id" element={<BuildLayout />}>
-          <Route path="resume" element={<BuildLayout />}>
-            {/* <Route index path=":profile_id" element={<Navigate to=":profile_id/profile" replace={true} />} /> */}
-            <Route index path=":profile_id" element={<Profile />} />
-            <Route path=":profile_id/profile" element={<Profile />} />
-            {/* <IndexRoute path=":profile_id/profile"   index element={<Profile />} /> */}
-            <Route path=":profile_id/education" element={<Education />} />
-            <Route path=":profile_id/skills" element={<Skills />} />
-            <Route path=":profile_id/experience" element={<Experience />} />
-         </Route>
+          <>
+            <Route path="resume/*" element={<BuildLayout />}>
+              {/* <Route index path=":profile_id" element={<Navigate to=":profile_id/profile" replace={true} />} /> */}
+              <Route index path=":profile_id" element={<Profile />} />
+              <Route path=":profile_id/profile" element={<Profile />} />
+              <Route path=":profile_id/education" element={<Education />} />
+              <Route path=":profile_id/skills" element={<Skills />} />
+              <Route path=":profile_id/experience" element={<Experience />} />
+            </Route>
+            <Route path="resume" element={<ResumeIndex />}> </Route>
+         </>
          )
        );
 
+      //  const routes1 = createBrowserRouter(
+      //   createRoutesFromElements(
+      //    // <Route path="/resume/:profile_id" element={<BuildLayout />}>
+      //   )
+      // );
+
        return (
-        <RouterProvider router={routes}></RouterProvider>
+          <RouterProvider router={routes}></RouterProvider>
        )
 
 }

@@ -35,7 +35,7 @@
     </body>
 
     <div class="col-3 float-right">
-        @include('auth.login')
+        @include('auth.modals.login')
     </div>
 
 

@@ -8,6 +8,7 @@ use App\Models\Resume;
 use App\Http\Controllers\Controller;
 use App\Models\Resume\Profile;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,9 +28,14 @@ class ResumeController extends Controller
 
     public function index()
     {
+        // dd('here');
         try{
-            $resumes  = $this->resumeModel->get();
-            return view('resume.index',compact($resumes));
+            if(request()->ajax()){
+                $resumes  = $this->resumeModel->where('user_id',auth()->id())->get()->toArray();
+                ///dd($resumes);
+                return response()->json(['status_code' => 200, 'resumes' => $resumes]);
+            }
+            return view('resume.index');
         }catch(Exception $e){
 
             return $e->getMessage();

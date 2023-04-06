@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
-import { AnyAction } from 'redux'
 import { profile_id, resumeState } from "./profileReducer";
 import axios from "axios";
 import { getSKillIndexURL, postSkillURL, URL_SKILL_DELETE } from "../../../constants/ResumeUrls";

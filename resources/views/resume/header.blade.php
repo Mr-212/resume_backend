@@ -6,9 +6,9 @@
                 {{-- <button data-toggle="modal" data-target="#create-resume-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Create
                 </button> --}}
-                <a data-bs-toggle="modal" data-bs-target="#create-resume-modal" class="block hover:text-slate-600 hover:bg-black focus:ring-4 border-slate-400 border-2 rounded-full text-white bg-slate-600 focus:ring-blue-300 font-bold text-lg px-4 py-1 text-center">
+                <button data-bs-toggle="modal" data-bs-target="#create-resume-modal" class="block hover:text-slate-600 hover:bg-black focus:ring-4 border-slate-400 border-2 rounded-full text-white bg-slate-600 focus:ring-blue-300 font-bold text-lg px-4 py-1 text-center">
                     Create
-                </a>
+                </button>
             </div>
 
         </div>

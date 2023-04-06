@@ -1,12 +1,4 @@
 
-
-<!-- <nav class="flex flex-row w-full bg-neutral-300 shadow-md justify-end items-center h-32 p-5">
-    <div class="justify-center align-middle">
-        <button class="hover:font-bold hover:underline text-black p-3">Login</button>
-        <button class="hover:font-bold hover:underline text-black p-3">Register</button>
-    </div>
-
-</nav> -->
 <nav class="row navbar fixed-top navbar-expand-lg navbar-dark bg-dark px-5">
     <div class="continer-fluid">
     <div class="row">
@@ -25,10 +17,10 @@
                 @else
                 
                 <li class="nav-item">       
-                    <button class="nav-link font-bold">Login</button></li>
-                <li class="nav-link nav-item">
+                    <button class="nav-link font-bold rounded-full px-4 py-1.5 bg-gray-200 opacity-100 text-black hover:bg-white hover:text-black" data-bs-toggle="modal" data-bs-target="#authentication-modal">Login</button></li>
+                {{-- <li class="nav-link nav-item">
                     <button class="text-primary font-bold">Register</button>
-                </li>
+                </li> --}}
                 @endif
             </ul>
 
