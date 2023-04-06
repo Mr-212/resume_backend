@@ -22,17 +22,15 @@ const ResumeIndex = () => {
     console.log(resumes)
 
     return(
-        <div className="flex">
-            {resumes.map((v,k) => {
-                console.log(v,k)
+        <div className="flex flex-col items-center justify-start space-y-2">
+            { resumes.map((v,k) => {
                 return(
-                    <div key={k}>
+                    // <div className="" key={k}>
                         <ResumeComponent resume={v}></ResumeComponent>
-
-                    </div>
+                    // </div>
                 )
 
-            })
+             })
             }
                
 
@@ -48,7 +46,7 @@ const ResumeComponent = ({resume} :any) => {
 
     console.log(resume);
     return(
-        <div>
+        <div className="flex flex-row items-start justify-start border-b-2 w-full p-1">
             <h5>{resume.title}</h5>
             <button className="">delete</button>
         </div>
