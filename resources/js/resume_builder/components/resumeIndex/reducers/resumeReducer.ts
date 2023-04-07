@@ -31,7 +31,8 @@ export const resumeSlice = createSlice({
             // console.log('here');
 
             if(action.payload.status_code = 200){
-                    state.push(...action.payload.resumes);
+                    // state.push(...action.payload.resumes);
+                    return action.payload.resumes;
             }
         })
 
