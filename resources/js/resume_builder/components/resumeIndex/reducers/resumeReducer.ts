@@ -14,6 +14,12 @@ export const resumeSlice = createSlice({
             state.splice(action.payload, 1);
         },
 
+        update: (state, action: PayloadAction<object>) => {
+            let resume =  state.filter(obj => obj.id == action.payload.resume.id);
+            console.log(current(resume));
+            resume = action.payload;
+        },
+
         getRecord: (state, action: PayloadAction<number>) => {
             //   const r = state.slice(action.payload, action.payload+1);
             //   const r = state.map((val,key )=> {
@@ -36,11 +42,15 @@ export const resumeSlice = createSlice({
             }
         })
 
-        // builder.addCase(postResume.fulfilled,(state,action)=>{
-        //     // console.log(action.payload);
-        //     state = action.payload;
+        builder.addCase(updateResumeTitle.fulfilled,(state,action)=>{
+            if(action.payload.status_code == 200){
+                const resume =  state.filter(obj => { return obj.id == action.payload.resume.id});
+                // console.log(current(resume));
+                resume.title = action.payload.resume.title;
+                return state;
+            }
 
-        // });
+        });
 
         
         // builder.addCase(deleteResume.fulfilled,(state, action)=>{
@@ -55,7 +65,7 @@ export const resumeSlice = createSlice({
 
  });
 
- export const { add, remove, getRecord} = resumeSlice.actions;
+ export const { add, remove, getRecord, update} = resumeSlice.actions;
  export default resumeSlice.reducer; 
 
 
@@ -69,24 +79,35 @@ export const resumeSlice = createSlice({
 //     }
 //  )
 
+export const updateResumeTitle = createAsyncThunk(
+    'resume/title',
+    async (resume) => {
+        const url = '/resume/'+resume.id;
+        const response = await axios.put(url, resume);
+        // console.log(response.data);
+        return response.data;
+    }
+     )
+
  export const getResumes = createAsyncThunk(
     'resumes',
     async () => {
         const url = '/resume';
         const response = await axios.get(url);
-        // console.log(response.data);
-        // add(response.data.resumes);
         return response.data;
     }
  )
-//  export const deleteResume = createAsyncThunk(
-//     'resume/delete',
-//     async (id: string) => {
-//         // const response = await axios.delete(URL_SKILL_DELETE + (id));
-//         // console.log(response.data)
-//         // return response.data;
-//     }
-//  )
+ export const deleteResume = createAsyncThunk(
+    'resume/delete',
+    async (id: string) => {
+        const url = '/resume/' +id;
+        const response = await axios.delete(url);
+        // console.log(response.data)
+        if(response.data.ststu_code = 200)
+            getResumes();
+        //return response.data;
+    }
+ )
 
 
 

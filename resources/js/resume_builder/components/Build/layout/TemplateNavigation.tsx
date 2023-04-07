@@ -34,7 +34,7 @@ import { WithResumeProps } from "../partials/WithResumeProps";
     const Templates = {
     
         'Basic':  <TemplateBasic />,
-        'Dark':<TemplateBasic_1 />
+        'Dark': <TemplateBasic_1 />
       }
       const[template, selectTemplate ] = useState(<TemplateBasic resumeProps={resumeStoreObject} />);
 
@@ -79,9 +79,8 @@ import { WithResumeProps } from "../partials/WithResumeProps";
     const active = "active opacity-100 text-green-800 font-bold text-lg transition ease-in-out duration-300";
 
     return(
-        
-        <div className="flex flex-col space-y-2">
-              <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg rounded-full opacity-100 text-gray-900 font-bold p-1">
+        <div className="h-full bg-slate-600 pb-8">
+              <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg opacity-100 text-gray-900 font-bold p-1">
                     { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
                             return(
@@ -89,23 +88,13 @@ import { WithResumeProps } from "../partials/WithResumeProps";
                               <div className={"flex flex-row text-gray-100 justify-evenly w-full active"} key={key} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
                             )                      
                         })
-                      
                     }
                 <div className="">
                     <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button>
                 </div>
             </div>
-            <div className="w-full [&::-webkit-scrollbar]:hidden overflow-y-auto">
-            <div >
-                {/* <div > */}
-
-               <div ref={pdfTemplate}>
-                {template}
-               </div>
-
-                    
-            </div>
-
+            <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}>
+                    {template}
             </div>
         </div>
     )

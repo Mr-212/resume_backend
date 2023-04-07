@@ -104,9 +104,20 @@ class ResumeController extends Controller
      * @param  \App\Models\Resume  $resume
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResumeRequest $request, Resume $resume)
+    public function update(Request $request)
     {
-        //
+        try{
+            // dd($request->all());
+            $resume = $this->resumeModel->find($request->id);
+            $resume->update($request->except('id'));
+            if($resume){
+                $resume->refresh();
+                return response()->json(['status_code' => 200, 'resume' => $resume]);
+            }
+
+        }catch(Exception $e){
+            return response()->json(['status_code' => 400, 'error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -115,8 +126,18 @@ class ResumeController extends Controller
      * @param  \App\Models\Resume  $resume
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resume $resume)
+    public function destroy($id)
     {
-        //
+        // dd($id);
+        try{
+            if($this->resumeModel::find($id)->delete()){
+                return response()->json(['status_code' => 200, 'message' => 'Resume deleted.']);
+            }
+
+        }catch(Exception $e){
+
+            return response()->json(['status_code' => 400, 'message' => $e->getMessage()]);
+            // throw $e->getMessage();
+        }
     }
 }

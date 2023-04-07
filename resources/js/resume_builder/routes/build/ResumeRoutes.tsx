@@ -16,6 +16,7 @@ import Profile from "../../components/Build/pages/Profile";
 import Skills from "../../components/Build/pages/Skills";
 import Dashboard from "../../components/Dashboard/Index";
 import ResumeIndex from "../../components/resumeIndex/pages";
+import Header from "../../components/Build/partials/commonHeader";
   
   
 
@@ -29,15 +30,17 @@ export const ResumeRoutes = (props) => {
          createRoutesFromElements(
           // <Route path="/resume/:profile_id" element={<BuildLayout />}>
           <>
-            <Route path="resume/*" element={<BuildLayout />}>
-              {/* <Route index path=":profile_id" element={<Navigate to=":profile_id/profile" replace={true} />} /> */}
-              <Route index path=":profile_id" element={<Profile />} />
-              <Route path=":profile_id/profile" element={<Profile />} />
-              <Route path=":profile_id/education" element={<Education />} />
-              <Route path=":profile_id/skills" element={<Skills />} />
-              <Route path=":profile_id/experience" element={<Experience />} />
+           <Route path="resume" element={<Header />}>
+              <Route path="*" element={<BuildLayout />}>
+                {/* <Route index path=":profile_id" element={<Navigate to=":profile_id/profile" replace={true} />} /> */}
+                <Route index path=":profile_id" element={<Profile />} />
+                <Route path=":profile_id/profile" element={<Profile />} />
+                <Route path=":profile_id/education" element={<Education />} />
+                <Route path=":profile_id/skills" element={<Skills />} />
+                <Route path=":profile_id/experience" element={<Experience />} />
+              </Route>
+              <Route path="" element={<ResumeIndex />}> </Route>
             </Route>
-            <Route path="resume" element={<ResumeIndex />}> </Route>
          </>
          )
        );

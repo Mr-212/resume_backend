@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Dashboard from "../Dashboard/Index";
 import BtnNavigator from "./layout/BtnNavigator";
 import Education from "./pages/Education";
@@ -33,12 +33,12 @@ interface Props {
 
 const BuildLayout = ( { children, saveFunction }: any )  => {
     const dispatch = useAppDispatch();
-    const profile_id =  useAppSelector(state => state.profile.profile_id);
+    let _profile_id =  useAppSelector(state => state.profile.profile_id);
+    let { profile_id } =  useParams();
+    
 
     useEffect(() => {
-        // console.log(profile_id)
-        // const profile_id = "100466e4-0388-4f35-bfad-42b31c616416";
-
+        profile_id = profile_id ? profile_id : _profile_id;
         if(profile_id){
             dispatch(getProfile(profile_id));
             dispatch(getEducation(profile_id));
@@ -48,31 +48,22 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
     });
 
     return(
-        <>
 
-            {/* <div className="flex flex-row  items-center shadow-md bg-slate-200 justify-center w-full">
-                <div className="flex flex-row w-full border-r-2">
-                    <ResumeMenuBar />
-                </div>
-                <div className="flex flex-row w-full">
-
-                </div>
-            
-            </div> */}
-
-            <div className="grid grid-cols-2 justify-center space-x-4 w-full pt-10">
+            <div className="grid grid-cols-2 space-x-4">
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
-                <div className="col-span-1">
+                    {/* <div className=" col-span-2">
+                        <Headers></Headers>
+                    </div> */}
+                <div className="col-span-1 h-full">
                         <BuilderNavigation></BuilderNavigation>
                 </div>
                
-                <div className="col-span-1">
+                <div className="col-span-1 h-full">
                         <TemplateNavigation></TemplateNavigation>
                    
                 </div>
               
             </div>
-        </>
     )
 
 }
