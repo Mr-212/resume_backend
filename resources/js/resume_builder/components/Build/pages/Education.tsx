@@ -1,15 +1,10 @@
 import React, { useEffect, useReducer, useState } from "react";
-import Dashboard from "../../Dashboard/Index";
-import BuildLayout from "../BuildLayout";
-import { WithHOC } from "../WithHOC";
 import { useForm } from "react-hook-form";
-// import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { add,updateRecord, remove, getRecord, postEducation, getEducation, deleteEducation, setHide} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { profile_id } from "../reducers/profileReducer";
 import Draggable from 'react-draggable'
 
 // import { update } from "../reducers/skillReducer";
@@ -177,7 +172,7 @@ interface EducationProps<T> {
     const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: education});
     const dispatch = useAppDispatch();
     const[arrowClass, setArrorClass]  = useState("fa fa-arrow-up");
-    // const profile_id = useAppSelector(state => state.profile.profile.id);
+    const profile_id = useAppSelector(state => state.profile.profile_id);
 
     useEffect(() => {
         Object.entries(education).map(([k,v]) => {
@@ -196,7 +191,9 @@ interface EducationProps<T> {
 
     const addRecord = handleSubmit(data => {
         data['index'] = index;
-        console.log(data, education);
+        data['profile_id'] = profile_id;
+        // console.log(data, education);
+
         dispatch(postEducation(data));
     
     });

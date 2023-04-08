@@ -1,11 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
 import { AnyAction } from 'redux'
-import { profile_id } from "./profileReducer";
 import { resumeState } from "./profileReducer";
 import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATION_CREATE, URL_EDUCATION_DELETE, URL_EDUCATION_GET, URL_PROFILE_CREATE } from "../../../constants/ResumeUrls";
 import axios from "axios";
-import { update } from "./skillReducer";
 
 
 export const educationSlice = createSlice({
@@ -72,9 +69,8 @@ export const educationSlice = createSlice({
  export const postEducation = createAsyncThunk(
     'education/add',
     async (educationObject) => {
-        const {index} = educationObject;
-        educationObject['profile_id'] = profile_id;
-        console.log(index, educationObject)
+        const {index, profile_id} = educationObject;
+        // console.log(index, educationObject)
         const response = await axios.post(postEducationURL(profile_id), educationObject);
         // // return {data: response.data};
         return {index: index, data: response.data};

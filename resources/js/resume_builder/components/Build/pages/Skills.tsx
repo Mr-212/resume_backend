@@ -1,12 +1,6 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
-import Dashboard from "../../Dashboard/Index";
-import BuildLayout from "../BuildLayout";
-import { WithHOC } from "../WithHOC";
-import { useForm } from "react-hook-form";
-// import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { add, update,remove, getRecord, getProfileSkills, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/skillReducer";
-import { profile_id } from "../reducers/profileReducer";
 
 
 
@@ -29,6 +23,8 @@ let counter = 0;
 const Skills = <T extends SkillProps> () => {
     const skillList = useAppSelector(state => state.skills.skills);
     const skillArray = useAppSelector(state => state.skills.skillList);
+    const profile_id = useAppSelector(state => state.profile.profile_id);
+
     const dispatch = useAppDispatch();
     // const [skills, setSkills] = useState([]); 
 
@@ -47,14 +43,14 @@ const Skills = <T extends SkillProps> () => {
     }, []);
 
     useEffect(() => {
-         console.log(skillList)
+        //  console.log(skillList)
         // console.log(skillArray)
 
     },[skillList])
 
     const submitSkills = () => {
-
-        dispatch(postProfileSkills(skillList));
+        const skillObject = {profile_id : profile_id, skillList: skillList};
+        dispatch(postProfileSkills(skillObject));
 
     };
 
@@ -65,9 +61,7 @@ const Skills = <T extends SkillProps> () => {
 
     const selectSkill = (skill: string) => {
             const skillObject = { skill: skill, score: 0, profile_id: profile_id};
-            dispatch(add(skillObject));
-
-      
+            dispatch(add(skillObject));  
     }
 
    

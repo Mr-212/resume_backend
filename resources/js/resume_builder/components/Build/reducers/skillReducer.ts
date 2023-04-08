@@ -68,9 +68,10 @@ export const SkillReducer = createSlice({
  export const postProfileSkills = createAsyncThunk(
     'skill/add',
     async (profileSkills) => {
+        const {profile_id, skillList} = profileSkills;
         // profileSkills['profile_id'] = profile_id;
         // console.log(profileSkills, postSkillURL(profile_id));
-        const response = await axios.post(postSkillURL(profile_id),  profileSkills)
+        const response = await axios.post(postSkillURL(profile_id),  skillList)
         // console.log(response.data);
         return response.data;
     }
@@ -82,7 +83,7 @@ export const SkillReducer = createSlice({
 
         // console.log(profile_id)
         const url =getSKillIndexURL(profile_id);
-        console.log(url);
+        // console.log(url);
         const response = await axios.get(url);
         // console.log(response.data)
         return response.data;

@@ -131,6 +131,7 @@ interface EProps {
     const {hidden, setHideShow} = useHideShowComponent(true);
     const [startDate, setStartDate] = useState(new Date());
     const[hide, setHide] = useState(false);
+    const profile_id = useAppSelector(state => state.profile.profile_id);
     
     const { register, handleSubmit, formState: {errors}, setValue}  = useForm({defaultValues: experience});
     const dispatch = useAppDispatch();
@@ -154,6 +155,7 @@ interface EProps {
         const id = experience.id;
         data['index'] = index;
         data['id'] = id;
+        data['profile_id'] = profile_id;
         dispatch(postExperience(data));
     
     });

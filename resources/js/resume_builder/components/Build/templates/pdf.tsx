@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'flex-start',
         marginLeft: 20,
+        marginRight: 20,
+
         marginTop: '20',
         marginBottom: '20px',
         height: '150',
@@ -35,12 +37,19 @@ const styles = StyleSheet.create({
         paddingTop: '10px',
         paddingBottom: '5px',
         fontSize: '14px',
-        fontWeight: '900',
+        fontWeight: '600',
         color: 'white',
       },
+      field_text: {
+        fontSize: '17px',
+        fontWeight: '600',
+        color: 'white',
+        // marginLeft: 10
+      },
       profession_text: {
-        color: '#d1d5db',
-        fontSize: '11px',
+        color: '#63A3EC',
+        fontSize: '15px',
+        fontWeight:500
       },
       profile_img: {
         width: '60px',
@@ -67,58 +76,10 @@ const PdfTemplate = () => {
     return(
     <Document>
     <Page size="A4" style={styles.page}>
-      <View style={styles.section_left}>
-      <View style={styles.profile_container}>
-         {/* <Image style={styles.profile_img} src={profile.profileImageURL} /> */}
-
-      <View
-        style={{
-          justifyContent: 'center',
-        }}
-      >
-        <Text style={styles.name_text}>{profile.first_name}</Text>
-      </View>
-      <Text style={styles.profession_text}>{profile.job_title}</Text>
-      <View style={styles.profile_line} />
-      <View>
-         <Text style={styles.name_text}>Education</Text>
-         {education.map((education,k) => {
-            return( 
-                 <View>
-                    <Text style={styles.name_text}>{education.qualification}</Text>
-                    <Text style={styles.name_text}>{education.gpa_marks}</Text>
-                    <Text style={styles.name_text}>{education.institution}</Text>
-                 </View>
-            )
-         })
-        }
-
-      </View>
-      <View style={styles.profile_line} />
-
-      <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start'} }>
-      <Text style={styles.name_text}>Skills</Text>
-
-      {Object.entries(skills).map(([key, val]) => {
-            return (
-                <View style={ {display: 'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'} }>
-                    <Text style={ { color: 'white'}} >{val['skill']}</Text>
-                    <Text style={ { backgroundColor:'#41F674', height: '10%',textAlign:'left', width: val['score'], marginLeft: 20}}></Text>
-                    <Text style={ {color:'white', marginLeft: 10}}>{val['score']}</Text>
-
-                </View>
-            )
-      })
-    }
-      </View>
-      <View style={styles.profile_line} />
-
-    </View>
-       
-      </View>
-      <View style={styles.section_right}>
-        
-      </View>
+     
+      <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
+      <RightSide profile={profile}/>
+     
     </Page>
   </Document>
     )
@@ -126,3 +87,83 @@ const PdfTemplate = () => {
 
 
 export default PdfTemplate;
+
+
+const RightSide = ({profile})=>{
+
+    return(
+         
+      <View style={styles.section_right}>
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
+            <Text style={styles.name_text}>Profession Summary</Text>
+            
+            <Text style={styles.field_text}> {profile.job_description}</Text>
+        </View>
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
+            <Text style={styles.name_text}>Experience</Text> 
+            <Text style={styles.field_text}> {profile.job_description}</Text>
+        </View>
+        
+      </View>
+    )
+}
+const LefttSide = ({profile, education, skills})=>{
+
+    return(
+         
+        <View style={styles.section_left}>
+        <View style={styles.profile_container}>
+           {/* <Image style={styles.profile_img} src={profile.profileImageURL} /> */}
+  
+        <View
+          style={{
+            justifyContent: 'center',
+          }}
+        >
+          <Text style={styles.name_text}>{profile.first_name}</Text>
+        </View>
+        <Text style={styles.profession_text}>{profile.job_title}</Text>
+        <View style={styles.profile_line} />
+        
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
+           <Text style={styles.name_text}>Education</Text>
+           {education.map((education,k) => {
+              return( 
+                   <View style={{display: 'flex', flexDirection:'column', alignItems:'center', width: '100%', borderBottom:'white',borderBottomWidth:'10',borderBottomColor:'white'}}>
+                      <View style={{display: 'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center',width: '100%'}}>
+                          <Text style={styles.field_text}>{education.qualification}</Text>
+                          <Text style={styles.field_text}>{education.gpa_marks}</Text>
+                      </View>
+                      <View style={{display: 'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center', width: '100%'}}>
+                          <Text style={styles.field_text}>{education.institution}</Text>
+                          <Text style={styles.field_text}>{education.address}</Text>
+                      </View>
+                   </View>
+              )
+              
+           })
+          }
+  
+        </View>
+  
+        <View style={styles.profile_line} />
+  
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
+          <Text style={styles.name_text}>Skills</Text>
+  
+          {Object.entries(skills).map(([key, val]) => {
+                  return (
+                      <View style={ {display: 'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center', width: '100%'} }>
+                          <Text style={ { fontWeight:100, color: 'white'}} >{val['skill']}</Text>
+                          <Text style={ { backgroundColor:'#41F674', height: '10%',textAlign:'left', width: val['score'], marginLeft: 20}}></Text>
+                          <Text style={ {color:'white', marginLeft: 10}}>{val['score']}</Text>
+                      </View>
+                  )
+              })
+          }
+      </View>
+        <View style={styles.profile_line} /></View>
+         
+      </View>
+    )
+}
