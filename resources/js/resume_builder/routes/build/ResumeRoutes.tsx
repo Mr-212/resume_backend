@@ -23,7 +23,7 @@ import Header from "../../components/Build/partials/commonHeader";
 
 export const ResumeRoutes = (props) => {
   // console.log(props)
-  const profile_id = props.profileId;
+  // const profile_id = props.profileId;
       
 
      const routes = createBrowserRouter(

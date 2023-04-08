@@ -4,6 +4,8 @@ import { getResumes, deleteResume, updateResumeTitle } from "../reducers/resumeR
 import { useAppSelector } from "../../../store/hooks";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import PdfTemplate from "../../Build/templates/pdf";
+import { setProfileId } from "../../Build/reducers/profileReducer";
 
 
 
@@ -14,6 +16,7 @@ const ResumeIndex = () => {
 
     useEffect(() => {
         const res = dispatch(getResumes());
+        
         // res.then(res=> {
         //     console.log(res);
         // })
@@ -51,6 +54,7 @@ const ResumeComponent = ({resume} :any) => {
     const dispatch = useAppDispatch();
     useEffect(() => {
         setTitle(resume.title);
+        dispatch(setProfileId(resume.id));
     }, [])
 
 
@@ -58,12 +62,12 @@ const ResumeComponent = ({resume} :any) => {
             dispatch(deleteResume(id));
     }
     const updateTitle = (id: string) => {
-
         dispatch(updateResumeTitle({id, title}));
     }
 
     // console.log(resume);
     return(
+        <>
         <div className="flex flex-col items-start bg-white rounded-md shadow-md opacity-100 justify-between h-44 p-2 w-1/2 space-y-2">
            
             <div className="flex flex-row justify-between  w-full px-4 border-b bg-white opacity-90 h-16">
@@ -78,12 +82,19 @@ const ResumeComponent = ({resume} :any) => {
                 </div>
                
            </div>
+
            {/* <div className="flex flex-row items-end justify-end w-full py-2 p-2 px-4">
                     <button onClick={() => deleteRes(resume.id)} className="text-red-600"><i className="fa fa-minus"></i></button>
             </div> */}
          
          
         </div>
+        {/* <div className="w-full">
+        <PdfTemplate /> 
+        </div> */}
+                  
+     </>
+
     )
 
 }

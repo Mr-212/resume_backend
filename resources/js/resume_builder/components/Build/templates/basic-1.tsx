@@ -19,8 +19,7 @@ import { education } from "../reducers/educationReducer";
 
     return(
     
-        <div className="flex flex-row border border-gray-300 rounded-sm bg-white shadow-lg">
-           
+        <div className="flex flex-row border border-gray-300 rounded-sm bg-white shadow-lg w-full h-screen">
             <div className="w-2/3">
                 <main className="flex flex-col">
                  

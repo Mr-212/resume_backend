@@ -11,6 +11,7 @@ import { ViewPDF } from "../partials/ViewPDF";
 import { ResumeStore } from "../partials/useResumeStore";
 import html2canvas from "html2canvas";
 import { WithResumeProps } from "../partials/WithResumeProps";
+import PdfTemplate from "../templates/pdf";
 // import * as html2canvas from "html2canvas";
 // import * as _html2canvas from "html2canvas";
 // const html2canvas: any = _html2canvas;
@@ -36,7 +37,7 @@ import { WithResumeProps } from "../partials/WithResumeProps";
         'Basic':  <TemplateBasic />,
         'Dark': <TemplateBasic_1 />
       }
-      const[template, selectTemplate ] = useState(<TemplateBasic resumeProps={resumeStoreObject} />);
+      const[template, selectTemplate ] = useState(<TemplateBasic />);
 
     // const tmp = <TemplateBasic resumeProps={resumeStoreObject} />;
 
@@ -52,7 +53,7 @@ import { WithResumeProps } from "../partials/WithResumeProps";
 
     const handleDonwlodPDF = async() => {
         // const pdf = new jsPDF("portrait", "pt", "a4");        // const html = ReactDOMServer.renderToStaticMarkup(pdfTemplate.current);
-        const h = pdfTemplate.current;
+        // const h = pdfTemplate.current;
         // console.log(html)
         // setTemp(html);
         // console.log(temp);
@@ -93,8 +94,10 @@ import { WithResumeProps } from "../partials/WithResumeProps";
                     <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button>
                 </div>
             </div>
-            <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}>
-                    {template}
+            {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
+            <div className="w-full h-full">
+                <PdfTemplate></PdfTemplate>
+                    {/* {template} */}
             </div>
         </div>
     )

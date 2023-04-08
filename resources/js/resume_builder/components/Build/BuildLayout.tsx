@@ -54,7 +54,7 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
                     {/* <div className=" col-span-2">
                         <Headers></Headers>
                     </div> */}
-                <div className="col-span-1 h-full">
+                <div className="col-span-1 h-full sticky">
                         <BuilderNavigation></BuilderNavigation>
                 </div>
                

@@ -22,8 +22,8 @@ import { education } from "../reducers/educationReducer";
 
     return(
     
-        <div className="border border-gray-300 rounded-sm bg-white shadow-lg">
-        <header className="flex flex-row border-b-2 bg-gray-100 p-4">
+        <div className="border border-gray-300 rounded-sm bg-white shadow-lg h-screen">
+         <header className="flex flex-row border-b-2 bg-gray-100 p-4">
             <div className="flex flex-row space-y-4 w-4/6">
                 <div className="flex flex-row w-full justify-start">
                     <div className="text-start">
