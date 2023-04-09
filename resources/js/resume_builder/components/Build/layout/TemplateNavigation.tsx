@@ -12,6 +12,7 @@ import { ResumeStore } from "../partials/useResumeStore";
 import html2canvas from "html2canvas";
 import { WithResumeProps } from "../partials/WithResumeProps";
 import PdfTemplate from "../templates/pdf";
+import Preview, { DonwloadPdf } from "../partials/pdfPreview";
 // import * as html2canvas from "html2canvas";
 // import * as _html2canvas from "html2canvas";
 // const html2canvas: any = _html2canvas;
@@ -37,7 +38,6 @@ import PdfTemplate from "../templates/pdf";
         'Basic':  <TemplateBasic />,
         'Dark': <TemplateBasic_1 />
       }
-      const[template, selectTemplate ] = useState(<TemplateBasic />);
 
     // const tmp = <TemplateBasic resumeProps={resumeStoreObject} />;
 
@@ -45,11 +45,20 @@ import PdfTemplate from "../templates/pdf";
 
     useEffect(() => {
         // temp == pdfTemplate.current;
-        // console.log(resumeStoreObject.profile);
-        // selectTemplate(template);
+        console.log(resumeStoreObject,'here');
+        // selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
 
 
-    },[resumeStoreObject, template])
+    },[resumeStoreObject])
+    const[template, selectTemplate ] = useState(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+
+
+    // useEffect(() => {
+   
+    //     selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+
+
+    // })
 
     const handleDonwlodPDF = async() => {
         // const pdf = new jsPDF("portrait", "pt", "a4");        // const html = ReactDOMServer.renderToStaticMarkup(pdfTemplate.current);
@@ -67,9 +76,11 @@ import PdfTemplate from "../templates/pdf";
           });
     }
 
+    // selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+
 
    
-
+    // console.log(resumeStoreObject,'here');
 //  const html = ReactDOMServer.renderToStaticMarkup((<TemplateBasic resumeProps={resumeStoreObject} />);
 //  const html = renderToString(<TemplateBasic resumeProps={resumeStoreObject} />);
 
@@ -91,12 +102,16 @@ import PdfTemplate from "../templates/pdf";
                         })
                     }
                 <div className="">
-                    <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button>
+                    {/* <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button> */}
+                    <DonwloadPdf pdf={template}></DonwloadPdf>
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
             <div className="w-full h-screen">
-                <PdfTemplate></PdfTemplate>
+                {/* <Preview> */}
+                 
+                   <PdfTemplate props={resumeStoreObject} />
+                {/* </Preview> */}
                     {/* {template} */}
             </div>
         </div>

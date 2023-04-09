@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 import { useAppSelector } from "../../../store/hooks";
 
 const styles = StyleSheet.create({
@@ -93,24 +93,42 @@ const styles = StyleSheet.create({
 
     });
 
-const PdfTemplate = () => {
+const PdfTemplate = ({props}) => {
 
-    const profile = useAppSelector(state => state.profile.profile);
-    const skills = useAppSelector(state => state.skills.skills);
-    const education = useAppSelector(state => state.education.education);
-    const experience = useAppSelector(state => state.experience.experience);
+    // const profile = useAppSelector(state => state.profile.profile);
+    // const skills = useAppSelector(state => state.skills.skills);
+    // const education = useAppSelector(state => state.education.education);
+    // const experience = useAppSelector(state => state.experience.experience);
+
+    const profile = props.profile;
+    const skills = props.skills;
+    const education = props.education;
+    const experience = props.experience;
+    console.log(education);
 
 
     return(
-    <Document>
-    <Page size="A4" style={styles.page}>
-     
-      <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
-      <RightSide profile={profile} experience={experience} education={education}/>
-     
-    </Page>
-  </Document>
+        <Document>
+            {/* {profile.length > 0  &&  */}
+        <Page size="A4" style={styles.page}>
+            <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
+            <RightSide profile={profile} experience={experience} education={education}/>
+        
+        </Page>
+        {/* } */}
+    </Document>
     )
+}
+
+const DonwlodPdf = ({pdf}) => {
+return(
+    <PDFDownloadLink
+        document={pdf}
+        fileName='somename.pdf'
+    >
+    {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+    </PDFDownloadLink>
+)
 }
 
 
@@ -122,7 +140,7 @@ const RightSide = ({profile, education,experience})=>{
     return(
          
       <View style={styles.section_right}>
-        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%', borderBottom: '#084c41', borderBottomColor:'black', borderBottomWidth:'108.1C24' } }>
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%' } }>
             <Text style={styles.name_text}>Profession Summary</Text>
             <Text style={styles.field_text_sm}> {profile.job_description}</Text>
         </View>
