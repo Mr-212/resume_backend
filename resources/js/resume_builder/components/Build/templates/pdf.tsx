@@ -78,7 +78,7 @@ const PdfTemplate = () => {
     <Page size="A4" style={styles.page}>
      
       <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
-      <RightSide profile={profile}/>
+      <RightSide profile={profile} experience={experience}/>
      
     </Page>
   </Document>
@@ -89,7 +89,7 @@ const PdfTemplate = () => {
 export default PdfTemplate;
 
 
-const RightSide = ({profile})=>{
+const RightSide = ({profile, experience})=>{
 
     return(
          
@@ -101,7 +101,26 @@ const RightSide = ({profile})=>{
         </View>
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
             <Text style={styles.name_text}>Experience</Text> 
-            <Text style={styles.field_text}> {profile.job_description}</Text>
+            {experience.map((experience, k ) => {
+                return(
+                    <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
+                        <View style={ {display: 'flex', flexDirection:'row', justifyContent:'space-between',width: '100%'} }>
+                            <Text style={styles.field_text}> {experience.job_title}</Text>
+                            <Text style={styles.field_text}> {experience.start_date+ ' - ' + experience.end_date}</Text>
+                        </View>
+                        <View style={ {display: 'flex', flexDirection:'row', justifyContent:'space-between',width: '100%'} }>
+                            <Text style={styles.field_text}> {experience.company}</Text>
+                            <Text style={styles.field_text}> {experience.city}</Text>
+                        </View>
+                        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between',width: '100%'} }>
+                            <Text style={styles.field_text}> Dscription</Text>
+                            <Text style={styles.field_text}> {experience.description}</Text>
+                        </View>
+                    </View>
+                 )
+
+                 })
+             }
         </View>
         
       </View>
