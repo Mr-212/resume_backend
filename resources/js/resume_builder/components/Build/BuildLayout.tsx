@@ -45,20 +45,20 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
             dispatch(getProfileSkills(profile_id));
             dispatch(getExperience(profile_id));
         }
-    });
+    },[]);
 
     return(
 
-            <div className="grid grid-cols-2 space-x-4">
+            <div className="grid grid-cols-2 h-screen max-h-screen space-x-4">
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
                     {/* <div className=" col-span-2">
                         <Headers></Headers>
                     </div> */}
-                <div className="col-span-1 h-full sticky">
+                <div className="col-span-1">
                         <BuilderNavigation></BuilderNavigation>
                 </div>
                
-                <div className="col-span-1 h-full">
+                <div className="col-span-1">
                         <TemplateNavigation></TemplateNavigation>
                    
                 </div>

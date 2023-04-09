@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
-import { AnyAction } from 'redux'
-import { profile_id } from "./profileReducer";
-import { resumeState } from "./profileReducer";
 import {  getExperienceIndexURL, postExperienceURL, URL_EXPERIENCE_CREATE, URL_EXPERIENCE_DELETE, URL_EXPERIENCE_GET } from "../../../constants/ResumeUrls";
 import axios from "axios";
-import { update } from "./skillReducer";
 
 
 export const experienceSlice = createSlice({
@@ -44,8 +39,10 @@ export const experienceSlice = createSlice({
         });
 
         builder.addCase(getExperience.fulfilled, (state, action)=>{
-            console.log(action.payload);
-            state.experience.push(...action.payload?.experiences);
+            // console.log(action.payload);
+            // state.experience.push(...action.payload?.experiences);
+            state.experience = action.payload?.experiences;
+
         });
 
         builder.addCase(deleteExperience.fulfilled, (state, action)=>{
@@ -67,11 +64,9 @@ export const experienceSlice = createSlice({
  export const postExperience = createAsyncThunk(
     'experience/add',
     async (experience) => {
-        const {index} = experience;
-        experience['profile_id'] = profile_id;
-        console.log(index, experience)
+        const {index, profile_id} = experience;
+        // console.log(index, experience)
         const response = await axios.post(postExperienceURL(profile_id), experience);
-        // // return {data: response.data};
         return {index: index, experience: response.data?.experience};
     }
  );

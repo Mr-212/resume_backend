@@ -3,6 +3,7 @@ import { AnyAction } from 'redux'
 import { resumeState } from "./profileReducer";
 import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATION_CREATE, URL_EDUCATION_DELETE, URL_EDUCATION_GET, URL_PROFILE_CREATE } from "../../../constants/ResumeUrls";
 import axios from "axios";
+import { update } from "./skillReducer";
 
 
 export const educationSlice = createSlice({
@@ -44,7 +45,8 @@ export const educationSlice = createSlice({
         builder.addCase(getEducation.fulfilled, (state, action)=>{
             //[...state, ...action.payload];
             // console.log(action.payload)
-            state.education.push(...action.payload);
+            // state.education.push(...action.payload);
+            state.education = action.payload;
             // return action.payload;
         });
 

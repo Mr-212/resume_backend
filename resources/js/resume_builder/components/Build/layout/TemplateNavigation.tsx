@@ -75,12 +75,12 @@ import PdfTemplate from "../templates/pdf";
 
     const url = getUrlPath();
     // const last_index = Templates.length;
-    let line = "bg-black h-1 w-full";
+    let line = "bg-black h-full w-full";
     const li_class = "text-black font-bold hover:text-indigo-800 hover:text-xl transition-all ease-in-out delay-150 duration-300 ";
     const active = "active opacity-100 text-green-800 font-bold text-lg transition ease-in-out duration-300";
 
     return(
-        <div className="h-full bg-slate-600 pb-8">
+        <div className="h-full bg-gray-400">
               <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg opacity-100 text-gray-900 font-bold p-1">
                     { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
@@ -95,7 +95,7 @@ import PdfTemplate from "../templates/pdf";
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
-            <div className="w-full h-full">
+            <div className="w-full h-screen">
                 <PdfTemplate></PdfTemplate>
                     {/* {template} */}
             </div>

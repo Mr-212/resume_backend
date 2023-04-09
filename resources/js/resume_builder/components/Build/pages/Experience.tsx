@@ -156,6 +156,7 @@ interface EProps {
         data['index'] = index;
         data['id'] = id;
         data['profile_id'] = profile_id;
+        // console.log(data);
         dispatch(postExperience(data));
     
     });

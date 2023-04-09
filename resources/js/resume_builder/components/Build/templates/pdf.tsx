@@ -36,13 +36,20 @@ const styles = StyleSheet.create({
       name_text: {
         paddingTop: '10px',
         paddingBottom: '5px',
-        fontSize: '14px',
+        fontSize: '18px',
         fontWeight: '600',
-        color: 'white',
+        color: '#E4E4E4',
       },
       field_text: {
-        fontSize: '17px',
-        fontWeight: '600',
+        fontSize: '16px',
+        fontWeight: '500',
+        color: 'white',
+        // marginLeft: 10
+      },
+
+      field_text_sm: {
+        fontSize: '14px',
+        fontWeight: '500',
         color: 'white',
         // marginLeft: 10
       },
@@ -97,7 +104,7 @@ const RightSide = ({profile, experience})=>{
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
             <Text style={styles.name_text}>Profession Summary</Text>
             
-            <Text style={styles.field_text}> {profile.job_description}</Text>
+            <Text style={styles.field_text_sm}> {profile.job_description}</Text>
         </View>
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
             <Text style={styles.name_text}>Experience</Text> 
@@ -113,8 +120,8 @@ const RightSide = ({profile, experience})=>{
                             <Text style={styles.field_text}> {experience.city}</Text>
                         </View>
                         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between',width: '100%'} }>
-                            <Text style={styles.field_text}> Dscription</Text>
-                            <Text style={styles.field_text}> {experience.description}</Text>
+                            {/* <Text style={styles.field_text}> Description</Text> */}
+                            <Text style={styles.field_text_sm}> {experience.description}</Text>
                         </View>
                     </View>
                  )

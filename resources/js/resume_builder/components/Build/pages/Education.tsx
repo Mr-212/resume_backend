@@ -101,14 +101,12 @@ const Education = <T extends EducationProps<T>> () => {
                 { educationList.length  > 0 && educationList.map( (val,key) => {
 
                     counter++;
-                    console.log(counter);
+                    // console.log(counter);
                     // return (<AddEducation setData={setData} id={null}></AddEducation>)
                     return (
                         <Draggable axis="Y">
-                            <div key={counter}>
-                            
-                                    <AddEducation items={val}  index={key}></AddEducation>
-                                
+                            <div key={counter}>             
+                                    <AddEducation items={val}  index={key}></AddEducation>                  
                             </div>
                         </Draggable>
                         )
@@ -162,7 +160,6 @@ interface EducationProps<T> {
  function AddEducation( {index, items}: props ) {
 
     const {hidden, setHideShow} = useHideShowComponent(true);
-
     const [startDate, setStartDate] = useState(new Date());
 
     // const hide = useAppSelector(state => state.education.hide);

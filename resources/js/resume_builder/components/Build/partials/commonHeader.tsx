@@ -10,7 +10,7 @@ const Header = () => {
 
 
     return(
-        <div className="grid grid-cols-1 w-full">
+        <>
             <nav className="flex flex-row w-full justify-start bg-slate-400 align-items-center opacity-70 text-white align-middle h-12">
                 {/* <button className="text-left text-2xl px-10"><i className="fa fa-plus"></i></button> */}
                 {profile_id && 
@@ -25,7 +25,7 @@ const Header = () => {
                  <Outlet></Outlet>
             </div>
            
-        </div>
+        </>
     )
 }
 
