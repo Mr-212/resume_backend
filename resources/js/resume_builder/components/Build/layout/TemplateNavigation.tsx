@@ -109,8 +109,18 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
             <div className="w-full h-screen">
                 {/* <Preview> */}
+
+                <PDFViewer
+                showToolbar={false}
+                style={{
+                    width: '100%',
+                    height: '95%',
+                }}
+                >
+                                       <PdfTemplate props={resumeStoreObject} />
+
+                </PDFViewer>
                  
-                   <PdfTemplate props={resumeStoreObject} />
                 {/* </Preview> */}
                     {/* {template} */}
             </div>

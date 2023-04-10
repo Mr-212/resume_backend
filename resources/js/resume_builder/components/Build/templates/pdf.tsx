@@ -9,10 +9,11 @@ const styles = StyleSheet.create({
         height: '100%'
       },
       section_right: {
-        margin: 10,
+        // margin: 10,
         padding: 10,
         paddingTop: 20,
         width: '65%',
+        backgroundColor: '#767676'
       },
       section_left: {
         width: '35%',
@@ -20,14 +21,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#084c41',
       },
       profile_container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: '20',
-        marginBottom: '20px',
-        height: '150',
+        // display: 'flex',
+        // flexDirection: 'column',
+        // alignItems: 'flex-start',
+        // // justifyContent:'space-between',
+        // marginLeft: 20,
+        // marginRight: 20,
+        // marginTop: '20',
+        // marginBottom: '20',
+        padding:20,
+        // height: '100%',
+        // // width:'100%',
         fontFamily: 'Helvetica-Bold',
       },
       name_text: {
@@ -39,29 +43,31 @@ const styles = StyleSheet.create({
       },
 
       contact_family: {
-        fontSize: '16px',
-        fontWeight: '600',
+        fontSize: '14px',
+        fontWeight: '500',
         color: '#E4E4E4',
         fontStyle: 'italic'
       },
 
       field_text: {
-        fontSize: '16px',
-        fontWeight: '600',
+        paddingTop: '5px',
+        paddingBottom: '5px',
+        fontSize: '15px',
+        fontWeight: '500',
         color: 'white',
         // marginLeft: 10
       },
 
       field_text_sm: {
-        fontSize: '14px',
-        fontWeight: '600',
+        fontSize: '12px',
+        fontWeight:'500',
         color: 'white',
         // marginLeft: 10
       },
       profession_text: {
         color: '#63A3EC',
         fontSize: '15px',
-        fontWeight:500
+        fontWeight: 500
       },
       profile_img: {
         width: '60px',
@@ -104,7 +110,7 @@ const PdfTemplate = ({props}) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
-    console.log(education);
+    // console.log(profile);
 
 
     return(
@@ -112,7 +118,7 @@ const PdfTemplate = ({props}) => {
             {/* {profile.length > 0  &&  */}
         <Page size="A4" style={styles.page}>
             <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
-            <RightSide profile={profile} experience={experience} education={education}/>
+            <RightSide profile={profile} experience={experience} education={education}></RightSide>
         
         </Page>
         {/* } */}
@@ -120,27 +126,18 @@ const PdfTemplate = ({props}) => {
     )
 }
 
-const DonwlodPdf = ({pdf}) => {
-return(
-    <PDFDownloadLink
-        document={pdf}
-        fileName='somename.pdf'
-    >
-    {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
-    </PDFDownloadLink>
-)
-}
+
 
 
 export default PdfTemplate;
 
 
-const RightSide = ({profile, education,experience})=>{
-
+const RightSide = ({profile, education, experience})=>{
+    console.log(profile)
     return(
          
       <View style={styles.section_right}>
-        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%' } }>
+        <View style={styles.flex_col} >
             <Text style={styles.name_text}>Profession Summary</Text>
             <Text style={styles.field_text_sm}> {profile.job_description}</Text>
         </View>
@@ -149,7 +146,7 @@ const RightSide = ({profile, education,experience})=>{
            <Text style={styles.name_text}>Education</Text>
            {education.map((education,k) => {
               return( 
-                   <View style={{display: 'flex', flexDirection:'column', alignItems:'center', width: '100%', borderBottom:'white', borderBottomWidth:'10',borderBottomColor:'white'}}>
+                   <View style={styles.flex_col}>
                       <View style={styles.flex_row}>
                           <Text style={styles.field_text}>{education.qualification}</Text>
                           <Text style={styles.field_text}>{education.gpa_marks}</Text>
@@ -164,8 +161,8 @@ const RightSide = ({profile, education,experience})=>{
            })
           }
   
-        </View>
-        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start',width: '100%'} }>
+        </View> 
+        <View style={ styles.flex_col}>
             <Text style={styles.name_text}>Experience</Text> 
             {experience.map((experience, k ) => {
                 return(
@@ -206,13 +203,12 @@ const LefttSide = ({profile, education, skills})=>{
           }}
         >
           <Text style={styles.name_text}>{profile.first_name}</Text>
+          <Text style={styles.profession_text}>{profile.job_title}</Text>
+
         </View>
-            <Text style={styles.profession_text}>{profile.job_title}</Text>
-        <View style={styles.profile_line} />
         
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
           <Text style={styles.name_text}>Contact</Text>
-  
             <View style={ styles.flex_col }>
                 <Text style={ styles.field_text } >Email</Text>
                 <Text style={ styles.contact_family } >{profile.email}</Text>
@@ -221,9 +217,8 @@ const LefttSide = ({profile, education, skills})=>{
                 { profile.address && 
                     <Text style={ styles.contact_family}>{profile.address}</Text>
                 }
-            </View>
-              
-      </View>
+            </View>          
+        </View>
        
   
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
@@ -239,9 +234,9 @@ const LefttSide = ({profile, education, skills})=>{
                   )
               })
           }
-      </View>
-        <View style={styles.profile_line} /></View>
+        </View>
          
+      </View>
       </View>
     )
 }
