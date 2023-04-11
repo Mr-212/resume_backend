@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
       name_text: {
         paddingTop: '10px',
         paddingBottom: '5px',
-        fontSize: '16px',
-        fontWeight: '600',
+        fontSize: '14px',
+        fontWeight: '400',
         color: '#E4E4E4',
       },
 
       contact_family: {
         fontSize: '14px',
-        fontWeight: '400',
+        fontWeight: '300',
         color: '#63A3EC',
         fontStyle: 'italic'
       },
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
       field_text: {
         paddingTop: '5px',
         paddingBottom: '5px',
-        fontSize: '15px',
-        fontWeight: '400',
+        fontSize: '13px',
+        fontWeight: '300',
         color: '#E4E4E4',
         // marginLeft: 10
       },
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
       },
       profession_text: {
         color: '#63A3EC',
-        fontSize: '14px',
-        fontWeight: '500',
+        fontSize: '11px',
+        fontWeight: '300',
         paddingTop:'5px',
       },
       profile_img: {
@@ -109,14 +109,16 @@ const styles = StyleSheet.create({
         marginTop: '5px',
         
       },
+
       right_section_headings: {
         color: '#475569',
         paddingTop: '5px',
         paddingBottom: '5px',
-        fontSize: '15px',
-        fontWeight: '500',
+        fontSize: '14px',
+        fontWeight: '600',
 
       },
+
       border_right_section :{
         borderBottom: '1px', 
         borderBottomColor:'#B4AEAD'
@@ -128,9 +130,10 @@ const styles = StyleSheet.create({
         color: 'black',
         paddingTop: '4px',
       },
+      
       section_right_font_colors_sm :{
-        fontSize: '12px',
-        fontWeight:'300',
+        fontSize: '11px',
+        fontWeight:'100',
         color: 'black',
         paddingTop: '4px',
       }
@@ -148,8 +151,6 @@ const PdfTemplate = ({props}) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
-    // console.log(profile);
-
 
     return(
         <Document>
@@ -189,8 +190,8 @@ const RightSide = ({profile, education, experience})=>{
                           <Text style={{...styles.section_right_font_colors}}>{education.gpa_marks}</Text>
                       </View>
                       <View style={styles.flex_row}>
-                          <Text style={styles.section_right_font_colors}>{education.institution}</Text>
-                          <Text style={styles.section_right_font_colors}>{education.address}</Text>
+                          <Text style={styles.section_right_font_colors_sm}>{education.institution}</Text>
+                          <Text style={styles.section_right_font_colors_sm}>{education.address}</Text>
                       </View>
                    </View>
               )
@@ -205,15 +206,16 @@ const RightSide = ({profile, education, experience})=>{
                 return(
                     <View style={ styles.flex_col }>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.section_right_font_colors}>{experience.job_title}</Text>
-                            <Text style={styles.section_right_font_colors}>{experience.start_date+ ' - ' + experience.end_date}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.start_date+ ' - ' + experience.end_date}</Text>
+                            <Text style={styles.section_right_font_colors}>{experience.company}</Text>
+
                         </View>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.section_right_font_colors}>{experience.company}</Text>
-                            <Text style={styles.section_right_font_colors}>{experience.city}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.job_title}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.city}</Text>
                         </View>
                         <View style={ styles.flex_col}>
-                            <Text style={ {...styles.right_section_headings}}>Description</Text>
+                            <Text style={ {...styles.right_section_headings}}>Working Summary</Text>
                             <Text style={styles.section_right_font_colors_sm}>{experience.description}</Text>
                         </View>
                     </View>
@@ -234,11 +236,7 @@ const LefttSide = ({profile, education, skills})=>{
         <View style={styles.profile_container}>
            {/* <Image style={styles.profile_img} src={profile.profileImageURL} /> */}
   
-        <View
-          style={{
-            justifyContent: 'flex-start',
-          }}
-        >
+        <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
           <Text style={styles.name_text}>{profile.first_name}</Text>
           <Text style={styles.profession_text}>{profile.job_title}</Text>
 

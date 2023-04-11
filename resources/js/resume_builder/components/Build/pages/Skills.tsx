@@ -98,7 +98,6 @@ const Skills = <T extends SkillProps> () => {
             { Object.values(skillList).map((val,key ) => {
                 // console.log(key.skill);
                 counter++;
-
                 return <AddSkills skill={val} index={key}  key={counter} ></AddSkills>;
             })
              }
