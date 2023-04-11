@@ -23,15 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('/resume')->group(function(){
-    //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
-    Route::resource('profile',ProfileContoller::class);
-    Route::resource('profile.education',EducationController::class)->shallow();
-    // ->parameters([
-    //     'profile' => 'profile:uuid',
-    // ]);;
-    Route::resource('profile.skill',SkillController::class)->shallow();
-    Route::resource('profile.experience',ExperienceController::class)->shallow();
-});
+
 
 

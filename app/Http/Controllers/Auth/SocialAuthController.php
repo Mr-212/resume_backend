@@ -41,6 +41,7 @@ class SocialAuthController extends Controller
                 $user = $this->userModel->$method($user->user);
                 if($user?->id){
                     Auth::login($user, true);
+                    // dd(auth()->user());
                     return redirect('resume');
                 }
                 // dd($request->all(), $user);

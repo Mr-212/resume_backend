@@ -45,7 +45,7 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
 
     useEffect(() => {
         // temp == pdfTemplate.current;
-        console.log(resumeStoreObject,'here');
+        // console.log(resumeStoreObject,'here');
         // selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
 
 
@@ -53,12 +53,11 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
     const[template, selectTemplate ] = useState(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
 
 
-    // useEffect(() => {
-   
-    //     selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+    useEffect(() => {
+        // console.log(resumeStoreObject.profile)
+        selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
 
-
-    // })
+    },[])
 
     const handleDonwlodPDF = async() => {
         // const pdf = new jsPDF("portrait", "pt", "a4");        // const html = ReactDOMServer.renderToStaticMarkup(pdfTemplate.current);
@@ -84,7 +83,6 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
 //  const html = ReactDOMServer.renderToStaticMarkup((<TemplateBasic resumeProps={resumeStoreObject} />);
 //  const html = renderToString(<TemplateBasic resumeProps={resumeStoreObject} />);
 
-    const url = getUrlPath();
     // const last_index = Templates.length;
     let line = "bg-black h-full w-full";
     const li_class = "text-black font-bold hover:text-indigo-800 hover:text-xl transition-all ease-in-out delay-150 duration-300 ";
@@ -93,17 +91,17 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
     return(
         <div className="h-full bg-gray-400">
               <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg opacity-100 text-gray-900 font-bold p-1">
-                    { Object.entries(Templates).map( ([key, val]) => {
+                    {/* { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
                             return(
                               
                               <div className={"flex flex-row text-gray-100 justify-evenly w-full active"} key={key} onClick={()=> selectTemplate(val)}><a>{key}</a></div>
                             )                      
                         })
-                    }
+                    } */}
                 <div className="">
                     {/* <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button> */}
-                    <DonwloadPdf pdf={template}></DonwloadPdf>
+                    <DonwloadPdf pdf={ <PdfTemplate props={resumeStoreObject} />}></DonwloadPdf>
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
@@ -111,13 +109,13 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
                 {/* <Preview> */}
 
                 <PDFViewer
-                showToolbar={false}
-                style={{
-                    width: '100%',
-                    height: '95%',
-                }}
+                    showToolbar={false}
+                    style={{
+                        width: '100%',
+                        height: '95%',
+                    }}
                 >
-                                       <PdfTemplate props={resumeStoreObject} />
+                    <PdfTemplate props={resumeStoreObject} />
 
                 </PDFViewer>
                  

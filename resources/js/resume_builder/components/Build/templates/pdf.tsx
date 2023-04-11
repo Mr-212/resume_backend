@@ -1,35 +1,42 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 import { useAppSelector } from "../../../store/hooks";
+import { color } from "html2canvas/dist/types/css/types/color";
+import { display } from "html2canvas/dist/types/css/property-descriptors/display";
 
 const styles = StyleSheet.create({
     page: {
         display: 'flex',
         flexDirection: 'row',
-        height: '100%'
+        height: '100%',
+        width: '100%'
+        // '[&::-webkit-scrollbar]': 'hidden' ,
+        // overflow: 'hidden'
       },
       section_right: {
         // margin: 10,
-        padding: 10,
+        padding: 15,
         paddingTop: 20,
         width: '65%',
-        backgroundColor: '#767676'
+        backgroundColor: '#F1F3F7',
+        fontFamily: 'Helvetica-Bold',
       },
       section_left: {
         width: '35%',
         height: '100%',
-        backgroundColor: '#084c41',
+        backgroundColor: 'black',
       },
       profile_container: {
-        // display: 'flex',
-        // flexDirection: 'column',
-        // alignItems: 'flex-start',
-        // // justifyContent:'space-between',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent:'flex-start',
         // marginLeft: 20,
         // marginRight: 20,
         // marginTop: '20',
         // marginBottom: '20',
         padding:20,
+        // margin: 20,
         // height: '100%',
         // // width:'100%',
         fontFamily: 'Helvetica-Bold',
@@ -37,15 +44,15 @@ const styles = StyleSheet.create({
       name_text: {
         paddingTop: '10px',
         paddingBottom: '5px',
-        fontSize: '18px',
+        fontSize: '16px',
         fontWeight: '600',
         color: '#E4E4E4',
       },
 
       contact_family: {
         fontSize: '14px',
-        fontWeight: '500',
-        color: '#E4E4E4',
+        fontWeight: '400',
+        color: '#63A3EC',
         fontStyle: 'italic'
       },
 
@@ -53,21 +60,23 @@ const styles = StyleSheet.create({
         paddingTop: '5px',
         paddingBottom: '5px',
         fontSize: '15px',
-        fontWeight: '500',
-        color: 'white',
+        fontWeight: '400',
+        color: '#E4E4E4',
         // marginLeft: 10
       },
 
       field_text_sm: {
         fontSize: '12px',
         fontWeight:'500',
-        color: 'white',
+        color: '#63A3EC',
+        paddingTop: '4px',
         // marginLeft: 10
       },
       profession_text: {
         color: '#63A3EC',
-        fontSize: '15px',
-        fontWeight: 500
+        fontSize: '14px',
+        fontWeight: '500',
+        paddingTop:'5px',
       },
       profile_img: {
         width: '60px',
@@ -88,13 +97,42 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         width: '100%',
         alignItems:'center',
+        marginTop: '5px',
+
       }, 
 
       flex_col: {
         display: 'flex', 
         flexDirection:'column', 
         justifyContent:'flex-start',
-        width: '100%'
+        width: '100%',
+        marginTop: '5px',
+        
+      },
+      right_section_headings: {
+        color: '#475569',
+        paddingTop: '5px',
+        paddingBottom: '5px',
+        fontSize: '15px',
+        fontWeight: '500',
+
+      },
+      border_right_section :{
+        borderBottom: '1px', 
+        borderBottomColor:'#B4AEAD'
+      },
+
+      section_right_font_colors :{
+        fontSize: '13px',
+        fontWeight:'500',
+        color: 'black',
+        paddingTop: '4px',
+      },
+      section_right_font_colors_sm :{
+        fontSize: '12px',
+        fontWeight:'300',
+        color: 'black',
+        paddingTop: '4px',
       }
 
     });
@@ -119,7 +157,6 @@ const PdfTemplate = ({props}) => {
         <Page size="A4" style={styles.page}>
             <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
             <RightSide profile={profile} experience={experience} education={education}></RightSide>
-        
         </Page>
         {/* } */}
     </Document>
@@ -133,27 +170,27 @@ export default PdfTemplate;
 
 
 const RightSide = ({profile, education, experience})=>{
-    console.log(profile)
+    // console.log(profile)
     return(
          
       <View style={styles.section_right}>
         <View style={styles.flex_col} >
-            <Text style={styles.name_text}>Profession Summary</Text>
-            <Text style={styles.field_text_sm}> {profile.job_description}</Text>
+            <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Profession Summary</Text>
+            <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View>
 
-        <View style={ styles.flex_col }>
-           <Text style={styles.name_text}>Education</Text>
-           {education.map((education,k) => {
+        <View style={styles.flex_col}>
+           <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Education</Text>
+           {education.map((education) => {
               return( 
                    <View style={styles.flex_col}>
                       <View style={styles.flex_row}>
-                          <Text style={styles.field_text}>{education.qualification}</Text>
-                          <Text style={styles.field_text}>{education.gpa_marks}</Text>
+                          <Text style={{...styles.section_right_font_colors}}>{education.qualification}</Text>
+                          <Text style={{...styles.section_right_font_colors}}>{education.gpa_marks}</Text>
                       </View>
                       <View style={styles.flex_row}>
-                          <Text style={styles.field_text}>{education.institution}</Text>
-                          <Text style={styles.field_text}>{education.address}</Text>
+                          <Text style={styles.section_right_font_colors}>{education.institution}</Text>
+                          <Text style={styles.section_right_font_colors}>{education.address}</Text>
                       </View>
                    </View>
               )
@@ -163,21 +200,21 @@ const RightSide = ({profile, education, experience})=>{
   
         </View> 
         <View style={ styles.flex_col}>
-            <Text style={styles.name_text}>Experience</Text> 
-            {experience.map((experience, k ) => {
+            <Text style={{...styles.right_section_headings, ...styles.border_right_section}}>Experience</Text> 
+            {experience.map((experience: any) => {
                 return(
                     <View style={ styles.flex_col }>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.field_text}> {experience.job_title}</Text>
-                            <Text style={styles.field_text}> {experience.start_date+ ' - ' + experience.end_date}</Text>
+                            <Text style={styles.section_right_font_colors}>{experience.job_title}</Text>
+                            <Text style={styles.section_right_font_colors}>{experience.start_date+ ' - ' + experience.end_date}</Text>
                         </View>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.field_text}> {experience.company}</Text>
-                            <Text style={styles.field_text}> {experience.city}</Text>
+                            <Text style={styles.section_right_font_colors}>{experience.company}</Text>
+                            <Text style={styles.section_right_font_colors}>{experience.city}</Text>
                         </View>
                         <View style={ styles.flex_col}>
-                            <Text style={ {...styles.name_text, fontSize: 17}}> Description</Text>
-                            <Text style={styles.field_text_sm}> {experience.description}</Text>
+                            <Text style={ {...styles.right_section_headings}}>Description</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.description}</Text>
                         </View>
                     </View>
                  )
@@ -199,7 +236,7 @@ const LefttSide = ({profile, education, skills})=>{
   
         <View
           style={{
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
           }}
         >
           <Text style={styles.name_text}>{profile.first_name}</Text>
@@ -208,7 +245,7 @@ const LefttSide = ({profile, education, skills})=>{
         </View>
         
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
-          <Text style={styles.name_text}>Contact</Text>
+          <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white'}}>Contact</Text>
             <View style={ styles.flex_col }>
                 <Text style={ styles.field_text } >Email</Text>
                 <Text style={ styles.contact_family } >{profile.email}</Text>
@@ -222,14 +259,21 @@ const LefttSide = ({profile, education, skills})=>{
        
   
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
-          <Text style={styles.name_text}>Skills</Text>
+          <Text style={{...styles.name_text,borderBottom: '1px', borderBottomColor:'white'}}>Skills</Text>
   
           {Object.entries(skills).map(([key, val]) => {
                   return (
-                      <View style={ styles.flex_row }>
-                          <Text style={ styles.field_text } >{val['skill']}</Text>
-                          <Text style={ { backgroundColor:'#41F674', height: '10%', textAlign:'left', width: val['score'], marginLeft: 20}}></Text>
-                          <Text style={ { color:'white', marginLeft: 10 }}>{val['score']}</Text>
+                      <View style={ styles.col}>
+                          <Text style={ styles.profession_text }>{val['skill']}</Text>
+                          <View style={{ flexDirection:'row', width: '100%', justifyContent:'space-between', alignContent:'center'}}>
+                             <View style={ {display:'flex', justifyContent:'flex-start',  alignItems:'center', flexDirection:'row', width: '100%' }}>
+                                <Text style={ { backgroundColor:'#41F674', height: '20%', width:  val['score']}}></Text>
+                                <Text style={ { backgroundColor:'white', height: '20%', width: 100 - val['score']}}></Text>
+
+
+                             </View>
+                             <Text style={ { color:'white', marginLeft: 5, 'fontSize':'14px' }}>{val['score']}</Text>
+                          </View>
                       </View>
                   )
               })
