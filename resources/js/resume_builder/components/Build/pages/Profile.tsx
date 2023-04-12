@@ -9,6 +9,7 @@ import BuildLayout from "../BuildLayout";
 import { getEducation } from "../reducers/educationReducer";
 import { add, getProfile, postProfile, profile } from "../reducers/profileReducer";
 import { WithHOC } from "../WithHOC";
+import ProfielImage from "./ProfileImage";
 
 // export interface ProfileProps {
 
@@ -204,16 +205,17 @@ function Profile<T> ( { id }: CombineProps<T>){
                         <button type="button" className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>
              
-                <div className="flex flex-row px-10 items-star w-full">
-                    {/* <div className="text-center w-1/4 pt-6">
-                        <div className="bg-cover bg-no-repeat rounded-md h-32 w-32 border">
+                <div className="flex flex-row items-star w-full space-x-2">
+                    <div className="text-center w-1/4 pt-6">
+                        <div className="bg-cover bg-no-repeat rounded-md h-full w-full border">
 
+                            <ProfielImage></ProfielImage>
                         </div>
                         
 
-                    </div> */}
+                    </div>
 
-                    <div className="w-full gap-2">
+                    <div className="w-3/4 gap-2">
                         <div className="flex flex-row gap-3">
 
                         
@@ -281,7 +283,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                    
                 </div>
-                <div className="flex flex-row p-10">
+                <div className="flex flex-row w-full">
 
                 <div className="flex flex-col justify-start items-start">
                     <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
@@ -313,7 +315,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                 </div> 
 
-                <div className="flex flex-row px-10 items-star w-full">
+                <div className="flex flex-row  items-star w-full">
 
                     <div className="flex flex-col justify-start items-start w-full">
                                 <label className="font-bold text-md text-gray-400">Description</label>
@@ -326,7 +328,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                 </div>
 
-                <div className="flex flex-row px-10 items-star w-full">
+                <div className="flex flex-row items-star w-full">
                    
                         <div className="flex flex-col items-start justify-start w-full">
                             <label className="block font-bold text-sm text-gray-400">Address</label>
