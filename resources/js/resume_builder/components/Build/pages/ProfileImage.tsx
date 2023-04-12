@@ -1,18 +1,30 @@
 import React from 'react';
 import ImageUploading from 'react-images-uploading';
+import { useAppDispatch } from '../../../store/store';
+import { postProfileImage } from '../reducers/profileReducer';
+import { useAppSelector } from '../../../store/hooks';
 
 export default  function ProfielImage() {
+  const dispatch = useAppDispatch();  
+  const profile_id = useAppSelector(state => state.profile.profile_id);
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
+    postImage(imageList);
   };
 
+  const postImage = (imagelist) => {
+    // console.log(images, imagelist);
+    const data = {profile_id: profile_id, imageList: imagelist};
+    dispatch(postProfileImage(data));
+    
+  }
+
   return (
-    <div className="App">
+    <div className="">
       <ImageUploading
         multiple={false}
         value={images}

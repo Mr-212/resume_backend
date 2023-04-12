@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
 import { useAppSelector } from "../../../store/hooks";
 import { color } from "html2canvas/dist/types/css/types/color";
 import { display } from "html2canvas/dist/types/css/property-descriptors/display";
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
         paddingTop:'5px',
       },
       profile_img: {
-        width: '60px',
-        height: '60px',
+        width: '80px',
+        height: '80px',
         borderRadius: '90',
       },
       profile_line: {
@@ -151,6 +151,7 @@ const PdfTemplate = ({props}) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
+    console.log(profile.image_url);
 
     return(
         <Document>
@@ -234,9 +235,9 @@ const LefttSide = ({profile, education, skills})=>{
          
         <View style={styles.section_left}>
         <View style={styles.profile_container}>
-           {/* <Image style={styles.profile_img} src={profile.profileImageURL} /> */}
   
         <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
+          <Image style={styles.profile_img} src={profile.image_url} />
           <Text style={styles.name_text}>{profile.first_name}</Text>
           <Text style={styles.profession_text}>{profile.job_title}</Text>
 

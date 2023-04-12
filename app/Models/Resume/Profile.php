@@ -14,8 +14,10 @@ class Profile extends Model
     use HasFactory, UUID;
     protected $table = 'resume_profile';
     
-    protected $fillable = [ 'title','user_id','job_title', 'job_description', 'first_name','last_name', 'email', 'phone', 'phone1', 'dob', 'github_url','linkedin_url','twitter_url',
-        'facebook_url', 'google_url','address','address1'
+    protected $fillable = [ 'title','user_id','job_title', 'job_description', 'name','first_name','last_name', 'email', 'phone', 'phone1', 'dob',
+    'image_url', 'github_url','linkedin_url','twitter_url',
+    'facebook_url', 'google_url','address','address1',
+         
     ];
 
 

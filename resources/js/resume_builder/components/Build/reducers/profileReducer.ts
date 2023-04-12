@@ -49,6 +49,10 @@ export const profileSlice = createSlice({
         builder.addCase(getProfile.fulfilled, (state, action)=>{
             state.profile = {...state.profile, ...action.payload};
             console.log(action.payload)
+        });
+        builder.addCase(postProfileImage.fulfilled, (state, action)=>{
+            state.profile = {...state.profile, ...action.payload};
+            console.log(action.payload)
         })
 
     }
@@ -81,6 +85,34 @@ export const profileSlice = createSlice({
         const response = await axios.get(URL_PROFILE_GET + id );
         // console.log(response.data.prifile)
         return response.data.profile;
+    }
+ )
+
+ export const postProfileImage = createAsyncThunk(
+    'profile/image',
+    async (data) => {
+
+        try{
+            const config = {
+                headers: {
+                "Content-Type": "multipart/form-data",
+                },
+            };
+            
+            // const {profile_id}
+            // console.log(data.imageList);
+            const formData = new FormData();
+            formData.append('file', JSON.stringify(data.imageList));
+            // formData.append('file', (data.imageList[0]));
+            console.log(formData.get('file'));
+
+            const url = '/resume/'+data.profile_id +'/image'
+            const response = await axios.post(url, formData, config);
+            return response.data.profile;
+        }
+        catch(err){
+            console.log(err);
+        }
     }
  )
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Resume\ResumeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Resume\ProfileContoller;
@@ -56,9 +57,10 @@ Route::get('/register', function () {
 
 });
 
-Route::resource('resume', ResumeController::class);
-Route::prefix('resume')->group(function(){
+Route::resource('resume.image', ImageController::class)->middleware('auth');;
+Route::resource('resume', ResumeController::class)->middleware('auth');;
 
+Route::prefix('resume')->group(function(){
     //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
     Route::resource('profile',ProfileContoller::class);
     Route::resource('profile.education',EducationController::class)->shallow();
@@ -67,7 +69,7 @@ Route::prefix('resume')->group(function(){
     // ]);;
     Route::resource('profile.skill',SkillController::class)->shallow();
     Route::resource('profile.experience',ExperienceController::class)->shallow();
-});
+})->middleware('auth');
 
 
 

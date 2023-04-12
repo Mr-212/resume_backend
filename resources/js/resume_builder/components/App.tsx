@@ -9,10 +9,10 @@ import Dashboard from "./Dashboard/Index";
 
 const App = (props) => {
 
-    const dispatch = useAppDispatch();
-    useEffect(()=> {
-        dispatch(setProfileId(props.profileId));
-    },[])
+    // const dispatch = useAppDispatch();
+    // useEffect(()=> {
+    //     dispatch(setProfileId(props.profileId));
+    // },[])
    
 
     // console.log(props);

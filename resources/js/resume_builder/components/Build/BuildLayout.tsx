@@ -7,7 +7,7 @@ import Education from "./pages/Education";
 import ResumeMenuBar from "./layout/Navigation";
 import Profile from "./pages/Profile";
 import TemplateBasic from "./templates/basic";
-import { getProfile } from "./reducers/profileReducer";
+import { getProfile, setProfileId } from "./reducers/profileReducer";
 import { getEducation } from "./reducers/educationReducer";
 import { useAppDispatch } from "../../store/store";
 import { getProfileSkills } from "./reducers/skillReducer";
@@ -33,13 +33,15 @@ interface Props {
 
 const BuildLayout = ( { children, saveFunction }: any )  => {
     const dispatch = useAppDispatch();
-    let _profile_id =  useAppSelector(state => state.profile.profile_id);
-    let { profile_id } =  useParams();
+    // let profile_id =  useAppSelector(state => state.profile.profile_id);
+    const { profile_id } =  useParams();
     
 
     useEffect(() => {
-        profile_id = profile_id ? profile_id : _profile_id;
+        // console.log(profile_id);
+        // profile_id = profile_id ? profile_id : _profile_id;
         if(profile_id){
+            dispatch(setProfileId(profile_id));
             dispatch(getProfile(profile_id));
             dispatch(getEducation(profile_id));
             dispatch(getProfileSkills(profile_id));

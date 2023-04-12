@@ -33,7 +33,8 @@ COPY vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/
 RUN chmod +x /usr/local/bin/wkhtmltoimage-amd64 
 RUN chmod +x /usr/local/bin/wkhtmltopdf-amd64
 RUN php artisan vendor:publish --provider="Barryvdh\Snappy\ServiceProvider"
-
+RUN chmod 777 -R storage
+RUN php artisan storage:link
 
 
 RUN a2enmod rewrite
