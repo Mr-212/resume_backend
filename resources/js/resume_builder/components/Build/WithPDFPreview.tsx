@@ -16,14 +16,13 @@ interface Props {
 
     
             const resumeStoreObject = ResumeStore();
-            //console.log(resumeStoreObject);
+            // console.log(resumeStoreObject);
             useEffect(() => {
 
             },[resumeStoreObject])
-            // console.log(props.pdf)
             return (
                 <div>
-                    {props.download &&
+                    {!props.pdf &&
                         <div>
                     <PDFDownloadLink
                         document={ <Component {...resumeStoreObject}></Component>}
@@ -33,6 +32,7 @@ interface Props {
                     </PDFDownloadLink>
                     </div>
                     }
+
                     {props.pdf &&
                     <div>
                         <PDFViewer
@@ -41,9 +41,9 @@ interface Props {
                                 width: '100%',
                                 height: '95%',
                             }}
-                        > 
+                        >  
                             <Component {...props} { ...resumeStoreObject}></Component>
-                        </PDFViewer>
+                         </PDFViewer>
                     </div>
                     }
 
@@ -54,18 +54,34 @@ interface Props {
 
 }
 
-// export const WithDonwloadPDF = ({pdf}) => {
+export const WithDonwloadPDF = ({pdf}) => {
     
-//     return(
+    return(
 
-//         <div>
-//             <PDFDownloadLink
-//                 document={pdf}
-//                 fileName='somename.pdf'
-//             >
-//             {({ loading }) => (loading ? 'Loading document...' :<button>Download</button>)}
-//             </PDFDownloadLink>
-//         </div>
-//     )
-// }
+        <div>
+            <PDFDownloadLink
+                document={pdf}
+                fileName='somename.pdf'
+            >
+            {({ loading }) => (loading ? 'Loading document...' :<button>Download</button>)}
+            </PDFDownloadLink>
+        </div>
+    )
+}
+export const WithPreview = (pdf) => {
+    
+    return(
+
+        <PDFViewer
+            showToolbar={false}
+            style={{
+                width: '100%',
+                height: '95%',
+            }}
+        >  
+           {pdf}
+        </PDFViewer>
+    )
+}
+
 

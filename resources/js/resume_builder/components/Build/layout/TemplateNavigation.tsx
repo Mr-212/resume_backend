@@ -13,7 +13,7 @@ import html2canvas from "html2canvas";
 import { WithResumeProps } from "../partials/WithResumeProps";
 import PdfTemplate from "../templates/pdf";
 // import Preview, { DonwloadPdf } from "../partials/pdfPreview";
-import { WithPDFPreview } from "../WithPDFPreview";
+import { WithPDFPreview, WithPreview } from "../WithPDFPreview";
 // import * as html2canvas from "html2canvas";
 // import * as _html2canvas from "html2canvas";
 // const html2canvas: any = _html2canvas;
@@ -51,7 +51,9 @@ import { WithPDFPreview } from "../WithPDFPreview";
 
 
     },[resumeStoreObject])
-    const[template, selectTemplate ] = useState(<PdfTemplate></PdfTemplate>);
+    // const[template, selectTemplate ] = useState(<PdfTemplate />);
+    const[template, selectTemplate ] = useState('PdfTemplate');
+
 
 
     useEffect(() => {
@@ -89,6 +91,10 @@ import { WithPDFPreview } from "../WithPDFPreview";
     const li_class = "text-black font-bold hover:text-indigo-800 hover:text-xl transition-all ease-in-out delay-150 duration-300 ";
     const active = "active opacity-100 text-green-800 font-bold text-lg transition ease-in-out duration-300";
 
+     function WithDownloadPdf(template: JSX.Element): React.ReactNode {
+         throw new Error("Function not implemented.");
+     }
+
     return(
         <div className="h-full bg-gray-400">
               <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg opacity-100 text-gray-900 font-bold p-1">
@@ -102,26 +108,15 @@ import { WithPDFPreview } from "../WithPDFPreview";
                     } */}
                 <div className="">
                     {/* <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button> */}
-                     <PdfTemplate download={1} />
+                    {/* { WithDownloadPdf(template)} */}
+                    {getComponent(template,false)}
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
             <div className="w-full h-screen">
-                {/* <Preview> */}
-
-                {/* <PDFViewer
-                    showToolbar={false}
-                    style={{
-                        width: '100%',
-                        height: '95%',
-                    }}
-                > */}
-                    <PdfTemplate pdf={1} />
-
-                {/* </PDFViewer> */}
-                 
-                {/* </Preview> */}
-                    {/* {template} */}
+                {/* <PdfTemplate pdf={1} /> */}
+                {getComponent(template,true)}
+                {/* {WithPreview(template)} */}
             </div>
         </div>
     )
@@ -130,4 +125,16 @@ import { WithPDFPreview } from "../WithPDFPreview";
 
 
 export default TemplateNavigation;
+
+
+const getComponent = (comp, pdf: boolean) => {
+
+    const components = {
+        'PdfTemplate': PdfTemplate,
+    };
+    const Component = components[comp];
+    return <Component pdf={pdf}></Component>;
+
+
+}
 
