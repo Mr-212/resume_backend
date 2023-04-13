@@ -12,7 +12,8 @@ import { ResumeStore } from "../partials/useResumeStore";
 import html2canvas from "html2canvas";
 import { WithResumeProps } from "../partials/WithResumeProps";
 import PdfTemplate from "../templates/pdf";
-import Preview, { DonwloadPdf } from "../partials/pdfPreview";
+// import Preview, { DonwloadPdf } from "../partials/pdfPreview";
+import { WithPDFPreview } from "../WithPDFPreview";
 // import * as html2canvas from "html2canvas";
 // import * as _html2canvas from "html2canvas";
 // const html2canvas: any = _html2canvas;
@@ -50,12 +51,12 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
 
 
     },[resumeStoreObject])
-    const[template, selectTemplate ] = useState(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+    const[template, selectTemplate ] = useState(<PdfTemplate></PdfTemplate>);
 
 
     useEffect(() => {
         // console.log(resumeStoreObject.profile)
-        selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
+        // selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);
 
     },[])
 
@@ -101,23 +102,23 @@ import Preview, { DonwloadPdf } from "../partials/pdfPreview";
                     } */}
                 <div className="">
                     {/* <button className="text-black text-lg rounded-full bg-white px-4 hover:bg-slate-400" onClick={handleDonwlodPDF}>Download</button> */}
-                    <DonwloadPdf pdf={ <PdfTemplate props={resumeStoreObject} />}></DonwloadPdf>
+                     <PdfTemplate download={1} />
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
             <div className="w-full h-screen">
                 {/* <Preview> */}
 
-                <PDFViewer
+                {/* <PDFViewer
                     showToolbar={false}
                     style={{
                         width: '100%',
                         height: '95%',
                     }}
-                >
-                    <PdfTemplate props={resumeStoreObject} />
+                > */}
+                    <PdfTemplate pdf={1} />
 
-                </PDFViewer>
+                {/* </PDFViewer> */}
                  
                 {/* </Preview> */}
                     {/* {template} */}

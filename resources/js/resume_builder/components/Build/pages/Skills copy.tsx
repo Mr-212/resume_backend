@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import Dashboard from "../../Dashboard/Index";
 import BuildLayout from "../BuildLayout";
-import { WithHOC } from "../WithHOC";
+import { WithHOC } from "../WithPDFPreview";
 import { useForm } from "react-hook-form";
 // import { educationReducer } from "../../reducers/build/educationReducer";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";

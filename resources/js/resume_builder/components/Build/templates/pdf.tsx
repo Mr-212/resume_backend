@@ -3,6 +3,8 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '
 import { useAppSelector } from "../../../store/hooks";
 import { color } from "html2canvas/dist/types/css/types/color";
 import { display } from "html2canvas/dist/types/css/property-descriptors/display";
+import { WithPDFPreview } from "../WithPDFPreview";
+import { ResumeStore } from "../partials/useResumeStore";
 
 const styles = StyleSheet.create({
     page: {
@@ -140,7 +142,8 @@ const styles = StyleSheet.create({
 
     });
 
-const PdfTemplate = ({props}) => {
+
+const PdfTemplate = (props) => {
 
     // const profile = useAppSelector(state => state.profile.profile);
     // const skills = useAppSelector(state => state.skills.skills);
@@ -151,7 +154,7 @@ const PdfTemplate = ({props}) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
-    console.log(profile.image_url);
+    console.log(props);
 
     return(
         <Document>
@@ -166,9 +169,12 @@ const PdfTemplate = ({props}) => {
 }
 
 
+// const resume = ResumeStore();
 
 
-export default PdfTemplate;
+export default WithPDFPreview(PdfTemplate);
+// export default (PdfTemplate);
+
 
 
 const RightSide = ({profile, education, experience})=>{

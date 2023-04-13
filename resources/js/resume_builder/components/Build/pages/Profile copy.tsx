@@ -8,7 +8,7 @@ import Dashboard from "../../Dashboard/Index";
 import BuildLayout from "../BuildLayout";
 import { getEducation } from "../reducers/educationReducer";
 import { add, getProfile, postProfile, profile } from "../reducers/profileReducer";
-import { WithHOC } from "../WithHOC";
+import { WithHOC } from "../WithPDFPreview";
 
 // export interface ProfileProps {
 

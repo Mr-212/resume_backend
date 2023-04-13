@@ -29,7 +29,7 @@ const Preview = ({ children }) => {
   export default Preview;
 
 
-  export const DonwloadPdf = ({pdf}) => {
+  export const WithDonwloadPDF = ({pdf}) => {
     
     return(
 
