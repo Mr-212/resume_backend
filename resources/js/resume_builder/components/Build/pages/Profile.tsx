@@ -283,7 +283,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                    
                 </div>
-                <div className="flex flex-row w-full">
+                <div className="flex flex-row w-full pt-10">
 
                 <div className="flex flex-col justify-start items-start">
                     <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
@@ -299,7 +299,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     
                     {/* <div className="inline-flex items-center justify-start w-full border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
-                        <input type="text" className=" h-8 border-b-2  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
+                        <input type="text" className="h-8 border-b-2 block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
                     {/* </div>  */}
                 </div>
 
@@ -309,13 +309,13 @@ function Profile<T> ( { id }: CombineProps<T>){
                     
                     {/* <div className="inline-flex items-center justify-start border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
-                        <input type="text" className=" h-8  block  border-b-2 text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
+                        <input type="text" className="h-8 block border-b-2 text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
                     {/* </div>  */}
                 </div>
 
                 </div> 
 
-                <div className="flex flex-row  items-star w-full">
+                <div className="flex flex-row  items-star w-full pt-10">
 
                     <div className="flex flex-col justify-start items-start w-full">
                                 <label className="font-bold text-md text-gray-400">Description</label>
@@ -328,7 +328,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                 </div>
 
-                <div className="flex flex-row items-star w-full">
+                <div className="flex flex-row items-star w-full pt-10">
                    
                         <div className="flex flex-col items-start justify-start w-full">
                             <label className="block font-bold text-sm text-gray-400">Address</label>
