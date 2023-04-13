@@ -28,7 +28,7 @@ interface Props {
                         document={ <Component {...resumeStoreObject}></Component>}
                         fileName='somename.pdf'
                     >
-                    {({ loading }) => (loading ? 'Loading document...' :<button>Download</button>)}
+                    {({ loading }) => (loading ? <div className="text-white text-center">Loading document...</div> :<button className="text-white">Download</button>)}
                     </PDFDownloadLink>
                     </div>
                     }
@@ -49,9 +49,7 @@ interface Props {
 
                
                 </div>
-            )
-
-
+        )
 }
 
 export const WithDonwloadPDF = ({pdf}) => {
