@@ -4,7 +4,7 @@ import { getResumes, deleteResume, updateResumeTitle } from "../reducers/resumeR
 import { useAppSelector } from "../../../store/hooks";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
-import PdfTemplate from "../../Build/templates/pdf";
+import PdfTemplate from "../../Build/templates/PdfTemplate";
 import { setProfileId } from "../../Build/reducers/profileReducer";
 
 

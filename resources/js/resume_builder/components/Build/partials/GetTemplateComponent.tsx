@@ -1,18 +1,19 @@
-import React, { Suspense } from "react";
-import PdfTemplate from "../templates/pdf";
+import React, { Suspense, lazy } from "react";
+import PdfTemplate from "../templates/PdfTemplate";
 
 
-export const getComponent = (comp, pdf: boolean) => {
+export const getComponent = (componentName, pdf: boolean) => {
 
     const components = {
         'PdfTemplate': PdfTemplate,
     };
     
-    const Component = components[comp];
+    // const DynamicComponent = components[componentName];
+    const DynamicComponent = lazy(() => import(`../templates/${componentName}`));
 
     return (
         <Suspense fallback={<div className="text-green-600">Loading...</div>}>
-            <Component pdf={pdf}></Component>
+            <DynamicComponent pdf={pdf}></DynamicComponent>
         </Suspense>
     )
 
