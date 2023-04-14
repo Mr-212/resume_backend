@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from "react";
-import PdfTemplate from "../templates/PdfTemplate";
+// import PdfTemplate from "../templates/PdfTemplate";
 
 
 export const getComponent = (componentName, pdf: boolean) => {
 
-    const components = {
-        'PdfTemplate': PdfTemplate,
-    };
+    // const components = {
+    //     'PdfTemplate': PdfTemplate,
+    // };
     
     // const DynamicComponent = components[componentName];
     const DynamicComponent = lazy(() => import(`../templates/${componentName}`));

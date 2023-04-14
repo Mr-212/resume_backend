@@ -213,7 +213,7 @@ const RightSide = ({profile, education, experience})=>{
                 return(
                     <View style={ styles.flex_col }>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.section_right_font_colors_sm}>{experience.start_date+ ' - ' + experience.end_date}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.start_date+ ' - ' + (experience.is_currently_working? 'Present' : experience.end_date)}</Text>
                             <Text style={styles.section_right_font_colors}>{experience.company}</Text>
 
                         </View>
