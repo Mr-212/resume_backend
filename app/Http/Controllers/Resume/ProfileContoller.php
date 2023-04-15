@@ -74,9 +74,10 @@ class ProfileContoller extends Controller
     {
         try{
             $profile = Profile::find($id);
+            // dd($profile);
             //  dd($profile,$id);
             // exit;
-            return response()->json(['STATUS_CODE'=>200,'profile'=>$profile, 'message' => 'Profile Retrived.']);
+            return response()->json(['STATUS_CODE'=>200,'profile'=> $profile ? $profile:[], 'message' => 'Profile Retrived.']);
 
 
         }catch(Exception $e){

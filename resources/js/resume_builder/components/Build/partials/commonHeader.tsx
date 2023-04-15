@@ -16,7 +16,9 @@ const Header = () => {
                 {profile_id && 
                     <Link to={'/resume'} className="text-left text-2xl px-10 text-gray-900"><i className="fa fa-arrow-left"></i></Link>
                 }
-                <Link to={'profile'} className="text-left text-2xl px-10 text-green-600"><i className="fa fa-plus"></i></Link>
+                 {!profile_id && 
+                    <Link to={'profile'} className="text-left text-2xl px-10 text-green-600"><i className="fa fa-plus"></i></Link>
+                 }
               
 
                 {/* <CreateResumeBtnModal></CreateResumeBtnModal> */}

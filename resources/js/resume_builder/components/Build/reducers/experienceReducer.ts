@@ -30,6 +30,10 @@ export const experienceSlice = createSlice({
 
         setHide: (state, action: PayloadAction<boolean>)=>{
             state.hide = action.payload;
+        },
+        
+        resetExperience:(state) => {
+            state.experience = [];
         }
     },
     extraReducers (builder){
@@ -57,7 +61,7 @@ export const experienceSlice = createSlice({
  });
 
  export const experience = state => state.experience;
- export const { add, updateRecord , remove, getRecord, setHide} = experienceSlice.actions;
+ export const { add, updateRecord , remove, getRecord, setHide, resetExperience} = experienceSlice.actions;
  export default experienceSlice.reducer; 
 
 

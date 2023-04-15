@@ -129,7 +129,7 @@ function Profile<T> ( { id }: CombineProps<T>){
     // let formValue = state.profile ? state.profile : {};
     const[formValues, setFormValues] = useState<CombineProps<T>>({});
 
-    const { register, handleSubmit, formState: {errors}, setValue} = useForm({defaultValues: formValue});
+    const { register, handleSubmit, formState: {errors}, setValue} = useForm({defaultValues: profile});
     // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
 
 
@@ -140,11 +140,13 @@ function Profile<T> ( { id }: CombineProps<T>){
         )
     }
 
+    // console.log(profile)
+
     useEffect(() => {
         // const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
         // dispatch(getProfile(profile_id));
         // dispatch(getEducation());
-    },[]);
+    });
 
     useEffect(() => {
         Object.entries(profile).map(([k,v]) => {

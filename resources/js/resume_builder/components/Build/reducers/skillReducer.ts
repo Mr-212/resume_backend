@@ -30,6 +30,10 @@ export const SkillReducer = createSlice({
         getRecord: (state, action: PayloadAction<number>) => {
    
         },
+
+        resetSkills: (state) => {
+            state.skills = [];
+        }
     },
 
     extraReducers(builder){
@@ -61,7 +65,7 @@ export const SkillReducer = createSlice({
 
  });
 
- export const { add, update, remove , getRecord, updateScore} = SkillReducer.actions;
+ export const { add, update, remove , getRecord, updateScore, resetSkills} = SkillReducer.actions;
  export default SkillReducer.reducer;
 
 

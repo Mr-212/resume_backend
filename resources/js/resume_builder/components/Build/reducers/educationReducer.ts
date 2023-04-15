@@ -33,6 +33,9 @@ export const educationSlice = createSlice({
 
         setHide: (state, action: PayloadAction<boolean>)=>{
             state.hide = action.payload;
+        },
+        resetEducation: (state)=>{
+            state.education = [];
         }
     },
     extraReducers (builder){
@@ -64,7 +67,7 @@ export const educationSlice = createSlice({
  });
 
  export const education = state => state.education;
- export const { add, updateRecord , remove, getRecord, setHide} = educationSlice.actions;
+ export const { add, updateRecord , remove, getRecord, setHide, resetEducation} = educationSlice.actions;
  export default educationSlice.reducer; 
 
 

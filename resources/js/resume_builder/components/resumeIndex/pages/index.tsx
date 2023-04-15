@@ -29,7 +29,7 @@ const ResumeIndex = () => {
     // console.log(resumes)
 
     return(
-        <div className="grid grid-flow-col space-x-5 px-10">
+        <div className="grid grid-flow-row grid-cols-3 gap-4 p-3 bg-slate-200 shadow-md">
             { resumes.map((v,k) => {
                 return(
                     // <div className="" key={k}>
@@ -68,13 +68,13 @@ const ResumeComponent = ({resume} :any) => {
     // console.log(resume);
     return(
         <>
-        <div className="flex flex-col items-start bg-white rounded-md shadow-md opacity-100 justify-between h-44 p-2 w-1/2 space-y-2">
+        <div className="flex flex-col items-start bg-white rounded-md shadow-md opacity-100 justify-between h-32">
            
-            <div className="flex flex-row justify-between  w-full px-4 border-b bg-white opacity-90 h-16">
+            <div className="flex flex-row justify-between items-center w-full px-4 border-b bg-blue-200 opacity-100 h-16">
                <h5 className="font-bold text-lg text-blue-700 italic ">{resume.job_title}</h5>
                <Link to={`${resume.id}/profile`} className="text-xl"><i className="fa fa-arrow-right"></i></Link>
             </div>
-            <div className="flex flex-row justify-between items-start align-items-center w-full h-full px-4">
+            <div className="flex flex-row justify-between items-center w-full h-full px-4">
                 <input  type='text' className="w-2/3 text-md font-bold text-blue-400 outline-none  border-gray-400" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
                 <div className="space-x-6">
                     <button onClick={ () => updateTitle(resume.id)} className="text-blue-600 font-bold"><i className="fa fa-pencil"></i></button>

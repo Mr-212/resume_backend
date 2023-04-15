@@ -24,14 +24,15 @@ const ResumeUrls = {
 }
 
 
- const ResumeMenuBar = () => {
+ const ResumeMenuBar = (props) => {
     const profile_id = useAppSelector(state=>state.profile.profile_id)
 
     const url = getUrlPath();
+    // console.log(props.match);
     // const last_index = ResumeUrls.length;
     let line = "bg-black h-1 w-full";
     const li_class = "text-white font-bold hover:text-green-800 hover:text-sm transition-all ease-in-out delay-150 duration-150 ";
-    const active = "active opacity-100 text-green-800 font-bold text-md transition-all ease-in-out duration-150";
+    const active = "active opacity-100 px-3 py-2.5 bg-gray-200 text-green-600 font-bold text-md transition-all ease-in-out duration-150";
 
     return(
         <div className="flex flex-row justify-between p-2 w-full items-center">
@@ -48,11 +49,14 @@ const ResumeUrls = {
                                 // if( i !== 0 && key < i+1  )  line = "bg-blue-400 h-1 w-full ";
 
                                 // console.log(k, v);
+                                const urlPath = '/resume/'+ profile_id + v ;
+                                // console.log(urlPath)
+
                                 return(
                                     <>
                                         <li className="" key={k}>
                                             {/* <span className="text-orange-500 font-bold text-lg pr-1">{val+1}</span> */}
-                                            <Link className={ url === profile_id + v ?  active : li_class }  to={profile_id+v}>{k}</Link>
+                                            <Link className={ url === urlPath?  active : li_class }  to={profile_id+v}>{k}</Link>
                                             {/* <Link className={ url === v ?  active : li_class }  to={v}>{k}</Link> */}
                                         </li>
                                         {/* { key !==  last_index -1 ?

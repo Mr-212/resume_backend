@@ -31,6 +31,12 @@ export const profileSlice = createSlice({
             //state.profile.splice(action.payload, 1);
         },
 
+        resetProfile: (state) => {
+            state.profile = {},
+            state.profile_id = '';
+            console.log('here');
+        },
+
         getRecord: (state, action: PayloadAction<number>) => {
             //   const r = state.slice(action.payload, action.payload+1);
             //   const r = state.map((val,key )=> {
@@ -47,13 +53,15 @@ export const profileSlice = createSlice({
             state.profile = action.payload;
         })
         builder.addCase(getProfile.fulfilled, (state, action)=>{
-            state.profile = {...state.profile, ...action.payload};
+            state.profile =  action.payload;
             console.log(action.payload)
         });
         builder.addCase(postProfileImage.fulfilled, (state, action)=>{
-            state.profile = {...state.profile, ...action.payload};
-            console.log(action.payload)
-        })
+            state.profile = {...action.payload};
+            // console.log(action.payload)
+        });
+
+
 
     }
 
@@ -63,7 +71,7 @@ export const profileSlice = createSlice({
 //  export const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
  export const profile_id = state  => state.profile_id;
 
- export const { add, remove , getRecord, setProfileId} = profileSlice.actions;
+ export const { add, remove , getRecord, setProfileId, resetProfile} = profileSlice.actions;
  export default profileSlice.reducer;
 
 
@@ -98,14 +106,8 @@ export const profileSlice = createSlice({
                 "Content-Type": "multipart/form-data",
                 },
             };
-            
-            // const {profile_id}
-            // console.log(data.imageList);
             const formData = new FormData();
             formData.append('file', JSON.stringify(data.imageList));
-            // formData.append('file', (data.imageList[0]));
-            console.log(formData.get('file'));
-
             const url = '/resume/'+data.profile_id +'/image'
             const response = await axios.post(url, formData, config);
             return response.data.profile;
