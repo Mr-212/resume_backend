@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useAppDispatch } from "../../../store/store";
 // import { hydrate } from "react-dom";
+
+// const dispatch = useAppDispatch();
 
 export const resumeSlice = createSlice({
     name: 'resume',
@@ -34,7 +37,6 @@ export const resumeSlice = createSlice({
     extraReducers:(builder) => {
         builder.addCase(getResumes.fulfilled, (state, action) => {
             console.log(action.payload);
-            // console.log('here');
 
             if(action.payload.status_code = 200){
                     // state.push(...action.payload.resumes);
@@ -99,12 +101,12 @@ export const updateResumeTitle = createAsyncThunk(
  )
  export const deleteResume = createAsyncThunk(
     'resume/delete',
-    async (id: string) => {
-        const url = '/resume/' +id;
+    async (id: string,{dispatch}) => {
+        const url = '/resume/' + id;
         const response = await axios.delete(url);
         // console.log(response.data)
         if(response.data.ststu_code = 200)
-            getResumes();
+            dispatch(getResumes());
         //return response.data;
     }
  )

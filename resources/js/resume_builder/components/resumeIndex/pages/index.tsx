@@ -22,6 +22,7 @@ const ResumeIndex = () => {
         // })
         // console.log(res);
     }, []);
+
      useEffect(() => {
       
     }, [resumes]);
@@ -52,10 +53,11 @@ const ResumeComponent = ({resume} :any) => {
 
     const [title, setTitle] = useState("");
     const dispatch = useAppDispatch();
+
     useEffect(() => {
         setTitle(resume.title);
         dispatch(setProfileId(resume.id));
-    }, [])
+    }, [resume])
 
 
     const deleteRes = (id: string) => {

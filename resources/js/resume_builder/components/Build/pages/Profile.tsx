@@ -126,6 +126,8 @@ function Profile<T> ( { id }: CombineProps<T>){
     const dispatch = useAppDispatch();
     // const profile = profile;
     const profile = useAppSelector(state => state.profile.profile);
+    const profile_id = useAppSelector(state => state.profile.profile_id);
+
     // let formValue = state.profile ? state.profile : {};
     const[formValues, setFormValues] = useState<CombineProps<T>>({});
 
@@ -143,9 +145,10 @@ function Profile<T> ( { id }: CombineProps<T>){
     // console.log(profile)
 
     useEffect(() => {
-        // const profile_id = "11aa6084-a71c-4602-98db-bc4617704979";
-        // dispatch(getProfile(profile_id));
-        // dispatch(getEducation());
+        if(!profile_id){
+            // console.log(profile_id)
+            // alert('empty');
+        }
     });
 
     useEffect(() => {
