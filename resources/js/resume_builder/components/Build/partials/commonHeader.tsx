@@ -1,10 +1,13 @@
 import React from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import CreateResumeBtnModal from "../../resumeIndex/pages/createResumeBtnModal";
+import { useAppDispatch } from "../../../store/store";
+import { newResume } from "../../resumeIndex/reducers/resumeReducer";
 
 
 
 const Header = () => {
+    const dispatch = useAppDispatch();
 
     const {profile_id} = useParams();
 
@@ -17,7 +20,9 @@ const Header = () => {
                     <Link to={'/resume'} className="text-left text-2xl px-10 text-gray-900"><i className="fa fa-arrow-left"></i></Link>
                 }
                  {!profile_id && 
-                    <Link to={'profile'} className="text-left text-2xl px-10 text-green-600"><i className="fa fa-plus"></i></Link>
+                    // <Link to={'profile'} className="text-left text-2xl px-10 text-green-600"><i className="fa fa-plus"></i></Link>
+                    <button onClick={() => dispatch(newResume())} className="text-left text-2xl px-10 text-green-600"><i className="fa fa-plus"></i></button>
+
                  }
               
 

@@ -66,9 +66,20 @@ class ResumeController extends Controller
      * @param  \App\Http\Requests\StoreResumeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResumeRequest $request)
+    public function store(Request $request)
     {
-        //
+        try{
+            // dd($request->all());
+            // $resume = $this->resumeModel->find($request->id);
+            $resume = $this->resumeModel->updateOrCreate(['id' => $request->id,'user_id' => auth()->id()],$request->all());
+            if($resume){
+                // $resume->refresh();
+                return response()->json(['status_code' => 200, 'resume' => $resume]);
+            }
+
+        }catch(Exception $e){
+            return response()->json(['status_code' => 400, 'error' => $e->getMessage()]);
+        }
     }
 
     /**

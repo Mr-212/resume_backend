@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../store/store";
-import { getResumes, deleteResume, updateResumeTitle } from "../reducers/resumeReducer";
+import { getResumes, deleteResume, updateResumeTitle, remove, updateResume } from "../reducers/resumeReducer";
 import { useAppSelector } from "../../../store/hooks";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
@@ -8,6 +8,9 @@ import PdfTemplate from "../../Build/templates/PdfTemplate";
 import { setProfileId } from "../../Build/reducers/profileReducer";
 
 
+const newResume = {
+    title: 'Enter CV name...'
+}
 
 const ResumeIndex = () => {
 
@@ -17,10 +20,6 @@ const ResumeIndex = () => {
     useEffect(() => {
         const res = dispatch(getResumes());
         
-        // res.then(res=> {
-        //     console.log(res);
-        // })
-        // console.log(res);
     }, []);
 
      useEffect(() => {
@@ -34,7 +33,7 @@ const ResumeIndex = () => {
             { resumes.map((v,k) => {
                 return(
                     // <div className="" key={k}>
-                        <ResumeComponent resume={v}></ResumeComponent>
+                        <ResumeComponent resume={v} index={k} key={k}></ResumeComponent>
                     // </div>
                 )
              })
@@ -49,7 +48,7 @@ const ResumeIndex = () => {
 
 export default ResumeIndex;
 
-const ResumeComponent = ({resume} :any) => {
+const ResumeComponent = ({resume, index} :any) => {
 
     const [title, setTitle] = useState("");
     const dispatch = useAppDispatch();
@@ -57,30 +56,45 @@ const ResumeComponent = ({resume} :any) => {
     useEffect(() => {
         setTitle(resume.title);
         dispatch(setProfileId(resume.id));
-    }, [resume])
+    }, [])
 
 
-    const deleteRes = (id: string) => {
-            dispatch(deleteResume(id));
+    const deleteResumeById = (id) => {
+            if(id != undefined)
+                 dispatch(deleteResume(id));
+            else
+                deleteResumeByIndex(index);     
     }
-    const updateTitle = (id: string) => {
-        dispatch(updateResumeTitle({id, title}));
+    const deleteResumeByIndex = (index) => {
+        dispatch(remove(index));
+}
+    const updateTitle = (id) => {
+        // console.log(id)
+        dispatch(updateResume({id, title, index}));
     }
 
     // console.log(resume);
+    // const deleteMethod = resume.id ? deleteRes(resume.id) : deleteResumeByIndex(index);
+
     return(
         <>
         <div className="flex flex-col items-start bg-white rounded-md shadow-md opacity-100 justify-between h-32">
            
             <div className="flex flex-row justify-between items-center w-full px-4 border-b bg-blue-200 opacity-100 h-16">
-               <h5 className="font-bold text-lg text-blue-700 italic ">{resume.job_title}</h5>
-               <Link to={`${resume.id}/profile`} className="text-xl"><i className="fa fa-arrow-right"></i></Link>
+               <h5 className="font-bold text-lg text-sky-800 italic">{resume.job_title}</h5>
+               {resume.id &&
+                 <Link to={`${resume.id}/profile`} className="text-xl"><i className="fa fa-arrow-right"></i></Link>
+               }
             </div>
             <div className="flex flex-row justify-between items-center w-full h-full px-4">
-                <input  type='text' className="w-2/3 text-md font-bold text-blue-400 outline-none  border-gray-400" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
+                <input  type='text' className="w-2/3 h-8 text-sm font-bold text-slate-500 outline-none border-blue-200 border-b" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
                 <div className="space-x-6">
-                    <button onClick={ () => updateTitle(resume.id)} className="text-blue-600 font-bold"><i className="fa fa-pencil"></i></button>
-                    <button onClick={() => deleteRes(resume.id)} className="text-red-600 font-bold text-xl"><i className="fa fa-minus"></i></button>
+                    {/* <button onClick={ () => updateTitle(resume.id)} className="text-blue-600 font-bold"><i className="fa fa-pencil"></i></button> */}
+                    <button onClick={ () => updateTitle(resume.id)} className="text-green-600 font-bold text-sm">Save</button>
+
+                    {/* <button onClick={() => deleteRes(resume.id)} className="text-red-600 font-bold text-xl"><i className="fa fa-minus"></i></button> */}
+                    <button onClick={ () => deleteResumeById(resume.id)} className="text-red-600 font-bold text-sm">Remove</button>
+
                 </div>
                
            </div>

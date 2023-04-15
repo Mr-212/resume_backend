@@ -13,15 +13,21 @@ export const resumeSlice = createSlice({
              state.unshift(...state, action.payload);
         },
 
+        newResume: (state) => {
+            const newResume = {title: 'Enter Resume Name ...'};
+            state.unshift(newResume);
+            
+        } ,
+
         remove: (state, action: PayloadAction<number>) => {
             state.splice(action.payload, 1);
         },
 
-        update: (state, action: PayloadAction<object>) => {
-            let resume =  state.filter(obj => obj.id == action.payload.resume.id);
-            console.log(current(resume));
-            resume = action.payload;
-        },
+        // update: (state, action: PayloadAction<object>) => {
+        //     let resume =  state.filter(obj => obj.id == action.payload.resume.id);
+        //     console.log(current(resume));
+        //     resume = action.payload;
+        // },
 
         getRecord: (state, action: PayloadAction<number>) => {
             //   const r = state.slice(action.payload, action.payload+1);
@@ -40,7 +46,8 @@ export const resumeSlice = createSlice({
 
             if(action.payload.status_code = 200){
                     // state.push(...action.payload.resumes);
-                    return action.payload.resumes;
+                     state =  [...action.payload.resumes];
+                     return state
             }
         })
 
@@ -48,8 +55,16 @@ export const resumeSlice = createSlice({
             if(action.payload.status_code == 200){
                 const resume =  state.filter(obj => { return obj.id == action.payload.resume.id});
                 // console.log(current(resume));
-                resume.title = action.payload.resume.title;
+                return action.payload.resume;
                 return state;
+            }
+           
+
+        });
+
+        builder.addCase(updateResume.fulfilled,(state, action)=>{
+            if(action.payload.data.status_code == 200){
+               state[action.payload.index] = action.payload.data.resume;
             }
 
         });
@@ -67,7 +82,7 @@ export const resumeSlice = createSlice({
 
  });
 
- export const { add, remove, getRecord, update} = resumeSlice.actions;
+ export const { add, remove, getRecord, update, newResume} = resumeSlice.actions;
  export default resumeSlice.reducer; 
 
 
@@ -83,13 +98,26 @@ export const resumeSlice = createSlice({
 
 export const updateResumeTitle = createAsyncThunk(
     'resume/title',
-    async (resume) => {
-        const url = '/resume/'+resume.id;
-        const response = await axios.put(url, resume);
+    async (resume,{dispatch}) => {
+        const url = '/resume';
+        const response = await axios.post(url, resume);
         // console.log(response.data);
         return response.data;
     }
-     )
+)
+
+export const updateResume = createAsyncThunk(
+    'resume/update',
+    async (resume,{dispatch}) => {
+        const {index} = resume;
+        const url = '/resume';
+        const response = await axios.post(url, resume);
+        // console.log(response.data);
+        return {index: index, data:response.data};
+        // if(response.data.ststu_code = 200)
+            // dispatch(getResumes());
+    }
+)
 
  export const getResumes = createAsyncThunk(
     'resumes',
