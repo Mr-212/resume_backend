@@ -85,16 +85,16 @@ const Skills = <T extends SkillProps> () => {
                 </div>
             </div>
 
-            <div className="flex flex-row items-center flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 pt-3">
                 {skillArray.map((v,k) => {
                     return (
-                            <span className="px-4 py-2 shadow-lg hover:bg-white hover:text-black transition-all ease-linear duration-100 font-bold text-white bg-gray-500" key={k} onClick={() => selectSkill(v)}>{v}</span>
+                            <div className="px-2 py-1.5 shadow-lg font-bold text-white bg-gray-500 hover:bg-black transition delay-150 duration-300 ease-in-out" key={k} onClick={() => selectSkill(v)}>{v}</div>
                         )
 
                 })
                 }
             </div>
-            <div className="flex flex-row items-center flex-wrap pr-4">
+            <div className="flex flex-col items-center gap-2 pt-3">
             { Object.values(skillList).map((val,key ) => {
                 // console.log(key.skill);
                 counter++;
@@ -149,7 +149,7 @@ function  AddSkills(props){
 
     return(
 
-        <div className="flex flex-col w-full pt-3 space-y-1">
+        <div className="flex flex-col w-full gap-2">
          
                     <div className="flex flex-row items-center justify-between  border-b-2 bg-gray-200 opacity-100" >
                         <span className="text-green-500 pl-4"><i className="fa fa-check" aria-hidden="true"></i></span>

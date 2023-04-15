@@ -224,13 +224,13 @@ interface EducationProps<T> {
     return(
     <div className="grid grid-row pt-0">
        <div className="grid grid-flow-row border-b-2 border-b-white bg-black opacity-80 shadow-lg py-2"> 
-            <div className="flex flex-row w-full justify-between">
+            <div className="flex flex-row w-full justify-between items-center px-10">
  
-                <div className="text-left pl-10 font-bold text-white pt-2">
+                <div className="text-left font-bold text-white">
                         <p><span className="pr-2">{education.qualification}</span><strong className="text-blue-400 font-bold">( {education.gpa_marks} )</strong></p>
-                        <p><strong className="italic pr-2">{education.institution}</strong><span className="pr-2">{" - "+ education.address}</span><small className="text-blue-400">( {education.start_date +'-'+education.end_date} )</small></p>
+                        <p><small className="italic pr-2">{education.institution}</small><small className="pr-2">{" - "+ education.address}</small><small className="text-blue-400">( {education.start_date +'-'+education.end_date} )</small></p>
                 </div>
-                <div className="text-right pr-10 pt-4">
+                <div className="text-right">
                     <button className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={(addRecord)} >Save</button>
 
                     <button className="pl-4" onClick={() => removeRecord(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
