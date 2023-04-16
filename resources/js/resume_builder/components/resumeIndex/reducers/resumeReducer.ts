@@ -7,20 +7,24 @@ import { useAppDispatch } from "../../../store/store";
 
 export const resumeSlice = createSlice({
     name: 'resume',
-    initialState: [],
+    initialState: {
+        resumes: [],
+        message :'',
+        error: '',
+    },
     reducers: {
         add:(state, action: PayloadAction<object>) => {
-             state.unshift(...state, action.payload);
+             state.resumes.unshift(...state, action.payload);
         },
 
         newResume: (state) => {
             const newResume = {title: 'Enter Resume Name ...'};
-            state.unshift(newResume);
+            state.resumes.unshift(newResume);
             
         } ,
 
         remove: (state, action: PayloadAction<number>) => {
-            state.splice(action.payload, 1);
+            state.resumes.splice(action.payload, 1);
         },
 
         // update: (state, action: PayloadAction<object>) => {
@@ -38,6 +42,10 @@ export const resumeSlice = createSlice({
             //   });
             //   console.log(r);
         },
+        setMessage: (state,action: PayloadAction<string>)=> {
+            state.message = action.payload
+        }
+
     },
 
     extraReducers:(builder) => {
@@ -46,14 +54,14 @@ export const resumeSlice = createSlice({
 
             if(action.payload.status_code = 200){
                     // state.push(...action.payload.resumes);
-                     state =  [...action.payload.resumes];
+                     state.resumes =  [...action.payload.resumes];
                      return state
             }
         })
 
         builder.addCase(updateResumeTitle.fulfilled,(state,action)=>{
             if(action.payload.status_code == 200){
-                const resume =  state.filter(obj => { return obj.id == action.payload.resume.id});
+                const resume =  state.resumes.filter(obj => { return obj.id == action.payload.resume.id});
                 // console.log(current(resume));
                 return action.payload.resume;
                 return state;
@@ -64,7 +72,8 @@ export const resumeSlice = createSlice({
 
         builder.addCase(updateResume.fulfilled,(state, action)=>{
             if(action.payload.data.status_code == 200){
-               state[action.payload.index] = action.payload.data.resume;
+               state.resumes[action.payload.index] = action.payload.data.resume;
+               state.message = "Resume updated";
             }
 
         });
@@ -82,7 +91,7 @@ export const resumeSlice = createSlice({
 
  });
 
- export const { add, remove, getRecord, update, newResume} = resumeSlice.actions;
+ export const { add, remove, getRecord, newResume, setMessage} = resumeSlice.actions;
  export default resumeSlice.reducer; 
 
 
@@ -133,8 +142,10 @@ export const updateResume = createAsyncThunk(
         const url = '/resume/' + id;
         const response = await axios.delete(url);
         // console.log(response.data)
-        if(response.data.ststu_code = 200)
+        if(response.data.ststu_code = 200){
+            // dispatch(setMessage('Resume deleted.'))
             dispatch(getResumes());
+        }
         //return response.data;
     }
  )

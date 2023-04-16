@@ -243,8 +243,10 @@ const LefttSide = ({profile, education, skills})=>{
         <View style={styles.profile_container}>
   
         <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
-          <Image style={styles.profile_img} src={profile.image_url} />
-          <Text style={styles.name_text}>{profile.first_name}</Text>
+          {profile.image_url && 
+              <Image style={styles.profile_img} src={profile.image_url} />
+          }
+          <Text style={styles.name_text}>{profile.name}</Text>
           <Text style={styles.profession_text}>{profile.job_title}</Text>
 
         </View>

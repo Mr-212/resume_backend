@@ -2,11 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\MenuController;
-use App\Http\Controllers\Resume\ProfileContoller;
-use App\Http\Controllers\Resume\EducationController;
-use App\Http\Controllers\Resume\ExperienceController;
-use App\Http\Controllers\Resume\SkillController;
+// use App\Http\Controllers\Dashboard\MenuController;
+// use App\Http\Controllers\Resume\ProfileContoller;
+// use App\Http\Controllers\Resume\EducationController;
+// use App\Http\Controllers\Resume\ExperienceController;
+// use App\Http\Controllers\Resume\SkillController;
 
 /*
 |--------------------------------------------------------------------------

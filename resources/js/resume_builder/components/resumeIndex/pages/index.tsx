@@ -6,6 +6,8 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import PdfTemplate from "../../Build/templates/PdfTemplate";
 import { setProfileId } from "../../Build/reducers/profileReducer";
+import { toast } from 'react-toastify';
+
 
 
 const newResume = {
@@ -14,8 +16,13 @@ const newResume = {
 
 const ResumeIndex = () => {
 
+
     const dispatch = useAppDispatch();
-    const resumes = useAppSelector(state => state.resume);
+    const messgae = useAppSelector(state => state.resume.message);
+
+    const resumes = useAppSelector(state => state.resume.resumes);
+    const notify = () => toast(messgae);
+
 
     useEffect(() => {
         const res = dispatch(getResumes());
@@ -23,8 +30,9 @@ const ResumeIndex = () => {
     }, []);
 
      useEffect(() => {
+        notify();
       
-    }, [resumes]);
+    }, [resumes, messgae]);
 
     // console.log(resumes)
 

@@ -4,6 +4,8 @@ import { useAppDispatch } from "../store/store";
 import { setProfileId } from "./Build/reducers/profileReducer";
 // import { DashboardRoutes } from "../routes/build/Dashboard";
 import Dashboard from "./Dashboard/Index";
+// import Popup from 'react-popup';
+
 
 
 
@@ -20,6 +22,7 @@ const App = (props) => {
     return(
     //  <DashboardRoutes></DashboardRoutes>
     <>
+        {/* <Popup/>, */}
         <ResumeRoutes {...props}></ResumeRoutes>
     </>
 

@@ -36,8 +36,8 @@ const ResumeUrls = {
 
     return(
         <div className="flex flex-row justify-between p-2 w-full items-center">
-              <nav className="flex flex-row items-center justify-start pl-10 w-2/3">
-                <ul className="inline-flex gap-8 text-sm">
+              <nav className="flex flex-row items-center justify-between px-10 w-full">
+                <ul className="inline-flex justify-between gap-8 text-sm">
                     
                     { 
                         //const last_index = Object.keys(val).length;
@@ -53,7 +53,7 @@ const ResumeUrls = {
                                 // console.log(urlPath)
 
                                 return(
-                                    <>
+                                    <div key={k}>
                                         <li className="" key={k}>
                                             {/* <span className="text-orange-500 font-bold text-lg pr-1">{val+1}</span> */}
                                             <Link className={ url === urlPath?  active : li_class }  to={profile_id+v}>{k}</Link>
@@ -63,7 +63,7 @@ const ResumeUrls = {
                                             // <span className={ key < last_index-1 ?  i < key && i > 0  ? "bg-black h-1 w-full" : "h-1 w-full bg-blue-400" : "bg-black h-1 w-full"}></span> : null
                                             <span  key={k} className={ line }></span> : null
                                         } */}
-                                    </>
+                                    </div>
                                 )
                             })
                     }
