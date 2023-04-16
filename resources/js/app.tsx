@@ -1,20 +1,23 @@
 
 import './bootstrap';
-import React from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react';
+// import ReactDom, { createRoot } from "react-dom/client";
+import ReactDom  from "react-dom";
+
+// import { createRoot } from 'react/jsx-runtime';
+// import { unstable_createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import App from "./resume_builder/components/App";
 import store from "./resume_builder/store/store";
-import Popup from 'react-popup';
 
-const  element  = document.getElementById("app")
+const  element  = document.getElementById("app");
 const props = element?.dataset;
-const root =  createRoot(element);
+// const root =  ReactDom.createRoot(element);
 // Modal.setAppElement('#app');
 
-root.render(
-    
+ReactDom.render(
     <Provider store={store}>
         <App {...props} />
     </Provider>,
+    document.getElementById("app")
 );

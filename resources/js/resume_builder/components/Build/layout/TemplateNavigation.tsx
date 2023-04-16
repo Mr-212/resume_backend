@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 import { getUrlPath } from "../../hooks/GetLocation";
 import TemplateBasic from "../templates/basic";
 import TemplateBasic_1 from "../templates/basic-1";
-import Html from 'react-pdf-html';
 import ReactDOMServer, { renderToString } from 'react-dom/server';
 import {PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-import { jsPDF } from "jspdf";
 import { ViewPDF } from "../partials/ViewPDF";
 import { ResumeStore } from "../partials/useResumeStore";
-import html2canvas from "html2canvas";
 import { WithResumeProps } from "../partials/WithResumeProps";
 import { WithPDFPreview, WithPreview } from "../WithPDFPreview";
 import { getComponent } from "../partials/GetTemplateComponent";
@@ -46,19 +43,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
     },[])
 
     const handleDonwlodPDF = async() => {
-        // const pdf = new jsPDF("portrait", "pt", "a4");        // const html = ReactDOMServer.renderToStaticMarkup(pdfTemplate.current);
-        // const h = pdfTemplate.current;
-        // console.log(html)
-        // setTemp(html);
-        // console.log(temp);
-        // pdf.text(html);
-        const html = html2canvas(h)
-        .then(canvas => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF("portrait", "pt", "a4");  
-            pdf.addImage(imgData, "JPEG", 10, 10);
-            pdf.save(`tmp.pdf`);
-          });
+      
     }
 
     // selectTemplate(<PdfTemplate props={resumeStoreObject}></PdfTemplate>);

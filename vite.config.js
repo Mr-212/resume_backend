@@ -11,11 +11,9 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         hmr: {
-            host: 'localhost'
+            host: 'localhost',
         }
     },
-    
-
     plugins: [
         // laravel({
         //     input: ['resources/css/app.css', 'resources/js/app.tsx'],
@@ -26,12 +24,6 @@ export default defineConfig({
         laravel(
             ['resources/css/app.css', 'resources/js/app.tsx'],
             react()),
-
-        // viteExternalsPlugin({
-        //     // html2canvas: "html2canvas",
-        // })
-            
-
             
     ],
 
@@ -40,5 +32,11 @@ export default defineConfig({
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
         }
 
-    }
+    },
+
+    build: {
+        rollupOptions: {
+        //   external: 'react-dom/client'
+        }
+      },
 });
