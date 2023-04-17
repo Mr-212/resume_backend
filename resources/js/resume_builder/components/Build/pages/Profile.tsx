@@ -228,7 +228,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <label className="font-bold text-sm text-gray-400">Job Title</label>
                                
                                 <div className="inline-flex items-start justify-start border-b-2 w-full">
-                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title} onMouseOver={submitForm}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
+                                    <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
                                 </div> 
                             </div>
                             <div className="flex flex-col justify-center items-start p-1 w-full">
@@ -236,7 +236,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <label className="block font-bold text-sm text-gray-400">Name</label>
 
                                 <div className="inline-flex items-center justify-start border-b-2 w-full ">
-                                    <input type="text" className=" h-8 block rounded  text-black text-sm font-bold focus:outline-none" value={formValues?.first_name}  onMouseOver={submitForm} placeholder="" {...register('name', {required: false, maxLength:20})} name="name"></input>
+                                    <input type="text" className=" h-8 block rounded  text-black text-sm font-bold focus:outline-none" value={formValues?.first_name}   placeholder="" {...register('name', {required: false, maxLength:20})} name="name"></input>
                                 </div>
 
                             </div>
@@ -328,7 +328,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                                 <div className="inline-flex items-start justify-start w-full border-b-2">
                                     {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                                    <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} onMouseOver={submitForm} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
+                                    <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
                                 </div> 
                     </div>
                 </div>

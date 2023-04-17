@@ -23,9 +23,8 @@
         <section class="container mt-14">
             <div class="">
                 <div class="text-primary">
-                    <h3>Welcome</h3>  
                 </div>
-                <!-- @yield('content') -->
+                @yield('content')
             </div>
         </section>
         

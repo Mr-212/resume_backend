@@ -4,20 +4,27 @@
     <div class="row">
         <div class="d-flex flex-row align-items-center col-6">
             <div class="text-white">
-                <h3>ActivityHub</h3>
+                <h3>Activities</h3>
             </div>
 
         </div>
         <div class="col-6 text-right">
-            <ul class="navbar-nav float-right">
+            <ul class="navbar-nav float-right space-x-2">
+                <li class="nav-item">       
+                    <button class="nav-link font-bold px-4 py-1.5 bg-slate-400 opacity-100 text-black hover:bg-white hover:text-black"><a href="/who-am-i">Who AM I?</a></button>
+                </li>
                 @if(auth()->user())
                 <li class="nav-link nav-item">
                     <h3>{{ auth()->user()->name }}</h3>
                 </li>
                 @else
                 
+              
+                
                 <li class="nav-item">       
-                    <button class="nav-link font-bold rounded-full px-4 py-1.5 bg-gray-200 opacity-100 text-black hover:bg-white hover:text-black" data-bs-toggle="modal" data-bs-target="#authentication-modal">Login</button></li>
+                    <button class="nav-link font-bold  px-4 py-1.5 bg-gray-200 opacity-100 text-black hover:bg-white hover:text-black" data-bs-toggle="modal" data-bs-target="#authentication-modal">Login</button>
+                </li>
+               
                 {{-- <li class="nav-link nav-item">
                     <button class="text-primary font-bold">Register</button>
                 </li> --}}

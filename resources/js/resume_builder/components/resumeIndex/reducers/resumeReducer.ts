@@ -72,8 +72,8 @@ export const resumeSlice = createSlice({
 
         builder.addCase(updateResume.fulfilled,(state, action)=>{
             if(action.payload.data.status_code == 200){
-               state.resumes[action.payload.index] = action.payload.data.resume;
-               state.message = "Resume updated";
+                state.message = "Resume updated";
+                state.resumes[action.payload.index] = action.payload.data.resume;
             }
 
         });

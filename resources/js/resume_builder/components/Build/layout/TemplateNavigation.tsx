@@ -15,11 +15,15 @@ import { getComponent } from "../partials/GetTemplateComponent";
 
     const pdfTemplate = useRef("");
     const resumeStoreObject = ResumeStore();
-    const Templates = {
+    // const Templates = {
     
-        'Basic':  <TemplateBasic />,
-        'Dark': <TemplateBasic_1 />
-      }
+    //     'Basic':  <TemplateBasic />,
+    //     'Dark': <TemplateBasic_1 />
+    //   }
+
+      const Templates = [
+       'PdfTemplate'
+      ];
 
 
     const [temp, setTemp] = useState();

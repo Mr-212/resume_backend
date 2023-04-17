@@ -10,6 +10,27 @@ import { toast } from 'react-toastify';
 
 
 
+const toastF = (func, message="updated") => {
+    toast.promise(
+        func,
+        {
+        pending: {
+            render(){
+              return "I'm loading"
+            },
+            icon: false,
+          },
+          success: {
+            render(message){
+              return `Updated..`
+            },
+             icon: true
+          },
+        },
+        { position: toast.POSITION.TOP_LEFT, type: toast.TYPE.SUCCESS, autoClose: 2000}
+    )
+}
+
 const newResume = {
     title: 'Enter CV name...'
 }
@@ -21,16 +42,35 @@ const ResumeIndex = () => {
     const messgae = useAppSelector(state => state.resume.message);
 
     const resumes = useAppSelector(state => state.resume.resumes);
-    const notify = () => toast(messgae);
+    const notify = () => toast(messgae, { position: toast.POSITION.TOP_CENTER, });
 
 
     useEffect(() => {
         const res = dispatch(getResumes());
+         toast.promise(
+            res,
+            {
+            pending: {
+                render(){
+                  return "I'm loading"
+                },
+                icon: false,
+              },
+            //   success: {
+            //     render(){
+            //       return ``
+            //     },
+            //     // other options
+            //     icon: "🟢",
+            //   },
+            },
+            { position: toast.POSITION.TOP_CENTER }
+        )
         
     }, []);
 
      useEffect(() => {
-        notify();
+        // notify();
       
     }, [resumes, messgae]);
 
@@ -68,8 +108,10 @@ const ResumeComponent = ({resume, index} :any) => {
 
 
     const deleteResumeById = (id) => {
-            if(id != undefined)
+            if(id != undefined){
                  dispatch(deleteResume(id));
+                 toast.warn('Record deleted..');
+            }
             else
                 deleteResumeByIndex(index);     
     }
@@ -78,7 +120,8 @@ const ResumeComponent = ({resume, index} :any) => {
 }
     const updateTitle = (id) => {
         // console.log(id)
-        dispatch(updateResume({id, title, index}));
+        // dispatch(updateResume({id, title, index}));
+        toastF(dispatch(updateResume({id, title, index})))
     }
 
     // console.log(resume);

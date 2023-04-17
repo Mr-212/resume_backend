@@ -1,4 +1,4 @@
-import React, { ComponentProps, useEffect } from "react";
+import React, { ComponentProps, Suspense, useEffect } from "react";
 import Dashboard from "../Dashboard/Index";
 import BtnNavigator from "./layout/BtnNavigator";
 import BuildLayout from "./BuildLayout";
@@ -35,6 +35,7 @@ interface Props {
 
                     {props.pdf &&
                     <div>
+                        <Suspense fallback={<h1>Loading profile...</h1>}>
                         <PDFViewer
                             showToolbar={false}
                             style={{
@@ -44,6 +45,7 @@ interface Props {
                         >  
                             <Component {...props} { ...resumeStoreObject}></Component>
                          </PDFViewer>
+                         </Suspense>
                     </div>
                     }
 
