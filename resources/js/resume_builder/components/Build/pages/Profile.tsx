@@ -210,10 +210,9 @@ function Profile<T> ( { id }: CombineProps<T>){
                         <button type="button" className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>
              
-                <div className="flex flex-row items-star w-full space-x-2">
-                    <div className="text-center w-1/4 pt-6">
+                <div className="flex flex-row items-star w-full gap-4">
+                    <div className="text-center w-1/4">
                         <div className="bg-cover bg-no-repeat rounded-md h-full w-full border">
-
                             <ProfielImage></ProfielImage>
                         </div>
                         
@@ -231,7 +230,11 @@ function Profile<T> ( { id }: CombineProps<T>){
                                     <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
                                 </div> 
                             </div>
-                            <div className="flex flex-col justify-center items-start p-1 w-full">
+                           
+
+                        </div>
+                        <div className="flex flex-row gap-3">
+                             <div className="flex flex-col justify-center items-start p-1 w-full">
                             
                                 <label className="block font-bold text-sm text-gray-400">Name</label>
 
@@ -240,9 +243,6 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 </div>
 
                             </div>
-
-                        </div>
-                        <div className="flex flex-row gap-3">
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="block font-bold text-sm text-gray-400">Email</label>
                                 {/* {validationErrors('email', 'Email')} */}
@@ -253,17 +253,20 @@ function Profile<T> ( { id }: CombineProps<T>){
                             </div>
 
 
-                            <div className="flex flex-col justify-center items-start p-1 w-full">
-                                    <label className="block font-bold text-sm text-gray-400">Phone</label>
-                                    {/* {validationErrors('phone', 'Phone')} */}
-
-                                    <div className="inline-flex items-center justify-start w-full border-b-2">
-                                        <input type="tel" className=" h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20})}  placeholder="" name="phone"></input>
-                                    </div>
-                                
-                                </div>
                         </div>
+
+                        
                         <div className="flex flex-row items-start w-full">
+
+                            <div className="flex flex-col justify-center items-start p-1 w-full">
+                                        <label className="block font-bold text-sm text-gray-400">Phone</label>
+                                        {/* {validationErrors('phone', 'Phone')} */}
+
+                                        <div className="inline-flex items-center justify-start w-full border-b-2">
+                                            <input type="tel" className=" h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20})}  placeholder="" name="phone"></input>
+                                        </div>
+                                    
+                            </div>
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="block font-bold text-sm text-gray-400">Date of Birth</label>
                                 {/* {validationErrors('dob', 'Date of Birth')} */}
@@ -272,29 +275,25 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 </div>
                             </div>
 
-                            <div className="flex flex-col justify-center items-start p-1 w-full">
+                            {/* <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="block font-bold text-sm text-gray-400">City</label>
-                                {/* {validationErrors('city', 'city')} */}
 
                                 <div className="inline-flex items-center justify-start w-full border-b-2">
                                     <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.city}  {...register('city', {required: false, maxLength:20})}  placeholder="" name="city"></input>
                                 </div>
                        
-                            </div>
-
+                            </div> */}
                         </div>
-
-                        
                     </div>
                    
                 </div>
-                <div className="flex flex-row w-full pt-10">
+                <div className="flex flex-row justify-between w-full pt-10">
 
                 <div className="flex flex-col justify-start items-start">
                     <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
                     {/* <div className="inline-flex items-center justify-start  border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span> */}
-                        <input type="text" className="h-8 border-b-2 block rounded-sm text-black focus:outline-none" value={formValues?.linkedin_url}  placeholder="" name="linkedin_url"></input>
+                        <input type="text" className="h-8 border-b-2 block rounded-sm text-black focus:outline-none overflow-auto" value={formValues?.linkedin_url}  {...register('linkedin_url', {required: false, maxLength:400})} placeholder="" name="linkedin_url"></input>
                     {/* </div>         */}
                 </div>
 
@@ -304,7 +303,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     
                     {/* <div className="inline-flex items-center justify-start w-full border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
-                        <input type="text" className="h-8 border-b-2 block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.github_url}  placeholder="" name="github_url"></input>
+                        <input type="text" className="h-8 border-b-2 block rounded text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.github_url}  {...register('github_url', {required: false, maxLength:400})}  placeholder="" name="github_url"></input>
                     {/* </div>  */}
                 </div>
 
@@ -314,7 +313,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                     
                     {/* <div className="inline-flex items-center justify-start border-b-2"> */}
                         {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
-                        <input type="text" className="h-8 block border-b-2 text-black text-sm font-bold focus:outline-none" value={formValues?.twitter_url}  placeholder="" name="twitter_url"></input>
+                        <input type="text" className="h-8 block border-b-2 text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.twitter_url}  {...register('twitter_url', {required: false, maxLength:400})} placeholder="" name="twitter_url"></input>
                     {/* </div>  */}
                 </div>
 
