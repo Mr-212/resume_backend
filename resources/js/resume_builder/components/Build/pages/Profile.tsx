@@ -10,6 +10,7 @@ import { getEducation } from "../reducers/educationReducer";
 import { add, getProfile, postProfile, profile } from "../reducers/profileReducer";
 import { WithHOC } from "../WithPDFPreview";
 import ProfielImage from "./ProfileImage";
+import { AddURLOrWebsite } from "./Misc";
 
 // export interface ProfileProps {
 
@@ -288,33 +289,25 @@ function Profile<T> ( { id }: CombineProps<T>){
                    
                 </div>
                 <div className="flex flex-row justify-between w-full pt-10">
-
+                    <AddURLOrWebsite></AddURLOrWebsite>
+                </div>
+                <div className="flex flex-row justify-between w-full pt-10">
                 <div className="flex flex-col justify-start items-start">
                     <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
-                    {/* <div className="inline-flex items-center justify-start  border-b-2"> */}
-                        {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-linkedin" aria-hidden="true"></i> </span> */}
                         <input type="text" className="h-8 border-b-2 block rounded-sm text-black focus:outline-none overflow-auto" value={formValues?.linkedin_url}  {...register('linkedin_url', {required: false, maxLength:400})} placeholder="" name="linkedin_url"></input>
-                    {/* </div>         */}
                 </div>
 
                 <div className="flex flex-col justify-center items-start">
 
                     <label className="block font-bold text-sm text-gray-400">Github URL</label>
                     
-                    {/* <div className="inline-flex items-center justify-start w-full border-b-2"> */}
-                        {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-github" aria-hidden="true"></i> </span> */}
                         <input type="text" className="h-8 border-b-2 block rounded text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.github_url}  {...register('github_url', {required: false, maxLength:400})}  placeholder="" name="github_url"></input>
-                    {/* </div>  */}
                 </div>
 
                 <div className="flex flex-col justify-center items-start">
 
                     <label className="block font-bold text-sm text-gray-400">Twitter</label>
-                    
-                    {/* <div className="inline-flex items-center justify-start border-b-2"> */}
-                        {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa-brands fa-twitter" aria-hidden="true"></i> </span> */}
                         <input type="text" className="h-8 block border-b-2 text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.twitter_url}  {...register('twitter_url', {required: false, maxLength:400})} placeholder="" name="twitter_url"></input>
-                    {/* </div>  */}
                 </div>
 
                 </div> 
