@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getUrlPath } from "../../hooks/GetLocation";
 import TemplateBasic from "../templates/basic";
@@ -93,7 +93,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
 }
 
 
-export default TemplateNavigation;
+export default memo(TemplateNavigation);
 
 
 

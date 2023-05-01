@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 
@@ -12,16 +12,32 @@ const URLArray = [
     'Github',
     'LinkedIn',
     'Twitter',
-]
+];
 
 export const AddURLOrWebsite = () => {
+
+    const [values, setValue] = useState([]);
+
+
+    const AddNewUrl = () => {
+
+    };
+
+    useEffect(() => {
+
+    },[]);
+
+
 
 
 
     return(
         <>
 
-            <div className="flex flex-row w-full justify-between">
+            <div className="flex flex-col w-full justify-between">
+                <div>
+                    <button className="py-1.5 px-4 bg-gray-600 text-blue-400 shadow">Add Sociala/Website</button>
+                </div>
                 <div className="flex flex-row w-full gap-3">
                     <div className="flex flex-row shadow gap-3 w-3/4">
 
@@ -37,7 +53,7 @@ export const AddURLOrWebsite = () => {
                     <div className="flex flex-row shadow justify-center gap-3 px-3 w-1/4">
 
                         <button className=" text-red-600"><i className="fa fa-minus"></i></button>
-                        <button className=" text-blue-900"><i className="fa fa-plus"></i></button>
+                        {/* <button className=" text-blue-900"><i className="fa fa-plus"></i></button> */}
                     </div> 
 
                 </div>

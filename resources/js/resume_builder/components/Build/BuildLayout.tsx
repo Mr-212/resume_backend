@@ -16,6 +16,7 @@ import TemplateBasic_1 from "./templates/basic-1";
 import TemplateNavigation from "./layout/TemplateNavigation";
 import BuilderNavigation from "./layout/BuilderNavigation";
 import { useAppSelector } from "../../store/hooks";
+import Header from "./partials/commonHeader";
 
 
 interface Props {
@@ -31,7 +32,7 @@ interface Props {
 
 
 
-const BuildLayout = ( { children, saveFunction }: any )  => {
+const BuildLayout = ( { children, saveFunction }:any )  => {
     const dispatch = useAppDispatch();
     // let profile_id =  useAppSelector(state => state.profile.profile_id);
     const { profile_id } =  useParams();
@@ -61,8 +62,12 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
     },[]);
 
     return(
+        <>
 
+        {/* <Header>            </Header> */}
             <div className="grid grid-cols-2 h-screen max-h-screen space-x-4">
+                        
+
                     {/* <BtnNavigator saveFunction={saveFunction}></BtnNavigator>   */}
                     {/* <div className=" col-span-2">
                         <Headers></Headers>
@@ -77,6 +82,7 @@ const BuildLayout = ( { children, saveFunction }: any )  => {
                 </div>
               
             </div>
+            </>
     )
 
 }

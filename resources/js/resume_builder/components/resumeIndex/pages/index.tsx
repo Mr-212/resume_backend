@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import PdfTemplate from "../../Build/templates/PdfTemplate";
 import { setProfileId } from "../../Build/reducers/profileReducer";
 import { toast } from 'react-toastify';
+import Header from "../../Build/partials/commonHeader";
 
 
 
@@ -77,6 +78,8 @@ const ResumeIndex = () => {
     // console.log(resumes)
 
     return(
+        <>
+        {/* <Header></Header> */}
         <div className="grid grid-flow-row grid-cols-3 gap-4 p-3 bg-slate-200 shadow-md">
             { resumes.map((v,k) => {
                 return(
@@ -90,6 +93,8 @@ const ResumeIndex = () => {
 
 
         </div>
+        </>
+
     )
 }
 
