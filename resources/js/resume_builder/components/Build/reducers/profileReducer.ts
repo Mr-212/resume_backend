@@ -10,6 +10,7 @@ export const resumeState = {
     
         profile_id: "",
         profile: {},
+        profile_links:[],
         education: [],
         skills: [],
    
@@ -108,7 +109,7 @@ export const profileSlice = createSlice({
             };
             const formData = new FormData();
             formData.append('file', JSON.stringify(data.imageList));
-            const url = '/resume/'+data.profile_id +'/image'
+            const url = '/resume/'+ data.profile_id +'/image';
             const response = await axios.post(url, formData, config);
             return response.data.profile;
         }
@@ -116,7 +117,16 @@ export const profileSlice = createSlice({
             console.log(err);
         }
     }
- )
+ );
+
+
+ export const postProfileLinks = createAsyncThunk(
+    'profile/links',
+    async initialProfile => {
+        const response = await axios.post("/resume/"+initialProfile.profile_id, initialProfile);
+        return response.data;
+    }
+ );
 
  
 

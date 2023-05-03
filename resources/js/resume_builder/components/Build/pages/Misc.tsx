@@ -96,10 +96,8 @@ const AddURLOrWebsiteComponent = ({data}) => {
 
         </div>
         <div className="flex flex-row  justify-center gap-3 px-3 w-1/4">
-
             <button className="text-red-600"><i className="fa fa-minus"></i></button>
         </div> 
-
     </div>
     )
 }
