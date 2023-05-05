@@ -18,6 +18,8 @@ const ResumeUrls = {
     "Profile" : "/profile",
     "Education" :"/education",
     // {"Soft Skill" :""},
+    "SoftSkills" :"/softskills",
+
     "Skill" :"/skills",
     "Work History" :"/experience" ,
     // "Cirtifications" :"" ,

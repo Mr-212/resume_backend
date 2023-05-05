@@ -13,7 +13,7 @@ import { education } from "../reducers/educationReducer";
     
     useEffect(() => {
 
-        // console.log("profile props ::" + profile)
+        // console.log("profile props ::" + skills)
     },[profile, skills, education, experience]);
 
 

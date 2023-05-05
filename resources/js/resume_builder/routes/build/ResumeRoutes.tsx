@@ -17,6 +17,7 @@ import Skills from "../../components/Build/pages/Skills";
 import Dashboard from "../../components/Dashboard/Index";
 import ResumeIndex from "../../components/resumeIndex/pages";
 import Header from "../../components/Build/partials/commonHeader";
+import SOftSkills from "../../components/Build/pages/SoftSkills";
   
   
 
@@ -37,6 +38,8 @@ export const ResumeRoutes = (props) => {
                 <Route path=":profile_id/profile" element={<Profile />} />
                 <Route path=":profile_id/education" element={<Education />} />
                 <Route path=":profile_id/skills" element={<Skills />} />
+                <Route path=":profile_id/softskills" element={<SOftSkills />} />
+
                 <Route path=":profile_id/experience" element={<Experience />} />
               </Route>
               <Route path="" element={<ResumeIndex />}> </Route>

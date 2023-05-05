@@ -5,6 +5,7 @@ import profileReducer from "../components/Build/reducers/profileReducer";
 import skillReducer from "../components/Build/reducers/skillReducer";
 import experienceReducer from "../components/Build/reducers/experienceReducer";
 import resumeReducer from "../components/resumeIndex/reducers/resumeReducer";
+import SoftSkillReducer from "../components/Build/reducers/SoftSkillReducer";
 
 
 
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
     profile: profileReducer,
     skills: skillReducer,
     experience: experienceReducer,
+    softskills: SoftSkillReducer,
 });
 
 

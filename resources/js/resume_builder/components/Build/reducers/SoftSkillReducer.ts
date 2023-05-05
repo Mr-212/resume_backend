@@ -4,27 +4,25 @@ import axios from "axios";
 import { getSKillIndexURL, postSkillURL, URL_SKILL_DELETE } from "../../../constants/ResumeUrls";
 
 
-export const SkillReducer = createSlice({
-    name: 'skills',
-    initialState: {skills: resumeState.skills, skillList:[]},
+export const SoftSkillReducer = createSlice({
+    name: 'softskills',
+    initialState: {softskills: [], skillList:[]},
     reducers : {
         add:(state, action: PayloadAction<object>) => {
-            // const skill = action.payload?.skill;
-            // const payload  = action.payload;
-            state.skills.unshift(action.payload);
+            state.softskills.unshift(action.payload);
         },
         
         update:(state, action: PayloadAction<object>) => {
              //state.skills[action.payload.index]['score'] = action.payload?.score;
         },
         updateScore:(state, action: PayloadAction<object>) => {
-             state.skills[action.payload.index]['score'] = action.payload?.score;
+            //  state.SoftSkills[action.payload.index]['score'] = action.payload?.score;
         },
 
         remove: (state, action: PayloadAction<number>) => {
             // state.skills.splice(action.payload, 1);
             // delete state.skills[action.payload];
-            state.skills.splice(action.payload,1);
+            state.softskills.splice(action.payload,1);
         },
 
         getRecord: (state, action: PayloadAction<number>) => {
@@ -32,45 +30,37 @@ export const SkillReducer = createSlice({
         },
 
         resetSkills: (state) => {
-            state.skills = [];
+            state.softskills = [];
         }
     },
 
     extraReducers(builder){
         builder.addCase(postProfileSkills.fulfilled,(state,action)=>{
             // console.log(action.payload);
-            state.skills = action.payload;
+            state.softskills = action.payload;
 
         });
 
         builder.addCase(getProfileSkills.fulfilled,(state, action)=>{
-            state.skills = action.payload?.skills?action.payload?.skills:{};
+            state.softskills = action.payload?.skills?action.payload?.skills:{};
             state.skillList = action.payload.skillsList;
         });
 
         builder.addCase(deleteProfileSkills.fulfilled,(state, action)=>{
-            // console.log(action.payload);
-            // let obj= state.skills.filter((k) => console.log(current(k)) );
-            // console.log(current(obj.id));
-            if(action.payload.status == 200){}
-                // remove(action.payload.id);
-                // delete state.skills[action.payload.skill];
-                // remove(action.payload.skill);
-                
-              
-
+          
+            if(action.payload.status == 200){}  
         });
 
     }
 
  });
 
- export const { add, update, remove , getRecord, updateScore, resetSkills} = SkillReducer.actions;
- export default SkillReducer.reducer;
+ export const { add, update, remove , getRecord, updateScore, resetSkills} = SoftSkillReducer.actions;
+ export default SoftSkillReducer.reducer;
 
 
  export const postProfileSkills = createAsyncThunk(
-    'skill/add',
+    'softskills/add',
     async (profileSkills) => {
         const {profile_id, skillList} = profileSkills;
         // profileSkills['profile_id'] = profile_id;
@@ -82,7 +72,7 @@ export const SkillReducer = createSlice({
  )
 
  export const getProfileSkills = createAsyncThunk(
-    'skill/get',
+    'softskills/get',
     async (profile_id: string) => {
 
         // console.log(profile_id)
@@ -94,7 +84,7 @@ export const SkillReducer = createSlice({
     }
  )
  export const deleteProfileSkills = createAsyncThunk(
-    'skill/delete',
+    'softskills/delete',
     async (id: string) => {
         const response = await axios.delete(URL_SKILL_DELETE + (id));
         // console.log(response.data)
