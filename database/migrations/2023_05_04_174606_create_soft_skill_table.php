@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resume_soft_skill', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignUlid('profile_id');
+        Schema::create('resume_misc', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignUuid('profile_id');
             $table->string('type')->nullable();
             $table->string('key')->nullable();
             $table->string('value')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resume_soft_skill');
+        Schema::dropIfExists('resume_misc');
     }
 };

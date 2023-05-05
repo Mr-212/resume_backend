@@ -7,7 +7,9 @@ use App\Http\Controllers\Resume\ProfileContoller;
 use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\ExperienceController;
 use App\Http\Controllers\Resume\SkillController;
+use App\Http\Controllers\Resume\SoftSkillController;
 use App\Http\Controllers\WhoAmIController;
+use App\Models\Resume\SoftSkill;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,8 @@ Route::prefix('resume')->group(function(){
     //     'profile' => 'profile:uuid',
     // ]);;
     Route::resource('profile.skill',SkillController::class)->shallow();
+    Route::resource('profile.softskill',SoftSkillController::class)->shallow();
+
     Route::resource('profile.experience',ExperienceController::class)->shallow();
 })->middleware('auth');
 

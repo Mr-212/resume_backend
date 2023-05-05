@@ -17,6 +17,7 @@ import TemplateNavigation from "./layout/TemplateNavigation";
 import BuilderNavigation from "./layout/BuilderNavigation";
 import { useAppSelector } from "../../store/hooks";
 import Header from "./partials/commonHeader";
+import { getProfileSoftSkills } from "./reducers/SoftSkillReducer";
 
 
 interface Props {
@@ -47,6 +48,8 @@ const BuildLayout = ( { children, saveFunction }:any )  => {
             dispatch(getProfile(profile_id));
             dispatch(getEducation(profile_id));
             dispatch(getProfileSkills(profile_id));
+            dispatch(getProfileSoftSkills(profile_id));
+
             dispatch(getExperience(profile_id));
         }else{
             dispatch(setProfileId(null));

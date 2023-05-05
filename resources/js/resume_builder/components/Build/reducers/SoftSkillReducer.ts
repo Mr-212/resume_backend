@@ -35,20 +35,23 @@ export const SoftSkillReducer = createSlice({
     },
 
     extraReducers(builder){
-        builder.addCase(postProfileSkills.fulfilled,(state,action)=>{
+        builder.addCase(postProfileSoftSkills.fulfilled,(state,action)=>{
             // console.log(action.payload);
-            state.softskills = action.payload;
+            if(action.payload.status_code == 200)
+                state.softskills = action.payload.softSkillData;
 
         });
 
-        builder.addCase(getProfileSkills.fulfilled,(state, action)=>{
-            state.softskills = action.payload?.skills?action.payload?.skills:{};
-            state.skillList = action.payload.skillsList;
+        builder.addCase(getProfileSoftSkills.fulfilled,(state, action)=>{
+            state.softskills = action.payload?.softskills? action.payload?.softskills: {};
+            // state.skillList = action.payload.skillsList;
         });
 
-        builder.addCase(deleteProfileSkills.fulfilled,(state, action)=>{
+        builder.addCase(deleteProfileSoftSkills.fulfilled,(state, action)=>{
           
-            if(action.payload.status == 200){}  
+            if(action.payload.status == 200){
+
+            }  
         });
 
     }
@@ -59,34 +62,38 @@ export const SoftSkillReducer = createSlice({
  export default SoftSkillReducer.reducer;
 
 
- export const postProfileSkills = createAsyncThunk(
+ export const postProfileSoftSkills = createAsyncThunk(
     'softskills/add',
     async (profileSkills) => {
         const {profile_id, skillList} = profileSkills;
         // profileSkills['profile_id'] = profile_id;
         // console.log(profileSkills, postSkillURL(profile_id));
-        const response = await axios.post(postSkillURL(profile_id),  skillList)
+        const url = '/resume/profile/'+profile_id +'/softskill'
+        const response = await axios.post(url, skillList)
         // console.log(response.data);
         return response.data;
     }
  )
 
- export const getProfileSkills = createAsyncThunk(
+ export const getProfileSoftSkills = createAsyncThunk(
     'softskills/get',
     async (profile_id: string) => {
 
         // console.log(profile_id)
-        const url = getSKillIndexURL(profile_id);
+        // const url = getSKillIndexURL(profile_id);
+        const url = '/resume/profile/'+(profile_id)+'/softskill';
+
         // console.log(url);
         const response = await axios.get(url);
         // console.log(response.data)
         return response.data;
     }
  )
- export const deleteProfileSkills = createAsyncThunk(
+ export const deleteProfileSoftSkills = createAsyncThunk(
     'softskills/delete',
     async (id: string) => {
-        const response = await axios.delete(URL_SKILL_DELETE + (id));
+        const url = '/resume/profile/softskill'+id;
+        const response = await axios.delete(url);
         // console.log(response.data)
         return response.data;
         // return {id: id, status: 200};

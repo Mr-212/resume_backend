@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add, update,remove, getRecord, getProfileSkills, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/SoftSkillReducer";
+import { add, update,remove, getRecord, postProfileSoftSkills, deleteProfileSoftSkills} from "../reducers/SoftSkillReducer";
 
 
 
@@ -41,7 +41,7 @@ const SOftSkills = <T extends SkillProps> () => {
 
     const submitSkills = () => {
         const skillObject = {profile_id : profile_id, skillList: skillList};
-        dispatch(postProfileSkills(skillObject));
+        dispatch(postProfileSoftSkills(skillObject));
 
     };
 
@@ -122,7 +122,7 @@ function  AddSkills(props){
     const removeSkill = (index: number) => {
         const id = skills.id;
         if(id)
-            dispatch(deleteProfileSkills(id)).then(res => {
+            dispatch(deleteProfileSoftSkills(id)).then(res => {
                     if(res.status == 200)
                         dispatch(remove(index));
             });
