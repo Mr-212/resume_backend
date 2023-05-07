@@ -116,10 +116,11 @@ class SoftSkillController extends Controller
      */
     public function destroy($id)
     {
+        // dd($id);
         {
             try{
                 if($this->softSkillModel::find($id)->delete()){
-                    return response()->json(['status' => 200,'message' => 'Record deleted.']);
+                    return response()->json(['status_code' => 200,'message' => 'Record deleted.']);
                 }
              } catch( Exception $e){
                 return response()->json(['status' => $e->getMessage()]);

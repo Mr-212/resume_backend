@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add, update,remove, getRecord, postProfileSoftSkills, deleteProfileSoftSkills} from "../reducers/SoftSkillReducer";
+import { add, update,remove, getRecord, postProfileSoftSkills, deleteProfileSoftSkills, updateScore} from "../reducers/SoftSkillReducer";
 
 
 
@@ -34,10 +34,10 @@ const SOftSkills = <T extends SkillProps> () => {
         // dispatch(getProfileSkills());
     }, []);
 
-    // useEffect(() => {
-    //     //  console.log(skillList)
+    useEffect(() => {
+        console.log(skillList)
 
-    // },[skillList])
+    },[skillList])
 
     const submitSkills = () => {
         const skillObject = {profile_id : profile_id, skillList: skillList};
@@ -109,21 +109,30 @@ function  AddSkills(props){
     // const skillList = useAppSelector(state => state.skills);
     const skills = props.skill;
     const index = props.index;
-    const[skill, setSkill] = useState(skills.key);
+    const[key, setKey] = useState(skills.key);
+    const[value, setValue] = useState(skills.value);
+
+    // useEffect(() => {
+    //     updateKeyValue();
+    // },[key, value])
 
 
-    const handleRangeInput = (value: number, skill: string) =>{
+
+    const updateKeyValue = () =>{
+
+        console.log({ index: index, key: key, value: value });
         
-        // dispatch(updateScore({ index: index, skill: skill}));
-        const obj = {index: index, skill: skill};
-        // dispatch(postProfileSkills(obj));
+        dispatch(update({ index: index, key: key, value: value }));
+       // const obj = { index: index, key: skill, value: value};
+       // dispatch(postProfileSoftSkills(obj));
     }
 
     const removeSkill = (index: number) => {
         const id = skills.id;
         if(id)
             dispatch(deleteProfileSoftSkills(id)).then(res => {
-                    if(res.status == 200)
+                    // console.log(res.payload.status_code);
+                    if(res.payload.status_code == 200)
                         dispatch(remove(index));
             });
         else
@@ -138,8 +147,8 @@ function  AddSkills(props){
          
                     <div className="flex flex-row items-center justify-between  border-b-2 bg-gray-200 opacity-100" >
                         <span className="text-blue-500 pl-4"><i className="fa fa-user-check" aria-hidden="true"></i></span>
-                        <input className="block h-8 pl-12 p-2 bg-gray-200 opacity-100 font-bold focus:outline-none w-1/3" value={skill} onChange={e => setSkill(e.target.value)} placeholder=""></input>
-                        <input className="block h-8 w-2/3"  type="text" value={skills.value} onChange={e => handleRangeInput(e.target.value, skill)} />
+                        <input className="block h-8 pl-12 p-2 bg-gray-200 opacity-100 font-bold focus:outline-none w-1/3" value={key} onChange={e => setKey(e.target.value)} placeholder=""></input>
+                        <input className="block h-8 w-2/3"  type="text" value={value} onChange={e => setValue(e.target.value)} onMouseLeave={updateKeyValue} />
                         <span className="block h-6 w-1/3 font-bold text-gray-700 text-center">{skills.score}</span>
                         <button className="w-1/5" onClick={() => removeSkill(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
                         {/* <button className="w-1/5" onClick={() => saveSkill(key['skill'])}>Save</button> */}

@@ -12,11 +12,14 @@ export const SoftSkillReducer = createSlice({
             state.softskills.unshift(action.payload);
         },
         
+        // update:(state, action: PayloadAction<object>) => {
+        //      //state.skills[action.payload.index]['score'] = action.payload?.score;
+        // },
         update:(state, action: PayloadAction<object>) => {
-             //state.skills[action.payload.index]['score'] = action.payload?.score;
-        },
-        updateScore:(state, action: PayloadAction<object>) => {
-            //  state.SoftSkills[action.payload.index]['score'] = action.payload?.score;
+            console.log( current(state.softskills));
+            state.softskills[action.payload.index].key = action.payload?.key;
+            state.softskills[action.payload.index].value = action.payload?.value;
+
         },
 
         remove: (state, action: PayloadAction<number>) => {
@@ -66,8 +69,6 @@ export const SoftSkillReducer = createSlice({
     'softskills/add',
     async (profileSkills) => {
         const {profile_id, skillList} = profileSkills;
-        // profileSkills['profile_id'] = profile_id;
-        // console.log(profileSkills, postSkillURL(profile_id));
         const url = '/resume/profile/'+profile_id +'/softskill'
         const response = await axios.post(url, skillList)
         // console.log(response.data);
@@ -91,11 +92,16 @@ export const SoftSkillReducer = createSlice({
  )
  export const deleteProfileSoftSkills = createAsyncThunk(
     'softskills/delete',
-    async (id: string) => {
-        const url = '/resume/profile/softskill'+id;
+    async (id: string,{dispatch}) => {
+        const url = '/resume/softskill/'+id;
         const response = await axios.delete(url);
         // console.log(response.data)
+        // if(response.data.status_code ==200){
+            // dispatch(getProfileSoftSkills(profile_id));
         return response.data;
+
+        // }
+        // return response.data;
         // return {id: id, status: 200};
     }
  )
