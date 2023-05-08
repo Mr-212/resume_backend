@@ -16,9 +16,10 @@ import { getUrlPath } from "../../hooks/GetLocation";
 const ResumeUrls = {
     
     "Profile" : "/profile",
+    "Personality Traits" :"/softskills",
+
     "Education" :"/education",
     // {"Soft Skill" :""},
-    "SoftSkills" :"/softskills",
 
     "Skill" :"/skills",
     "Work History" :"/experience" ,

@@ -5,6 +5,7 @@ import { color } from "html2canvas/dist/types/css/types/color";
 import { display } from "html2canvas/dist/types/css/property-descriptors/display";
 import { WithPDFPreview } from "../WithPDFPreview";
 import { ResumeStore } from "../partials/useResumeStore";
+import SOftSkills from "../pages/SoftSkills";
 
 const styles = StyleSheet.create({
     page: {
@@ -154,6 +155,8 @@ const PdfTemplate = (props) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
+    const softskills = props.softskills;
+
     console.log(props);
 
     return(
@@ -161,7 +164,7 @@ const PdfTemplate = (props) => {
             {/* {profile.length > 0  &&  */}
         <Page size="A4" style={styles.page}>
             <LefttSide profile={profile} education={education} skills={skills}></LefttSide>
-            <RightSide profile={profile} experience={experience} education={education}></RightSide>
+            <RightSide profile={profile} experience={experience} education={education} softskills={softskills}></RightSide>
         </Page>
         {/* } */}
     </Document>
@@ -177,7 +180,7 @@ export default WithPDFPreview(PdfTemplate);
 
 
 
-const RightSide = ({profile, education, experience})=>{
+const RightSide = ({profile, education, experience, softskills})=>{
     // console.log(profile)
     return(
          
@@ -186,6 +189,21 @@ const RightSide = ({profile, education, experience})=>{
             <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Profession Summary</Text>
             <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View>
+
+        {softskills && 
+
+        <View style={styles.flex_col} >
+            <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Personality Traits</Text>
+            <View style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', flexWrap:'wrap' , width:'100%'}} >
+
+              {softskills.map((v,k) => 
+
+                  <Text style={{...styles.section_right_font_colors_sm,marginTop:'4px', fontSize:'14px', color:'#031F64', fontStyle:'italic', fontWeight:'extrabold'}}>{v.key}</Text>
+              )}
+            </View>
+
+        </View>   
+        }     
 
         <View style={styles.flex_col}>
            <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Education</Text>

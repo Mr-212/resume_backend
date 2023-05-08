@@ -85,7 +85,7 @@ const SOftSkills = <T extends SkillProps> () => {
                 })
                 }
             </div>
-            <div className="flex flex-col items-center gap-2 pt-3">
+            <div className="flex flex-row flex-wrap items-center gap-2 pt-3">
             { Object.values(skillList).map((val,key ) => {
                 counter++;
                 return <AddSkills skill={val} index={key} key={counter} ></AddSkills>;
@@ -143,13 +143,12 @@ function  AddSkills(props){
 
     return(
 
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex flex-col items-center">
          
-                    <div className="flex flex-row items-center justify-between  border-b-2 bg-gray-200 opacity-100" >
+                    <div className="flex flex-row items-center justify-between border-b-2 bg-gray-200 opacity-100" >
                         <span className="text-blue-500 pl-4"><i className="fa fa-user-check" aria-hidden="true"></i></span>
-                        <input className="block h-8 pl-12 p-2 bg-gray-200 opacity-100 font-bold focus:outline-none w-1/3" value={key} onChange={e => setKey(e.target.value)} placeholder=""></input>
-                        <input className="block h-8 w-2/3"  type="text" value={value} onChange={e => setValue(e.target.value)} onMouseLeave={updateKeyValue} />
-                        <span className="block h-6 w-1/3 font-bold text-gray-700 text-center">{skills.score}</span>
+                        <input className="w-2/3 block h-8 pl-12 p-2 bg-gray-200 opacity-100 font-bold focus:outline-none" value={key} onChange={e => setKey(e.target.value)} onMouseLeave={updateKeyValue} placeholder=""></input>
+                        {/* <input className="pl-2 block h-8 outline-none w-2/3"  type="text" value={value} onChange={e => setValue(e.target.value)} onMouseLeave={updateKeyValue} /> */}
                         <button className="w-1/5" onClick={() => removeSkill(index)}><span className="text-lg text-red-600"><i className="fa fa-minus"></i></span></button>
                         {/* <button className="w-1/5" onClick={() => saveSkill(key['skill'])}>Save</button> */}
 
