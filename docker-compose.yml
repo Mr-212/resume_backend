@@ -83,4 +83,4 @@ services:
 networks:
   app:
     name: php80
-    external: true
+    # external: true
