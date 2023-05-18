@@ -13,7 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: isbang/compose-action@v1.4.1
-      with:
-        compose-file: "docker-compose.yml"
-        down-flags: "--volumes"
+    - name: running docker compose
+      run:  docker-compose -f docker-compose.yml
+    # - uses: isbang/compose-action@v1.4.1
+      # with:
+      #   compose-file: "docker-compose.yml"
+      #   down-flags: "--volumes"
