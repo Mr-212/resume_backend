@@ -30,6 +30,7 @@ php artisan optimize:clear
 php artisan optimize
 php artisan migrate
 # apachectl -D FOREGROUND
+echo "PHP ENTRY EXECUTED"
 
 
 # cd $APP_PATH

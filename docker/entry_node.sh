@@ -10,5 +10,6 @@ chmod -R o+w $APP_PATH/storage/
 
 cd $APP_PATH
 npm run dev
+echo "NODE ENTRY EXECUTED"
 
 exec "$@"
