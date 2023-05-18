@@ -9,7 +9,6 @@ use App\Http\Controllers\Resume\ExperienceController;
 use App\Http\Controllers\Resume\SkillController;
 use App\Http\Controllers\Resume\SoftSkillController;
 use App\Http\Controllers\WhoAmIController;
-use App\Models\Resume\SoftSkill;
 
 /*
 |--------------------------------------------------------------------------
