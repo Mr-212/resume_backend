@@ -27,7 +27,7 @@ RUN npm install --global npx yarn
 # WORKDIR /var/www/resume_backend
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN coposer install
+RUN composer install
 COPY vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64 /usr/local/bin/
 COPY vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/
 RUN chmod +x /usr/local/bin/wkhtmltoimage-amd64 
