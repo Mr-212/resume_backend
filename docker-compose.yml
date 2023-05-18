@@ -66,20 +66,20 @@ services:
     networks:
       - app
 
- lt:
-    # image: efrecon/localtunnel
-    image: docker_env_php80
-    # restart: on-failure
-    # network_mode: host
-    command: lt  --local-host resume_backend --port 80 --subdomain resumedev
-    # environment: 
-    #   - SUBDOMAIN=resume
-    # links:
-    #   - resume_backend
-    # depends_on:
-    #   - resume_backend
-    networks:
-      - app
+#  lt:
+#     # image: efrecon/localtunnel
+#     image: docker_env_php80
+#     # restart: on-failure
+#     # network_mode: host
+#     command: lt  --local-host resume_backend --port 80 --subdomain resumedev
+#     # environment: 
+#     #   - SUBDOMAIN=resume
+#     # links:
+#     #   - resume_backend
+#     # depends_on:
+#     #   - resume_backend
+#     networks:
+#       - app
 
 networks:
   app:
