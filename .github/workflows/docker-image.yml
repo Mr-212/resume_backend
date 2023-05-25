@@ -19,6 +19,11 @@ jobs:
       # with:
       #   compose-file: "docker-compose.yml"
       #   down-flags: "--volumes"
+    - name: Set up Docker Compose
+      run:  |
+        docker-compose down
+        docker-compose -f docker-compose.yml up -d
+
     # - name: Set AWS PEM Key
     #   run: echo "$AWS_PEM_KEY" > aws.pem
     #   env:
@@ -30,6 +35,10 @@ jobs:
         host: ${{secrets.EC2_HOST}}
         username: ${{secrets.EC2_USERNAME}}
         key: ${{ secrets.EC2_SECRET }}
+        script: |
+            cd /var/www/resume-backend
+            git pull origin main
+            sudo docker-compose down
+            sudo docker-compose up -d
 
-    # - name: running docker compose
-    #   run:  docker-compose -f docker-compose.yml up -d
+   
