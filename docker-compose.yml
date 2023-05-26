@@ -49,8 +49,8 @@ services:
     # image: docker_env_php80
     ports:
       - "3000:3000"
-      - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
-      # - 5173:5173
+      # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
+      - 5173:5173
 
     working_dir: /var/www/resume_backend
     volumes:
