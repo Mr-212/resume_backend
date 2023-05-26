@@ -18,11 +18,11 @@ a2enmod rewrite
 
 cd $APP_PATH
 composer install
-cp vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64 /usr/local/bin/
-cp vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/
-chmod +x /usr/local/bin/wkhtmltoimage-amd64 
-chmod +x /usr/local/bin/wkhtmltopdf-amd64
-php artisan vendor:publish --provider="Barryvdh\Snappy\ServiceProvider"
+# cp vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64 /usr/local/bin/
+# cp vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/
+# chmod +x /usr/local/bin/wkhtmltoimage-amd64 
+# chmod +x /usr/local/bin/wkhtmltopdf-amd64
+# php artisan vendor:publish --provider="Barryvdh\Snappy\ServiceProvider"
 chmod 777 -R storage
 php artisan storage:link
 composer dump-autoload
