@@ -41,10 +41,10 @@ services:
 
  resume_backend_node:
     container_name: resume_backend_node
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    # image: docker_env_php80
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile
+    image: docker_env_php80
     ports:
       - "3000:3000"
       - "3306:3306"
