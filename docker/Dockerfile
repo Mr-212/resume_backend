@@ -15,9 +15,11 @@ RUN apt update \
         && docker-php-ext-install \
             intl \
             opcache \
+            mysqli \
             pdo \
             pdo_mysql \
-            mysql 
+        && docker-php-ext-enable \
+        mysqli
 
 
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
