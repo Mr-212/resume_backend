@@ -34,4 +34,4 @@ echo "PHP ENTRY EXECUTED"
 
 
 # cd $APP_PATH
-exec "$@
+exec "$@"
