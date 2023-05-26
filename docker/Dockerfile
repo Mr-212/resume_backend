@@ -11,7 +11,7 @@ RUN apt update \
             libzip-dev \
             zip \
             zlib1g-dev \
-            php-mysql \
+            # php-mysql \
         && docker-php-ext-install \
             intl \
             opcache \
