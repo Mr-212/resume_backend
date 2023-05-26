@@ -11,12 +11,13 @@ RUN apt update \
             libzip-dev \
             zip \
             zlib1g-dev \
+            php-mysql \
         && docker-php-ext-install \
             intl \
             opcache \
             pdo \
-            pdo_pgsql \
-            pgsql 
+            pdo_mysql \
+            mysql 
 
 
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
