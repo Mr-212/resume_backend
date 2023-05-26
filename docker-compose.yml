@@ -6,14 +6,16 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: docker_env_php80
+    # image: docker_env_php80
     # command: 'chmod -R 0777 ${WORKING_DIR}'  
     ports:
       # - "8080:80"
       # - "8000:8000"
       - "2525:2525"
+      - "3306:3306"
+
       # - "3000:3000"
-      - "8001:80"
+      - "80:80"
       # - "5173:5173"
       # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
       # - "8000:8001"
@@ -44,10 +46,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: docker_env_php80
+    # image: docker_env_php80
     ports:
       - "3000:3000"
-      - "3306:3306"
       - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
 
     working_dir: /var/www/resume_backend
