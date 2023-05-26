@@ -9,6 +9,7 @@ chmod -R 0777 $APP_PATH
 chmod -R o+w $APP_PATH/storage/
 
 cd $APP_PATH
+npm i -f
 npm run dev
 echo "NODE ENTRY EXECUTED"
 
