@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    # image: docker_env_php80
+    image: docker_env_php80
     # command: 'chmod -R 0777 ${WORKING_DIR}'  
     ports:
       # - "8080:80"
@@ -43,10 +43,10 @@ services:
 
  resume_backend_node:
     container_name: resume_backend_node
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    # image: docker_env_php80
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile
+    image: docker_env_php80
     ports:
       - "3000:3000"
       # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
