@@ -26,6 +26,7 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm            
 RUN npm install --global npx yarn
+RUN echo fs.inotify.max_user_watches=524288 | /bin/bash tee -a /etc/sysctl.conf
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
