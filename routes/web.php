@@ -22,8 +22,8 @@ use App\Http\Controllers\WhoAmIController;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Auth/Login');
-    return view('layouts.app');
+    return view('index.index');
+    //return view('layouts.app');
 });
 
 // Route::prefix('resume')->group(function(){
