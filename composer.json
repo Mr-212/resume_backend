@@ -13,6 +13,7 @@
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "inertiajs/inertia-laravel": "^0.6.9",
+        "laravel/cashier": "^13.17",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.5",
         "laravel/sanctum": "^3.0",

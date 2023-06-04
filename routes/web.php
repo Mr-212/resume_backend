@@ -49,7 +49,7 @@ Route::get('/', function () {
 //->middleware(['auth']);
 
 
-Route::resource('who-am-i', WhoAmIController::class);
+Route::resource('aboutMe', WhoAmIController::class);
 Route::resource('resume.image', ImageController::class)->middleware('auth');
 
 Route::resource('resume', ResumeController::class)->middleware('auth');
