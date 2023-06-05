@@ -8,6 +8,7 @@ use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\ExperienceController;
 use App\Http\Controllers\Resume\SkillController;
 use App\Http\Controllers\Resume\SoftSkillController;
+use App\Http\Controllers\Subscriptions\StripeController;
 use App\Http\Controllers\WhoAmIController;
 
 /*
@@ -52,7 +53,15 @@ Route::get('/', function () {
 Route::resource('aboutMe', WhoAmIController::class);
 Route::resource('resume.image', ImageController::class)->middleware('auth');
 
+
+Route::prefix('subscriptions')->group(function(){
+    Route::resource('customer', StripeController::class);
+
+});
+
+
 Route::resource('resume', ResumeController::class)->middleware('auth');
+
 
 Route::prefix('resume')->group(function(){
     //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
