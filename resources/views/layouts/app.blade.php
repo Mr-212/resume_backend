@@ -41,6 +41,7 @@
     <!-- footer -->
     <footer>
         @include('layouts.partials.footer')
+        @stack('scripts')
     </footer>
 
 

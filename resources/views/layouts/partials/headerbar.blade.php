@@ -18,9 +18,14 @@
                 </li>
 
                 @if(auth()->user())
-                <li class="nav-link nav-item">
-                    <h3>{{ auth()->user()->name }}</h3>
-                </li>
+                    <li class="nav-link nav-item">
+                        <h3>{{ auth()->user()->name }}</h3>
+                    </li>
+                    <li class="nav-item">       
+                        <button class="nav-link font-bold px-2 py-1 opacity-100 text-slate-100 hover:outline-slate-200 hover:border-b hover:text-white">
+                            <a href="/auth/logout">Logout</a>
+                        </button>
+                    </li>
                 @else
                 
               

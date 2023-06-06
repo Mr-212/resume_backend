@@ -12,8 +12,10 @@ class Plan extends Model
     use HasFactory, UUID;
 
     protected $table = 'subscripton_plans';
-    protected $fillable = ['stripe_id', 'identifier' ,'title','price','currency'];
+    protected $fillable = ['stripe_id','identifier' ,'title','interval','type','status', 'price','currency'];
 
+    const PLAN_TYPES = ['Recurring','Fixed'];
+    const PLAN_INTERVAL = ['Free','Day','Week','Month','Quarter','Year'];
 
     public function subscription(): HasOne
     {

@@ -3,39 +3,31 @@
 namespace App\Http\Controllers\Subscriptions;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subscriptions\Plan;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StripeController extends Controller
+class PaymentController extends Controller
 {
+
+
+    private $user;
+
+    public function __construct(User $user)
+    {
+        // $this->user = Auth::user();
+        $this->user = $user;
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    private $user, $plan;
-
-    public function __construct(User $user, Plan $plan)
-    {
-        $this->user = Auth::user();
-        $this->plan = $plan;
-        //  $this->user = $user;
-
-    }
-
-
-
     public function index()
     {
-
-        $plans = $this->plan->orderBy('price','asc')->get();
-
-        return view('subscriptions.index',['plans' => $plans]);
-        
+        $intent = $this->user->createSetupIntent();
+        return view('subscriptions.update_payment_method',compact('intent'));
     }
 
     /**
@@ -45,15 +37,7 @@ class StripeController extends Controller
      */
     public function create()
     {
-
-        try{
-
-            $customer = $this->user->createAsStripeCustomer();
-
-
-        }catch(Exception $e){
-            throw $e->getMessage();
-        }
+        //
     }
 
     /**
