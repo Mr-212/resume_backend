@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Subscriptions;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscriptions\Plan;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,11 +17,12 @@ class StripeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private $user;
+    private $user, $plan;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Plan $plan)
     {
         $this->user = Auth::user();
+        $this->plan = $plan;
         //  $this->user = $user;
 
     }
@@ -30,7 +32,9 @@ class StripeController extends Controller
     public function index()
     {
 
-        return view('subscriptions.index');
+        $plans = $this->plan->get();
+
+        return view('subscriptions.index',['plans' => $plans]);
         
     }
 

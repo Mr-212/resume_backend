@@ -11,11 +11,10 @@
                 <li class="nav-item">       
                     <button class="nav-link font-bold px-2 py-1 opacity-100 text-slate-100 hover:outline-slate-200 hover:border-b hover:text-white"><a class="text-slate-100 hover:text-white" href="/subscriptions/customer">Subscribe</a></button>
                 </li>
-
+                
                 <li class="nav-item">       
                     <button class="font-bold py-1 hover:border-b opacity-100"><a class="text-slate-100 hover:text-white" href="/who-am-i">About me ?</a></button>
                     {{-- <a class="font-bold py-1 opacity-100 text-slate-100 hover:border-b hover:text-white" href="/who-am-i">About me ?</a> --}}
-
                 </li>
 
                 @if(auth()->user())
