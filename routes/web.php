@@ -10,6 +10,7 @@ use App\Http\Controllers\Resume\SkillController;
 use App\Http\Controllers\Resume\SoftSkillController;
 use App\Http\Controllers\Subscriptions\PaymentController;
 use App\Http\Controllers\Subscriptions\StripeController;
+use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\WhoAmIController;
 
 /*
@@ -55,10 +56,12 @@ Route::resource('aboutMe', WhoAmIController::class);
 Route::resource('resume.image', ImageController::class)->middleware('auth');
 
 
-Route::prefix('subscriptions')->group(function(){
-    Route::resource('customer', StripeController::class);
+// Route::prefix('subscriptions')->group(function(){
+    Route::resource('subscription', SubscriptionController::class);
+    // Route::resource('subscreptions', StripeController::class)->shallow();
     Route::resource('payment_methods', PaymentController::class);
-});
+
+// });
 
 
 Route::resource('resume', ResumeController::class)->middleware('auth');

@@ -38,6 +38,14 @@ class StripeController extends Controller
         
     }
 
+    public function getPaymentMethod()
+    {
+
+        $plans = $this->plan->orderBy('price','asc')->get();
+        return view('subscriptions.index',['plans' => $plans]);
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

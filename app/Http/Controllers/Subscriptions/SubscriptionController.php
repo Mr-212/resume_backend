@@ -3,10 +3,24 @@
 namespace App\Http\Controllers\Subscriptions;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscriptions\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
+
+
+    private $user, $plan;
+
+    public function __construct(User $user, Plan $plan)
+    {
+        // $this->user = Auth::user();
+        $this->plan = $plan;
+        $this->user = $user;
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,9 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $plans = $this->plan->orderBy('price','asc')->get();
+
+        return view('subscriptions.index',['plans' => $plans]);
     }
 
     /**
@@ -22,9 +38,11 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $plan_id = $request->plan_id;
+        $intent = $this->user->createSetupIntent();
+        return view('subscriptions.update_payment_method',compact('intent','plan_id'));
     }
 
     /**
@@ -35,7 +53,7 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

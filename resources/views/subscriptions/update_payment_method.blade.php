@@ -11,14 +11,18 @@
                 <h4 class="font-bold text-md">Payment Method Info</h4>
             </div>
 
-            <form class="space-y-3" id="payment_form" action="/subscriptions/create" method="POST">
+            <form class="space-y-3" id="payment_form" action="/subscription" method="post">
+                @csrf
+                <input type="hidden" name="payment_method_id" id='payment_method_id' />
+                <input type="hidden" name="plan_id" value="{{$plan_id}}" />
+
                 <input class="w-full text-sm  border-b-2 outline-none" id="card-holder-name" placeholder="Card Holder Name" type="text">
     
                 <!-- Stripe Elements Placeholder -->
                 <div class="w-full border-b-2" id="card-element"></div>
                 
                 <button type="button" class="px-2 py-1 bg-blue-400 text-gray-50  hover:bg-black hover:text-white rounded-none float-right font-bold" id="card-button" data-secret="{{ $intent->client_secret }}">
-                    Update Payment Method
+                    Update
                 </button>
             </form>
            
@@ -52,13 +56,18 @@
                 }
             }
         );
+
+        
     
         if (error) {
             // Display "error.message" to the user...
         } else {
+            // console.log(setupIntent);
+            if(setupIntent.payment_method  != ""){
+                document.getElementById('payment_method_id').value = setupIntent.payment_method;
+                document.getElementById('payment_form').submit();
+            }
             //console.log("The card has been verified successfully...");
-            document.getElementById('payment_form').submit();
-
         }
     });
 </script>

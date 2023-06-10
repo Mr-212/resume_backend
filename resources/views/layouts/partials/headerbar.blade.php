@@ -9,7 +9,7 @@
             <ul class="navbar-nav float-right space-x-2">
 
                 <li class="nav-item">       
-                    <button class="nav-link font-bold px-2 py-1 opacity-100 text-slate-100 hover:outline-slate-200 hover:border-b hover:text-white"><a class="text-slate-100 hover:text-white" href="/subscriptions/customer">Subscribe</a></button>
+                    <button class="nav-link font-bold px-2 py-1 opacity-100 text-slate-100 hover:outline-slate-200 hover:border-b hover:text-white"><a class="text-slate-100 hover:text-white" href="/subscription">Subscribe</a></button>
                 </li>
                 
                 <li class="nav-item">       
