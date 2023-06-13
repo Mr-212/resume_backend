@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Subscriptions;
 use App\Http\Controllers\Controller;
 use App\Models\Subscriptions\Plan;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,9 @@ class SubscriptionController extends Controller
 
     public function __construct(User $user, Plan $plan)
     {
-        // $this->user = Auth::user();
+        $this->user = Auth::user();
         $this->plan = $plan;
-        $this->user = $user;
+       // $this->user = $user;
 
     }
     /**
@@ -41,7 +42,8 @@ class SubscriptionController extends Controller
     public function create(Request $request)
     {
         $plan_id = $request->plan_id;
-        $intent = $this->user->createSetupIntent();
+        $subscriptionProduct = $this->plan->where('stripe_id')->first('identifier');
+        $intent = $this->user->newSubscription($subscriptionProduct, $request->plan_id)->create($request->payment_id);
         return view('subscriptions.update_payment_method',compact('intent','plan_id'));
     }
 
@@ -54,6 +56,15 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
+
+        try{
+            if($request->has('plan_id')){
+                $this->user->createS;
+            }
+
+        }catch(Exception $e){
+            throw $e->getMessage();
+        }
     }
 
     /**
