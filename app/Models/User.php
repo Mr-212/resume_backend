@@ -30,7 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'first_name','last_name','phone','is_social','privider','provider_id','img_url','social_email_verified','nickname','url','nickname'
+        'first_name','last_name','phone','is_social','privider','provider_id','img_url','social_email_verified','url','nickname'
     ];
 
     /**
