@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
         padding: 15,
         // paddingTop: 20,
         width: '100%',
-        height: '70%',
+        // height: '70%',
 
         // backgroundColor: '#F1F3F7',
         fontFamily: 'Helvetica-Bold',
       },
       section_top: {
         width: '100%',
-        height: '30%',
+        // height: '50%',
         backgroundColor: '#E5E9EE',
       },
 
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent:'flex-start',
+        fontFamily: 'Helvetica-Bold',
         // marginLeft: 20,
         // marginRight: 20,
         // marginTop: '20',
@@ -52,9 +53,9 @@ const styles = StyleSheet.create({
       },
 
       contact_family: {
-        fontSize: '11px',
+        fontSize: '12px',
         fontWeight: '800',
-        color: '#7E8387',
+        color: '#475569',
         fontStyle: 'italic',
         marginLeft: '5px'
       },
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
       },
       profession_text: {
         color: '#023579',
-        fontSize: '15px',
+        fontSize: '11px',
         fontWeight: '500',
         paddingTop:'5px',
       },
@@ -135,10 +136,20 @@ const styles = StyleSheet.create({
       },
       
       section_right_font_colors_sm :{
-        fontSize: '11px',
-        fontWeight:'100',
-        color: 'black',
-        paddingTop: '4px',
+        fontSize: '10px',
+        fontWeight:'600',
+        color: '#475569',
+        paddingTop: '5px',
+        paddingBottom: 5,
+      },
+
+      border_y: {
+         borderBottom:'1px',
+         borderBottomColor:'#B4AEAD', 
+         borderTop: '1px', 
+         borderTopColor:'#B4AEAD',
+         paddingBottom: 5,
+         marginBottom: 5
       }
 
     });
@@ -155,6 +166,7 @@ const PdfTemplateBasic = (props) => {
     const skills = props.skills;
     const education = props.education;
     const experience = props.experience;
+    const softskills = props.softskills;
     console.log(props);
 
     return(
@@ -165,7 +177,7 @@ const PdfTemplateBasic = (props) => {
           <View style={styles.flex_col}>
             <UpperSection profile={profile}></UpperSection>
 
-            {/* <LowerSection profile={profile} education={education} skills={skills}></LowerSection> */}
+            <LowerSection profile={profile} education={education}  experience={experience} skills={skills} softskills={softskills}></LowerSection>
             </View>
         </Page>
         {/* } */}
@@ -182,15 +194,58 @@ export default WithPDFPreview(PdfTemplateBasic);
 
 
 
-const LowerSection = ({profile, education, experience})=>{
+const LowerSection = ({profile, education, experience, skills, softskills})=>{
     // console.log(profile)
     return(
          
       <View style={styles.section_right}>
-        <View style={styles.flex_col} >
+        {/* <View style={styles.flex_col} >
             <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Profession Summary</Text>
             <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
+        </View> */}
+        <View style={ {...styles.flex_col}} >
+            <Text style={ {...styles.name_text,  color: 'gray', ...styles.border_y }}>Profession Summary</Text>
+            <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View>
+
+
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
+          <Text style={{...styles.name_text, ...styles.border_y, color: 'gray'}}>Technical Skills</Text>
+          <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%', flexWrap: 'wrap'} }>
+
+          {Object.entries(skills).map(([key, val]) => {
+                  return (
+                      <View style={ {display:'flex', flexDirection:'column', justifyContent:'flex-start', width: '33.33%'}}>
+                          <Text style={ styles.contact_family }>{val['skill']}</Text>
+                          <View style={{ flexDirection:'row', width:'100%', marginLeft: 5, justifyContent:'flex-start', alignContent:'center'}}>
+                             <View style={ {display:'flex', justifyContent:'flex-start',  alignItems:'center', flexDirection:'row' }}>
+                                <Text style={ { backgroundColor:'#1C0FF4', height: '40%', width:  val['score']}}></Text>
+                                <Text style={ { backgroundColor:'gray', height: '40%', width: 100 - val['score']}}></Text>
+                             </View>
+                             <Text style={ { color:'gray', marginLeft: 5, 'fontSize':'9px' }}>{val['score']}</Text>
+                          </View>
+                      </View>
+                   
+                  )
+              })
+          }
+         </View>
+        </View>
+
+        {softskills && 
+
+        <View style={styles.flex_col} >
+            <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Personality Traits</Text>
+            <View style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', flexWrap:'wrap' , width:'100%'}} >
+
+              {softskills.map((v,k) => 
+
+                  <Text style={{marginTop:'5px', backgroundColor:'#6b7280', padding:7 , marginLeft:'3px', fontSize: 12, color:'white', fontFamily: 'Helvetica-Bold', fontWeight:'extrabold'}}>{v.key}</Text>
+              )}
+            </View>
+
+        </View>   
+}  
 
         <View style={styles.flex_col}>
            <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Education</Text>
@@ -226,16 +281,40 @@ const LowerSection = ({profile, education, experience})=>{
                             <Text style={styles.section_right_font_colors_sm}>{experience.job_title}</Text>
                             <Text style={styles.section_right_font_colors_sm}>{experience.city}</Text>
                         </View>
-                        <View style={ styles.flex_col}>
-                            <Text style={ {...styles.right_section_headings}}>Working Summary</Text>
+                        {/* <View style={ styles.flex_col}>
+                            <Text style={ {...styles.right_section_headings}}>Profession Summary</Text>
                             <Text style={styles.section_right_font_colors_sm}>{experience.description}</Text>
-                        </View>
+                        </View> */}
+
                     </View>
                  )
 
                  })
              }
         </View>
+        
+        {/* <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
+          <Text style={{...styles.name_text, ...styles.border_y}}>Skills</Text>
+          <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
+
+          {Object.entries(skills).map(([key, val]) => {
+                  return (
+                      <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between', width: '50%'}}>
+                          <Text style={ styles.contact_family }>{val['skill']}</Text>
+                          <View style={{ flexDirection:'row', width:'100%', marginLeft: 5, justifyContent:'flex-start', alignContent:'center'}}>
+                             <View style={ {display:'flex', justifyContent:'flex-start',  alignItems:'center', flexDirection:'row' }}>
+                                <Text style={ { backgroundColor:'#1C0FF4', height: '40%', width:  val['score']}}></Text>
+                                <Text style={ { backgroundColor:'gray', height: '40%', width: 100 - val['score']}}></Text>
+                             </View>
+                             <Text style={ { color:'gray', marginLeft: 5, 'fontSize':'9px' }}>{val['score']}</Text>
+                          </View>
+                      </View>
+                   
+                  )
+              })
+          }
+         </View>
+        </View> */}
         
       </View>
     )
@@ -261,11 +340,11 @@ const UpperSection = ({profile})=>{
 
         </View>
         
-        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between', width: '100%',  borderBottom: '1px', borderBottomColor:'white', paddingBottom:'10', borderTop:'1px', borderTopColor:'white'} }>
-          <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white' }}>Contact</Text>
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between', width: '100%', paddingBottom:'10'} }>
+          <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white', borderTop:'1px', borderTopColor:'white' }}>Contact</Text>
           
           <View style={ {display: 'flex', flexDirection:'row', justifyContent:'space-between', width: '100%'} }>
-            <View style={ {...styles.flex_col} }>
+            <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '50%'} }>
                 <Text style={ styles.field_text }>Email</Text>
                 <Text style={ styles.contact_family }>{profile.email}</Text>
                 <Text style={ styles.field_text }>Phone</Text>
@@ -277,14 +356,22 @@ const UpperSection = ({profile})=>{
                   </View>
                 }
             </View>  
-            <View style={ styles.flex_col }>
+            <View style={ {...styles.flex_col, width: '50%' }}>
                 <Text style={ styles.field_text } >Email</Text>
                 <Text style={ styles.contact_family }>{profile.email}</Text>
                 <Text style={ styles.field_text } >Phone</Text>
                 <Text style={ styles.contact_family}>{profile.phone}</Text>
+
             </View>  
             </View>        
         </View>
+
+
+
+        {/* <View style={ {...styles.flex_col}} >
+            <Text style={ {...styles.name_text, borderBottom:'1px', borderBottomColor:'white',color: 'gray',borderTop: '1px', borderTopColor:'white'}}>Profession Summary</Text>
+            <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
+        </View> */}
        
   
         {/* <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
