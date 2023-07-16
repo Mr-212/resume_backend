@@ -12,7 +12,7 @@ services:
       # - "8080:80"
       # - "8000:8000"
       - "2525:2525"
-      - "3306:3306"
+      # - "3306:3306"
 
       # - "3000:3000"
       - "80:80"
@@ -82,6 +82,19 @@ services:
 #     #   - resume_backend
 #     networks:
 #       - app
+
+ db:
+    image: mysql:latest
+    container_name: mysql_db
+    # command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306 
+    networks:
+      - app   
+  
 
 networks:
   app:

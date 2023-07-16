@@ -11,6 +11,12 @@ class AuthController extends Controller
     //
 
 
+
+    public function login(): void {
+
+    }
+
+
     public function logout() {
         try{
             auth()->logout();

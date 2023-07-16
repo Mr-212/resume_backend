@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Subscriptions\Subscription;
+use App\Models\Subscriptions\SubscriptionItem;
+
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
@@ -28,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Cashier::useCustomerModel(User::class);
-        Cashier::calculateTaxes();
+        Cashier::useSubscriptionModel(Subscription::class);
+        Cashier::useSubscriptionItemModel(SubscriptionItem::class);
+
+        // Cashier::calculateTaxes();
     }
 }

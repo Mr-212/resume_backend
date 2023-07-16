@@ -198,7 +198,7 @@ const RightSide = ({profile, education, experience, softskills})=>{
 
               {softskills.map((v,k) => 
 
-                  <Text style={{...styles.section_right_font_colors_sm,marginTop:'4px', fontSize:'14px', color:'#031F64', fontStyle:'italic', fontWeight:'extrabold'}}>{v.key}</Text>
+                  <Text style={{...styles.section_right_font_colors_sm,marginTop:'4px', marginLeft:'2px', fontSize:'14px', borderBottom:'1px', color:'#031F64', fontStyle:'italic', fontWeight:'extrabold'}}>{v.key}</Text>
               )}
             </View>
 

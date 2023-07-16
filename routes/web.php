@@ -80,5 +80,3 @@ Route::prefix('resume')->group(function(){
     Route::resource('profile.experience',ExperienceController::class)->shallow();
 })->middleware('auth');
 
-
-

@@ -41,7 +41,11 @@ class SubscriptionController extends Controller
      */
     public function create(Request $request)
     {
-        
+
+        dd(Auth::user()->paymentMethods());
+        $plan_id = $request->plan_id;
+        $intent = Auth::user()->createSetupIntent();
+        return view('subscriptions.update_payment_method',compact('intent','plan_id'));
     }
 
     /**
@@ -52,21 +56,25 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
 
         try{
             if($request->has('plan_id')){
-                if(!$this->user->hasPaymentMethod())
-                    $this->updateDefaultPaymentMethod($request->payment_method_id);
+                // if(!$this->user->hasPaymentMethod())
+                //     $this->updateDefaultPaymentMethod($request->payment_method_id);
                 
                 $plan_id = $request->plan_id;
-                $subscriptionProduct = $this->plan->where('stripe_id',$plan_id)->first('identifier');
-                $intent = $this->user->newSubscription($subscriptionProduct, $request->plan_id)->create($request->payment_method_id);
-                return view('subscriptions.update_payment_method',compact('intent','plan_id'));
+                $subscriptionProduct = $this->plan->where('stripe_id',$plan_id)->first()->identifier;
+                
+                $subscription = Auth::user()->newSubscription($subscriptionProduct, $request->plan_id)->create($request->payment_method_id);
+                
+                // dd($subscription);
+                
+               
             }
 
         }catch(Exception $e){
-            throw $e->getMessage();
+            dd($e->getMessage());
         }
     }
 

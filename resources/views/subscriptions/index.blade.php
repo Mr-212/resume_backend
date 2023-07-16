@@ -32,7 +32,7 @@
               <button type="button"
                 class="inline-block w-full rounded-sm bg-blue-800 px-6 pt-2.5 pb-2 text-md font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-slate-200 hover:text-black focus:bg-sky-400 focus:outline-none focus:ring-0 active:bg-sky-600">
                 <a  class="" href="{{route('subscription.create',['plan_id' => $plan->stripe_id])}}">Buy</a>
-                <a  class="" href="/subscription/create">Buy</a>
+                {{-- <a  class="" href="/subscription/create">Buy</a> --}}
 
               </button>
             </div>

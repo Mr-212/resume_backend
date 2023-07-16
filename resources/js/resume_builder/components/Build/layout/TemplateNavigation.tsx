@@ -36,7 +36,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
 
     },[resumeStoreObject])
     // const[Template, selectTemplate ] = useState(PdfTemplate);
-    const[template, selectTemplate ] = useState('PdfTemplate');
+    const[template, selectTemplate ] = useState('PdfTemplateBasic');
 
 
 

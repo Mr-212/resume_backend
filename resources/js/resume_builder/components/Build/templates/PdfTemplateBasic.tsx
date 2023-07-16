@@ -15,18 +15,19 @@ const styles = StyleSheet.create({
         // margin: 10,
         display:'flex',
         padding: 15,
-        paddingTop: 20,
+        // paddingTop: 20,
         width: '100%',
         height: '70%',
 
-        backgroundColor: '#F1F3F7',
+        // backgroundColor: '#F1F3F7',
         fontFamily: 'Helvetica-Bold',
       },
-      section_left: {
+      section_top: {
         width: '100%',
         height: '30%',
-        backgroundColor: '#0E53B4',
+        backgroundColor: '#E5E9EE',
       },
+
       profile_container: {
         display: 'flex',
         flexDirection: 'column',
@@ -43,46 +44,47 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica-Bold',
       },
       name_text: {
-        paddingTop: '10px',
+        paddingTop: '5px',
         paddingBottom: '5px',
-        fontSize: '14px',
-        fontWeight: '400',
-        color: '#E4E4E4',
+        fontSize: '13px',
+        fontWeight: '500',
+        color: '#212324',
       },
 
       contact_family: {
-        fontSize: '14px',
-        fontWeight: '300',
-        color: '#63A3EC',
-        fontStyle: 'italic'
+        fontSize: '11px',
+        fontWeight: '800',
+        color: '#7E8387',
+        fontStyle: 'italic',
+        marginLeft: '5px'
       },
 
       field_text: {
         paddingTop: '5px',
-        paddingBottom: '5px',
-        fontSize: '13px',
-        fontWeight: '300',
-        color: '#E4E4E4',
+        paddingBottom: '2px',
+        fontSize: '10px',
+        fontWeight: '600',
+        color: '#212324',
         // marginLeft: 10
       },
 
       field_text_sm: {
-        fontSize: '12px',
-        fontWeight:'500',
-        color: '#63A3EC',
-        paddingTop: '4px',
-        // marginLeft: 10
+        fontSize: '11px',
+        fontWeight:'600',
+        color: '#7E8387',
+        paddingTop: '2',
+        marginLeft: 10
       },
       profession_text: {
-        color: '#63A3EC',
-        fontSize: '11px',
-        fontWeight: '300',
+        color: '#023579',
+        fontSize: '15px',
+        fontWeight: '500',
         paddingTop:'5px',
       },
       profile_img: {
         width: '80px',
         height: '80px',
-        borderRadius: '90',
+        borderRadius:'90',
       },
       profile_line: {
         marginTop: '10px',
@@ -196,7 +198,7 @@ const LowerSection = ({profile, education, experience})=>{
               return( 
                    <View style={styles.flex_col}>
                       <View style={styles.flex_row}>
-                          <Text style={{...styles.section_right_font_colors}}>{education.qualification}</Text>
+                          <Text style={{...styles.section_right_font_colors}}>-{education.qualification}</Text>
                           <Text style={{...styles.section_right_font_colors}}>{education.gpa_marks}</Text>
                       </View>
                       <View style={styles.flex_row}>
@@ -242,29 +244,46 @@ const UpperSection = ({profile})=>{
 
     return(
          
-        <View style={styles.section_left}>
+        <View style={styles.section_top}>
         <View style={styles.profile_container}>
   
-        <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
+        <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%', marginBottom:'5'}} >
+          
+          <Text style={styles.name_text}>{profile.name}</Text>
+          <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
+              <Text style={{...styles.field_text,marginRight:3, fontSize: 8 ,fontWeight: 600, color: 'black'}}>Title</Text>
+              <Text style={styles.profession_text}>{profile.job_title}</Text>
+          </View>
           {profile.image_url && 
               <Image style={styles.profile_img} src={profile.image_url} />
           }
-          <Text style={styles.name_text}>{profile.name}</Text>
-          <Text style={styles.profession_text}>{profile.job_title}</Text>
+          
 
         </View>
         
-        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
-          <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white'}}>Contact</Text>
-            <View style={ styles.flex_col }>
-                <Text style={ styles.field_text } >Email</Text>
-                <Text style={ styles.contact_family } >{profile.email}</Text>
-                <Text style={ styles.field_text } >Phone</Text>
+        <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between', width: '100%',  borderBottom: '1px', borderBottomColor:'white', paddingBottom:'10', borderTop:'1px', borderTopColor:'white'} }>
+          <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white' }}>Contact</Text>
+          
+          <View style={ {display: 'flex', flexDirection:'row', justifyContent:'space-between', width: '100%'} }>
+            <View style={ {...styles.flex_col} }>
+                <Text style={ styles.field_text }>Email</Text>
+                <Text style={ styles.contact_family }>{profile.email}</Text>
+                <Text style={ styles.field_text }>Phone</Text>
                 <Text style={ styles.contact_family}>{profile.phone}</Text>
                 { profile.address && 
+                  <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
+                    <Text style={ styles.field_text}>Address</Text>
                     <Text style={ styles.contact_family}>{profile.address}</Text>
+                  </View>
                 }
-            </View>          
+            </View>  
+            <View style={ styles.flex_col }>
+                <Text style={ styles.field_text } >Email</Text>
+                <Text style={ styles.contact_family }>{profile.email}</Text>
+                <Text style={ styles.field_text } >Phone</Text>
+                <Text style={ styles.contact_family}>{profile.phone}</Text>
+            </View>  
+            </View>        
         </View>
        
   
