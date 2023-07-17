@@ -49,6 +49,9 @@ class ImageController extends Controller
                     $image = str_replace($replace, '', $image);                     
                     $image = str_replace(' ', '+', $image); 
                     $imageName = Str::random(10).'.'.$extension;
+                    if(!is_dir(storage_path(). '/app/public/images/resume/')){
+                        mkdir(storage_path(). '/app/public/images/resume/', $permissions = 0777, true);
+                    }
                     $path = storage_path(). '/app/public/images/resume/'.$imageName;
                     $image_url = url('storage/images/resume/'.$imageName);
                     $file = File::put($path, base64_decode($image));

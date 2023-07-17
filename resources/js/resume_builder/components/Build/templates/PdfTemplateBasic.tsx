@@ -34,15 +34,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'flex-start',
         fontFamily: 'Helvetica-Bold',
-        // marginLeft: 20,
-        // marginRight: 20,
+        marginLeft: 20,
+        marginRight: 20,
         // marginTop: '20',
         // marginBottom: '20',
-        padding:20,
+        // padding:20,
         // margin: 20,
         // height: '100%',
         // // width:'100%',
-        fontFamily: 'Helvetica-Bold',
       },
       name_text: {
         paddingTop: '5px',
@@ -84,8 +83,8 @@ const styles = StyleSheet.create({
       },
       profile_img: {
         width: '80px',
-        height: '80px',
-        borderRadius:'90',
+        height: '70px',
+        borderRadius:'100',
       },
       profile_line: {
         marginTop: '10px',
@@ -204,7 +203,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
             <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View> */}
         <View style={ {...styles.flex_col}} >
-            <Text style={ {...styles.name_text,  color: 'gray', ...styles.border_y }}>Profession Summary</Text>
+            <Text style={ {...styles.name_text,  color: 'gray', ...styles.border_y }}>Professional Summary</Text>
             <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View>
 
@@ -232,7 +231,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
          </View>
         </View>
 
-        {softskills && 
+        {softskills.length && 
 
         <View style={styles.flex_col} >
             <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Personality Traits</Text>
@@ -240,40 +239,42 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
 
               {softskills.map((v,k) => 
 
-                  <Text style={{marginTop:'5px', backgroundColor:'#6b7280', padding:7 , marginLeft:'3px', fontSize: 12, color:'white', fontFamily: 'Helvetica-Bold', fontWeight:'extrabold'}}>{v.key}</Text>
+                  <Text style={{marginTop:'5px', backgroundColor:'#6b7280', padding:7, marginLeft:'3px', fontSize: 12, color:'white', fontFamily: 'Helvetica-Bold', fontWeight:'extrabold'}}>{v.key}</Text>
               )}
             </View>
 
         </View>   
 }  
-
-        <View style={styles.flex_col}>
-           <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Education</Text>
-           {education.map((education) => {
-              return( 
-                   <View style={styles.flex_col}>
-                      <View style={styles.flex_row}>
-                          <Text style={{...styles.section_right_font_colors}}>-{education.qualification}</Text>
-                          <Text style={{...styles.section_right_font_colors}}>{education.gpa_marks}</Text>
-                      </View>
-                      <View style={styles.flex_row}>
-                          <Text style={styles.section_right_font_colors_sm}>{education.institution}</Text>
-                          <Text style={styles.section_right_font_colors_sm}>{education.address}</Text>
-                      </View>
-                   </View>
-              )
-              
-           })
-          }
-  
-        </View> 
-        <View style={ styles.flex_col}>
-            <Text style={{...styles.right_section_headings, ...styles.border_right_section}}>Experience</Text> 
-            {experience.map((experience: any) => {
+        { education.length &&
+          <View style={styles.flex_col}>
+            <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Education</Text>
+            {education.map((education) => {
+                return( 
+                    <View style={styles.flex_col}>
+                        <View style={styles.flex_row}>
+                            <Text style={{...styles.section_right_font_colors}}>{education.qualification}</Text>
+                            <Text style={{...styles.section_right_font_colors}}>{education.gpa_marks}</Text>
+                        </View>
+                        <View style={styles.flex_row}>
+                            <Text style={styles.section_right_font_colors_sm}>{education.institution}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{education.address}</Text>
+                        </View>
+                    </View>
+                )
+                
+            })
+            }
+    
+          </View> 
+      }
+      { experience.length &&
+        <View style={ styles.flex_col} break>
+              <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Experience</Text>
+            { experience.map((experience: any) => {
                 return(
                     <View style={ styles.flex_col }>
                         <View style={ styles.flex_row }>
-                            <Text style={styles.section_right_font_colors_sm}>{experience.start_date+ ' - ' + (experience.is_currently_working? 'Present' : experience.end_date)}</Text>
+                            <Text style={styles.section_right_font_colors_sm}>{experience.start_date+ ' - ' + (experience.is_currently_working ? 'Present' : experience.end_date)}</Text>
                             <Text style={styles.section_right_font_colors}>{experience.company}</Text>
 
                         </View>
@@ -281,10 +282,12 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
                             <Text style={styles.section_right_font_colors_sm}>{experience.job_title}</Text>
                             <Text style={styles.section_right_font_colors_sm}>{experience.city}</Text>
                         </View>
-                        {/* <View style={ styles.flex_col}>
-                            <Text style={ {...styles.right_section_headings}}>Profession Summary</Text>
-                            <Text style={styles.section_right_font_colors_sm}>{experience.description}</Text>
-                        </View> */}
+                        {experience.description &&
+                          <View style={ styles.flex_col}>
+                              <Text style={ {...styles.right_section_headings}}>Profession Summary</Text>
+                              <Text style={styles.section_right_font_colors_sm}>{experience.description}</Text>
+                          </View>
+                        }
 
                     </View>
                  )
@@ -292,6 +295,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
                  })
              }
         </View>
+      }
         
         {/* <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
           <Text style={{...styles.name_text, ...styles.border_y}}>Skills</Text>
@@ -326,16 +330,20 @@ const UpperSection = ({profile})=>{
         <View style={styles.section_top}>
         <View style={styles.profile_container}>
   
-        <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%', marginBottom:'5'}} >
+        <View style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', marginBottom:'5'}} >
           
-          <Text style={styles.name_text}>{profile.name}</Text>
-          <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
-              <Text style={{...styles.field_text,marginRight:3, fontSize: 8 ,fontWeight: 600, color: 'black'}}>Title</Text>
-              <Text style={styles.profession_text}>{profile.job_title}</Text>
+          <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
+            <Text style={styles.name_text}>{profile.name}</Text>
+            <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
+                <Text style={{...styles.field_text,marginRight:3, fontSize: 8 ,fontWeight: 600, color: 'black'}}>Title</Text>
+                <Text style={styles.profession_text}>{profile.job_title}</Text>
+            </View>
           </View>
-          {profile.image_url && 
-              <Image style={styles.profile_img} src={profile.image_url} />
-          }
+          {/* <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-end', width:'100%', marginBottom:'5'}} > */}
+            {profile.image_url && 
+                <Image style={styles.profile_img} src={profile.image_url} />
+            }
+          {/* </View> */}
           
 
         </View>
