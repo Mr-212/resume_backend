@@ -75,8 +75,8 @@ export const WithPreview = (pdf) => {
         <PDFViewer
             showToolbar={false}
             style={{
-                width: '100%',
-                height: '95%',
+                width: '70%',
+                height: '70%',
             }}
         >  
            {pdf}

@@ -85,7 +85,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
             <div className="w-full h-screen">
-                { getComponent(template,true) }
+                { getComponent(template, true) }
             </div>
         </div>
     )

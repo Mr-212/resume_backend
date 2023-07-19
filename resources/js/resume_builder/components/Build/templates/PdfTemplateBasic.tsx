@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image, Link } from '@react-pdf/renderer';
 import { useAppSelector } from "../../../store/hooks";
 import { WithPDFPreview } from "../WithPDFPreview";
 const styles = StyleSheet.create({
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
       },
 
       contact_family: {
-        fontSize: '12px',
+        fontSize: '11px',
         fontWeight: '800',
         color: '#475569',
         fontStyle: 'italic',
@@ -365,10 +365,26 @@ const UpperSection = ({profile})=>{
                 }
             </View>  
             <View style={ {...styles.flex_col, width: '50%' }}>
-                <Text style={ styles.field_text } >Email</Text>
-                <Text style={ styles.contact_family }>{profile.email}</Text>
-                <Text style={ styles.field_text } >Phone</Text>
-                <Text style={ styles.contact_family}>{profile.phone}</Text>
+              {profile.linkedin_url &&
+              <View>
+                  <Text style={ styles.field_text } >LinkedIn</Text>
+                  {/* <Text style={ styles.contact_family }>{profile.linkedin_url}</Text> */}
+                  <Link src={profile.linkedin_url} style={ styles.contact_family }>{profile.linkedin_url}</Link>
+
+              </View>
+              }
+              {profile.github_url && 
+              <View>
+                  <Text style={ styles.field_text } >Github</Text>
+                  <Text style={ styles.contact_family}>{profile.github_url}</Text>
+                </View>
+              }
+              {profile.twitter_url &&
+              <View>
+                  <Text style={ styles.field_text }>Twitter</Text>
+                  <Text style={ styles.contact_family}>{profile.twitter_url}</Text>
+                </View>
+              }
 
             </View>  
             </View>        
