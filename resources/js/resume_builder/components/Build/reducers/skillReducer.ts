@@ -33,7 +33,11 @@ export const SkillReducer = createSlice({
 
         resetSkills: (state) => {
             state.skills = [];
-        }
+        },
+
+        setArray: (state, action: PayloadAction<Array<Object>>) =>{
+            state.skills = action.payload;
+        },
     },
 
     extraReducers(builder){
@@ -65,7 +69,7 @@ export const SkillReducer = createSlice({
 
  });
 
- export const { add, update, remove , getRecord, updateScore, resetSkills} = SkillReducer.actions;
+ export const { add, update, remove , getRecord, updateScore, resetSkills,setArray} = SkillReducer.actions;
  export default SkillReducer.reducer;
 
 

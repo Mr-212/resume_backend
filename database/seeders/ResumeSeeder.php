@@ -26,14 +26,8 @@ class ResumeSeeder extends Seeder
     public function run()
     {
 
-        // DB::Truncate();
-        // DB::
-
         // dd(User::all());
-
         $user = User::whereEmail('raza.ar10@gmail.com')->first('id');
-        
-
         $profile = Profile::updateOrCreate(['email' => 'raza_997@hotmail.com'],[
             'id' => Str::uuid(),
             'title' => 'Ali Raza',
@@ -46,6 +40,7 @@ class ResumeSeeder extends Seeder
             'github_url'  => 'https://github.com/mr-212',
             'address' => 'Lahore, Pakistan',
             'dob' => Carbon::parse('28-12-1989'),
+            
             'job_description' => 'Hi, I am full stack developer specialized in Larave with backend and ReactJs as frontend framework, with heavy backend development. 
              I have around 5 years of development experience. I can offer my services in domain range of app development, new feature development, bug fixing, API integrations
              third party, REST API development, database archtecture, payment gateway integration etc.',

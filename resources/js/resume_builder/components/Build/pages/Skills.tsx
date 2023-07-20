@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add, update,remove, getRecord, getProfileSkills, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/skillReducer";
+import { add, update,remove, getRecord, getProfileSkills, setArray, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/skillReducer";
 
 import { Draggable } from "react-drag-reorder";
 
@@ -69,7 +69,33 @@ const Skills = <T extends SkillProps> () => {
 
     const getChangedPos = (currentPos, newPos) => {
         console.log(currentPos, newPos);
+        // console.log(skillList);
+        reArrangeIndex(currentPos, newPos);
+        // console.log(skillList);
+
+
+
+
       };
+
+    const reArrangeIndex = (currentPos, newPos) => {
+        
+        let newArr = [...skillList];
+        let temp = newArr[currentPos];
+        // console.log(newArr);
+        // newArr[currentPos] = newArr[newPos];
+        // newArr[newPos] = temp;
+
+        let newtemp = newArr.splice(currentPos,1);
+        newArr.splice(newPos,0, newtemp[0]);
+        // console.log(newArr, newtemp);
+        dispatch(setArray(newArr));
+
+            
+    }  
+    
+
+   
 
    
 
@@ -103,8 +129,8 @@ const Skills = <T extends SkillProps> () => {
             </div>
             <div className="flex flex-col items-center gap-2 pt-3">
             <Draggable onPosChange={getChangedPos}>
-            { Object.values(skillList).map((val,key ) => {
-                // console.log(key.skill);
+            { Object.values(skillList).map((val, key) => {
+                // console.log(val);
                 counter++;
                 return (
                     <AddSkills skill={val} index={key}  key={counter} ></AddSkills>
