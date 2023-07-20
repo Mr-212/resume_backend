@@ -17,11 +17,7 @@ export const SelectTemplate = ( ) =>{
             { templates.map((val, key) => {
                   console.log(val);
                 return <div>
-                           { 
-
-                           getComponent(val,true) 
-                           }
-
+                           { getComponent(val,true)  }
                        </div>
             })
 

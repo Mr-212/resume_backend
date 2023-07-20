@@ -2,6 +2,9 @@ import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { add, update,remove, getRecord, getProfileSkills, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/skillReducer";
 
+import { Draggable } from "react-drag-reorder";
+
+
 
 
 
@@ -64,6 +67,10 @@ const Skills = <T extends SkillProps> () => {
             dispatch(add(skillObject));  
     }
 
+    const getChangedPos = (currentPos, newPos) => {
+        console.log(currentPos, newPos);
+      };
+
    
 
     return(
@@ -74,7 +81,7 @@ const Skills = <T extends SkillProps> () => {
             <div className="grid grid-cols-2 border-blue-300">
                 <div className="col-span-2 h-10 py-2 border-blue-100  bg-blue-200 opacity-100 mb-3 shadow-lg items-center align-middle">
                     <div className="flex flex-row justify-between border-blue-300 px-10">
-                        <h4 className="text-blue-800 text-md font-bold text-left">Skills</h4>
+                        <h4 className="text-blue-800 text-md font-bold text-left">Technical Skills</h4>
                         <div>
                             <button className="text-right px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitSkills}>Save</button>
                             <button className="text-right px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={newSkills}><i className="fa fa-plus"></i></button>
@@ -95,12 +102,17 @@ const Skills = <T extends SkillProps> () => {
                 }
             </div>
             <div className="flex flex-col items-center gap-2 pt-3">
+            <Draggable onPosChange={getChangedPos}>
             { Object.values(skillList).map((val,key ) => {
                 // console.log(key.skill);
                 counter++;
-                return <AddSkills skill={val} index={key}  key={counter} ></AddSkills>;
+                return (
+                    <AddSkills skill={val} index={key}  key={counter} ></AddSkills>
+                )
+               
             })
              }
+             </Draggable>
 
             </div>
 

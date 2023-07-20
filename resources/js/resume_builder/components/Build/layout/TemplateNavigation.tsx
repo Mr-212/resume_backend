@@ -68,7 +68,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
      }
 
     return(
-        <div className="h-full bg-gray-400">
+        <div className="h-screen bg-gray-400">
               <div className="flex flex-row w-full align-middle items-center bg-slate-600 shadow-lg opacity-100 text-gray-900 font-bold p-1">
                     {/* { Object.entries(Templates).map( ([key, val]) => {
                         // console.log(val, key)
@@ -84,7 +84,7 @@ import { getComponent } from "../partials/GetTemplateComponent";
                 </div>
             </div>
             {/* <div className="h-full [&::-webkit-scrollbar]:hidden overflow-y-scroll"  ref={pdfTemplate}> */}
-            <div className="w-full h-screen">
+            <div className="w-full">
                 { getComponent(template, true) }
             </div>
         </div>

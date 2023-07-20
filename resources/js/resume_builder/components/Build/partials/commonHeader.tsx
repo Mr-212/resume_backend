@@ -43,7 +43,7 @@ const Header = () => {
                 // overlayClassName="some-custom-overlay-class"
                 isOpen={isOpen}
                 title="Select a template"
-                width="400px"
+                width="800px"
                 // subtitle="Optional subtitle."
                 from="right"
                 onRequestClose={() => {

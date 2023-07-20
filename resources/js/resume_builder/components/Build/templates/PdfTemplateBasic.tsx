@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     page: {
         display: 'flex',
         flexDirection: 'row',
-        height: '100%',
+        // height: '80%',
         width: '100%'
         // '[&::-webkit-scrollbar]': 'hidden' ,
         // overflow: 'hidden'
@@ -149,6 +149,14 @@ const styles = StyleSheet.create({
          borderTopColor:'#B4AEAD',
          paddingBottom: 5,
          marginBottom: 5
+      },
+
+      pageNumber:{
+        position: 'absolute',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        textAlign: 'center'
       }
 
     });
@@ -171,13 +179,17 @@ const PdfTemplateBasic = (props) => {
     return(
         <Document>
             {/* {profile.length > 0  &&  */}
-        <Page size="A4" style={styles.page}>
+        <Page size="A4" style={styles.page} wrap>
 
           <View style={styles.flex_col}>
             <UpperSection profile={profile}></UpperSection>
-
             <LowerSection profile={profile} education={education}  experience={experience} skills={skills} softskills={softskills}></LowerSection>
-            </View>
+          </View>
+
+          {/* <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+            `${pageNumber} / ${totalPages}`
+          )} fixed /> */}
+
         </Page>
         {/* } */}
     </Document>
@@ -268,7 +280,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
           </View> 
       }
       { experience.length &&
-        <View style={ styles.flex_col} break>
+        <View style={ styles.flex_col} wrap={false}>
               <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Experience</Text>
             { experience.map((experience: any) => {
                 return(

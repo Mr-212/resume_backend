@@ -12,7 +12,7 @@ class Education extends Model
 
     protected $table = 'resume_education';
     
-    protected $fillable = [ 'profile_id', 'institution', 'qualification', 'gpa_marks','start_date', 'end_date', 'address', 'description', 'created_by', 'updated_by', 
+    protected $fillable = ['id', 'profile_id', 'institution', 'qualification', 'gpa_marks','start_date', 'end_date', 'address', 'description', 'created_by', 'updated_by', 
     ];
 
 
