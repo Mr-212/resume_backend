@@ -8,9 +8,12 @@ use App\Models\Resume\Experience;
 use App\Models\Resume\Profile;
 use App\Models\Resume\Skill;
 use App\Models\Resume\SoftSkill;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ResumeSeeder extends Seeder
@@ -22,11 +25,19 @@ class ResumeSeeder extends Seeder
      */
     public function run()
     {
+
+        // DB::Truncate();
+        // DB::
+
+        // dd(User::all());
+
+        $user = User::whereEmail('raza.ar10@gmail.com')->first('id');
         
 
         $profile = Profile::updateOrCreate(['email' => 'raza_997@hotmail.com'],[
+            'id' => Str::uuid(),
             'title' => 'Ali Raza',
-            'user_id' => Str::uuid(),
+            'user_id' => $user->id,
             'job_title' => 'Full Stack developer (Laravel/React)',
             'email' => 'raza_997@hotmail.com',
             'name' => 'Ali Raza',
@@ -40,6 +51,7 @@ class ResumeSeeder extends Seeder
              third party, REST API development, database archtecture, payment gateway integration etc.',
 
         ]);
+        // dd($profile);
 
         Education::updateOrCreate([
             'profile_id' => $profile->id,
@@ -61,6 +73,119 @@ class ResumeSeeder extends Seeder
             'gpa_marks' => '3.36',
             'start_date' => 2014,
             'end_date'   => 2018,
+        ]);
+
+       
+
+        Experience::updateOrCreate(['profile_id' => $profile->id, 'company'=> 'Aksile Media'],
+        [
+            'id' => Str::uuid(),
+            'job_title' =>'Laravel Developer',
+            'is_currently_working' => 0,
+            'start_date' => '2016',
+            'end_date' => '2016',
+            'city' => 'Lahore',
+            'country' =>'Pakistan',
+            'description' => 'test',
+
+        ]);
+
+        Experience::updateOrCreate(['profile_id' => $profile->id,'company'=> 'Pantera Engineering'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'job_title' =>'Laravel Developer',
+            'start_date' => '2017',
+            'end_date' => '2018',
+            'city' => 'Lahore',
+            'country' =>'Pakistan',
+            // 'description' => '',
+
+        ]);
+
+        Experience::updateOrCreate(['profile_id' => $profile->id,'company'=>'Programmers Force'],
+        [
+            'id' => Str::uuid(),
+            'job_title' =>'Laravel Developer',
+
+            'profile_id' => $profile->id,
+            'start_date' => '2019',
+            'end_date' => '2020',
+            'city' => 'Lahore',
+            'country'=> 'Pakistan',
+            'description' => '',
+
+        ]);
+
+        Experience::updateOrCreate(['profile_id' => $profile->id,'company' => 'Techloyce'],
+        [
+            'id' => Str::uuid(),
+            'job_title' =>'Laravel Developer',
+
+            'profile_id' => $profile->id,
+            'start_date' => '2020',
+            'end_date' => '2021',
+            'city' => 'Lahore',
+            'country'=> 'Pakistan',
+            'description' => '',
+
+        ]);
+
+        Experience::updateOrCreate(['profile_id' => $profile->id,'company' => 'Aksile Media', 'start_date' => '2021'],
+        [
+            'id' => Str::uuid(),
+            'job_title' =>'Laravel Developer',
+
+            'profile_id' => $profile->id,
+            'start_date' => '2021',
+            'end_date' => '2023',
+            'city' => 'Lahore',
+            'country'=> 'Pakistan',
+            'description' => '',
+
+        ]);
+
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Analytical Abilities'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
+        ]);
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Reasoning'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
+        ]);
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Interapersonel'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
+        ]);
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Hardworking'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
+        ]);
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Research'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
+        ]);
+        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Committed'],
+        [
+            'id' => Str::uuid(),
+            'profile_id' => $profile->id,
+            'value' => ''
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Laravel'],
@@ -114,112 +239,9 @@ class ResumeSeeder extends Seeder
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Docker Compose'],
         [
-            // 'id' => Str::uuid(),
+            'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
-        ]);
-
-        Experience::updateOrCreate(['profile_id' => $profile->id,'company'=> 'Aksile Media', 'start_date' => '2016'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'start_date' => '2016',
-            'end_date' => '2016',
-            'city' => 'Lahore',
-            'country', 'Pakistan',
-            'description' => '',
-
-        ]);
-
-        Experience::updateOrCreate(['profile_id' => $profile->id,'company'=> 'Pantera Engineering'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'start_date' => '2017',
-            'end_date' => '2018',
-            'city' => 'Lahore',
-            'country', 'Pakistan',
-            'description' => '',
-
-        ]);
-
-        Experience::updateOrCreate(['profile_id' => $profile->id,'company'=>'Programmers Force'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'start_date' => '2019',
-            'end_date' => '2020',
-            'city' => 'Lahore',
-            'country', 'Pakistan',
-            'description' => '',
-
-        ]);
-
-        Experience::updateOrCreate(['profile_id' => $profile->id,'company' => 'Techloyce'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'start_date' => '2020',
-            'end_date' => '2021',
-            'city' => 'Lahore',
-            'country', 'Pakistan',
-            'description' => '',
-
-        ]);
-
-        Experience::updateOrCreate(['profile_id' => $profile->id,'company' => 'Aksile Media', 'start_date' => '2021'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'start_date' => '2021',
-            'end_date' => '2023',
-            'city' => 'Lahore',
-            'country', 'Pakistan',
-            'description' => '',
-
-        ]);
-
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Analytical Abilities'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
-        ]);
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Reasoning'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
-        ]);
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Interapersonel'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
-        ]);
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Hardworking'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
-        ]);
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Research'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
-        ]);
-        SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Committed'],
-        [
-            // 'id' => Str::uuid(),
-            'profile_id' => $profile->id,
-            'value' => ''
-
         ]);
 
 
