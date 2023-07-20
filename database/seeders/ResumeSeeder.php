@@ -86,7 +86,7 @@ class ResumeSeeder extends Seeder
             'end_date' => '2016',
             'city' => 'Lahore',
             'country' =>'Pakistan',
-            'description' => 'test',
+            'description' => '',
 
         ]);
 
@@ -99,7 +99,7 @@ class ResumeSeeder extends Seeder
             'end_date' => '2018',
             'city' => 'Lahore',
             'country' =>'Pakistan',
-            // 'description' => '',
+            'description' => '',
 
         ]);
 
@@ -107,7 +107,6 @@ class ResumeSeeder extends Seeder
         [
             'id' => Str::uuid(),
             'job_title' =>'Laravel Developer',
-
             'profile_id' => $profile->id,
             'start_date' => '2019',
             'end_date' => '2020',
@@ -121,7 +120,6 @@ class ResumeSeeder extends Seeder
         [
             'id' => Str::uuid(),
             'job_title' =>'Laravel Developer',
-
             'profile_id' => $profile->id,
             'start_date' => '2020',
             'end_date' => '2021',
@@ -135,7 +133,6 @@ class ResumeSeeder extends Seeder
         [
             'id' => Str::uuid(),
             'job_title' =>'Laravel Developer',
-
             'profile_id' => $profile->id,
             'start_date' => '2021',
             'end_date' => '2023',
