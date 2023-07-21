@@ -21,5 +21,7 @@ Route::prefix('social')->group(function(){
 });
 Route::get('{provider}/callback', [SocialAuthController::class, 'callback']);
 Route::get('logout', [AuthController::class, 'logout']);
+Route::post('login', [AuthController::class, 'login']);
+
 
 
