@@ -57,6 +57,7 @@ class ResumeSeeder extends Seeder
             'gpa_marks' => '3.54',
             'start_date' => 2011,
             'end_date'   => 2013,
+            'sort' => 2,
          ]);
 
          Education::updateOrCreate([
@@ -68,6 +69,7 @@ class ResumeSeeder extends Seeder
             'gpa_marks' => '3.36',
             'start_date' => 2014,
             'end_date'   => 2018,
+            'sort' => 1
         ]);
 
        

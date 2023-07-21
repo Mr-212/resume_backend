@@ -70,6 +70,7 @@ Route::resource('resume', ResumeController::class)->middleware('auth');
 Route::prefix('resume')->group(function(){
     //Route::get('/get_menu_list',[ MenuController::class, 'get_menu_list' ]);
     Route::resource('profile',ProfileContoller::class);
+    Route::post('profile/{profile_id}/education/save',[EducationController::class,'save']);
     Route::resource('profile.education',EducationController::class)->shallow();
     // ->parameters([
     //     'profile' => 'profile:uuid',

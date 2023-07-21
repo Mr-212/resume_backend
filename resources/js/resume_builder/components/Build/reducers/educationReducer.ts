@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AnyAction } from 'redux'
-import { resumeState } from "./profileReducer";
+import { profile_id, resumeState } from "./profileReducer";
 import { getEducationIndex, getEducationIndexURL, postEducationURL, URL_EDUCATION_CREATE, URL_EDUCATION_DELETE, URL_EDUCATION_GET, URL_PROFILE_CREATE } from "../../../constants/ResumeUrls";
 import axios from "axios";
 import { update } from "./skillReducer";
@@ -36,6 +36,10 @@ export const educationSlice = createSlice({
         },
         resetEducation: (state)=>{
             state.education = [];
+        },
+
+        setArray:(state,action: PayloadAction<Array<Object>>) => {
+            state.education = action.payload;
         }
     },
     extraReducers (builder){
@@ -60,6 +64,13 @@ export const educationSlice = createSlice({
 
         });
 
+        builder.addCase(postSave.fulfilled, (state, action)=>{
+            console.log(action.payload.status == 200)
+                //state.education = 
+
+
+        });
+
 
     }
 
@@ -67,7 +78,7 @@ export const educationSlice = createSlice({
  });
 
  export const education = state => state.education;
- export const { add, updateRecord , remove, getRecord, setHide, resetEducation} = educationSlice.actions;
+ export const { add, updateRecord , remove, getRecord, setHide, resetEducation, setArray} = educationSlice.actions;
  export default educationSlice.reducer; 
 
 
@@ -79,6 +90,17 @@ export const educationSlice = createSlice({
         const response = await axios.post(postEducationURL(profile_id), educationObject);
         // // return {data: response.data};
         return {index: index, data: response.data};
+    }
+ );
+ export const postSave = createAsyncThunk(
+    'education/save',
+    async (educationObjectArray) => {
+        const { profile_id, educationArrayList} = educationObjectArray;
+        // console.log(index, educationObject)
+        const url = '/resume/profile/'+profile_id+'/education/save';
+        const response = await axios.post(url, educationArrayList);
+        // // return {data: response.data};
+        return  response.data;
     }
  );
 

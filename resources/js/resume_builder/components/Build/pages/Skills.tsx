@@ -204,13 +204,15 @@ function  AddSkills(props){
 
     const removeSkill = (index: number) => {
         const id = skills.id;
-        console.log(id);
-        if(id)
+        // console.log(id);
+        if(id){
             dispatch(deleteProfileSkills(id)).then(res => {
-                    if(res.status == 200)
+                // console.log(res);
+                    if(res.payload.status == 200)
                         dispatch(remove(index));
 
             });
+        }
         else
             dispatch(remove(index));
 

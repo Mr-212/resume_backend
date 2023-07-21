@@ -1,11 +1,13 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { add,updateRecord, remove, getRecord, postEducation, getEducation, deleteEducation, setHide} from "../reducers/educationReducer";
+import { add,updateRecord, remove, getRecord, postEducation, getEducation, postSave,setArray, deleteEducation, setHide} from "../reducers/educationReducer";
 import useHideShowComponent from "../partials/useHideShowComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Draggable from 'react-draggable'
+// import Draggable from 'react-draggable'
+import { Draggable } from "react-drag-reorder";
+
 
 // import { update } from "../reducers/skillReducer";
 
@@ -43,6 +45,8 @@ const Education = <T extends EducationProps<T>> () => {
 
     // const [education_list, setList] = useState([]);
     const educationList = useAppSelector(state => state.education.education);
+    const profile_id = useAppSelector(state => state.profile.profile_id);
+
     const dispatch = useAppDispatch();
     const validationErrors = (key: string, value: string) => {
 
@@ -81,6 +85,52 @@ const Education = <T extends EducationProps<T>> () => {
         dispatch(add(defaultValues));
 
     }; 
+
+    const save = () => {
+        
+        dispatch(postSave({profile_id: profile_id, educationArrayList: educationList}))
+    }
+
+
+    const getChangedPos = (currentPos, newPos) => {
+        console.log(currentPos, newPos);
+        // console.log(skillList);
+        reArrangeIndex(currentPos, newPos);
+        console.log(educationList);
+      };
+
+    const reArrangeIndex = (currentPos, newPos) => {
+        
+        let newArr = [...educationList];
+        let temp = newArr[currentPos];
+        // console.log(newArr);
+        // newArr[currentPos] = newArr[newPos];
+        // newArr[newPos] = temp;
+
+        let newtemp = newArr.splice(currentPos,1);
+        newArr.splice(newPos,0, newtemp[0]);
+        console.log(newArr, newtemp);
+        
+        dispatch(setArray(newArr));
+
+            
+    } 
+    
+    
+    const DragabbleEducationList = useCallback(() => {
+        return(
+            <Draggable onPosChange={getChangedPos}>
+                { educationList.length  > 0 && educationList.map( (val,key) => {
+                    counter++;
+                    return <AddEducation items={val}  index={key} key={counter}></AddEducation>                  
+                     
+                 })
+            } 
+
+            </Draggable>
+        )
+    },[]);
+
     return(
 
         //<BuildLayout>
@@ -89,29 +139,32 @@ const Education = <T extends EducationProps<T>> () => {
             <div className="grid grid-cols-2 border-slate-400">
                 <div className="col-span-2  h-10 py-2 bg-blue-200 opacity-100 mb-3 shadow-lg  items-center align-middle">
                     <div className="grid grid-cols-2 border-slate-400 px-10">
-                        <h4 className="text-blue-800 text-md font-bold text-left">Educational Details</h4>
-                        <button className="text-right" onClick={addEducation}><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
-
+                        <h4 className="text-blue-800 text-md font-bold text-justify">Educational Details</h4>
+                        <div className="flex flex-row justify-end space-x-3">
+                            <button className="" onClick={addEducation}><span className="text-lg text-blue-800"><i className="fa fa-plus"></i></span></button>
+                            <button className="text-green-600 font-bold" onClick={save}>Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-rows-1">
                 
-                { educationList.length  > 0 && educationList.map( (val,key) => {
+                {/* { educationList.length  > 0 && educationList.map( (val,key) => {
 
                     counter++;
                     // console.log(counter);
                     // return (<AddEducation setData={setData} id={null}></AddEducation>)
                     return (
-                        <Draggable axis="Y">
+                       
                             <div key={counter}>             
                                     <AddEducation items={val}  index={key}></AddEducation>                  
                             </div>
-                        </Draggable>
                         )
                 })
-                }             
+                }              */}
+
+                <DragabbleEducationList></DragabbleEducationList>
             </div>
 
         

@@ -25,7 +25,7 @@ class EducationController extends Controller
     public function index($profile_id)
     {
         try{
-            $educationList = $this->model::whereProfileId($profile_id)->get();
+            $educationList = $this->model::whereProfileId($profile_id)->orderBy('sort','asc')->get();
             return response()->json($educationList);
 
         }catch(Exception $e){
@@ -52,7 +52,7 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->id);
+        // dd($request->all());
         try{
             if($education = $this->model::updateOrCreate(['id' => $request->id], $request->all())){
                 return response()->json($education);
@@ -64,6 +64,26 @@ class EducationController extends Controller
         
     }
 
+
+    public function save(Request $request)
+    {
+
+        // dd($request->all());
+        
+        try{
+            foreach($request->all() as $k => $v){
+                $v['sort'] = $k+1;
+                if($education = $this->model::updateOrCreate(['id' => $v['id']], $v)){
+                    // return response()->json($education);
+                }
+            }
+            return response()->json(['status' => 200,'message' => 'Records updated successfully.']);
+
+        }catch(Exception $e){
+            return response()->json($e->getMessage()());
+        }
+        
+    }
     /**
      * Display the specified resource.
      *
