@@ -38,6 +38,8 @@ jobs:
         script: |
             cd /var/www/resume_backend
             git pull origin test
+            cp .env.production .env
             docker-compose build
+            
             docker-compose down
             docker-compose up -d
