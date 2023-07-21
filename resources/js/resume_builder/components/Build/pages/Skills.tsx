@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { add, update,remove, getRecord, getProfileSkills, setArray, postProfileSkills,updateScore, deleteProfileSkills} from "../reducers/skillReducer";
 
@@ -21,7 +21,6 @@ const defaultValues = {
     // profile_id: profile_id,
 }
 
-let counter = 0;
 
 const Skills = <T extends SkillProps> () => {
     const skillList = useAppSelector(state => state.skills.skills);
@@ -71,7 +70,7 @@ const Skills = <T extends SkillProps> () => {
         console.log(currentPos, newPos);
         // console.log(skillList);
         reArrangeIndex(currentPos, newPos);
-        // console.log(skillList);
+        console.log(skillList);
 
 
 
@@ -89,10 +88,42 @@ const Skills = <T extends SkillProps> () => {
         let newtemp = newArr.splice(currentPos,1);
         newArr.splice(newPos,0, newtemp[0]);
         // console.log(newArr, newtemp);
+        
         dispatch(setArray(newArr));
 
             
     }  
+
+    const DraggAbleRender = useCallback(() => {
+        let counter = 0;
+        if(skillList && skillList.length){
+            // console.log(skillList);
+            return(
+                <Draggable onPosChange={getChangedPos}>
+                    { Object.values(skillList).map((val, key) => {
+                        // console.log(val);
+                        counter++;
+
+                        return (
+                            <>
+                            {console.log(val)}
+                              <AddSkills skill={val} index={key} key={counter} ></AddSkills>
+
+                            </>
+                            
+                        )
+
+                    
+                    })
+                }
+                </Draggable>
+
+            );
+
+         }
+         return null;
+
+    },[skillList]);
     
 
    
@@ -128,7 +159,7 @@ const Skills = <T extends SkillProps> () => {
                 }
             </div>
             <div className="flex flex-col items-center gap-2 pt-3">
-            <Draggable onPosChange={getChangedPos}>
+            {/* <Draggable onPosChange={getChangedPos}>
             { Object.values(skillList).map((val, key) => {
                 // console.log(val);
                 counter++;
@@ -138,7 +169,8 @@ const Skills = <T extends SkillProps> () => {
                
             })
              }
-             </Draggable>
+             </Draggable> */}
+            <DraggAbleRender></DraggAbleRender>
 
             </div>
 

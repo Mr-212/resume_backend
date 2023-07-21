@@ -24,7 +24,7 @@ export const SkillReducer = createSlice({
         remove: (state, action: PayloadAction<number>) => {
             // state.skills.splice(action.payload, 1);
             // delete state.skills[action.payload];
-            state.skills.splice(action.payload,1);
+            state.skills.splice(action.payload, 1);
         },
 
         getRecord: (state, action: PayloadAction<number>) => {
