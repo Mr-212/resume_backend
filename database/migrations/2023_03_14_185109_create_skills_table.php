@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('profile_id');
             $table->unsignedBigInteger('skill_id')->nullable()->default(0);
             $table->string('skill')->nullable();
+            $table->unsignedInteger('sort')->nullable();
             $table->unsignedInteger('score')->default(0)->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();

@@ -40,7 +40,7 @@ class ResumeSeeder extends Seeder
             'github_url'  => 'https://github.com/mr-212',
             'address' => 'Lahore, Pakistan',
             'dob' => Carbon::parse('28-12-1989'),
-            
+
             'job_description' => 'Hi, I am full stack developer specialized in Larave with backend and ReactJs as frontend framework, with heavy backend development. 
              I have around 5 years of development experience. I can offer my services in domain range of app development, new feature development, bug fixing, API integrations
              third party, REST API development, database archtecture, payment gateway integration etc.',
@@ -186,12 +186,15 @@ class ResumeSeeder extends Seeder
             'skill' => 'Laravel',
             'score' => 90,
             'profile_id' => $profile->id,
+            'sort' => 1,
         ]);
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Livewire'],
         [
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 2,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'ReactJS'],
@@ -199,6 +202,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 3,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Codeignitor'],
@@ -206,6 +211,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 70,
             'profile_id' => $profile->id,
+            'sort' => 4,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Javascript'],
@@ -213,6 +220,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 5,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'MySQL'],
@@ -220,6 +229,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 6,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Docker'],
@@ -227,6 +238,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 7,
+
         ]);
 
         Skill::updateOrCreate(['profile_id' => $profile->id,'skill' => 'Docker Compose'],
@@ -234,6 +247,8 @@ class ResumeSeeder extends Seeder
             'id' => Str::uuid(),
             'score' => 80,
             'profile_id' => $profile->id,
+            'sort' => 8,
+
         ]);
 
 

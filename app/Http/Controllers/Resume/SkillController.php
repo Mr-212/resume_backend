@@ -28,7 +28,7 @@ class SkillController extends Controller
         // dd($profile_id);
         try{
             $skills = SkillConstants::List;
-            $list = Skill::whereProfileId($profile_id)->get()->toArray();
+            $list = Skill::whereProfileId($profile_id)->orderBy('sort','asc')->get()->toArray();
             // foreach($list as $k=>$v){
             //     // dd($v);
             //     $list[$v['skill']] = $v;
@@ -62,9 +62,10 @@ class SkillController extends Controller
     {
         try{
             // dd($request->all());
-
+            
             foreach(($request->all()) as $k => $value){
                 $id = array_key_exists('id',$value)?$value['id'] : "";
+                $value['sort'] = $k+1;
 
                 if($skill = Skill::updateOrCreate(['id' => $id], $value)){
                     // $updatedSkills[$k] = $skill;

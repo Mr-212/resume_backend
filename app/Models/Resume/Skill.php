@@ -13,7 +13,7 @@ class Skill extends Model
 
     protected $table = "profile_skills";
 
-    protected $fillable = ['profile_id', 'skill_id' ,'skill', 'score','created_by','updated_by'];
+    protected $fillable = ['profile_id', 'skill_id' ,'skill', 'score','sort','created_by','updated_by'];
 
     public function profile(){
         return $this->hasOne(Profile::class);
