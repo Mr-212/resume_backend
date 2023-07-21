@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "test" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "test" ]
 
 jobs:
 
@@ -37,7 +37,7 @@ jobs:
         key: ${{ secrets.EC2_SECRET }}
         script: |
             cd /var/www/resume_backend
-            git pull origin master
+            git pull origin test
             docker-compose build
             docker-compose down
             docker-compose up -d
