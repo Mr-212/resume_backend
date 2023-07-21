@@ -84,6 +84,7 @@ class ResumeSeeder extends Seeder
             'city' => 'Lahore',
             'country' =>'Pakistan',
             'description' => '',
+            'sort' => 1
 
         ]);
 
@@ -97,6 +98,7 @@ class ResumeSeeder extends Seeder
             'city' => 'Lahore',
             'country' =>'Pakistan',
             'description' => '',
+            'sort' => 2
 
         ]);
 
@@ -110,6 +112,7 @@ class ResumeSeeder extends Seeder
             'city' => 'Lahore',
             'country'=> 'Pakistan',
             'description' => '',
+            'sort' => 3
 
         ]);
 
@@ -123,6 +126,7 @@ class ResumeSeeder extends Seeder
             'city' => 'Lahore',
             'country'=> 'Pakistan',
             'description' => '',
+            'sort' => 4
 
         ]);
 
@@ -136,6 +140,7 @@ class ResumeSeeder extends Seeder
             'city' => 'Lahore',
             'country'=> 'Pakistan',
             'description' => '',
+            'sort' => 5
 
         ]);
 

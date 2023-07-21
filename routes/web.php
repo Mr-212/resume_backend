@@ -12,6 +12,7 @@ use App\Http\Controllers\Subscriptions\PaymentController;
 use App\Http\Controllers\Subscriptions\StripeController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\WhoAmIController;
+use App\Models\Resume\Experience;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,7 @@ Route::prefix('resume')->group(function(){
     Route::resource('profile.skill',SkillController::class)->shallow();
     Route::resource('profile.softskill',SoftSkillController::class)->shallow();
 
+    Route::post('profile/{profile_id}/experience/save',[ExperienceController::class,'save']);
     Route::resource('profile.experience',ExperienceController::class)->shallow();
 })->middleware('auth');
 

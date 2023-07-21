@@ -34,6 +34,9 @@ export const experienceSlice = createSlice({
         
         resetExperience:(state) => {
             state.experience = [];
+        },
+        setArray:(state,action: PayloadAction<Array<Object>>) => {
+            state.experience = action.payload;
         }
     },
     extraReducers (builder){
@@ -61,7 +64,7 @@ export const experienceSlice = createSlice({
  });
 
  export const experience = state => state.experience;
- export const { add, updateRecord , remove, getRecord, setHide, resetExperience} = experienceSlice.actions;
+ export const { add, updateRecord , remove, getRecord, setHide, resetExperience, setArray} = experienceSlice.actions;
  export default experienceSlice.reducer; 
 
 
@@ -89,7 +92,17 @@ export const experienceSlice = createSlice({
             const response = await axios.delete(URL_EXPERIENCE_DELETE + id);
             return response.data;
         }
-    }
+    }  
  )
+
+ export const postSave = createAsyncThunk(
+    'experience/save',
+    async (experienceObjectArray) => {
+        const { profile_id, experienceArrayList} = experienceObjectArray;
+        const url = '/resume/profile/'+profile_id+'/experience/save';
+        const response = await axios.post(url, experienceArrayList);
+        return  response.data;
+    }
+ );
 
 

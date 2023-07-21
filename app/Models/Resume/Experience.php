@@ -12,7 +12,7 @@ class Experience extends Model
 
 
     protected $table = 'profile_experiences';
-    protected $fillable = ['profile_id' ,'job_title','company','start_date','end_date','is_currently_working','city','country','description','created_by','updated_by'];
+    protected $fillable = ['profile_id' ,'job_title','company','start_date','end_date','is_currently_working','city','country','description','sort','created_by','updated_by'];
 
 
     public function profile(){

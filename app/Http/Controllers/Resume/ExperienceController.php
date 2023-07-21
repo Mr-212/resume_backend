@@ -30,7 +30,7 @@ class ExperienceController extends Controller
         
         try{
             if($profile_id){
-                $experiences = $this->model::whereProfileId($profile_id)->get();
+                $experiences = $this->model::whereProfileId($profile_id)->orderBy('sort','asc')->get();
                 return response()->json(['status' => 200, 'experiences' => $experiences]);
             }
 
@@ -68,6 +68,26 @@ class ExperienceController extends Controller
         }catch(Exception $e){
             return response()->json(['status' =>  401, 'error' => $e->getMessage()]);
         }
+    }
+
+    public function save(Request $request)
+    {
+
+        // dd($request->all());
+        
+        try{
+            foreach($request->all() as $k => $v){
+                $v['sort'] = $k+1;
+                if($education = $this->model::updateOrCreate(['id' => $v['id']], $v)){
+                    // return response()->json($education);
+                }
+            }
+            return response()->json(['status' => 200,'message' => 'Records updated successfully.']);
+
+        }catch(Exception $e){
+            return response()->json($e->getMessage()());
+        }
+        
     }
 
     /**
