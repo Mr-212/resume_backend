@@ -1,7 +1,7 @@
 
 //  const API_URL = 'http://resume_backend:8001/api';
 //  const API_URL = 'http://localhost';
- const API_URL = window.location.href;
+ const API_URL = window.location.origin;
  console.log(API_URL);
 
 
