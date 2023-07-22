@@ -2,6 +2,7 @@
 //  const API_URL = 'http://resume_backend:8001/api';
 //  const API_URL = 'http://localhost';
  const API_URL = window.location.href;
+ console.log(API_URL);
 
 
  export const URL_PROFILE_CREATE = API_URL + '/resume/profile'; 
