@@ -148,42 +148,53 @@ class ResumeSeeder extends Seeder
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
 
         ]);
         SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Reasoning'],
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
+
 
         ]);
         SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Interapersonel'],
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
+
 
         ]);
         SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Hardworking'],
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
+
 
         ]);
         SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Research'],
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
+
 
         ]);
         SoftSkill::updateOrCreate(['profile_id' => $profile->id,'key' => 'Committed'],
         [
             'id' => Str::uuid(),
             'profile_id' => $profile->id,
-            'value' => ''
+            'value' => '',
+            'type' => SoftSkill::SOFT_SKILL
+
 
         ]);
 

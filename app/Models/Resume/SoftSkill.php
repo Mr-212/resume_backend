@@ -10,6 +10,8 @@ class SoftSkill extends Model
 {
     use HasFactory, UUID;
 
+    const SOFT_SKILL = 'SOFT_SKILL';
+
     protected $table= 'resume_misc';
     protected $fillable = [ 'profile_id','type','key','value','created_by','updated_by'];
 

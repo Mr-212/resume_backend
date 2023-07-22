@@ -2,7 +2,7 @@
 //  const API_URL = 'http://resume_backend:8001/api';
 //  const API_URL = 'http://localhost';
  const API_URL = 'http://54.172.174.198';
- console.log(API_URL);
+//  console.log(API_URL);
 
 
  export const URL_PROFILE_CREATE = API_URL + '/resume/profile'; 
@@ -20,7 +20,6 @@
  export const getEducationIndexURL = (profile_id: string): string => {
     return URL_EDUCATION_GET+profile_id+'/education';
  }
-
 
  export const postEducationURL = (profile_id: string): string => {
     return URL_EDUCATION_GET+profile_id+'/education';
