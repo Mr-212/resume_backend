@@ -27,14 +27,14 @@ class UserSeeder extends Seeder
         \App\Models\User::updateOrCreate([ 'email' => 'raza_997@hotmail.com'],[
             'id' => Str::uuid(),
             'name' => 'Ali Raza',
-            'email' => 'raza_997@hotmail.com',
+            // 'email' => 'raza_997@hotmail.com',
             'password' => Hash::make('thisisnotme')
         ]);
 
         \App\Models\User::updateOrCreate([ 'email' => 'raza.ar10@gmail.com'],[
             'id' => Str::uuid(),
             'name' => 'Ali Raza',
-            'email' => 'raza_997@hotmail.com',
+            // 'email' => 'raza_997@hotmail.com',
             'password' => Hash::make('thisisnotme')
         ]);
     }
