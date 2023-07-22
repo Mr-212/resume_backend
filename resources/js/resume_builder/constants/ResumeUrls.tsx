@@ -26,7 +26,6 @@
     return URL_EDUCATION_GET+profile_id+'/education';
  }
 
-
  export const URL_SKILL_CREATE = API_URL + '/resume/profile/skill'; 
  export const URL_SKILL_GET = API_URL + '/resume/profile/'; 
  export const URL_SKILL_UPDATE = API_URL + '/resume/'; 
