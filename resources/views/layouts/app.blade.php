@@ -35,6 +35,7 @@
 
     <div class="col-3 float-right">
         @include('auth.modals.login')
+        @include('auth.modals.register')
     </div>
 
 
