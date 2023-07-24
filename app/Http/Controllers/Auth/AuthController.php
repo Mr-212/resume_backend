@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -37,19 +40,20 @@ class AuthController extends Controller
 
             $validate = $request->validate([
                 'name' => 'string|required',
-                'email' => 'required|email|unique:users,email',
-                'password'=>'required| min:6',
-                'confirm_password' => 'required|confirmed'
-            ], $request->all());
+                'email' => 'required|email|unique:users',
+                'password'=>'required|confirmed|min:4',
+                // 'password_confirmation' => 'confirmed'
+            ]);
 
-            dd($validate);
-
-            if(Auth::attempt($request->except('_token'))){
-                return redirect('resume');
+            // dd($validate);
+            $request->request->add(['password' => Hash::make($request->password)]);
+            if($user = User::create($request->except('_token'))){
+                return response('User added successfully.', 200);
             }
 
         }catch(Exception $e){
-            throw new Error($e->getMessage());
+            // dd($e->getMessage());
+            return new Exception($e->getMessage());
         }
 
     }
