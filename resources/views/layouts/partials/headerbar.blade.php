@@ -27,9 +27,7 @@
                         </button>
                     </li>
                 @else
-                
-              
-                
+                 
                 <li class="nav-item border-l-2 px-3">       
                     <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-400 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#authentication-modal">Login</button>
                 </li>
@@ -37,7 +35,6 @@
                     <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-300 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#register-modal">Register</button>
                 </li>
 
-               
                
                 {{-- <li class="nav-link nav-item">
                     <button class="text-primary font-bold">Register</button>
