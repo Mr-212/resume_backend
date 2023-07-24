@@ -136,9 +136,9 @@ const ResumeComponent = ({resume, index} :any) => {
         <>
         <div className="flex flex-col items-start bg-white shadow-md opacity-100 justify-between h-32">
            
-            <div className="flex flex-row justify-between items-center w-full px-2 border-b bg-black h-16">
+            <div className="flex flex-row justify-between items-center w-full px-3 border-b bg-black h-16">
                 <div className="flex justify-start space-x-1">
-                    <label className="font-bold text-xs text-gray-200">Title</label>
+                    <label className="font-bold text-xs text-gray-200 italic">Title</label>
                     <h5 className="font-bold text-lg text-white">{resume.job_title}</h5>
                 </div>
               
@@ -148,7 +148,7 @@ const ResumeComponent = ({resume, index} :any) => {
             </div>
             <div className="flex flex-row justify-between items-center w-full h-full px-4">
                 <div className="flex justify-start space-x-1">
-                    <label className="font-bold text-xs text-slate-600">CV Title</label>
+                    <label className="font-bold text-xs text-slate-600 italic">CV Title</label>
                     <input  type='text' className="w-2/3 h-8 text-sm text-center italic font-extrabold text-black outline-none border-blue-200 border-b" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
                </div>
                 <div className="space-x-4">
