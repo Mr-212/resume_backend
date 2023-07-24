@@ -1,26 +1,22 @@
-<nav class="row navbar sticky-top navbar-expand-lg bg-slate-200 px-10">
+<nav class="row navbar sticky-top navbar-expand-md bg-slate-700 px-10">
     <div class="continer">
     <div class="row">
         <div class="d-flex flex-row align-items-center col-6">
-            <div class="text-white">
-                {{-- <button data-toggle="modal" data-target="#create-resume-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Create
-                </button> --}}
-                {{-- <button data-bs-toggle="modal" data-bs-target="#create-resume-modal" class="block hover:text-slate-600 hover:bg-black focus:ring-4 border-slate-400 border-2 rounded-full text-white bg-slate-600 focus:ring-blue-300 font-bold text-lg px-4 py-1 text-center">
-                    Create
-                </button> --}}
-            </div>
+            <ul class="d-flex align-items-center justify-content-end navbar-nav float-right">
+                <li class="nav-item">
+                    <button class="nav-link px-1 py-1 font-lg text-gray-100 border-b border-white hover:text-slate-200"><a class="hover:text-green-600" href="/">Home</a></button>
+                </li>
+            </ul>
 
         </div>
-        <div class=" col-6 text-right">
-            <ul class="d-flex align-items-center justify-content-end navbar-nav float-right">
+        <div class="col-6 text-right">
+            <ul class="d-flex align-items-center justify-content-end navbar-nav float-right space-x-3">
                 <li class="nav-item">       
-                    {{-- <h4 class="nav-link font-bold text-green-600">Ali Raza</h4> --}}
-                    <h4 class="nav-link font-bold text-gray-600 opacity-100 text-lg transition-all">{{auth()->user()->name}}</h4>
+                    <h4 class="nav-link font-bold text-white opacity-100 text-lg transition-all">{{auth()->user()->name}}</h4>
 
                 </li>
                 <li class="nav-item">
-                    <button class=" px-3 py-1 font-bold text-balck border-b-2 border-green-500 hover:text-slate-900"><a href="/auth/logout">Logout</a></button>
+                    <button class=" px-1 py-1 font-md text-slate-200 border-b border-white hover:text-slate-200"><a class="hover:text-green-600" href="/auth/logout">Logout</a></button>
                 </li>
             </ul>
 

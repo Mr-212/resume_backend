@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         }catch(Exception $e){
             // dd($e->getMessage());
-            return new Exception($e->getMessage());
+            // return new ($e->getMessage());
         }
 
     }

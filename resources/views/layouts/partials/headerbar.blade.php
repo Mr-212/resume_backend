@@ -18,8 +18,12 @@
                 </li> --}}
 
                 @if(auth()->user())
-                    <li class="nav-link nav-item border-l-2 px-3 ">
-                        <h3 class="text-green-600 font-bold">{{ auth()->user()->name }}</h3>
+                   
+                    <li class="nav-item border-l-2 px-3 ">
+                        <h3 class="nav-link text-green-600 font-bold">{{ auth()->user()->name }}</h3>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-400 hover:outline-slate-200 hover:border-b hover:text-white"><a class="" href="/resume">Resume</a></button>
                     </li>
                     <li class="nav-item">       
                         <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-300 hover:outline-slate-200 hover:border-b hover:text-white">

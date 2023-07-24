@@ -134,22 +134,29 @@ const ResumeComponent = ({resume, index} :any) => {
 
     return(
         <>
-        <div className="flex flex-col items-start bg-white rounded-md shadow-md opacity-100 justify-between h-32">
+        <div className="flex flex-col items-start bg-white shadow-md opacity-100 justify-between h-32">
            
-            <div className="flex flex-row justify-between items-center w-full px-4 border-b bg-blue-200 opacity-100 h-16">
-               <h5 className="font-bold text-lg text-sky-800 italic">{resume.job_title}</h5>
+            <div className="flex flex-row justify-between items-center w-full px-2 border-b bg-black h-16">
+                <div className="flex justify-start space-x-1">
+                    <label className="font-bold text-xs text-gray-200">Title</label>
+                    <h5 className="font-bold text-lg text-white">{resume.job_title}</h5>
+                </div>
+              
                {resume.id &&
-                 <Link to={`${resume.id}/profile`} className="text-xl"><i className="fa fa-arrow-right"></i></Link>
+                 <Link to={`${resume.id}/profile`} className="text-xl font-extrabold text-slate-200 hover:text-green-700"><i className="fa fa-arrow-right"></i></Link>
                }
             </div>
             <div className="flex flex-row justify-between items-center w-full h-full px-4">
-                <input  type='text' className="w-2/3 h-8 text-sm font-bold text-slate-500 outline-none border-blue-200 border-b" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
-                <div className="space-x-6">
+                <div className="flex justify-start space-x-1">
+                    <label className="font-bold text-xs text-slate-600">CV Title</label>
+                    <input  type='text' className="w-2/3 h-8 text-sm text-center italic font-extrabold text-black outline-none border-blue-200 border-b" onChange={(e) => setTitle(e.currentTarget.value)} value={title}></input>
+               </div>
+                <div className="space-x-4">
                     {/* <button onClick={ () => updateTitle(resume.id)} className="text-blue-600 font-bold"><i className="fa fa-pencil"></i></button> */}
                     <button onClick={ () => updateTitle(resume.id)} className="text-green-600 font-bold text-sm">Save</button>
 
                     {/* <button onClick={() => deleteRes(resume.id)} className="text-red-600 font-bold text-xl"><i className="fa fa-minus"></i></button> */}
-                    <button onClick={ () => deleteResumeById(resume.id)} className="text-red-600 font-bold text-sm">Remove</button>
+                    <button onClick={ () => deleteResumeById(resume.id)} className="text-red-600 font-bold text-sm">Delete</button>
 
                 </div>
                
