@@ -288,9 +288,9 @@ function Profile<T> ( { id }: CombineProps<T>){
                     </div>
                    
                 </div>
-                <div className="flex flex-row justify-between w-full pt-10">
+                {/* <div className="flex flex-row justify-between w-full pt-10">
                     <AddURLOrWebsite></AddURLOrWebsite>
-                </div>
+                </div> */}
                 <div className="flex flex-row justify-between w-full pt-10">
                 <div className="flex flex-col justify-start items-start">
                     <label className="block font-bold text-sm text-gray-400">LinkedIn URL</label>
