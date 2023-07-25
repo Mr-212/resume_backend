@@ -20,12 +20,10 @@
              @include('layouts.partials.headerbar')
         </section>
       
-        <section class="container mt-14">
-            <div class="">
+        <section class="fluid-container my-12">
                 <div class="text-primary">
                 </div>
                 @yield('content')
-            </div>
         </section>
         
         </main>

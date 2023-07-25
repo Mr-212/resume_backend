@@ -17,6 +17,15 @@ class AuthController extends Controller
 
 
 
+    public function getLogin() {
+            return view('auth._login');
+    }
+
+    public function getRegister() {
+        return view('auth._register');
+    }
+
+
     public function login(Request $request) {
 
         // dd($request->all());

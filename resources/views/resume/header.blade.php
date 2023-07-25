@@ -4,7 +4,7 @@
         <div class="d-flex flex-row align-items-center col-6">
             <ul class="d-flex align-items-center justify-content-end navbar-nav float-right">
                 <li class="nav-item">
-                    <button class="nav-link px-1 py-1 font-lg text-gray-100 border-b border-white hover:text-slate-200"><a class="hover:text-green-600" href="/">Home</a></button>
+                    <button class="nav-link px-1 py-1 font-bold text-gray-100 border-b border-white hover:text-slate-200"><a class="hover:text-white" href="/">Home</a></button>
                 </li>
             </ul>
 
@@ -16,7 +16,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <button class=" px-1 py-1 font-md text-slate-200 border-b border-white hover:text-slate-200"><a class="hover:text-green-600" href="/auth/logout">Logout</a></button>
+                    <button class="nav-link px-1 py-1 text-sm font-bold text-slate-200 border-b border-white hover:text-slate-200"><a class="hover:text-white italic" href="/auth/logout">Logout</a></button>
                 </li>
             </ul>
 
