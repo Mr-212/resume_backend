@@ -14,7 +14,7 @@
                 
                 {{-- <li class="nav-item">       
                     <button class="font-bold py-1 hover:border-b opacity-100"><a class="text-slate-100 hover:text-white" href="/who-am-i">About me ?</a></button>
-                    {{-- <a class="font-bold py-1 opacity-100 text-slate-100 hover:border-b hover:text-white" href="/who-am-i">About me ?</a> --}}
+                   <a class="font-bold py-1 opacity-100 text-slate-100 hover:border-b hover:text-white" href="/who-am-i">About me ?</a> 
                 </li> --}}
 
                 @if(auth()->user())
@@ -32,9 +32,7 @@
                     </li>
                 @else
                  
-                <li class="nav-item border-l-2 px-3">       
-                    <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-400 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#authenticatio-modal"><a href="/auth/login">Login</a></button>
-                </li>
+               
                 <li class="nav-item">       
                     <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-300 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#registe-modal"><a href="/auth/register">Register</a></button>
                 </li>
