@@ -1,7 +1,7 @@
 
 FROM node:16-buster-slim AS node
 
-FROM php:8.0-apache
+FROM php:8.1-apache
 
 RUN apt update \
         && apt install -y \
@@ -30,7 +30,7 @@ RUN npm install --global npx yarn
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-WORKDIR /var/www/resume_backend
+# WORKDIR /var/www
 # RUN composer install
 # COPY vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64 /usr/local/bin/
 # COPY vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/

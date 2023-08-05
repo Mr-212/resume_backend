@@ -1,102 +1,55 @@
 version: '3.7'
-
 services:
- resume_backend:
-    container_name: resume_backend
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    image: docker_env_php80
-    # command: 'chmod -R 0777 ${WORKING_DIR}'  
-    ports:
-      # - "8080:80"
-      # - "8000:8000"
-      - "2525:2525"
-      # - "3306:3306"
-
-      # - "3000:3000"
-      - "80:80"
-      # - "5173:5173"
-      # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
-      # - "8000:8001"
-
-    # volumes:
-    #   - .:/var/www/crm_backend
-
-    working_dir: /var/www/resume_backend
-    volumes:
-      - ./:/var/www/resume_backend
-      - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
-      - ./docker/entry_point.sh:/usr/local/bin/entry_point.sh
-      # - ./docker/entry_node.sh:/usr/local/bin/entry_node.sh
-    # tty: true
-    restart: unless-stopped
-
-    entrypoint:
-      - /usr/local/bin/entry_point.sh
-
-    command: bash -c "apachectl -D FOREGROUND"
-    # env_file:
-    #   - ./.env
-    networks:
-      - app    
-
- resume_backend_node:
-    container_name: resume_backend_node
-    # build:
-    #   context: .
-    #   dockerfile: ./docker/Dockerfile
-    image: docker_env_php80
-    ports:
-      - "3000:3000"
-      # - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
-      - 5173:5173
-
-    working_dir: /var/www/resume_backend
-    volumes:
-      - ./:/var/www/resume_backend
-      - ./docker/entry_node.sh:/usr/local/bin/entry_node.sh
-    tty: true
-    restart: unless-stopped
-
-    entrypoint:
-      - /usr/local/bin/entry_node.sh
-
-    # command: bash -c "apachectl -D FOREGROUND"
-    # env_file:
-    #   - ./.env
-    networks:
-      - app
-
-#  lt:
-#     # image: efrecon/localtunnel
-#     image: docker_env_php80
-#     # restart: on-failure
-#     # network_mode: host
-#     command: lt  --local-host resume_backend --port 80 --subdomain resumedev
-#     # environment: 
-#     #   - SUBDOMAIN=resume
-#     # links:
-#     #   - resume_backend
-#     # depends_on:
-#     #   - resume_backend
-#     networks:
-#       - app
-
-#  db:
-#     image: mysql:latest
-#     container_name: mysql_db
-#     # command: --default-authentication-plugin=mysql_native_password
-#     restart: always
-#     environment:
-#       - MYSQL_ROOT_PASSWORD: root
-#     ports:
-#       - 3306:3306 
-#     networks:
-#       - app
-  
-
+    resume_backend:
+        container_name: resume_backend
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        image: docker_env_php80
+        ports:
+            - '2525:2525'
+            - '80:80'
+        working_dir: /var/www/resume_backend
+        volumes:
+            - './:/var/www/resume_backend'
+            - './docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf'
+            - './docker/entry_point.sh:/usr/local/bin/entry_point.sh'
+        restart: unless-stopped
+        entrypoint:
+            - /usr/local/bin/entry_point.sh
+        command: 'bash -c "apachectl -D FOREGROUND"'
+        networks:
+            - app
+    resume_backend_node:
+        container_name: resume_backend_node
+        image: docker_env_php80
+        ports:
+            - '3000:3000'
+            - '5173:5173'
+        working_dir: /var/www/resume_backend
+        volumes:
+            - './:/var/www/resume_backend'
+            - './docker/entry_node.sh:/usr/local/bin/entry_node.sh'
+        tty: true
+        restart: unless-stopped
+        entrypoint:
+            - /usr/local/bin/entry_node.sh
+        networks:
+            - app
+    db:
+        image: mysql:latest
+        container_name: mysql_db
+        # command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+        - 3306:3306
+        networks:
+        - app        
+    
 networks:
-  app:
-    # name: php80
-    # external: true
+    app:
+        name: local
+        external: true
+
