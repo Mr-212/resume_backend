@@ -37,20 +37,25 @@ jobs:
         script: |
             cd /var/www/resume_backend
             git pull origin test
+            cp .env.production .env
+            cp docker-compose.test.yml docker-compose.yml
+            docker-compose build
+            docker-compose down
+            docker-compose up -d
 
-    - name: pull from repository
-      run: |  
-          cd /var/www/resume_backend
-          git pull origin test
+    # - name: pull from repository
+    #   run: |  
+    #       cd /var/www/resume_backend
+    #       git pull origin test
 
 
-    - name: deploy
-      if: ${{ github.event.pull_request.merged == true && !failure() }}
-      run: | 
-        cp .env.production .env
-        cp docker-compose.test.yml docker-compose.yml
-        docker-compose build
-        docker-compose down
-        docker-compose up -d
+    # - name: deploy
+    #   if: ${{ github.event.pull_request.merged == true && !failure() }}
+    #   run: | 
+    #     cp .env.production .env
+    #     cp docker-compose.test.yml docker-compose.yml
+    #     docker-compose build
+    #     docker-compose down
+    #     docker-compose up -d
             
              
