@@ -36,6 +36,9 @@
                 <li class="nav-item">       
                     <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-300 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#registe-modal"><a href="/auth/register">Register</a></button>
                 </li>
+                <li class="nav-item">       
+                    <button class="nav-link font-md px-2 py-1 opacity-100 text-slate-300 hover:outline-slate-200 hover:border-b hover:text-white" data-bs-toggle="modal" data-bs-target="#registe-modal"><a href="/auth/login">Login</a></button>
+                </li>
 
                
                 {{-- <li class="nav-link nav-item">

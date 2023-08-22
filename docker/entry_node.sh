@@ -10,7 +10,7 @@ chmod -R o+w $APP_PATH/storage/
 
 cd $APP_PATH
 npm i -f
-npm run dev
+npm run dev --port=3001
 echo "NODE ENTRY EXECUTED"
 
 exec "$@"

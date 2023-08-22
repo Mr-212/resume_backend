@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Subscription;
 
 class SubscriptionController extends Controller
 {
@@ -32,6 +33,21 @@ class SubscriptionController extends Controller
         $plans = $this->plan->orderBy('price','asc')->get();
 
         return view('subscriptions.index',['plans' => $plans]);
+    }
+
+
+    public function subscriptions()
+    {
+
+        // dd(Auth::user());
+
+        $subscriptions = Auth::user()->subscriptions;
+        // $subs  = Subscription::query()->get();
+
+
+        dd($subscriptions);
+        return view('subscriptions.index',['plans' => $plans]);
+        
     }
 
     /**

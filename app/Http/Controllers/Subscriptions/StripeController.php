@@ -33,10 +33,11 @@ class StripeController extends Controller
     {
 
         $plans = $this->plan->orderBy('price','asc')->get();
-
         return view('subscriptions.index',['plans' => $plans]);
         
     }
+
+   
 
     public function getPaymentMethod()
     {

@@ -57,7 +57,10 @@ Route::resource('aboutMe', WhoAmIController::class);
 Route::resource('resume.image', ImageController::class)->middleware('auth');
 
 
-// Route::prefix('subscriptions')->group(function(){
+Route::prefix('subscriptions')->group(function(){
+    Route::get('/', [SubscriptionController::class, 'subscriptions']);
+});
+
     Route::resource('subscription', SubscriptionController::class);
     // Route::resource('subscreptions', StripeController::class)->shallow();
     Route::resource('payment_methods', PaymentController::class);
