@@ -37,9 +37,10 @@ jobs:
         script_stop: true
         script: |
             cd /var/www/resume_backend
-            git pull origin test || exit
-            cp .env.production .env || exit
-            cp docker-compose.test.yml docker-compose.yml ||exit
+            git checkout .
+            git pull origin test
+            cp .env.production .env
+            cp docker-compose.test.yml docker-compose.yml
             docker-compose build
             docker-compose down
             docker-compose up -d
