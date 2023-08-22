@@ -45,7 +45,6 @@ jobs:
             docker-compose down
             docker-compose up -d
             
-
     # - name: pull from repository
     #   run: |  
     #       cd /var/www/resume_backend
