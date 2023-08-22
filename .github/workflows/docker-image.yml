@@ -39,8 +39,8 @@ jobs:
             cd /var/www/resume_backend
             git checkout .
             git pull origin test
-            cp .env.production .env
-            cp docker-compose.test.yml docker-compose.yml
+            # cp .env.production .env
+            # cp docker-compose.test.yml docker-compose.yml
             docker-compose build
             docker-compose down
             docker-compose up -d
