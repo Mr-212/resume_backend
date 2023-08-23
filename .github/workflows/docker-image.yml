@@ -43,6 +43,14 @@ jobs:
             docker-compose build
             docker-compose down
             docker-compose up -d
+            
+            composer install
+            chmod 777 -R storage
+            php artisan storage:link
+            composer dump-autoload
+            php artisan optimize:clear
+            php artisan optimize
+            php artisan migrate
 
     # - name: deploy
     #   if: ${{ github.event.pull_request.merged == true && !failure() }}
