@@ -43,8 +43,6 @@ jobs:
             docker-compose build
             docker-compose down
             docker-compose up -d
-            
-
 
     # - name: deploy
     #   if: ${{ github.event.pull_request.merged == true && !failure() }}
