@@ -36,18 +36,25 @@ services:
             - /usr/local/bin/entry_node.sh
         networks:
             - app
-    # db:
-    #     image: mysql:latest
-    #     container_name: mysql_db
-    #     # command: --default-authentication-plugin=mysql_native_password
-    #     restart: always
-    #     environment:
-    #       MYSQL_ROOT_PASSWORD: root
-    #     ports:
-    #     - 3306:3306
-    #     networks:
-    #     - app        
-    
+    db:
+        image: mysql:8.1
+        container_name: mysql_db
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+          MYSQL_DATABASE: resume_app
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+        - 3306:3306
+        networks:
+        - app
+        volumes:
+            - mysql_db_volume:/var/lib/mysql
+            - ./docker/backups/mysql:/var/backups/mysql
+
+volumes:
+    mysql_db_volume:
+
 networks:
     app:
         name: local

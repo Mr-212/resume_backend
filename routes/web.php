@@ -13,6 +13,7 @@ use App\Http\Controllers\Subscriptions\StripeController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\WhoAmIController;
 use App\Models\Resume\Experience;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,10 @@ Route::prefix('resume')->group(function(){
     Route::resource('profile.experience',ExperienceController::class)->shallow();
 })->middleware('auth');
 
+
+Route::get('/test', function(){
+    // here call test directly and return or dd output
+    Artisan::call('test');
+    // dd(Artisan::output())
+    return Artisan::output();
+});
