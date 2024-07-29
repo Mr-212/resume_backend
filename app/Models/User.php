@@ -90,4 +90,16 @@ class User extends Authenticatable
             return ['error' => true, 'errorMsg' => $e->getMessage()];
         }
     }
+
+
+    public function checkStripePrice($price)
+    {
+        $subscription = $this->subscriptions->contains(function ($subscription) use ($price){
+
+            return $subscription->stripe_price == $price && $subscription->active();
+
+        });
+
+        return $subscription;
+    }
 }

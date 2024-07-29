@@ -22,7 +22,7 @@ class ResumeController extends Controller
     private $resumeModel;
 
     public function __construct(Profile $profile)
-    {   
+    {
         $this->resumeModel = $profile;
     }
 
@@ -40,7 +40,7 @@ class ResumeController extends Controller
 
             return $e->getMessage();
         }
-        
+
     }
 
     /**
@@ -57,7 +57,7 @@ class ResumeController extends Controller
         $resume = $this->resumeModel->create(['title'=>$title,'user_id' => $user_id]);
         return redirect('/resume/'.$resume->id);
         // dd($resume);
-        // return 
+        // return
     }
 
     /**

@@ -14,6 +14,7 @@ use App\Http\Controllers\Subscriptions\SubscriptionController;
 use App\Http\Controllers\WhoAmIController;
 use App\Models\Resume\Experience;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,13 +43,13 @@ Route::get('/', function () {
 
 //     // Route::get('/profile', function () {
 //     //     return Inertia::render('Build/Profile');
-    
+
 //     // });
 //     // Route::get('/education', function () {
 //     //     return Inertia::render('Build/Education');
-    
+
 //     // });
-    
+
 // });
 // Route::resource('resume', ResumeController::class);
 //->middleware(['auth']);
@@ -63,6 +64,9 @@ Route::prefix('subscriptions')->group(function(){
 });
 
     Route::resource('subscription', SubscriptionController::class);
+    Route::get('/billing-portal', function (Request $request) {
+        return $request->user()->redirectToBillingPortal();
+    });
     // Route::resource('subscreptions', StripeController::class)->shallow();
     Route::resource('payment_methods', PaymentController::class);
 
@@ -86,6 +90,7 @@ Route::prefix('resume')->group(function(){
     Route::post('profile/{profile_id}/experience/save',[ExperienceController::class,'save']);
     Route::resource('profile.experience',ExperienceController::class)->shallow();
 })->middleware('auth');
+
 
 
 Route::get('/test', function(){

@@ -1,7 +1,7 @@
 
-FROM node:16-buster-slim AS node
+FROM node:20-buster-slim AS node
 
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 RUN apt update \
         && apt install -y \
@@ -24,7 +24,7 @@ RUN apt update \
 
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
-RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm            
+RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 RUN npm install --global npx yarn
 # RUN /bin/bash echo fs.inotify.max_user_watches=524288 | /bin/bash tee -a /etc/sysctl.conf && /bin/bash sysctl -p
 
@@ -34,7 +34,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # RUN composer install
 # COPY vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64 /usr/local/bin/
 # COPY vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 /usr/local/bin/
-# RUN chmod +x /usr/local/bin/wkhtmltoimage-amd64 
+# RUN chmod +x /usr/local/bin/wkhtmltoimage-amd64
 # RUN chmod +x /usr/local/bin/wkhtmltopdf-amd64
 # RUN php artisan vendor:publish --provider="Barryvdh\Snappy\ServiceProvider"
 # RUN chmod 777 -R storage

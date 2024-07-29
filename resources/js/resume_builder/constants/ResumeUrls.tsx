@@ -1,19 +1,19 @@
 
 //  const API_URL = 'http://resume_backend:8001/api';
-//  const API_URL = 'http://localhost';
- const API_URL = 'http://54.172.174.198';
+ const API_URL = 'http://localhost:8000';
+//  const API_URL = 'http://54.172.174.198';
 //  console.log(API_URL);
 
 
- export const URL_PROFILE_CREATE = API_URL + '/resume/profile'; 
- export const URL_PROFILE_GET = API_URL + '/resume/profile/'; 
- export const URL_PROFILE_UPDATE = API_URL + '/resume/'; 
- export const URL_PROFILE_DELETE = API_URL + '/resume/'; 
+ export const URL_PROFILE_CREATE = API_URL + '/resume/profile';
+ export const URL_PROFILE_GET = API_URL + '/resume/profile/';
+ export const URL_PROFILE_UPDATE = API_URL + '/resume/';
+ export const URL_PROFILE_DELETE = API_URL + '/resume/';
 
 
- export const URL_EDUCATION_CREATE = API_URL + '/resume/profile/education'; 
- export const URL_EDUCATION_GET = API_URL + '/resume/profile/'; 
- export const URL_EDUCATION_UPDATE = API_URL + '/resume/'; 
+ export const URL_EDUCATION_CREATE = API_URL + '/resume/profile/education';
+ export const URL_EDUCATION_GET = API_URL + '/resume/profile/';
+ export const URL_EDUCATION_UPDATE = API_URL + '/resume/';
  export const URL_EDUCATION_DELETE = API_URL + '/resume/education/';
 
 
@@ -25,9 +25,9 @@
     return URL_EDUCATION_GET+profile_id+'/education';
  }
 
- export const URL_SKILL_CREATE = API_URL + '/resume/profile/skill'; 
- export const URL_SKILL_GET = API_URL + '/resume/profile/'; 
- export const URL_SKILL_UPDATE = API_URL + '/resume/'; 
+ export const URL_SKILL_CREATE = API_URL + '/resume/profile/skill';
+ export const URL_SKILL_GET = API_URL + '/resume/profile/';
+ export const URL_SKILL_UPDATE = API_URL + '/resume/';
  export const URL_SKILL_DELETE = API_URL + '/resume/skill/';
 
  export const getSKillIndexURL = (profile_id: string): string => {
@@ -41,9 +41,9 @@ export const postSkillURL = (profile_id: string): string => {
 
 
 
-export const URL_EXPERIENCE_CREATE = API_URL + '/resume/profile/skill'; 
-export const URL_EXPERIENCE_GET = API_URL + '/resume/profile/'; 
-export const URL_EXPERIENCE_UPDATE = API_URL + '/resume/'; 
+export const URL_EXPERIENCE_CREATE = API_URL + '/resume/profile/skill';
+export const URL_EXPERIENCE_GET = API_URL + '/resume/profile/';
+export const URL_EXPERIENCE_UPDATE = API_URL + '/resume/';
 export const URL_EXPERIENCE_DELETE = API_URL + '/resume/experience/';
 
 export const getExperienceIndexURL = (profile_id: string): string => {

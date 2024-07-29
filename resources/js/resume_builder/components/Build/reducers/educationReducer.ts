@@ -19,17 +19,17 @@ export const educationSlice = createSlice({
             const { index, data } = action.payload;
             // const item = state.filter((item,k) => { index == k ? item = data});
             state.education[index] = data;
-             
+
         },
 
         remove: (state, action: PayloadAction<number>) => {
             state.education.splice(action.payload, 1);
         },
-        
+
 
         getRecord: (state, action: PayloadAction<number>) => {
-    
-        }, 
+
+        },
 
         setHide: (state, action: PayloadAction<boolean>)=>{
             state.hide = action.payload;
@@ -42,6 +42,7 @@ export const educationSlice = createSlice({
             state.education = action.payload;
         }
     },
+
     extraReducers (builder){
         builder.addCase(postEducation.fulfilled, (state, action)=>{
             const {index, data} = action.payload;
@@ -66,7 +67,7 @@ export const educationSlice = createSlice({
 
         builder.addCase(postSave.fulfilled, (state, action)=>{
             console.log(action.payload.status == 200)
-                //state.education = 
+                //state.education =
 
 
         });
@@ -79,7 +80,7 @@ export const educationSlice = createSlice({
 
  export const education = state => state.education;
  export const { add, updateRecord , remove, getRecord, setHide, resetEducation, setArray} = educationSlice.actions;
- export default educationSlice.reducer; 
+ export default educationSlice.reducer;
 
 
  export const postEducation = createAsyncThunk(

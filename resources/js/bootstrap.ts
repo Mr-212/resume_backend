@@ -23,6 +23,7 @@ import axios from 'axios';
 (window as any).axios = axios;
 
 (window as any).axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+(window as any).api_url = 'http://localhost';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

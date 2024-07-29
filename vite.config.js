@@ -14,22 +14,25 @@ export default defineConfig({
             host: 'localhost',
         }
     },
+
     plugins: [
         // laravel({
         //     input: ['resources/css/app.css', 'resources/js/app.tsx'],
         //     refresh: true,
-          
+
         // }, react()),
 
         laravel(
             ['resources/css/app.css', 'resources/js/app.tsx'],
             react()),
-            
+
     ],
 
     resolve:{
         alias:{
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+            'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
+
         }
 
     },

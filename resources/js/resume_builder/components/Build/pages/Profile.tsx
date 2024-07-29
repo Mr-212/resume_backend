@@ -17,7 +17,7 @@ import { AddURLOrWebsite } from "./Misc";
 //         id?:string,
 //         job_title : string,
 //         job_description: string,
-//         first_name: string, 
+//         first_name: string,
 //         last_name: string,
 //         email: string,
 //         phone: string,
@@ -37,7 +37,7 @@ export interface ProfileProps<T> {
         // id?:string,
         // job_title : string,
         // job_description: string,
-        // first_name?: string, 
+        // first_name?: string,
         // last_name?: string,
         // name: string,
         // email: string,
@@ -52,12 +52,12 @@ export interface ProfileProps<T> {
 const formValue =  {
 
     // id:"",
-   
-    
+
+
     job_title : "",
     job_description: "",
-    name: "", 
-    first_name: "", 
+    name: "",
+    first_name: "",
     // last_name: "",
     email: "",
     phone: "",
@@ -82,7 +82,7 @@ type profile = ProfileProps<typeof formValue>;
 //         id?:string,
 //         job_title : string,
 //         job_description: string,
-//         first_name: string, 
+//         first_name: string,
 //         last_name: string,
 //         email: string,
 //         phone: string,
@@ -168,7 +168,7 @@ function Profile<T> ( { id }: CombineProps<T>){
         // const value  = e.target.value;
         setFormValues( {...formValues, [name]: value} );
         // console.log(state.profile)
-        
+
     }
 
     // const submitForm = (e: FormEvent) => {
@@ -190,13 +190,13 @@ function Profile<T> ( { id }: CombineProps<T>){
         //     setAlert({...alert, show: false})
 
         // }, 5000)
-    }) 
+    })
     // console.log(profile)
 
-    
-    
+
+
     return(
-        
+
         // <BuildLayout saveFunction={submitForm}>
 
         <div className="w-full" >
@@ -210,33 +210,33 @@ function Profile<T> ( { id }: CombineProps<T>){
                         <h4 className="text-black font-bold text-md text-left ">Profile</h4>
                         <button type="button" className="px-4 py-1 opacity-100 text-md text-green-600 font-bold" onClick={submitForm} name="save_btn">Save</button>
                 </div>
-             
+
                 <div className="flex flex-row items-star w-full gap-4">
                     <div className="text-center w-1/4">
                         <div className="bg-cover bg-no-repeat rounded-md h-full w-full border">
                             <ProfielImage></ProfielImage>
                         </div>
-                        
+
 
                     </div>
 
                     <div className="w-3/4 gap-2">
                         <div className="flex flex-row gap-3">
 
-                        
+
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="font-bold text-sm text-gray-400">Job Title</label>
-                               
+
                                 <div className="inline-flex items-start justify-start border-b-2 w-full">
                                     <input  className="h-8 block text-black text-sm  font-bold focus:outline-none focus:bg-gray" value={formValues?.job_title}  placeholder="" {...register('job_title', { required: false, maxLength: 100 })} name="job_title"></input>
-                                </div> 
+                                </div>
                             </div>
-                           
+
 
                         </div>
                         <div className="flex flex-row gap-3">
                              <div className="flex flex-col justify-center items-start p-1 w-full">
-                            
+
                                 <label className="block font-bold text-sm text-gray-400">Name</label>
 
                                 <div className="inline-flex items-center justify-start border-b-2 w-full ">
@@ -256,7 +256,7 @@ function Profile<T> ( { id }: CombineProps<T>){
 
                         </div>
 
-                        
+
                         <div className="flex flex-row items-start w-full">
 
                             <div className="flex flex-col justify-center items-start p-1 w-full">
@@ -266,7 +266,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                         <div className="inline-flex items-center justify-start w-full border-b-2">
                                             <input type="tel" className=" h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.phone}  {...register('phone', {required: false, maxLength:20})}  placeholder="" name="phone"></input>
                                         </div>
-                                    
+
                             </div>
                             <div className="flex flex-col justify-center items-start p-1 w-full">
                                 <label className="block font-bold text-sm text-gray-400">Date of Birth</label>
@@ -282,11 +282,11 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <div className="inline-flex items-center justify-start w-full border-b-2">
                                     <input type="tel" className="w-full h-8  block rounded text-black text-sm font-bold focus:outline-none" value={formValues?.city}  {...register('city', {required: false, maxLength:20})}  placeholder="" name="city"></input>
                                 </div>
-                       
+
                             </div> */}
                         </div>
                     </div>
-                   
+
                 </div>
                 {/* <div className="flex flex-row justify-between w-full pt-10">
                     <AddURLOrWebsite></AddURLOrWebsite>
@@ -300,7 +300,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                 <div className="flex flex-col justify-center items-start">
 
                     <label className="block font-bold text-sm text-gray-400">Github URL</label>
-                    
+
                         <input type="text" className="h-8 border-b-2 block rounded text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.github_url}  {...register('github_url', {required: false, maxLength:400})}  placeholder="" name="github_url"></input>
                 </div>
 
@@ -310,7 +310,20 @@ function Profile<T> ( { id }: CombineProps<T>){
                         <input type="text" className="h-8 block border-b-2 text-black text-sm font-bold focus:outline-none overflow-auto" value={formValues?.twitter_url}  {...register('twitter_url', {required: false, maxLength:400})} placeholder="" name="twitter_url"></input>
                 </div>
 
-                </div> 
+                </div>
+                <div className="flex flex-row items-star w-full pt-10">
+
+                <div className="flex flex-col items-start justify-start w-full">
+                    <label className="block font-bold text-sm text-gray-400">Address</label>
+                    {/* {validationErrors('address', 'Address')} */}
+
+                    <div className="inline-flex items-start justify-start w-full border-b-2">
+                        {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
+                        <input type="input" className="block text-black text-sm focus:outline-none" value={formValues?.address}  {...register('address', {required: false, maxLength:100})}  placeholder="" name="address"/>
+                    </div>
+
+                </div>
+                </div>
 
                 <div className="flex flex-row  items-star w-full pt-10">
 
@@ -321,29 +334,17 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <div className="inline-flex items-start justify-start w-full border-b-2">
                                     {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
                                     <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
-                                </div> 
+                                </div>
                     </div>
                 </div>
 
-                <div className="flex flex-row items-star w-full pt-10">
-                   
-                        <div className="flex flex-col items-start justify-start w-full">
-                            <label className="block font-bold text-sm text-gray-400">Address</label>
-                            {/* {validationErrors('address', 'Address')} */}
 
-                            <div className="inline-flex items-start justify-start w-full border-b-2">
-                                {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                                <textarea  className="h-24 block text-black text-sm focus:outline-none" value={formValues?.address}  {...register('address', {required: false, maxLength:100})}  placeholder="" name="address"></textarea>
-                            </div> 
 
-                         </div>
-                </div>
+            </div>
 
-            </div>  
-        
         </div>
     )
 }
- 
+
 
 export default Profile;

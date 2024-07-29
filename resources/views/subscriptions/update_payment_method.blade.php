@@ -1,32 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-       
-        <div class="col-md-6">
+    <div class="row bg-gray-200 h-screen p-10">
 
-        </div>    
-        <div class="col-md-4 border shadow bg-gray-50 px-10 py-5 float-right">
-            <div class="border-b-2 border-blue-400 py-2">
-                <h4 class="font-bold text-md">Payment Method Info</h4>
+        <div class="col-md-6">
+            <div class="p-5 card shadow h-96">
+                <header>
+                    {{ $plan->title }}
+                </header>
+                <div class="card-body">
+                    <p>{{ $plan->price }}</p>
+                    <p>{{ $plan->type }}</p>
+                    <p>{{ $plan->interval }}</p>
+
+                </div>
             </div>
 
-            <form class="space-y-3" id="payment_form" action="/subscription" method="post">
-                @csrf
-                <input type="hidden" name="payment_method_id" id='payment_method_id' />
-                <input type="hidden" name="plan_id" value="{{$plan_id}}" />
-
-                <input class="w-full text-sm  border-b-2 outline-none" id="card-holder-name" placeholder="Card Holder Name" type="text">
-    
-                <!-- Stripe Elements Placeholder -->
-                <div class="w-full border-b-2" id="card-element"></div>
-                
-                <button type="button" class="px-2 py-1 bg-blue-400 text-gray-50  hover:bg-black hover:text-white rounded-none float-right font-bold" id="card-button" data-secret="{{ $intent->client_secret }}">
-                    Update
-                </button>
-            </form>
-           
         </div>
+        <div class="col-md-6">
+            <div class="p-5 card shadow bg-gray-50 h-96">
+                <div class="header border-b-2 border-gray-400 py-2">
+                    <h4 class="text-center font-bold text-md py-2 text-black">Payment Method Info</h4>
+                </div>
+
+                <form class="card-body space-y-3" id="payment_form" action="/subscription" method="post">
+                    @csrf
+                    <input type="hidden" name="payment_method_id" id='payment_method_id' />
+                    <input type="hidden" name="plan_id" value="{{$plan_id}}" />
+
+                    <input class="w-full text-sm  border-b-2 outline-none" id="card-holder-name" placeholder="Card Holder Name" type="text">
+
+                    <!-- Stripe Elements Placeholder -->
+                    <div class="py-1" id="card-element">
+
+                    </div>
+                    <button type="button" class="w-full py-2 bg-blue-900 text-gray-50 hover:bg-black hover:text-white rounded-none float-right font-bold" id="card-button" data-secret="{{ $intent->client_secret }}">
+                        Subscribe
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
 
     </div>
 @endsection
@@ -34,7 +50,7 @@
 
 @push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
- 
+
 <script>
 
     console.log("{{env('STRIPE_KEY')}}")
@@ -46,7 +62,7 @@
     const cardHolderName = document.getElementById('card-holder-name');
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
-    
+
     cardButton.addEventListener('click', async (e) => {
         const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
@@ -57,10 +73,11 @@
             }
         );
 
-        
-    
+
+
         if (error) {
             // Display "error.message" to the user...
+            alert(error.message);
         } else {
             // console.log(setupIntent);
             if(setupIntent.payment_method  != ""){

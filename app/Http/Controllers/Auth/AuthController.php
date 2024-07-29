@@ -30,12 +30,14 @@ class AuthController extends Controller
 
         // dd($request->all());
         try{
-
+            // dd('here');
             if(Auth::attempt($request->except('_token'))){
                 return redirect('resume');
             }
+            dd('filed');
 
         }catch(Exception $e){
+            // dd("error");
             throw new Error($e->getMessage());
         }
 
