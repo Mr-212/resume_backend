@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Subscription;
+use Illuminate\Support\Facades\Session;
 
 class SubscriptionController extends Controller
 {
@@ -57,22 +58,33 @@ class SubscriptionController extends Controller
     public function create(Request $request)
     {
 
-        // dd(Auth::user());
+        // dd($request->all());
         $this->user = Auth::user();
+        if($request->has('trial_days'))
+        {
+            Session::put($this->user->id.'_trial_days',$request->get('trial_days'));
+        }
+
+        // if($this->user->subscr())
+
+        // dd(Session::get($this->user->id.'_trial_days'));
         $plan_id = $request->plan_id;
         $plan = Plan::whereStripeId($plan_id)->firstOrFail();
+        $paymentMethods = $this->user->paymentMethods();
+        // dd($paymentMethods->card);
         //  dd($this->user->subscribedToPrice($plan->stripe_id));
         // dd($plan->stripe_id);
 
 
-        if($this->user->checkStripePrice($plan->stripe_id))
+        // if($this->user->checkStripePrice($plan->stripe_id))
+        if($this->user->subscription($plan->title))
         {
             // dd('user alredy subscibed to that plan');
-            return view('subscriptions.subscribed');
+            // return view('subscriptions.subscribed');
             // return redirect()->back();
         }
         $intent = $this->user->createSetupIntent();
-        return view('subscriptions.update_payment_method',compact('intent','plan_id','plan'));
+        return view('subscriptions.update_payment_method',compact('intent','plan_id','plan','paymentMethods'));
     }
 
     /**
@@ -94,22 +106,33 @@ class SubscriptionController extends Controller
                 //     $this->updateDefaultPaymentMethod($request->payment_method_id);
                 $plan_id = $request->plan_id;
                 $subscriptionProduct = $this->plan->where('stripe_id',$plan_id)->first();
+                $trial_days = 0;
+                if(Session::has($this->user->id.'_trial_days'))
+                {
+                    $trial_days = Session::get($this->user->id.'_trial_days');
+                }
 
 
                 // if($this->user->subscribed($subscriptionProduct->stripe_id))
-                if($this->user->subscribedToPrice($subscriptionProduct->stripe_id))
+                // if($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title))
+                if($this->user->subscribed($subscriptionProduct->title))
                 {
                     // return redirect('subscription.subscibed');
                     dd("already subscribed", $subscriptionProduct->title);
 
                 }else
                 {
-                    $subscription = $this->user->newSubscription('default', $request->plan_id)->create($request->payment_method_id);
+                    $subscription = $this->user->newSubscription($subscriptionProduct->title, $request->plan_id);
+                    if($trial_days) $subscription = $subscription->trialDays($trial_days);
+                    $subscription = $subscription->create($request->payment_method_id);
                     if($subscription->stripe_id)
                     {
+                        // if($subscription->onTrial())
+                        // {
+                        //     dd('on trial');
+                        // }
                         return view('subscriptions.subscribed');
                     }
-                    // dd($subscription);
                 }
 
                 return;
@@ -118,7 +141,7 @@ class SubscriptionController extends Controller
             }
 
         }catch(Exception $e){
-            dd($e->getMessage());
+            dd($e->getTraceAsString());
         }
     }
 

@@ -20,7 +20,7 @@ class PlanSeeder extends Seeder
         [
             'id' => Str::uuid(),
             'title' => 'Premium',
-            'identifier' => 'Premium',  
+            'identifier' => 'Premium',
             'price' => 1,
             'interval' => 'Day',
             'type' => 'Recurring',
@@ -52,5 +52,17 @@ class PlanSeeder extends Seeder
 
         ]
         );
+
+        // Plan::updateOrCreate(['stripe_id' => 'price_1NFzGHDoh4KpmE6IUfTkftyj'],
+        // [
+        //     'id' => Str::uuid(),
+        //     'title' => 'Premium',
+        //     'identifier' => 'Premium',
+        //     'price' => '10',
+        //     'interval' => 'Month',
+        //     'type' => 'Recurring',
+
+        // ]
+        // );
     }
 }

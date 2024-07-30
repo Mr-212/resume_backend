@@ -17,10 +17,32 @@
             </div>
 
         </div>
+        @if(!empty($paymentMethods))
         <div class="col-md-6">
+            <div class="p-4 card shadow bg-gray-50 h-96">
+                <div class="header border-b-2 border-gray-400 py-2">
+                    <h4 class="text-center font-bold text-md py-2 text-black">Select Payament Method</h4>
+                    </div>
+                <div class="card-body">
+                    @foreach ($paymentMethods as $paymentMethod )
+                    <div class="flex flex-row justify-start space-x-2 shadow-lg">
+                        <input class="" type="radio" name="paymentMethod" value="{{ $paymentMethod->id}}" />
+                        <div class="flex flex-row justify-start space-x-2 w-full text-black font-bold">
+                            <span class="">{{ $paymentMethod->card->brand }}</span>
+                            <span class="">{{ $paymentMethod->card->last4 }}</span>
+                            <span class="">{{ $paymentMethod->card->exp_month }} / {{ $paymentMethod->card->exp_year }}</span>
+
+                        </div>
+                    </div>
+
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
             <div class="p-5 card shadow bg-gray-50 h-96">
                 <div class="header border-b-2 border-gray-400 py-2">
-                    <h4 class="text-center font-bold text-md py-2 text-black">Payment Method Info</h4>
+                    <h4 class="text-center font-bold text-md py-2 text-black">Add Payment Method Info</h4>
                 </div>
 
                 <form class="card-body space-y-3" id="payment_form" action="/subscription" method="post">
