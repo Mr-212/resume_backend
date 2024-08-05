@@ -114,13 +114,21 @@ class SubscriptionController extends Controller
 
 
                 // if($this->user->subscribed($subscriptionProduct->stripe_id))
-                // if($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title))
-                if($this->user->subscribed($subscriptionProduct->title))
+                // dd($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title));
+                if($this->user->subscribed($subscriptionProduct->title) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title))
+                // if($this->user->subscribed($subscriptionProduct->title))
                 {
-                    // return redirect('subscription.subscibed');
-                    dd("already subscribed", $subscriptionProduct->title);
+                    $message = "You are already subscribed to " . $subscriptionProduct->title;
+                    $subscription = $this->user->subscription($subscriptionProduct->title)->swap($subscriptionProduct->stripe_id);
+                    if($subscription->stripe_id)
+                        $message = "Your subscription successfully changed to $" . $subscriptionProduct->price . "/" .$subscriptionProduct->interval . " price";
+                    return view('subscriptions.subscribed', compact('message'));
 
-                }else
+                }
+                // if()){
+
+                // }
+                else
                 {
                     $subscription = $this->user->newSubscription($subscriptionProduct->title, $request->plan_id);
                     if($trial_days) $subscription = $subscription->trialDays($trial_days);
@@ -131,7 +139,8 @@ class SubscriptionController extends Controller
                         // {
                         //     dd('on trial');
                         // }
-                        return view('subscriptions.subscribed');
+                        $message = "You have succssfully subscribed to ".$subscriptionProduct->title;
+                        return view('subscriptions.subscribed',compact('message'));
                     }
                 }
 
