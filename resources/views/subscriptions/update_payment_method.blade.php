@@ -28,25 +28,29 @@
                     <h4 class="text-center font-bold text-md py-2 text-black">Payment Method Info</h4>
                 </div>
 
+                <div>
+                    @if(!empty($paymentMethods))
+                    <div>
+
+                        <input type="radio" name="radio_payment" id="select_existing_card" class="radio_payment_method" value="existing"/>
+                        <label for="select_existing">Select Existing Payment Method</label>
+                    </div>
+                    @endif
+
+                    <div>
+                        <input type="radio" name="radio_payment" id="add_new_card" class="radio_payment_method" value="new" />
+                        <label for="add_new_card">Add New Card</label>
+                    </div>
+                </div>
+
 
                 <form class="card-body space-y-3" id="payment_form" action="/subscription" method="post">
                     @csrf
                     <input type="hidden" name="payment_method_id" id='payment_method_id' />
                     <input type="hidden" name="plan_id" value="{{$plan_id}}" />
-                    <div>
-                        <div>
-
-                            <input type="radio" name="radio_payment_method" id="select_existing_card" class="radio_payment_method" value="existing"/>
-                            <label for="select_existing">Select Existing Payment Method</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" name="radio_payment_method" id="add_new_card" class="radio_payment_method" value="new" />
-                            <label for="add_new_card">Add New Card</label>
-                        </div>
-                    </div>
 
 
+                    @if(!empty($paymentMethods))
                     <div class="select_card mb-2">
 
                         <select class="form-control border-none bg-gray-400 rounded-none" id="select_payment_method_id" placeholder="">
@@ -63,6 +67,7 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
 
                     <div class="add_card">
                         {{-- <input type="radio" name="payment_methood" /> --}}
@@ -98,14 +103,50 @@
 
 <script>
 
-    $(document).ready(function() {
-        var is_checked = $('.radio_payment_method').val();
-        console.log(is_checked);
+    // $(document).ready(function() {
 
-    });
+        // $('.radio_payment_method').change(function() {
+        //     console.log('inside');
+        //     var is_checked = $('.radio_payment_method:checked').val();
+        //     console.log(is_checked);
+
+        //     if($('.radio_payment_method').is(':checked')){
+        //         var is_checked = $('.radio_payment_method:checked').val();
+        //         console.log(is_checked);
+        //     }
+        // });
+
+        var radio;
+
+        var radio = document.querySelectorAll('.radio_payment_method').forEach(function(element) {
+
+           element.addEventListener('change', function(event) {
+
+            var is_checked = document.querySelector('.radio_payment_method:checked').value;
+            radio = is_checked;
+            console.log(radio);
+
+            if(is_checked == 'new'){
+                document.querySelector('.select_card').style.display = 'none';
+                document.querySelector('.add_card').style.display = 'block';
+            }
+            if(is_checked == 'existing'){
+                document.querySelector('.select_card').style.display = 'block';
+                document.querySelector('.add_card').style.display = 'none';
+            }
+
+
+           });
+
+        })
+
+
+    // });
 </script>
 
 <script>
+
+
 
     console.log("{{env('STRIPE_KEY')}}")
     const stripe = Stripe("pk_test_51L2wxGDoh4KpmE6IrbjsAB1Lig622SuWSoQBrljuhf95bxtEq2jdpnIVJDDYfkoPxmzvdgXYSRdwRWySQyW8JiBj00HSGY1FSy");
@@ -118,28 +159,36 @@
     const clientSecret = cardButton.dataset.secret;
 
     cardButton.addEventListener('click', async (e) => {
-        const { setupIntent, error } = await stripe.confirmCardSetup(
-            clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: { name: cardHolderName.value }
+
+        if(radio == 'new') {
+            const { setupIntent, error } = await stripe.confirmCardSetup(
+                clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: { name: cardHolderName.value }
+                    }
                 }
+            );
+
+            if (error) {
+                // Display "error.message" to the user...
+                alert(error.message);
+            } else {
+                // console.log(setupIntent);
+                if(setupIntent.payment_method  != ""){
+                    document.getElementById('payment_method_id').value = setupIntent.payment_method;
+                    document.getElementById('payment_form').submit();
+                }
+                //console.log("The card has been verified successfully...");
             }
-        );
-
-
-
-        if (error) {
-            // Display "error.message" to the user...
-            alert(error.message);
-        } else {
-            // console.log(setupIntent);
-            if(setupIntent.payment_method  != ""){
-                document.getElementById('payment_method_id').value = setupIntent.payment_method;
-                document.getElementById('payment_form').submit();
-            }
-            //console.log("The card has been verified successfully...");
         }
+        if(radio == 'existing'){
+            var id = document.getElementById('select_payment_method_id').value;
+            // console.log(id, radio);
+            document.getElementById('payment_method_id').value = id;
+            document.getElementById('payment_form').submit();
+        }
+
     });
 </script>
 
