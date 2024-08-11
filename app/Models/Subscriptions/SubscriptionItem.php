@@ -15,5 +15,5 @@ class SubscriptionItem extends CashierSubscriptionItem
 
     protected $fillable = ['subscription_id','stripe_id','stripe_product','stripe_price','quantity'];
 
-    
+
 }

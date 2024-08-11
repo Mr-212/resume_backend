@@ -17,7 +17,8 @@ class Subscription extends CashierSubscription
 
 
 
-    public function subscription_items(){
-        return $this->hasMany(SubscriptionItem::class);
+    public function plan(){
+
+        return $this->belongsTo(Plan::class, 'stripe_price','stripe_id');
     }
 }

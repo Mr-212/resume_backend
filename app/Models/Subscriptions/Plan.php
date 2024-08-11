@@ -21,4 +21,9 @@ class Plan extends Model
     {
         return $this->hasOne(subscription::class);
     }
+
+    public function getPlanNameAttribute(): string
+    {
+        return "{$this->title} - $ {$this->price}/{$this->interval}";
+    }
 }
