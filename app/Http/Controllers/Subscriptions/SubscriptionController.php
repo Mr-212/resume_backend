@@ -143,9 +143,7 @@ class SubscriptionController extends Controller
                         return view('subscriptions.subscribed',compact('message'));
                     }
                 }
-
                 return;
-
 
             }
 
