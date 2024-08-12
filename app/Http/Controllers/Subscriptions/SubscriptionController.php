@@ -69,7 +69,7 @@ class SubscriptionController extends Controller
 
         // dd(Session::get($this->user->id.'_trial_days'));
         $plan_id = $request->plan_id;
-        $plan = Plan::whereStripeId($plan_id)->firstOrFail();
+        $plan = Plan::whereStripePrice($plan_id)->firstOrFail();
         $paymentMethods = $this->user->paymentMethods();
         // dd($paymentMethods->card);
         //  dd($this->user->subscribedToPrice($plan->stripe_id));
@@ -105,7 +105,7 @@ class SubscriptionController extends Controller
                 // if(!$this->user->hasPaymentMethod())
                 //     $this->updateDefaultPaymentMethod($request->payment_method_id);
                 $plan_id = $request->plan_id;
-                $subscriptionProduct = $this->plan->where('stripe_id',$plan_id)->first();
+                $subscriptionProduct = $this->plan->where('stripe_price',$plan_id)->first();
                 $trial_days = 0;
                 if(Session::has($this->user->id.'_trial_days'))
                 {
@@ -115,11 +115,11 @@ class SubscriptionController extends Controller
 
                 // if($this->user->subscribed($subscriptionProduct->stripe_id))
                 // dd($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title));
-                if($this->user->subscribed($subscriptionProduct->title) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title))
+                if($this->user->subscribed($subscriptionProduct->title) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_price, $subscriptionProduct->title))
                 // if($this->user->subscribed($subscriptionProduct->title))
                 {
                     $message = "You are already subscribed to " . $subscriptionProduct->title;
-                    $subscription = $this->user->subscription($subscriptionProduct->title)->swap($subscriptionProduct->stripe_id);
+                    $subscription = $this->user->subscription($subscriptionProduct->title)->swap($subscriptionProduct->stripe_price);
                     if($subscription->stripe_id)
                         $message = "Your subscription successfully changed to $" . $subscriptionProduct->price . "/" .$subscriptionProduct->interval . " price";
                     return view('subscriptions.subscribed', compact('message'));
@@ -130,7 +130,7 @@ class SubscriptionController extends Controller
                 // }
                 else
                 {
-                    $subscription = $this->user->newSubscription($subscriptionProduct->title, $request->plan_id);
+                    $subscription = $this->user->newSubscription($subscriptionProduct->title, $request->plan_price);
                     if($trial_days) $subscription = $subscription->trialDays($trial_days);
                     $subscription = $subscription->create($request->payment_method_id);
                     if($subscription->stripe_id)

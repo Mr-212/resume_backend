@@ -16,11 +16,11 @@ class PlanSeeder extends Seeder
      */
     public function run()
     {
-        Plan::updateOrCreate(['stripe_id' => 'price_1NFiMIDoh4KpmE6ILdPoqNt5',],
+        Plan::updateOrCreate(['stripe_price' => 'price_1NFiMIDoh4KpmE6ILdPoqNt5',],
         [
             'id' => Str::uuid(),
-            'title' => 'Premium',
-            'identifier' => 'Premium',
+            'product_name' => 'Premium',
+            // 'identifier' => 'Premium',
             'price' => 1,
             'interval' => 'Day',
             'type' => 'Recurring',
@@ -28,11 +28,11 @@ class PlanSeeder extends Seeder
         ]
         );
 
-        Plan::updateOrCreate(['stripe_id' => 'price_1NFiMIDoh4KpmE6Ir0AUXvj8'],
+        Plan::updateOrCreate(['stripe_price' => 'price_1NFiMIDoh4KpmE6Ir0AUXvj8'],
         [
             'id' => Str::uuid(),
-            'title' => 'Premium',
-            'identifier' => 'Premium',
+            'product_name' => 'Premium',
+
             'price' => 5,
             'interval' => 'Week',
             'type' => 'Recurring',
@@ -41,28 +41,15 @@ class PlanSeeder extends Seeder
         ]
         );
 
-        Plan::updateOrCreate(['stripe_id' => 'price_1NFzGHDoh4KpmE6IUfTkftyj'],
+        Plan::updateOrCreate(['stripe_price' => 'price_1NFzGHDoh4KpmE6IUfTkftyj'],
         [
             'id' => Str::uuid(),
-            'title' => 'Premium',
-            'identifier' => 'Premium',
+            'product_name' => 'Premium',
             'price' => '10',
             'interval' => 'Month',
             'type' => 'Recurring',
 
         ]
         );
-
-        // Plan::updateOrCreate(['stripe_id' => 'price_1NFzGHDoh4KpmE6IUfTkftyj'],
-        // [
-        //     'id' => Str::uuid(),
-        //     'title' => 'Premium',
-        //     'identifier' => 'Premium',
-        //     'price' => '10',
-        //     'interval' => 'Month',
-        //     'type' => 'Recurring',
-
-        // ]
-        // );
     }
 }

@@ -14,6 +14,11 @@ return [
     |
     */
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY',NULL),
+        'secret' => env('STRIPE_SECRET',NULL)
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

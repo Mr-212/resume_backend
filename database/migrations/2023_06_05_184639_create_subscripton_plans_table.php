@@ -14,17 +14,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscripton_plans', function (Blueprint $table) {
+        Schema::create('stripe_plans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title')->nullable();
-            $table->string('identifier')->nullable();
-            $table->string('stripe_id')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('stripe_price')->nullable();
+            // $table->string('name')->nullable();
+            $table->string('product_id')->nullable();
+            $table->string('product_name')->nullable();
+            $table->boolean('active')->default(1);
+            $table->string('billing_scheme')->default('per_unit');
             $table->string('currency')->default('usd')->nullable();
             $table->unsignedBigInteger('price')->nullable();
             $table->enum('type', Plan::PLAN_TYPES)->nullable();
             $table->enum('interval',Plan::PLAN_INTERVAL)->nullable();
-            
+
 
             $table->timestamps();
         });
@@ -37,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscripton_plans');
+        Schema::dropIfExists('stripe_plans');
     }
 };

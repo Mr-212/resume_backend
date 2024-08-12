@@ -11,10 +11,12 @@ class Plan extends Model
 {
     use HasFactory, UUID;
 
-    protected $table = 'subscripton_plans';
+    protected $table = 'stripe_plans';
     protected $fillable = ['stripe_id','identifier' ,'title','interval','type','status', 'price','currency'];
 
     const PLAN_TYPES = ['Recurring','Fixed'];
+    const PLAN_TYPE_RECURRING = 'Recurring';
+    const PLAN_TYPE_FIXED = 'Fixed';
     const PLAN_INTERVAL = ['Free','Day','Week','Month','Quarter','Year'];
 
     public function subscription(): HasOne
@@ -24,6 +26,6 @@ class Plan extends Model
 
     public function getPlanNameAttribute(): string
     {
-        return "{$this->title} - $ {$this->price}/{$this->interval}";
+        return "{$this->product_name} - $ {$this->price}/{$this->interval}";
     }
 }

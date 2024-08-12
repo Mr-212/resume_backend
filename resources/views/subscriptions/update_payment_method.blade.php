@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <div class="p-5 card shadow h-96">
                 <header>
-                    {{ $plan->title }}
+                    {{ $plan->product_name }}
                 </header>
                 <div class="card-body">
                     <p>{{ $plan->price }}</p>
