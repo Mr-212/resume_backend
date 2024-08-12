@@ -6,6 +6,7 @@ use App\Filament\Resources\SubscriptionResource\Pages;
 use App\Filament\Resources\SubscriptionResource\RelationManagers;
 use App\Models\Subscriptions\Plan;
 use App\Models\Subscriptions\Subscription;
+use Filament\Actions\ViewAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,7 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\FormAction;
 
 
@@ -51,6 +52,18 @@ class SubscriptionResource extends Resource
             ->columns([
 
                 Tables\Columns\TextColumn::make('name'),
+
+                Tables\Columns\TextColumn::make('user.name')
+                ->label('Customer')
+                ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
+                // ->action(function($record){
+                //     // dd($record->user_id);
+
+                //     return url(route('filament.admin.resources.users.edit', [ 'record' => $record->user_id]));
+                //     // return UserResource::getUrl('edit', ['record' => $record->user_id]);
+
+                // }),
+
                 Tables\Columns\TextColumn::make('stripe_id'),
                 Tables\Columns\TextColumn::make('stripe_status')
                 ->label('Status'),
@@ -61,6 +74,7 @@ class SubscriptionResource extends Resource
                 //     $plan = Plan::where('stripe_id', $record->stripe_price)->first();
                 //     return $plan ? "{$plan->title} - $ {$plan->price}/{$plan->interval}" : null;
                 // }),
+
                 Tables\Columns\TextColumn::make('plan.plan_name')
                 ->label('Plan'),
 
@@ -71,6 +85,14 @@ class SubscriptionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+
+                Action::make('View Customer')->url(fn($record) => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
+
+                Action::make('cancel_plan')->label('Cancel')
+                ->color('danger')
+                ->action(fn($record) => $record)
+                ->requiresConfirmation(),
+                // ->button(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -16,4 +16,9 @@ class ListSubscriptions extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getActions(): array
+    {
+        return [];
+    }
 }
