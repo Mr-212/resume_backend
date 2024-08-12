@@ -13,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\FormAction;
+
 
 class SubscriptionResource extends Resource
 {
@@ -24,9 +27,23 @@ class SubscriptionResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->readOnly(),
+                Forms\Components\TextInput::make('stripe_status')
+                ->label('Status'),
+
+                // Forms\Components\TextInput::make('cancel_subscription')
+                // ->label('Cancel Subscription')
+                // // ->color('danger')
+                // // ->icon('heroicon-o-x-circle')
+                // ->extraAttributes(['type' => 'button'])
+                // // ->requiresConfirmation()
+                // // ->action('cancelSubscription')
+                // ,
+
             ]);
     }
+
+
 
     public static function table(Table $table): Table
     {
@@ -46,9 +63,6 @@ class SubscriptionResource extends Resource
                 // }),
                 Tables\Columns\TextColumn::make('plan.plan_name')
                 ->label('Plan'),
-
-
-
 
 
             ])
@@ -79,5 +93,11 @@ class SubscriptionResource extends Resource
             'create' => Pages\CreateSubscription::route('/create'),
             'edit' => Pages\EditSubscription::route('/{record}/edit'),
         ];
+    }
+
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }
