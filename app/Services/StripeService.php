@@ -22,13 +22,21 @@ class StripeService {
         $prices = Price::all(['limit' =>100]);
 
         foreach($prices as $price){
-            dd($price);
-            $this->planModel->updateOrCreate(['stripe_id' => $price->id],
-                ['title' => '']
+            // dd($price);
+            $this->planModel->updateOrCreate(['stripe_price' => $price->id ],
+                [
+                    'product_id' => $price->product,
+                    'product_name' => '',
+                    'price' => $price->unit_amount,
+                    'currency' => $price->currency,
+                    'billing_scheme' => $price->billing_scheme,
+                    'type'=> $price->type,
+                    'interval' => ucfirst($price->recurring?->interval)
+                ]
             );
         }
 
-        dd($prices->data);
+        dd('success');
 
     }
 

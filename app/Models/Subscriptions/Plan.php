@@ -12,7 +12,7 @@ class Plan extends Model
     use HasFactory, UUID;
 
     protected $table = 'stripe_plans';
-    protected $fillable = ['stripe_id','identifier' ,'title','interval','type','status', 'price','currency'];
+    protected $fillable = ['stripe_price','product_name' ,'product_id','interval','type','active', 'price','currency','billing_scheme'];
 
     const PLAN_TYPES = ['Recurring','Fixed'];
     const PLAN_TYPE_RECURRING = 'Recurring';

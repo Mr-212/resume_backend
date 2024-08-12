@@ -30,8 +30,7 @@ class PlanResource extends Resource
                 ->options([
                     Plan::PLAN_TYPE_FIXED => Plan::PLAN_TYPE_FIXED,
                     Plan::PLAN_TYPE_RECURRING => Plan::PLAN_TYPE_RECURRING,
-                ])
-                ,
+                ]),
 
             ]);
     }
