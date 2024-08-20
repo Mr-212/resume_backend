@@ -57,7 +57,7 @@ class SubscriptionResource extends Resource
                 ->label('Customer')
                 ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
 
-                Tables\Columns\TextColumn::make('stripe_id'),
+                Tables\Columns\TextColumn::make('stripe_price'),
                 Tables\Columns\TextColumn::make('stripe_status')
                 ->label('Status'),
 
