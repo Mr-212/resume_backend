@@ -117,7 +117,7 @@ class SubscriptionController extends Controller
 
                 // if($this->user->subscribed($subscriptionProduct->stripe_id))
                 // dd($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title));
-                if($this->user->subscribed($subscriptionProduct->title) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_price, $subscriptionProduct->product_name))
+                if($this->user->subscribed($subscriptionProduct->product_name) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_price, $subscriptionProduct->product_name))
                 // if($this->user->subscribed($subscriptionProduct->title))
                 {
                     $message = "You are already subscribed to " . $subscriptionProduct->product_name;
@@ -133,19 +133,14 @@ class SubscriptionController extends Controller
                 else
                 {
                     // dd($subscriptionProduct);
-                    $subscription = $this->user->newSubscription('default', $subscriptionProduct->stripe_price);
+                    $subscription = $this->user->newSubscription($subscriptionProduct->product_name, $subscriptionProduct->stripe_price);
                     if($trial_days) $subscription = $subscription->trialDays($trial_days);
-                    // dd($subscription);
                     $subscription = $subscription->create($request->payment_method_id);
 
                     // dd($subscription);
 
                     if($subscription->stripe_id)
                     {
-                        // if($subscription->onTrial())
-                        // {
-                        //     dd('on trial');
-                        // }
                         $message = "You have succssfully subscribed to ".$subscriptionProduct->product_name;
                         return view('subscriptions.subscribed',compact('message'));
                     }

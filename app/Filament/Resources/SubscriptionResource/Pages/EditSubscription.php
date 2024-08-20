@@ -27,15 +27,21 @@ class EditSubscription extends EditRecord
                 ->color('danger')
                 ->icon('heroicon-o-x-circle')
                 ->requiresConfirmation()
-                ->action(fn ($record) => static::cancelSubscription($record)),
+                ->action(fn ($record) => static::cancelSubscription($record))
+                ->visible(fn ($record) => $record->subscription_active)
+                ,
         ]);
     }
 
     protected static function cancelSubscription($record)
     {
         $user = $record?->user;
+        // dd(is_null($user));
 
-        if (!$user && $user->subscribedToPrice($record->stripe_price, $record->name)) {
+        if (!is_null($user) && $user->subscribedToPrice($record->stripe_price, $record->type)) {
+
+            $canceled = $record->cancelNow();
+            // dd($canceled);
             Notification::make()
             ->title('Subscription successfully cancelled.')
             ->success()
@@ -45,6 +51,8 @@ class EditSubscription extends EditRecord
             ->title('Error in cancelleing Subscription.')
             ->danger()
             ->send();
+
+
         }
 
         return redirect()->back();

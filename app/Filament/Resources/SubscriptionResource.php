@@ -28,7 +28,7 @@ class SubscriptionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->readOnly(),
+                Forms\Components\TextInput::make('type')->readOnly(),
                 Forms\Components\TextInput::make('stripe_status')
                 ->label('Status'),
 
@@ -51,7 +51,7 @@ class SubscriptionResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('type'),
 
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('Customer')

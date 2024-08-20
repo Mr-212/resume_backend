@@ -14,7 +14,7 @@ class Subscription extends CashierSubscription
 
     protected $table = 'subscriptions';
 
-    protected $fillable = ['user_id','name','stripe_id','stripe_status','stripe_price','trial_ends_at','ends_at'];
+    protected $fillable = ['user_id','type','stripe_id','stripe_status','stripe_price','trial_ends_at','ends_at'];
 
 
     public function plan(){
