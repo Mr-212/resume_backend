@@ -50,12 +50,13 @@ class SubscriptionResource extends Resource
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('type'),
 
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('Customer')
-                ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
+                // ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
+                ->url(fn($record) : string => UserResource::getUrl('edit', [ 'record' => $record->user_id])),
+
 
                 Tables\Columns\TextColumn::make('stripe_price'),
                 Tables\Columns\TextColumn::make('stripe_status')
@@ -78,7 +79,9 @@ class SubscriptionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+
 
                 // Action::make('View Customer')->url(fn($record) => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
 
@@ -86,7 +89,6 @@ class SubscriptionResource extends Resource
                 ->color('danger')
                 ->action(fn($record) => $record)
                 ->requiresConfirmation(),
-                // ->button(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

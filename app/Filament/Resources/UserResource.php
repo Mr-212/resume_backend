@@ -36,15 +36,18 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
+
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('stripe_id')
-                ->label('Is Stripe Customer ? ')
-                ->formatStateUsing(fn ($state) => $state ? 'Yes' : 'No' ),
+
+                Tables\Columns\IconColumn::make('stripe_id')
+                ->label('Is Stripe Customer? ')
+                ->boolean(fn ($state) => $state ? true : false ),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
