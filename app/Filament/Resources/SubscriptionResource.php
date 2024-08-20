@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriptionResource\Pages;
 use App\Filament\Resources\SubscriptionResource\RelationManagers;
+use App\Filament\Resources\SubscriptionResource\RelationManagers\UserRelationManager;
 use App\Models\Subscriptions\Plan;
 use App\Models\Subscriptions\Subscription;
 use Filament\Actions\ViewAction;
@@ -52,10 +53,32 @@ class SubscriptionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('type'),
 
+                // Tables\Columns\TextColumn::make('user.name')
+                // ->label('Customer')
+                // // ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
+                // ->url(fn($record) : string => UserResource::getUrl('edit', [ 'record' => $record->user_id])),
+
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('Customer')
-                // ->url(fn($record) : string => route('filament.admin.resources.users.edit', [ 'record' => $record->user_id])),
-                ->url(fn($record) : string => UserResource::getUrl('edit', [ 'record' => $record->user_id])),
+                ->action(function ($record, $livewire){
+                    return Action::make('viewUser')
+                    ->label('view user')
+                    ->icon('heroicon-o-eye')
+                    ->modalHeading('User Details')
+                    ->form([
+                        Forms\Components\TextInput::make('name')
+                        ->label('Name')
+                        ->default($record->user->name)
+                        ->disabled(),
+
+                        Forms\Components\TextInput::make('email')
+                        ->label('Email')
+                        ->default($record->user->email)
+                        ->disabled(),
+
+                    ])
+                    ->action( fn() => $livewire->notify('User details viewd'));
+                }),
 
 
                 Tables\Columns\TextColumn::make('stripe_price'),
@@ -100,7 +123,7 @@ class SubscriptionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UserRelationManager::class,
         ];
     }
 
