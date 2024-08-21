@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 
 class UserResource extends Resource
 {
@@ -24,9 +26,26 @@ class UserResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('email'),
-                Forms\Components\TextInput::make('stripe_id'),
+                Grid::make()
+                ->schema([
+                    Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('name'),
+                        Forms\Components\TextInput::make('email'),
+                    ])
+                    ->columns(2),
+                    Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('stripe_id'),
+
+                    ])
+                    ->columns(2)
+
+                ]),
+
+                // Forms\Components\TextInput::make('name'),
+                // Forms\Components\TextInput::make('email'),
+                // Forms\Components\TextInput::make('stripe_id'),
 
             ]);
     }
@@ -34,6 +53,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
 
