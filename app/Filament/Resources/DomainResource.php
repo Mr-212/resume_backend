@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DomainResource\Pages;
 use App\Filament\Resources\DomainResource\RelationManagers;
 use App\Models\Domain;
+use App\Models\Tenant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,26 +20,20 @@ class DomainResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Tenants';
+
+    protected static bool $shouldRegisterNavigation = true;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('domain')
-                ->default(function(){
-
-                    $tenant =  $this->getOwnerRecord();
-                    dd($tenant);
-
-                    return "{$tenant->name}.localhost";
-
-
-                })
                 ->required(),
                 // ->live(fn()),
-                // Forms\Components\Select::make('Select Tenant...')
-                // ->options(Ten),
+                Forms\Components\Select::make('Select Tenant...')
+                ->label('Tenant')
+                ->options(Tenant::query()->pluck('id','id')),
             ]);
     }
 
@@ -46,7 +41,9 @@ class DomainResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('domain'),
+                Tables\Columns\TextColumn::make('tenant_id')
+                ->label('Tenant'),
             ])
             ->filters([
                 //
