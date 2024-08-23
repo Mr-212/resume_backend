@@ -196,6 +196,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class,
 
 
     ],
