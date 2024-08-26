@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PlanSeeder::class,
             ResumeSeeder::class,
-            TenantSeeder::class
+            // TenantSeeder::class
         ]);
 
     }

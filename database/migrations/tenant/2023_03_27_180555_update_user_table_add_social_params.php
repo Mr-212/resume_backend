@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         if(Schema::hasTable('users')){
-
             Schema::table('users', function (Blueprint $table) {
                 $table->string('password')->change()->nullable();
                 $table->string('email')->change()->nullable();
@@ -42,18 +41,17 @@ return new class extends Migration
     public function down()
     {
         if(Schema::hasTable('users')){
-            Schema::dropIfExists('users');
             Schema::table('users', function (Blueprint $table) {
                 $table->dropIfExists('first_name');
-                $table->dropIfExists('last_name');
-                $table->dropIfExists('phone');
-                $table->dropIfExists('is_social');
-                $table->dropIfExists('provider');
-                $table->dropIfExists('provider_id');
-                $table->dropIfExists('img_url');
-                $table->dropIfExists('url');
-                $table->dropIfExists('social_email_verified');
-                $table->dropIfExists('social_email_verified');
+                $table->dropColumn('last_name');
+                $table->dropColumn('phone');
+                $table->dropColumn('is_social');
+                $table->dropColumn('provider');
+                $table->dropColumn('provider_id');
+                $table->dropColumn('img_url');
+                $table->dropColumn('url');
+                $table->dropColumn('social_email_verified');
+                $table->dropColumn('social_email_verified');
                 $table->string('password')->change();
                 $table->string('email')->change();
             });

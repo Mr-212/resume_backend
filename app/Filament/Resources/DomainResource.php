@@ -29,14 +29,13 @@ class DomainResource extends Resource
         return $form
             ->schema([
 
-                // ->live(fn()),
                 Forms\Components\Select::make('tenant_id')
                 ->label('Tenant')
                 ->options(Tenant::query()->pluck('id','id'))
                 ->reactive()
                 ->afterStateUpdated(function($state, callable $set){
-                    // $tenant = Tenant::find($state);
                     $domain = "{$state}.localhost";
+                    return $domain;
                 }),
 
                 Forms\Components\TextInput::make('domain')
