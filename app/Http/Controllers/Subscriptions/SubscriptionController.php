@@ -65,20 +65,12 @@ class SubscriptionController extends Controller
             Session::put($this->user->id.'_trial_days',$request->get('trial_days'));
         }
 
-        // if($this->user->subscr())
 
         // dd(Session::get($this->user->id.'_trial_days'));
         $plan_id = $request->plan_id;
         $plan = Plan::whereStripePrice($plan_id)->firstOrFail();
         $paymentMethods = $this->user->paymentMethods();
-        // $paymentMethods = Auth::user()->paymentMethods();
 
-        // dd($paymentMethods);
-        //  dd($this->user->subscribedToPrice($plan->stripe_id));
-        // dd($plan->stripe_id);
-
-
-        // if($this->user->checkStripePrice($plan->stripe_id))
         if($this->user->subscription($plan->product_name))
         {
             // dd('user alredy subscibed to that plan');
@@ -104,8 +96,7 @@ class SubscriptionController extends Controller
 
             if($request->has('plan_id'))
             {
-                // if(!$this->user->hasPaymentMethod())
-                //     $this->updateDefaultPaymentMethod($request->payment_method_id);
+
                 $plan_id = $request->plan_id;
                 $subscriptionProduct = $this->plan->where('stripe_price',$plan_id)->first();
                 $trial_days = 0;
@@ -114,11 +105,7 @@ class SubscriptionController extends Controller
                     $trial_days = Session::get($this->user->id.'_trial_days');
                 }
 
-
-                // if($this->user->subscribed($subscriptionProduct->stripe_id))
-                // dd($this->user->subscribedToPrice($subscriptionProduct->stripe_id, $subscriptionProduct->title));
                 if($this->user->subscribed($subscriptionProduct->product_name) && !$this->user->subscribedToPrice($subscriptionProduct->stripe_price, $subscriptionProduct->product_name))
-                // if($this->user->subscribed($subscriptionProduct->title))
                 {
                     $message = "You are already subscribed to " . $subscriptionProduct->product_name;
                     $subscription = $this->user->subscription($subscriptionProduct->product_name)->swap($subscriptionProduct->stripe_price);
@@ -127,17 +114,12 @@ class SubscriptionController extends Controller
                     return view('subscriptions.subscribed', compact('message'));
 
                 }
-                // if()){
 
-                // }
                 else
                 {
-                    // dd($subscriptionProduct);
                     $subscription = $this->user->newSubscription($subscriptionProduct->product_name, $subscriptionProduct->stripe_price);
                     if($trial_days) $subscription = $subscription->trialDays($trial_days);
                     $subscription = $subscription->create($request->payment_method_id);
-
-                    // dd($subscription);
 
                     if($subscription->stripe_id)
                     {
