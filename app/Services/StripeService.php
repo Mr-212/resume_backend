@@ -3,6 +3,7 @@ namespace App\Services;
 use Stripe\Stripe;
 use Stripe\Price;
 use App\Models\Subscriptions\Plan;
+use Exception;
 use Stripe\Product;
 
 class StripeService {
@@ -22,7 +23,6 @@ class StripeService {
     public function getPlans(): bool {
 
         $prices = Price::all(['limit' =>100]);
-        // $prices = [];
 
         if(!filled($prices)) return false;
 
@@ -45,12 +45,32 @@ class StripeService {
 
         return true;
 
-        dd('success');
+        // dd('success');
 
     }
 
 
-    public function createPlan(){
+    public function create_plan(){
+
+    }
+
+
+    public function delete_price($price_id)
+    {
+        try{
+            $price = Price::retrieve($price_id);
+            // dd($price);
+            $price->active = false;
+            $price->save();
+        }
+        catch(Exception $e)
+        {
+            // dd($e->getMessage());
+            return false;
+        }
+
+        return true;
+
 
     }
 }

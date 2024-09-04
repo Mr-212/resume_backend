@@ -51,13 +51,9 @@ class ResumeController extends Controller
     public function create(Request $request)
     {
         $title = $request->title;
-        // $user = Str::uuid();
         $user_id = auth()->user()->id;
-        // dd(auth()->user());
         $resume = $this->resumeModel->create(['title'=>$title,'user_id' => $user_id]);
         return redirect('/resume/'.$resume->id);
-        // dd($resume);
-        // return
     }
 
     /**
@@ -140,7 +136,6 @@ class ResumeController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
         try{
             if($this->resumeModel::find($id)->delete()){
                 return response()->json(['status_code' => 200, 'message' => 'Resume deleted.']);
