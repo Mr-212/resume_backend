@@ -5,7 +5,7 @@ namespace App\Filament\Resources\PlanResource\Pages;
 use App\Filament\Resources\PlanResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use App\Services\StripeService;
+use App\Services\Stripe\StripeService;
 
 class ListPlans extends ListRecords
 {
@@ -20,7 +20,6 @@ class ListPlans extends ListRecords
             ->label('Refresh')
             ->color('info')
             ->button()
-
             ->action(fn() => $this->getPlans()),
         ];
     }
@@ -28,8 +27,8 @@ class ListPlans extends ListRecords
 
     protected function getPlans()
     {
-        $stripeService =  new StripeService();
-        $stripeService->getPlans();
+        $stripeService =  (new StripeService())->plan();
+        $stripeService->all();
     }
 
 

@@ -1,26 +1,24 @@
 <?php
-namespace App\Services;
+namespace App\Services\Stripe;
 use Stripe\Stripe;
 use Stripe\Price;
 use App\Models\Subscriptions\Plan;
 use Exception;
 use Stripe\Product;
 
-class StripeService {
+class StripePlanService extends StripeBase {
 
-    private $apiKey, $apiSecret, $planModel;
+     private $planModel;
 
     public function __construct()
     {
-        $this->apiKey = env("STRIPE_KEY");
-        $this->apiSecret = env("STRIPE_SECRET");
-        Stripe::setApiKey($this->apiSecret);
+
         $this->planModel = new Plan();
 
     }
 
 
-    public function getPlans(): bool {
+    public function all(): bool {
 
         $prices = Price::all(['limit' =>100]);
 
@@ -45,7 +43,7 @@ class StripeService {
 
         return true;
 
-        // dd('success');
+        //  dd('success');
 
     }
 
@@ -55,7 +53,7 @@ class StripeService {
     }
 
 
-    public function delete_price($price_id)
+    public function delete($price_id)
     {
         try{
             $price = Price::retrieve($price_id);
@@ -68,9 +66,6 @@ class StripeService {
             // dd($e->getMessage());
             return false;
         }
-
         return true;
-
-
     }
 }

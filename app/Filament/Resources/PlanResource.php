@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Subscriptions\Plan;
 use App\Models\Subscriptions\Subscription;
 use App\Models\Subscriptions\SubscriptionItem;
-use App\Services\StripeService;
+use App\Services\Stripe\StripeService;
 use Exception;
 
 class PlanResource extends Resource
@@ -112,8 +112,8 @@ class PlanResource extends Resource
 
             if(!$is_subscribed)
             {
-                $stripeService = new StripeService();
-                if($stripeService->delete_price($price->stripe_price))
+                $stripeService = (new StripeService())->price();
+                if($stripeService->deactivate($price->stripe_price))
                 {
                     $price->active = 0;
                     $price->save();
@@ -125,7 +125,8 @@ class PlanResource extends Resource
                 }
                 return false;
 
-            }else{
+            }
+            else{
                 \Filament\Notifications\Notification::make()
                 ->title('danger')
                 ->body('Price can\'t be deleted its used in subscriptin item')
