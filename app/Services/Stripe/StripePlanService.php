@@ -12,9 +12,8 @@ class StripePlanService extends StripeBase {
 
     public function __construct()
     {
-
+        parent::__construct();
         $this->planModel = new Plan();
-
     }
 
 
@@ -25,7 +24,7 @@ class StripePlanService extends StripeBase {
         if(!filled($prices)) return false;
 
         foreach($prices as $price){
-            // dd($price);
+             dd($price);
             $product = Product::retrieve($price->product);
 
             $this->planModel->updateOrCreate(['stripe_price' => $price->id ],

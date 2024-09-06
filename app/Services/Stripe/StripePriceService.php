@@ -12,8 +12,7 @@ class StripePriceService extends StripeBase {
 
     public function __construct()
     {
-
-
+        parent::__construct();
     }
 
 

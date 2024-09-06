@@ -4,7 +4,7 @@ use Stripe\Stripe;
 use Stripe\Price;
 use App\Models\Subscriptions\Plan;
 use Exception;
-use Laravel\Cashier\Invoice;
+use Stripe\Invoice;
 use Stripe\Product;
 
 class StripeInvoiceService extends StripeBase {
@@ -13,11 +13,11 @@ class StripeInvoiceService extends StripeBase {
 
     public function __construct(private $canQuery = false)
     {
-
+        parent::__construct();
     }
 
 
-    public function all(): bool {
+    public function all() {
 
         try{
             $invoices = Invoice::all();
