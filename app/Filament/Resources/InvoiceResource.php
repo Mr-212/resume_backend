@@ -13,10 +13,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use App\Models\Subscriptions\Invoice;
 class InvoiceResource extends Resource
 {
-    // protected static ?string $model = Invoice::class;
+    protected static ?string $model = Invoice::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,7 +24,7 @@ class InvoiceResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -33,18 +33,18 @@ class InvoiceResource extends Resource
         return $table
             ->columns(
                 static::getTableColumns(),
-            );
-            // ->filters([
-            //     //
-            // ])
-            // ->actions([
-            //     Tables\Actions\EditAction::make(),
-            // ])
-            // ->bulkActions([
-            //     Tables\Actions\BulkActionGroup::make([
-            //         Tables\Actions\DeleteBulkAction::make(),
-            //     ]),
-            // ]);
+            )
+            ->filters([
+                //
+            ])
+            ->actions([
+                //Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    //Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 
     public static function getRelations(): array
@@ -66,8 +66,8 @@ class InvoiceResource extends Resource
 
     public static function getTableQuery()
     {
-        $invoices = static::fetchInvoices();
-        dd($invoices);
+        // $invoices = static::fetchInvoices();
+        // dd($invoices);
     }
 
 
@@ -75,18 +75,30 @@ class InvoiceResource extends Resource
     {
         return
         [
-            Tables\Columns\TextColumn::make('invoice_id')
+        Tables\Columns\TextColumn::make('id')
             ->label('Invoice ID'),
 
-        Tables\Columns\TextColumn::make('amount')
+        Tables\Columns\TextColumn::make('amount_due')
             ->label('Amount'),
 
-        Tables\Columns\TextColumn::make('status')
+        Tables\Columns\TextColumn::make('amount_paid')
             ->label('Status'),
 
-        Tables\Columns\TextColumn::make('date')
-            ->label('Date')
-            ->date(),
+        Tables\Columns\TextColumn::make('billing_reason')
+            ->label('Billing Reason'),
+
+        Tables\Columns\TextColumn::make('subtotal')
+            ->label('Sub Total'),
+
+        Tables\Columns\TextColumn::make('total_discount_amount')
+            ->label('DIscount'),
+
+        Tables\Columns\TextColumn::make('total_excluding_tax')
+            ->label('Total Exporting Tax'),
+
+        Tables\Columns\TextColumn::make('total_tax_amounts')
+            ->label('Tax'),
+
         ];
     }
 
