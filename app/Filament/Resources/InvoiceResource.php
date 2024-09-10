@@ -76,13 +76,14 @@ class InvoiceResource extends Resource
         return
         [
         Tables\Columns\TextColumn::make('id')
-            ->label('Invoice ID'),
+            ->label('Invoice ID')
+            ->hidden(),
 
-        Tables\Columns\TextColumn::make('customer_name')
+        Tables\Columns\TextColumn::make('customer.name')
             ->label('Customer'),
 
-        Tables\Columns\TextColumn::make('customer.email')
-            ->label('Customer ID'),
+        // Tables\Columns\TextColumn::make('customer.email')
+        //     ->label('Customer Email'),
 
         Tables\Columns\TextColumn::make('subscription.type')
             ->label('Subscription'),
