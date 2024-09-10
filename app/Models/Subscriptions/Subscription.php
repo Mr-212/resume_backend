@@ -25,4 +25,10 @@ class Subscription extends CashierSubscription
     public function user() {
         return $this->belongsTo(User::class,'user_id');
     }
+
+
+    public function stripe_invoices()
+    {
+        return $this->hasMany(Invoice::class,'subscription_id','stripe_id');
+    }
 }

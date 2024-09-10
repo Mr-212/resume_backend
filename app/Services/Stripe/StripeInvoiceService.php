@@ -20,7 +20,7 @@ class StripeInvoiceService extends StripeBase {
     public function all() {
 
         try{
-            $invoices = Invoice::all();
+            $invoices = Invoice::all(['limit' => 100]);
         }
         catch(Exception $e){
 

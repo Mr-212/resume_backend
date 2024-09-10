@@ -2,9 +2,11 @@
 
 namespace App\Models\Subscriptions;
 
+use App\Models\User;
 use App\Services\Stripe\StripeService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Sushi\Sushi;
 
 class Invoice extends Model
@@ -19,6 +21,8 @@ class Invoice extends Model
     protected $schema =
     [
         'id' => 'string',
+        'subscription_id' => 'string',
+        'customer_id' => 'string',
         'amount_due' => 'float',
         'amount_paid' => 'float',
 
@@ -32,8 +36,12 @@ class Invoice extends Model
         // dd($stripePrice->all());
 
         $invoices = collect($stripeInvoice->all()->data)->map(function($data){
+            // dd($data->toArray());
             return [
                  'id'=> $data->id,
+                 'customer_name' => $data->customer_name,
+                 'customer_id'=>$data->customer,
+                 'subscription_id' => $data->subscription,
                  'amount_due'=> $data->amount_due,
                  'amount_paid'=> $data->amount_paid,
                  'subtotal'=> $data->subtotal,
@@ -43,7 +51,6 @@ class Invoice extends Model
                  'total_excluding_tax'=> $data->total_excluding_tax
             ];
         })->toArray();
-        // dd($invoices);
         return $invoices;
 
     }
@@ -51,6 +58,18 @@ class Invoice extends Model
 
     protected function sushiShouldCache()
     {
-        return false;
+        return true;
+    }
+
+
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class,'subscription_id','stripe_id');
+    }
+
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id','stripe_id');
     }
 }

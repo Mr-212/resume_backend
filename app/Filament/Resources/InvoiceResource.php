@@ -78,6 +78,15 @@ class InvoiceResource extends Resource
         Tables\Columns\TextColumn::make('id')
             ->label('Invoice ID'),
 
+        Tables\Columns\TextColumn::make('customer_name')
+            ->label('Customer'),
+
+        Tables\Columns\TextColumn::make('customer.email')
+            ->label('Customer ID'),
+
+        Tables\Columns\TextColumn::make('subscription.type')
+            ->label('Subscription'),
+
         Tables\Columns\TextColumn::make('amount_due')
             ->label('Amount'),
 
