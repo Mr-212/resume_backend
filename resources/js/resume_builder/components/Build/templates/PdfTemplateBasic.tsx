@@ -2,6 +2,8 @@ import React from "react";
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image, Link } from '@react-pdf/renderer';
 import { useAppSelector } from "../../../store/hooks";
 import { WithPDFPreview } from "../WithPDFPreview";
+import { htmlToText } from 'html-to-text';
+
 const styles = StyleSheet.create({
     page: {
         display: 'flex',
@@ -95,22 +97,22 @@ const styles = StyleSheet.create({
       },
 
       flex_row: {
-        display: 'flex', 
-        flexDirection:'row', 
+        display: 'flex',
+        flexDirection:'row',
         justifyContent:'space-between',
         width: '100%',
         alignItems:'center',
         marginTop: '5px',
 
-      }, 
+      },
 
       flex_col: {
-        display: 'flex', 
-        flexDirection:'column', 
+        display: 'flex',
+        flexDirection:'column',
         justifyContent:'flex-start',
         width: '100%',
         marginTop: '5px',
-        
+
       },
 
       right_section_headings: {
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
       },
 
       border_right_section :{
-        borderBottom: '1px', 
+        borderBottom: '1px',
         borderBottomColor:'#B4AEAD'
       },
 
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
         color: 'black',
         paddingTop: '4px',
       },
-      
+
       section_right_font_colors_sm :{
         fontSize: '10px',
         fontWeight:'600',
@@ -144,8 +146,8 @@ const styles = StyleSheet.create({
 
       border_y: {
          borderBottom:'1px',
-         borderBottomColor:'#B4AEAD', 
-         borderTop: '1px', 
+         borderBottomColor:'#B4AEAD',
+         borderTop: '1px',
          borderTopColor:'#B4AEAD',
          paddingBottom: 5,
          marginBottom: 5
@@ -208,7 +210,7 @@ export default WithPDFPreview(PdfTemplateBasic);
 const LowerSection = ({profile, education, experience, skills, softskills})=>{
     // console.log(profile)
     return(
-         
+
       <View style={styles.section_right}>
         {/* <View style={styles.flex_col} >
             <Text style={ {...styles.right_section_headings, ...styles.border_right_section}}>Profession Summary</Text>
@@ -216,7 +218,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
         </View> */}
         <View style={ {...styles.flex_col}} >
             <Text style={ {...styles.name_text,  color: 'gray', ...styles.border_y }}>Professional Summary</Text>
-            <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
+            <Text style={{...styles.section_right_font_colors_sm}}>{htmlToText(profile.job_description)}</Text>
         </View>
 
 
@@ -236,32 +238,32 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
                              <Text style={ { color:'gray', marginLeft: 5, 'fontSize':'9px' }}>{val['score']}</Text>
                           </View>
                       </View>
-                   
+
                   )
               })
           }
          </View>
         </View>
 
-        {softskills.length && 
+        {softskills.length &&
 
         <View style={styles.flex_col} >
             <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Personality Traits</Text>
             <View style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', flexWrap:'wrap' , width:'100%'}} >
 
-              {softskills.map((v,k) => 
+              {softskills.map((v,k) =>
 
                   <Text style={{marginTop:'5px', backgroundColor:'#6b7280', padding:7, marginLeft:'3px', fontSize: 12, color:'white', fontFamily: 'Helvetica-Bold', fontWeight:'extrabold'}}>{v.key}</Text>
               )}
             </View>
 
-        </View>   
-}  
+        </View>
+}
         { education.length &&
           <View style={styles.flex_col}>
             <Text style={ {...styles.name_text, ...styles.border_y, color: 'gray'}}>Education</Text>
             {education.map((education) => {
-                return( 
+                return(
                     <View style={styles.flex_col}>
                         <View style={styles.flex_row}>
                             <Text style={{...styles.section_right_font_colors}}>{education.qualification}</Text>
@@ -273,11 +275,11 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
                         </View>
                     </View>
                 )
-                
+
             })
             }
-    
-          </View> 
+
+          </View>
       }
       { experience.length &&
         <View style={ styles.flex_col} wrap={false}>
@@ -308,7 +310,7 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
              }
         </View>
       }
-        
+
         {/* <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
           <Text style={{...styles.name_text, ...styles.border_y}}>Skills</Text>
           <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
@@ -325,25 +327,25 @@ const LowerSection = ({profile, education, experience, skills, softskills})=>{
                              <Text style={ { color:'gray', marginLeft: 5, 'fontSize':'9px' }}>{val['score']}</Text>
                           </View>
                       </View>
-                   
+
                   )
               })
           }
          </View>
         </View> */}
-        
+
       </View>
     )
 }
 const UpperSection = ({profile})=>{
 
     return(
-         
+
         <View style={styles.section_top}>
         <View style={styles.profile_container}>
-  
+
         <View style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', marginBottom:'5'}} >
-          
+
           <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-start', width:'100%'}} >
             <Text style={styles.name_text}>{profile.name}</Text>
             <View style={ {display: 'flex', flexDirection:'row', justifyContent:'flex-start', width: '100%'} }>
@@ -352,30 +354,30 @@ const UpperSection = ({profile})=>{
             </View>
           </View>
           {/* <View style={{ display:'flex', flexDirection:'column', justifyContent:'flex-end', width:'100%', marginBottom:'5'}} > */}
-            {profile.image_url && 
+            {profile.image_url &&
                 <Image style={styles.profile_img} src={profile.image_url} />
             }
           {/* </View> */}
-          
+
 
         </View>
-        
+
         <View style={ {display: 'flex', flexDirection:'column', justifyContent:'space-between', width: '100%', paddingBottom:'10'} }>
           <Text style={ {...styles.name_text, borderBottom: '1px', borderBottomColor:'white', borderTop:'1px', borderTopColor:'white' }}>Contact</Text>
-          
+
           <View style={ {display: 'flex', flexDirection:'row', justifyContent:'space-between', width: '100%'} }>
             <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '50%'} }>
                 <Text style={ styles.field_text }>Email</Text>
                 <Text style={ styles.contact_family }>{profile.email}</Text>
                 <Text style={ styles.field_text }>Phone</Text>
                 <Text style={ styles.contact_family}>{profile.phone}</Text>
-                { profile.address && 
+                { profile.address &&
                   <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
                     <Text style={ styles.field_text}>Address</Text>
                     <Text style={ styles.contact_family}>{profile.address}</Text>
                   </View>
                 }
-            </View>  
+            </View>
             <View style={ {...styles.flex_col, width: '50%' }}>
               {profile.linkedin_url &&
               <View>
@@ -385,7 +387,7 @@ const UpperSection = ({profile})=>{
 
               </View>
               }
-              {profile.github_url && 
+              {profile.github_url &&
               <View>
                   <Text style={ styles.field_text } >Github</Text>
                   <Text style={ styles.contact_family}>{profile.github_url}</Text>
@@ -398,8 +400,8 @@ const UpperSection = ({profile})=>{
                 </View>
               }
 
-            </View>  
-            </View>        
+            </View>
+            </View>
         </View>
 
 
@@ -408,11 +410,11 @@ const UpperSection = ({profile})=>{
             <Text style={ {...styles.name_text, borderBottom:'1px', borderBottomColor:'white',color: 'gray',borderTop: '1px', borderTopColor:'white'}}>Profession Summary</Text>
             <Text style={{...styles.section_right_font_colors_sm}}>{profile.job_description}</Text>
         </View> */}
-       
-  
+
+
         {/* <View style={ {display: 'flex', flexDirection:'column', justifyContent:'flex-start', width: '100%'} }>
           <Text style={{...styles.name_text,borderBottom: '1px', borderBottomColor:'white'}}>Skills</Text>
-  
+
           {Object.entries(skills).map(([key, val]) => {
                   return (
                       <View style={ styles.col}>
@@ -431,7 +433,7 @@ const UpperSection = ({profile})=>{
               })
           }
         </View> */}
-         
+
       </View>
       </View>
     )

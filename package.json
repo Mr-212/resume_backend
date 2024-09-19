@@ -35,10 +35,12 @@
         "@types/react-dom": "^18.0.0",
         "@types/react-redux": "^7.1.25",
         "bootstrap": "^5.2.3",
+        "html-to-text": "^9.0.5",
         "jquery": "^3.6.4",
         "react-datepicker": "^4.10.0",
         "react-images-uploading": "^3.1.7",
         "react-modal": "^3.16.1",
+        "react-quill": "^2.0.0",
         "react-redux": "^8.0.5",
         "react-toastify": "^9.1.2",
         "vite-plugin-externals": "^0.6.2"

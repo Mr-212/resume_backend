@@ -11,6 +11,7 @@ import { add, getProfile, postProfile, profile } from "../reducers/profileReduce
 import { WithHOC } from "../WithPDFPreview";
 import ProfielImage from "./ProfileImage";
 import { AddURLOrWebsite } from "./Misc";
+import ReactQuillEditor from "../partials/ReactQuillEditor";
 
 // export interface ProfileProps {
 
@@ -52,8 +53,6 @@ export interface ProfileProps<T> {
 const formValue =  {
 
     // id:"",
-
-
     job_title : "",
     job_description: "",
     name: "",
@@ -69,6 +68,7 @@ const formValue =  {
     address: "",
 
 }
+
 type profile = ProfileProps<typeof formValue>;
 
 
@@ -97,6 +97,7 @@ type profile = ProfileProps<typeof formValue>;
 
 
 interface WarningProps {
+
     show: boolean,
     title: string,
     message: string
@@ -104,9 +105,6 @@ interface WarningProps {
 
 type CombineProps<T> = ProfileProps<T> & WarningProps & typeof formValue;
 
-type props= {
-    submitForm?: () => void,
-}
 
 
 export const Alert = ( title: string, message: string ) => {
@@ -118,37 +116,23 @@ export const Alert = ( title: string, message: string ) => {
      )
 }
 
-
-
-// function Profile<T , U extends WarningProps<U>> ( { id }: (ProfileProps<T>)){
-
 function Profile<T> ( { id }: CombineProps<T>){
+
     const[alert, setAlert] = useState();
+
     const dispatch = useAppDispatch();
-    // const profile = profile;
+
     const profile = useAppSelector(state => state.profile.profile);
+
     const profile_id = useAppSelector(state => state.profile.profile_id);
 
-    // let formValue = state.profile ? state.profile : {};
     const[formValues, setFormValues] = useState<CombineProps<T>>({});
 
-    const { register, handleSubmit, formState: {errors}, setValue} = useForm({defaultValues: profile});
-    // const { register, handleSubmit, formState: {errors}, setValue} = useForm<ProfileProps>();
-
-
-    const validationErrors = (key: string, value: string) => {
-        return(
-            null
-            // <label className="block text-indigo-600 font-bold text-md">{ errors[key] && value +` is required`}</label>
-        )
-    }
-
-    // console.log(profile)
+    const { register, handleSubmit, formState: {errors}, setValue, getValues } = useForm({defaultValues: profile});
 
     useEffect(() => {
         if(!profile_id){
-            // console.log(profile_id)
-            // alert('empty');
+
         }
     });
 
@@ -159,38 +143,24 @@ function Profile<T> ( { id }: CombineProps<T>){
 
     },[profile]);
 
-
-
-
     const handleFormChange = (e: ChangeEvent< HTMLInputElement | HTMLTextAreaElement | undefined>): void => {
         const{name, value} = e.currentTarget;
         // const key  = e.target.key;
         // const value  = e.target.value;
         setFormValues( {...formValues, [name]: value} );
-        // console.log(state.profile)
 
     }
 
     // const submitForm = (e: FormEvent) => {
     const submitForm  = handleSubmit(data => {
-
-        // Object.entries(profile).map(([k,v]) => {
-        //     setValue(k,v);
-        // })
-        // console.log(data);
+        console.log(data);
         dispatch(postProfile(data));
-        // Alert('Success','Data saved');
-        // const request = axios.post(URL_PROFILE_CREATE, data)
-        // .then(res => {
-        //     setAlert({...alert, show: true, title:'Alert', message: res.data.message})
-
-        // });
-        // dispatch(add(data));
-        // setTimeout(() => {
-        //     setAlert({...alert, show: false})
-
-        // }, 5000)
     })
+
+
+    const handleJobDescriptionChange = (content) => {
+        setValue('job_description', content );
+    };
     // console.log(profile)
 
 
@@ -331,9 +301,9 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 <label className="font-bold text-md text-gray-400">Description</label>
                                 {/* {validationErrors('job_description', 'Description')} */}
 
-                                <div className="inline-flex items-start justify-start w-full border-b-2">
-                                    {/* <span className="absolute w-8 bg-white rounded h-8 pt-3"><i className="fa fa-address-book" aria-hidden="true"></i> </span> */}
-                                    <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea>
+                                <div className="inline-flex items-start  h-96 justify-start w-full border-b-2">
+                                    <ReactQuillEditor initValue={getValues("job_description")} onChange={ handleJobDescriptionChange } />
+                                    {/* <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea> */}
                                 </div>
                     </div>
                 </div>

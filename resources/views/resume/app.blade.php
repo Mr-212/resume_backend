@@ -5,12 +5,12 @@
         @include('layouts.partials.head')
         @vite('resources/css/app.css')
         @vite('resources/js/app.tsx')
-        @vite('resources/js/app.js');
-        @viteReactRefresh
+        {{-- @vite('resources/js/app.js'); --}}
+        {{-- @viteReactRefresh --}}
     </head>
-   
-   
- 
+
+
+
     <!-- body -->
     <body class="h-screen max-h-screen overflow-y-scroll [&::-webkit-scrollbar]:hidden">
         <div class="container stick-top">
@@ -20,8 +20,8 @@
                 {{-- <div id="app" class="flex text-center h-screen max-h-screen w-full pt-6" data-profile-id="{{ $resume_id }}"></div> --}}
             </div>
         </div>
-       
-      
+
+
 
     </body>
 

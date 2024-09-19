@@ -73,11 +73,11 @@ class SubscriptionController extends Controller
 
         if($this->user->subscription($plan->product_name))
         {
-            // dd('user alredy subscibed to that plan');
-            // return view('subscriptions.subscribed');
-            // return redirect()->back();
+
         }
+
         $intent = $this->user->createSetupIntent();
+
         return view('subscriptions.update_payment_method',compact('intent','plan_id','plan','paymentMethods'));
     }
 
@@ -132,7 +132,8 @@ class SubscriptionController extends Controller
             }
 
         }catch(Exception $e){
-            dd($e->getMessage());
+
+            throw new Exception($e->getMessage());
         }
     }
 

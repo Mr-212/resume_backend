@@ -22,9 +22,19 @@ export default defineConfig({
 
         // }, react()),
 
-        laravel(
-            ['resources/css/app.css', 'resources/js/app.tsx'],
-            react()),
+        laravel
+        (
+            {
+                input: [
+                    'resources/css/app.css',
+                    'resources/js/app.tsx'
+                    // 'resources/js/app.js'
+                ],
+                refresh: true,
+
+            },
+            react()
+        ),
 
     ],
 

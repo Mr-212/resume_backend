@@ -15,14 +15,14 @@ const App = (props) => {
     // useEffect(()=> {
     //     dispatch(setProfileId(props.profileId));
     // },[])
-   
+
 
     // console.log(props);
 
     return(
     //  <DashboardRoutes></DashboardRoutes>
     <>
-        {/* <Popup/>, */}
+
         <ResumeRoutes {...props}></ResumeRoutes>
     </>
 

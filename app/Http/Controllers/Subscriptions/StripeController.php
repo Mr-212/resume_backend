@@ -33,18 +33,20 @@ class StripeController extends Controller
     {
 
         $plans = $this->plan->orderBy('price','asc')->get();
+
         return view('subscriptions.index',['plans' => $plans]);
-        
+
     }
 
-   
+
 
     public function getPaymentMethod()
     {
 
         $plans = $this->plan->orderBy('price','asc')->get();
+
         return view('subscriptions.index',['plans' => $plans]);
-        
+
     }
 
     /**
@@ -60,8 +62,10 @@ class StripeController extends Controller
             $customer = $this->user->createAsStripeCustomer();
 
 
-        }catch(Exception $e){
-            throw $e->getMessage();
+        }
+        catch(Exception $e)
+        {
+            throw new Exception($e->getMessage());
         }
     }
 
