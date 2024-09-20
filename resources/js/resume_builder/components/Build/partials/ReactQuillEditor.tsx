@@ -11,11 +11,12 @@ const ReacQuillEditor = ( { initValue, onChange }  ) => {
         onChange(content);
     }
 
+    console.log(value)
+
     return(
+
         <div className="w-full">
-
             <ReactQuill theme="snow" value={ value } onChange={ handleChange }/>
-
         </div>
     );
 

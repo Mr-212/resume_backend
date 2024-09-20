@@ -137,11 +137,20 @@ function Profile<T> ( { id }: CombineProps<T>){
     });
 
     useEffect(() => {
-        Object.entries(profile).map(([k,v]) => {
-            setValue(k,v);
-        })
+        register("job_description", { required: false, maxLength: 500 });
+    }, [register]);
 
-    },[profile]);
+    useEffect(() => {
+
+        Object.entries(profile).map(([k,v]) => {
+            // console.log(k);
+            setValue(k,v);
+        });
+
+        //setValue("job_description", profile.job_description);
+
+
+    },[profile, setValue]);
 
     const handleFormChange = (e: ChangeEvent< HTMLInputElement | HTMLTextAreaElement | undefined>): void => {
         const{name, value} = e.currentTarget;
@@ -161,7 +170,7 @@ function Profile<T> ( { id }: CombineProps<T>){
     const handleJobDescriptionChange = (content) => {
         setValue('job_description', content );
     };
-    // console.log(profile)
+    console.log('job_description: ' + getValues('job_description'));
 
 
 
@@ -302,7 +311,7 @@ function Profile<T> ( { id }: CombineProps<T>){
                                 {/* {validationErrors('job_description', 'Description')} */}
 
                                 <div className="inline-flex items-start  h-96 justify-start w-full border-b-2">
-                                    <ReactQuillEditor initValue={getValues("job_description")} onChange={ handleJobDescriptionChange } />
+                                    <ReactQuillEditor initValue={ getValues('job_description') } onChange={ handleJobDescriptionChange } />
                                     {/* <textarea  className="w-full h-32 block rounded text-black text-sm focus:outline-none" value={formValues?.job_description} placeholder="Tell about yourself!" {...register('job_description', {required: false, maxLength:500})}  name="job_description"></textarea> */}
                                 </div>
                     </div>
